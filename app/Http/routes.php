@@ -32,3 +32,9 @@ $app->get('/test/extract', function () {
 
     return 'Done !';
 });
+
+$app->get('/test/extract/item', function () {
+    Bus::dispatch(new App\Jobs\Extract\CreateItem());
+
+    return 'Done!';
+});

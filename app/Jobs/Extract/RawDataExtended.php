@@ -101,12 +101,14 @@ class RawDataExtended extends Job
                     } elseif (preg_match("/Fiel Deposit/", $currentSpan, $match)) {
                         try {
                             $data->depositary = trim($footerDetails->filter('span:nth-child('.($i+1).')')->text());
+                            $data->depositary = preg_replace("/(\\n)|(\\t)/", "", $data->depositary);
                         } catch (\Exception $e) {
                             $data->depositary = null;
                         }
                     } elseif (preg_match("/Mediador/", $currentSpan, $match)) {
                         try {
                             $data->mediator = trim($footerDetails->filter('span:nth-child('.($i+1).')')->text());
+                            $data->mediator = preg_replace("/(\\n)|(\\t)/", "", $data->mediator);
                         } catch (\Exception $e) {
                             $data->mediator = null;
                         }
