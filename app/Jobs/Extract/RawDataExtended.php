@@ -49,31 +49,31 @@ class RawDataExtended extends Job
             for ($x = 1; $x <= ($headerDetails->filter('span')->count()+5); $x++) {
                 if ($headerDetails->filter('span:nth-child('.$x.')')->count()) {
                     $currentSpan = $headerDetails->filter('span:nth-child('.$x.')')->text();
-                    if (preg_match("/Base de Venda/", $currentSpan, $match)) {
+                    if (preg_match('/Base de Venda/i', $currentSpan, $match)) {
                         try {
                             $data->price = trim($headerDetails->filter('span:nth-child('.($x+1).')')->text());
                         } catch (\Exception $e) {
                             $data->price = null;
                         }
-                    } elseif (preg_match("/Estado da Venda/", $currentSpan, $match)) {
+                    } elseif (preg_match('/Estado da Venda/i', $currentSpan, $match)) {
                         try {
                             $data->status = trim($headerDetails->filter('span:nth-child('.($x+1).')')->text());
                         } catch (\Exception $e) {
                             $data->status = null;
                         }
-                    } elseif (preg_match("/Serviço de Finanças/", $currentSpan, $match)) {
+                    } elseif (preg_match('/Serviço de Finanças/i', $currentSpan, $match)) {
                         try {
                             $data->taxOffice = trim($headerDetails->filter('span:nth-child('.($x+1).')')->text());
                         } catch (\Exception $e) {
                             $data->taxOffice = null;
                         }
-                    } elseif (preg_match("/Modalidade/", $currentSpan, $match)) {
+                    } elseif (preg_match('/Modalidade/i', $currentSpan, $match)) {
                         try {
                             $data->mode = trim($headerDetails->filter('span:nth-child('.($x+1).')')->text());
                         } catch (\Exception $e) {
                             $data->mode = null;
                         }
-                    } elseif (preg_match("/Motivo da Suspen/", $currentSpan, $match)) {
+                    } elseif (preg_match('/Motivo da Suspen/i', $currentSpan, $match)) {
                         try {
                             $data->suspReason = trim($headerDetails->filter('span:nth-child('.($x+1).')')->text());
                         } catch (\Exception $e) {
@@ -86,45 +86,45 @@ class RawDataExtended extends Job
             for ($i = 1; $i <= ($footerDetails->filter('span')->count()+5); $i++) {
                 if ($footerDetails->filter('span:nth-child('.$i.')')->count()) {
                     $currentSpan = trim($footerDetails->filter('span:nth-child('.$i.')')->text());
-                    if (preg_match("/Caracter/", $currentSpan, $match)) {
+                    if (preg_match('/Caracter/i', $currentSpan, $match)) {
                         try {
                             $data->desc = trim($footerDetails->filter('span:nth-child('.($i+1).')')->text());
                         } catch (\Exception $e) {
                             $data->desc = null;
                         }
-                    } elseif (preg_match("/Nome dos Executados/", $currentSpan, $match)) {
+                    } elseif (preg_match('/Nome dos Executados/i', $currentSpan, $match)) {
                         try {
                             $data->owners = trim($footerDetails->filter('span:nth-child('.($i+1).')')->text());
                         } catch (\Exception $e) {
                             $data->owners = null;
                         }
-                    } elseif (preg_match("/Fiel Deposit/", $currentSpan, $match)) {
+                    } elseif (preg_match('/Fiel Deposit/i', $currentSpan, $match)) {
                         try {
                             $data->depositary = trim($footerDetails->filter('span:nth-child('.($i+1).')')->text());
-                            $data->depositary = preg_replace("/(\\n)|(\\t)/", "", $data->depositary);
+                            $data->depositary = preg_replace('/(\\n)|(\\t)/', '', $data->depositary);
                         } catch (\Exception $e) {
                             $data->depositary = null;
                         }
-                    } elseif (preg_match("/Mediador/", $currentSpan, $match)) {
+                    } elseif (preg_match('/Mediador/i', $currentSpan, $match)) {
                         try {
                             $data->mediator = trim($footerDetails->filter('span:nth-child('.($i+1).')')->text());
-                            $data->mediator = preg_replace("/(\\n)|(\\t)/", "", $data->mediator);
+                            $data->mediator = preg_replace('/(\\n)|(\\t)/', '', $data->mediator);
                         } catch (\Exception $e) {
                             $data->mediator = null;
                         }
-                    } elseif (preg_match("/examinar o bem/", $currentSpan, $match)) {
+                    } elseif (preg_match('/examinar o bem/i', $currentSpan, $match)) {
                         try {
                             $data->preview = trim($footerDetails->filter('span:nth-child('.($i+1).')')->text());
                         } catch (\Exception $e) {
                             $data->preview = null;
                         }
-                    } elseif (preg_match("/aceitaçao das propostas/", $currentSpan, $match)) {
+                    } elseif (preg_match('/aceitaçao das propostas/i', $currentSpan, $match)) {
                         try {
                             $data->acceptance = trim($footerDetails->filter('span:nth-child('.($i+1).')')->text());
                         } catch (\Exception $e) {
                             $data->acceptance = null;
                         }
-                    } elseif (preg_match("/abertura das propostas/", $currentSpan, $match)) {
+                    } elseif (preg_match('/abertura das propostas/i', $currentSpan, $match)) {
                         try {
                             $data->opening = trim($footerDetails->filter('span:nth-child('.($i+1).')')->text());
                         } catch (\Exception $e) {

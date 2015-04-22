@@ -61,7 +61,7 @@ class WebsiteExtended extends Job
             for ($x = 1; $x <= ($item->filter('span')->count()); $x++) {
                 $currentSpan = $item->filter('span:nth-child('.$x.')')->text();
 
-                if (preg_match("/Nº Venda:/", $currentSpan, $match)) {
+                if (preg_match('/Nº Venda:/i', $currentSpan, $match)) {
                     $nextSpan = $item->filter('span:nth-child('.($x+1).')')->text();
 
                     preg_match_all('/\d{1,}/', $nextSpan, $nextSpanOutput);
@@ -75,7 +75,7 @@ class WebsiteExtended extends Job
 
                         $flagItemCodeFound = true;
                     }
-                } elseif (preg_match("/Estado Actual:/", $currentSpan, $match)) {
+                } elseif (preg_match('/Estado Actual:/i', $currentSpan, $match)) {
                     $nextSpan = $item->filter('span:nth-child('.($x+1).')')->text();
 
                     $itemStatus = $nextSpan;
