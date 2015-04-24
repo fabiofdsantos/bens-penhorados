@@ -102,6 +102,7 @@ class RawDataExtended extends Job
                         try {
                             $data->depositary = trim($footerDetails->filter('th:nth-child(1) > span:nth-child('.($i+1).')')->text());
                             $data->depositary = preg_replace('/(\\n)|(\\t)/', '', $data->depositary);
+
                         } catch (\Exception $e) {
                             $data->depositary = null;
                         }
@@ -133,7 +134,6 @@ class RawDataExtended extends Job
                     }
                 }
             }
-            dd('x');
             $data->lat = $this->lat;
             $data->lng = $this->lng;
             $headerImages = $crawler->filter('#trFotoP > th:nth-child(2)');
