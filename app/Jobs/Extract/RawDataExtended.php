@@ -102,7 +102,9 @@ class RawDataExtended extends Job
                         try {
                             $data->depositary = trim($footerDetails->filter('th:nth-child(1) > span:nth-child('.($i+1).')')->text());
                             $data->depositary = preg_replace('/(\\n)|(\\t)/', '', $data->depositary);
-
+                            if (preg_match('/Email/i', $data->depositary, $match)) {
+                                $data->depositary = $data->depositary.' '.$footerDetails->filter('th:nth-child(1) > span:nth-child('.($i+1).') > a')->attr('href');
+                            }
                         } catch (\Exception $e) {
                             $data->depositary = null;
                         }
@@ -110,6 +112,10 @@ class RawDataExtended extends Job
                         try {
                             $data->mediator = trim($footerDetails->filter('th:nth-child(1) > span:nth-child('.($i+1).')')->text());
                             $data->mediator = preg_replace('/(\\n)|(\\t)/', '', $data->mediator);
+
+                            if (preg_match('/Email/i', $data->mediator, $match)) {
+                                $data->mediator = $data->mediator.' '.$footerDetails->filter('th:nth-child(1) > span:nth-child('.($i+1).') > a')->attr('href');
+                            }
                         } catch (\Exception $e) {
                             $data->mediator = null;
                         }
