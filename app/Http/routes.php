@@ -14,27 +14,3 @@
 $app->get('/', function () use ($app) {
     return $app->welcome();
 });
-
-$app->get('/test/map', function () {
-    Bus::dispatch(new App\Jobs\Import\Map());
-
-    return 'Done!';
-});
-
-$app->get('/test/raw', function () {
-    Bus::dispatch(new App\Jobs\Import\Website());
-
-    return 'Done!';
-});
-
-$app->get('/test/extract', function () {
-    Bus::dispatch(new App\Jobs\Extract\RawData());
-
-    return 'Done !';
-});
-
-$app->get('/test/extract/item', function () {
-    Bus::dispatch(new App\Jobs\Extract\CreateItem());
-
-    return 'Done!';
-});
