@@ -11,11 +11,11 @@ class CreateItemsTable extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->integer('code')->primary();
+            $table->string('code')->primary();
             $table->integer('tax_office');
             $table->integer('year');
-            $table->integer('status');
-            $table->integer('mode');
+            $table->string('status');
+            $table->string('mode');
             $table->string('price')->nullable();
             $table->boolean('incl_vat')->nullable();
             $table->double('lat')->nullable();
