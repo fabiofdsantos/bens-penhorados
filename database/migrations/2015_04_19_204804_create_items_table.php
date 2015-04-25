@@ -27,13 +27,10 @@ class CreateItemsTable extends Migration
             $table->string('mediator_name')->nullable();
             $table->integer('mediator_phone')->nullable();
             $table->string('mediator_email')->nullable();
-            $table->string('preview_local')->nullable();
             $table->dateTime('preview_dt_start')->nullable();
             $table->dateTime('preview_dt_end')->nullable();
-            $table->string('preview_contact')->nullable();
-            $table->dateTime('acceptance');
-            $table->string('opening_local')->nullable();
-            $table->dateTime('opening_datetime')->nullable();
+            $table->dateTime('acceptance_dt');
+            $table->dateTime('opening_dt')->nullable();
             $table->timestamps();
         });
     }
