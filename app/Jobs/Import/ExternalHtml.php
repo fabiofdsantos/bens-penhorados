@@ -1,10 +1,12 @@
 <?php namespace App\Jobs\Import;
 
 use Symfony\Component\DomCrawler\Crawler;
+use App\Jobs\Extract\RawDataExtended;
 use App\Models\RawData;
 use App\Jobs\Job;
 use GuzzleHttp;
 use Storage;
+use Bus;
 
 /**
  * Description here...
@@ -84,5 +86,7 @@ class ExternalHtml extends Job
         $item->lat = $this->lat;
         $item->lng = $this->lng;
         $item->save();
+
+        Bus::dispatch(new RawDataExtended($this->itemCode, $filePath, $this->lat, $this->lng));
     }
 }

@@ -41,7 +41,7 @@ class Website extends Job
                 return 'preg_match_all() failed';
             }
 
-            for ($currentPage = 1; $currentPage <= $lastPage; $currentPage++) {
+            for ($currentPage = 1; $currentPage <= 2; $currentPage++) {
                 Bus::dispatch(new WebsiteExtended($category, $existingItems, $currentPage));
             }
         }

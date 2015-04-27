@@ -1,10 +1,12 @@
 <?php namespace App\Jobs\Extract;
 
 use Symfony\Component\DomCrawler\Crawler;
+use App\Jobs\Extract\ItemGeneric;
 use App\Models\SourceDataObject;
 use App\Models\SourceData;
 use App\Jobs\Job;
 use Storage;
+use Bus;
 
 /**
  * Description here...
@@ -148,6 +150,8 @@ class RawDataExtended extends Job
             }
             $item->data = json_encode($data);
             $item->save();
+
+            Bus::dispatch(new ItemGeneric($this->code, $item->data));
         }
     }
 }
