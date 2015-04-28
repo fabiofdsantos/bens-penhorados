@@ -15,10 +15,11 @@ class CreateVehiclesTable extends Migration
             $table->foreign('code')->references('code')->on('items');
             $table->string('make');
             $table->string('model');
-            $table->integer('vehicle_year');
+            $table->integer('year');
             $table->enum('type', array('Car', 'Truck', 'Motorcycle', 'Boat', 'Other'));
             $table->enum('fuel', array('Gasoline', 'Diesel', 'Hybrid', 'Electric', 'Alternative'))->nullable();
-            $table->string('colours')->nullable();
+            $table->integer('color_id')->nullable();
+            $table->foreign('color_id')->references('id')->on('vehicles_colors');
             $table->boolean('isGoodCondition')->nullable();
             $table->timestamps();
         });
