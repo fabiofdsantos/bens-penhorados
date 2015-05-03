@@ -1,4 +1,6 @@
-<?php namespace App\Jobs\Extract;
+<?php
+
+namespace App\Jobs\Extract;
 
 use Intervention\Image\ImageManager;
 use App\Models\Items\Item;
@@ -21,6 +23,8 @@ class ItemGeneric extends Job
 
     public function handle()
     {
+        print "\n > Creating a generic item of $this->code ... \n";
+
         $item = new Item();
         $item->code = $this->code;
         $data = json_decode($this->data);

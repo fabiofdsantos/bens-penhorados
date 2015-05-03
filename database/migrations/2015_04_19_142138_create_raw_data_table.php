@@ -12,7 +12,7 @@ class CreateRawDataTable extends Migration
     {
         Schema::create('raw_data', function (Blueprint $table) {
             $table->string('code')->primary();
-            $table->string('status');
+            $table->string('hash')->nullable();
             $table->string('lat')->nullable();
             $table->string('lng')->nullable();
             $table->timestamps();

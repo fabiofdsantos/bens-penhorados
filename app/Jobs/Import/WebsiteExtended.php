@@ -1,8 +1,11 @@
-<?php namespace App\Jobs\Import;
+<?php
+
+namespace App\Jobs\Import;
 
 use Symfony\Component\DomCrawler\Crawler;
 use App\Jobs\Job;
 use GuzzleHttp;
+use Hash;
 use Bus;
 
 /**
@@ -25,7 +28,7 @@ class WebsiteExtended extends Job
     {
         $guzzle = new GuzzleHttp\Client();
 
-        var_dump('Categoria: '.$this->category.'---- Pagina: '.$this->currentPage);
+        print "\n > Getting items from category number $this->category (page $this->currentPage) \n";
 
         $request = $guzzle->createRequest('GET', 'www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta='.$this->category.'&page='.$this->currentPage, [
             'headers' => [
@@ -47,22 +50,21 @@ class WebsiteExtended extends Job
         if (count($output[0]) > 1) {
             $from = (int) $output[0][0];
             $to = (int) $output[0][1];
-            $totalCurrentPage = (($to-$from)+1);
+            $totalCurrentPage = (($to - $from) + 1);
         } else {
             return 'preg_match_all() failed';
         }
 
-        for ($i = 7; $i <= ($totalCurrentPage+7); $i++) {
+        for ($i = 7; $i <= ($totalCurrentPage + 7); $i++) {
             $item = $crawler->filter('table.w100 > tr:nth-child('.$i.') > td:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tr:nth-child(2) > td:nth-child(1)');
-
-            $flagItemCodeFound = false;
-            $flagItemStatusFound = false;
+            $dataToBeHashed = $crawler->filter('table.w100 > tr:nth-child('.$i.') > td:nth-child(1) > div:nth-child(1) > table:nth-child(1)')->html();
+            $hash = Hash::make($dataToBeHashed);
 
             for ($x = 1; $x <= ($item->filter('span')->count()); $x++) {
                 $currentSpan = $item->filter('span:nth-child('.$x.')')->text();
 
                 if (preg_match('/Nº Venda:/i', $currentSpan, $match)) {
-                    $nextSpan = $item->filter('span:nth-child('.($x+1).')')->text();
+                    $nextSpan = $item->filter('span:nth-child('.($x + 1).')')->text();
 
                     preg_match_all('/\d{1,}/', $nextSpan, $nextSpanOutput);
 
@@ -73,28 +75,18 @@ class WebsiteExtended extends Job
 
                         $itemCode = $taxOffice.'.'.$year.'.'.$itemId;
 
-                        $flagItemCodeFound = true;
-                    }
-                } elseif (preg_match('/Estado Actual:/i', $currentSpan, $match)) {
-                    $nextSpan = $item->filter('span:nth-child('.($x+1).')')->text();
-
-                    $itemStatus = $nextSpan;
-                    $flagItemStatusFound = true;
-                } else {
-                    if ($flagItemCodeFound == true && $flagItemStatusFound == true) {
-                        $x = $item->filter('span')->count();
-
                         if (array_key_exists($itemCode, $this->existingItems)) {
-                            if ($this->existingItems[$itemCode] != $itemStatus) {
-                                Bus::dispatch(new ExternalHtml($taxOffice, $year, $itemId, $itemStatus, null, null, true));
-                                var_dump('Venda numero: '.$itemCode.' || Estado: '.$itemStatus);
-                            } else {
-                                var_dump('----- JA EXISTE NA BASE DE DADOS COM O MESMO ESTADO -----');
+                            if (!Hash::check($dataToBeHashed, $this->existingItems[$itemCode])) {
+                                Bus::dispatch(new ExternalHtml($taxOffice, $year, $itemId, $hash, null, null, true));
+
+                                print "\n *** Updating item: $itemCode *** \n";
                             }
                         } else {
-                            Bus::dispatch(new ExternalHtml($taxOffice, $year, $itemId, $itemStatus, null, null, false));
-                            var_dump('Venda numero: '.$itemCode.' || Estado: '.$itemStatus);
+                            Bus::dispatch(new ExternalHtml($taxOffice, $year, $itemId, $hash, null, null, false));
+
+                            print "\n *** New item found: $itemCode *** \n";
                         }
+                        break;
                     }
                 }
             }

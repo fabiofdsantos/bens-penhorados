@@ -1,4 +1,6 @@
-<?php namespace App\Jobs\Import;
+<?php
+
+namespace App\Jobs\Import;
 
 use App\Models\RawData;
 use App\Jobs\Job;
@@ -16,6 +18,9 @@ class Map extends Job
         $existingItems = DB::table('raw_data')->lists('code');
 
         $guzzle = new GuzzleHttp\Client();
+
+        print " > Getting items from map ... \n";
+        $i = 0;
 
         foreach ($locations as $location) {
             $request = $guzzle->createRequest('POST', 'http://www.e-financas.gov.pt/fovendas/proxy.jsp?http://ags/arcgis/rest/services/vendas/fovendas/MapServer/0/query', [
@@ -38,12 +43,10 @@ class Map extends Job
 
             $result = json_decode($response->getBody());
 
-            var_dump(count($result->features));
-
             foreach ($result->features as $item) {
                 $itemCode = $item->attributes->EREPFIN.'.'.$item->attributes->DANO.'.'.$item->attributes->XNRORDEM;
 
-                if (! in_array($itemCode, $existingItems)) {
+                if (!in_array($itemCode, $existingItems)) {
                     $rawItem = new RawData();
                     $rawItem->code = $itemCode;
                 } else {
@@ -53,7 +56,11 @@ class Map extends Job
                 $rawItem->lat = $item->attributes->XLAT;
                 $rawItem->lng = $item->attributes->XLON;
                 $rawItem->save();
+
+                $i++;
             }
         }
+
+        print " \n *** Done. $i items found! *** \n\n";
     }
 }

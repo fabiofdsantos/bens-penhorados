@@ -1,4 +1,6 @@
-<?php namespace App\Jobs\Import;
+<?php
+
+namespace App\Jobs\Import;
 
 use Symfony\Component\DomCrawler\Crawler;
 use App\Jobs\Job;
@@ -14,9 +16,11 @@ class Website extends Job
     public function handle()
     {
         $categories = DB::table('raw_data_categories')->lists('code');
-        $existingItems = DB::table('raw_data')->lists('status', 'code');
+        $existingItems = DB::table('raw_data')->lists('hash', 'code');
 
         $guzzle = new GuzzleHttp\Client();
+
+        print "\n > Getting items from all categories ... \n";
 
         foreach ($categories as $category) {
             $request = $guzzle->createRequest('GET', 'www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta='.$category, [
@@ -41,7 +45,7 @@ class Website extends Job
                 return 'preg_match_all() failed';
             }
 
-            for ($currentPage = 1; $currentPage <= $lastPage; $currentPage++) {
+            for ($currentPage = 1; $currentPage <= 2; $currentPage++) {
                 Bus::dispatch(new WebsiteExtended($category, $existingItems, $currentPage));
             }
         }

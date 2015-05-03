@@ -1,4 +1,6 @@
-<?php namespace App\Jobs\Import;
+<?php
+
+namespace App\Jobs\Import;
 
 use Symfony\Component\DomCrawler\Crawler;
 use App\Jobs\Extract\RawDataExtended;
@@ -20,12 +22,12 @@ class ExternalHtml extends Job
     protected $taxOffice;
     protected $year;
     protected $itemId;
-    protected $itemStatus;
+    protected $hash;
     protected $lat;
     protected $lng;
     protected $isUpdate;
 
-    public function __construct($taxOffice, $year, $itemId, $itemStatus, $lat, $lng, $isUpdate)
+    public function __construct($taxOffice, $year, $itemId, $hash, $lat, $lng, $isUpdate)
     {
         $this->folder = 'rawdata/';
         $this->oldFolder = 'rawdata/old/';
@@ -34,7 +36,7 @@ class ExternalHtml extends Job
         $this->taxOffice = $taxOffice;
         $this->year = $year;
         $this->itemId = $itemId;
-        $this->itemStatus = $itemStatus;
+        $this->hash = $hash;
         $this->lat = $lat;
         $this->lng = $lng;
         $this->isUpdate = $isUpdate;
@@ -42,9 +44,9 @@ class ExternalHtml extends Job
 
     public function handle()
     {
-        var_dump('---------------- Extracting HTML: '.$this->taxOffice.'.'.$this->year.'.'.$this->itemId);
-
         $guzzle = new GuzzleHttp\Client();
+
+        print "\n > Saving $this->itemCode html as raw data... \n";
 
         $request = $guzzle->createRequest('GET', 'http://www.e-financas.gov.pt/vendas/detalheVenda.action?idVenda='.$this->itemId.'&sf='.$this->taxOffice.'&ano='.$this->year, [
         'headers' => [
@@ -82,7 +84,7 @@ class ExternalHtml extends Job
             $item->code = $this->itemCode;
         }
 
-        $item->status = $this->itemStatus;
+        $item->hash = $this->hash;
         $item->lat = $this->lat;
         $item->lng = $this->lng;
         $item->save();
