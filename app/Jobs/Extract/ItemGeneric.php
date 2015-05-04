@@ -147,5 +147,13 @@ class ItemGeneric extends Job
         }
 
         $item->save();
+
+        if (preg_match('/Imóveis/ui', $data->depositary, $match)) {
+            // to do
+        } elseif (preg_match('/Veículos/ui', $data->depositary, $match)) {
+            Bus::dispatch(new ItemVehicle($this->code, $item->data));
+        } else {
+            // to do
+        }
     }
 }
