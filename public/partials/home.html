@@ -20,34 +20,9 @@
                 <h2>Últimas Inserções</h2>
                 <hr>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-md-4 col-sm-6" ng-repeat="newItem in newItems">
                 <a href="#">
-                    <img class="img-responsive img-home-item" src="http://placehold.it/700x450">
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <a href="#">
-                    <img class="img-responsive img-home-item" src="http://placehold.it/700x450">
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <a href="#">
-                    <img class="img-responsive img-home-item" src="http://placehold.it/700x450">
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <a href="#">
-                    <img class="img-responsive img-home-item" src="http://placehold.it/700x450">
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <a href="#">
-                    <img class="img-responsive img-home-item" src="http://placehold.it/700x450">
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <a href="#">
-                    <img class="img-responsive img-home-item" src="http://placehold.it/700x450">
+                    <img class="img-responsive img-home-item" ng-src="../images/{{ newItem.image }}">
                 </a>
             </div>
         </div>
@@ -61,34 +36,9 @@
                 <h2>A terminar o limite para propostas</h2>
                 <hr>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-md-4 col-sm-6" ng-repeat="endingItem in endingSoon">
                 <a href="#">
-                    <img class="img-responsive img-home-item" src="http://placehold.it/700x450">
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <a href="#">
-                    <img class="img-responsive img-home-item" src="http://placehold.it/700x450">
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <a href="#">
-                    <img class="img-responsive img-home-item" src="http://placehold.it/700x450">
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <a href="#">
-                    <img class="img-responsive img-home-item" src="http://placehold.it/700x450">
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <a href="#">
-                    <img class="img-responsive img-home-item" src="http://placehold.it/700x450">
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <a href="#">
-                    <img class="img-responsive img-home-item" src="http://placehold.it/700x450">
+                    <img class="img-responsive img-home-item" src="../images/{{ endingItem.image }}">
                 </a>
             </div>
         </div>

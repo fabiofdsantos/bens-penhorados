@@ -14,3 +14,7 @@
 $app->get('/', function () {
     return view('index');
 });
+
+$app->group(['namespace' => 'App\Http\Controllers'], function () use ($app) {
+    $app->get('api/v1/home', ['as' => 'home', 'uses' => 'HomeController@index']);
+});
