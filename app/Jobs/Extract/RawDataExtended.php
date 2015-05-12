@@ -150,6 +150,7 @@ class RawDataExtended extends Job
             $headerImages = $crawler->filter('#trFotoP > th:nth-child(2)');
             for ($c = 1; $c <= ($headerImages->filter('img')->count()); $c++) {
                 $data->images[$c - 1] = $headerImages->filter('img:nth-child('.$c.')')->attr('src');
+                $data->images[$c - 1] = preg_replace('/1(?=\.jpg)/', '2', $data->images[$c - 1]);
             }
             $item->data = json_encode($data);
             $item->save();
