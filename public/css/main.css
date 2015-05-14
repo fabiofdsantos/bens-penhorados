@@ -10,6 +10,19 @@ body {
     padding-bottom: 20px;
 }
 
+.home-price {
+
+  background-color: rgba(147, 145, 145, 0.79);
+  font-weight: 900;
+  color: rgb(253, 251, 251);
+  margin: 0;
+  position: absolute;
+  bottom: 15%;
+  left: 6%;
+  font-size: 50px;
+
+}
+
 .dropdown {
     cursor: pointer;
 }

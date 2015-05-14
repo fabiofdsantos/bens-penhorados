@@ -61,6 +61,7 @@ class ItemGeneric extends Job
                 try {
                     $img = $manager->make($external_image);
                     $filename = $i.'-'.$this->code.'.jpg';
+                    $img->fit(600, 400);
                     $img->encode('jpg', 90);
                     $img->save('public/images/'.$filename);
                 } catch (\Exception $e) {
