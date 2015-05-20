@@ -12,11 +12,13 @@ class ItemVehicle extends Job
 {
     protected $code;
     protected $desc;
+    protected $colors;
 
-    public function __construct($code, $description)
+    public function __construct($code, $description, $colors)
     {
         $this->code = $code;
         $this->desc = $description;
+        $this->colors = $colors;
     }
 
     public function handle()
@@ -51,14 +53,9 @@ class ItemVehicle extends Job
             }
         }
 
-        $colors = ['preto', 'branco', 'cinzento', 'prateado', 'azul', 'vermelho',
-        'amarelo', 'verde', 'bege', 'rosa', 'roxo', 'dourado', 'castanho',
-        'preta', 'branca', 'cinzenta', 'prateada', 'vermelha', 'amarela',
-        'dourada', 'castanha', ];
-
         foreach ($colors as $color) {
-            if (preg_match("/$color/im", $this->desc)) {
-                $vehicle->color = $color;
+            if (preg_match("/$color->name/im", $this->desc)) {
+                $vehicle->color_id = $color->id;
                 break;
             }
         }

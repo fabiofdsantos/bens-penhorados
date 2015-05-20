@@ -152,7 +152,9 @@ class ItemGeneric extends Job
         if (preg_match('/Imóveis/ui', $data->depositary, $match)) {
             // to do
         } elseif (preg_match('/Veículos/ui', $data->depositary, $match)) {
-            Bus::dispatch(new ItemVehicle($this->code, $item->data));
+            $colors = DB::table('vehicles_colors')->lists('name', 'id');
+
+            Bus::dispatch(new ItemVehicle($this->code, $item->data, $colors));
         } else {
             // to do
         }
