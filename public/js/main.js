@@ -8,6 +8,10 @@ app.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'partials/home.html',
       controller: 'HomeCtrl'
     })
+    .when('/login', {
+      templateUrl: 'partials/login.html',
+      controller: 'LoginCtrl'
+    })
     .otherwise('/404', {
       templateUrl: 'partials/404.html'
     });

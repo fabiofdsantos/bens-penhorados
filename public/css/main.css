@@ -23,6 +23,14 @@ body {
 
 }
 
+#loginbox{
+    margin-top: 30px;
+}
+
+#form > div {
+    margin-bottom: 25px;
+}
+
 .dropdown {
     cursor: pointer;
 }
