@@ -10,6 +10,16 @@ body {
     padding-bottom: 20px;
 }
 
+.slogan {
+    margin-bottom: 2%;
+}
+
+.slogan-background {
+    padding-top: 5%;
+    background-image:url('/img/home.jpg');
+    background-position: 50% 43%;
+}
+
 .home-price {
 
   background-color: rgba(147, 145, 145, 0.79);
@@ -65,4 +75,13 @@ footer {
 }
 /* Responsive Styles */
 
-@media (max-width: 767px) {}
+@media (max-width: 767px) {
+
+    .slogan h2 {
+        font-size: 25px;
+    }
+
+    .slogan {
+        margin-bottom: 5%;
+    }
+}
