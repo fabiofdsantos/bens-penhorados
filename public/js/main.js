@@ -8,6 +8,9 @@ app.config(['$routeProvider', function($routeProvider) {
             templateUrl: 'partials/home.html',
             controller: 'HomeCtrl'
         })
+        .when('/404', {
+            templateUrl: 'partials/404.html'
+        })
         .when('/login', {
             templateUrl: 'partials/login.html',
             controller: 'LoginCtrl'
@@ -15,9 +18,7 @@ app.config(['$routeProvider', function($routeProvider) {
         .when('/register', {
             templateUrl: 'partials/register.html'
         })
-        .otherwise('/404', {
-            templateUrl: 'partials/404.html'
-        });
+        .otherwise({ redirectTo: '/404' });
 }]);
 
 app.controller('HomeCtrl', function($scope, $http) {
