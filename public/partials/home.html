@@ -21,8 +21,7 @@
                 <hr>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6" ng-repeat="newItem in newItems">
-                <div class="home-price">
-                    <span ng-bind="newItem.price"></span> €</div>
+            <div class="home-price"><span ng-bind="newItem.price"></span> € <p>Anúncio XPTO</p></div>
                 <a href="#">
                     <img class="img-responsive img-home-item" ng-src="../images/{{ newItem.image != null ? newItem.image : 'empty.jpg'}}">
                 </a>
