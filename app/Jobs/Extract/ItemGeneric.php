@@ -6,6 +6,8 @@ use Intervention\Image\ImageManager;
 use App\Models\Items\Item;
 use Carbon\Carbon;
 use App\Jobs\Job;
+use DB;
+use Bus;
 
 /**
  * Description here...
@@ -149,9 +151,9 @@ class ItemGeneric extends Job
 
         $item->save();
 
-        if (preg_match('/Imóveis/ui', $data->depositary, $match)) {
+        if (preg_match('/Imóveis/ui', $data->cat)) {
             // to do
-        } elseif (preg_match('/Veículos/ui', $data->depositary, $match)) {
+        } elseif (preg_match('/Veículos/ui', $data->cat)) {
             $colors = DB::table('vehicles_colors')->lists('name', 'id');
 
             Bus::dispatch(new ItemVehicle($this->code, $item->data, $colors));

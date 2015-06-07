@@ -39,7 +39,7 @@ class ItemVehicle extends Job
 
         $categories = ['ligeiro', 'motociclo', 'empilhador'];
         foreach ($categories as $category) {
-            if (preg_match("/$category/im")) {
+            if (preg_match("/$category/im", $this->desc)) {
                 $vehicle->category = $category;
                 break;
             }
@@ -53,12 +53,12 @@ class ItemVehicle extends Job
             }
         }
 
-        foreach ($colors as $color) {
-            if (preg_match("/$color->name/im", $this->desc)) {
-                $vehicle->color_id = $color->id;
-                break;
-            }
-        }
+        //foreach ($this->colors as $color) {
+        //    if (preg_match("/$color->name/im", $this->desc)) {
+        //        $vehicle->color_id = $color->id;
+        //        break;
+        //    }
+        //}
 
         if (preg_match('/gasolina/im', $this->desc)) {
             $vehicle->fuel = 'Gasolina';
@@ -85,5 +85,7 @@ class ItemVehicle extends Job
         } else {
             $vehicle->isGoodCondition = null;
         }
+
+        $vehicle->save();
     }
 }
