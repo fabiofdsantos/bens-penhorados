@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/animate.css">
 
+    <link rel="stylesheet" href="css/loading-bar.css">
 </head>
 
 <body ng-app="bens-penhorados">
@@ -30,6 +31,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-route.min.js"></script>
     <script src="js/modules/dirPagination.js"></script>
+    <script src="js/modules/loading-bar.min.js"></script>
 
     <script src="js/main.js"></script>
 

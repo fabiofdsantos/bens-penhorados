@@ -1,7 +1,12 @@
 var app = angular.module('bens-penhorados', [
     'ngRoute',
-    'angularUtils.directives.dirPagination'
+    'angularUtils.directives.dirPagination',
+    'angular-loading-bar'
 ]);
+
+app.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = true;
+}]);
 
 app.config(function(paginationTemplateProvider) {
     paginationTemplateProvider.setPath('js/modules/dirPagination.tpl.html');
