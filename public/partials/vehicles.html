@@ -7,7 +7,9 @@
             <div class="col-md-9">
                 <div class="row results-per-page">
                     <div class="col-md-9 as-table">
-                        <span ng-bind="itemsFrom"></span><span>-</span><span ng-bind="itemsTo"></span> de
+                        <span ng-bind="itemsFrom"></span>
+                        <span>-</span>
+                        <span ng-bind="itemsTo"></span> de
                         <span ng-bind="totalItems"></span> veículos encontrados
                     </div>
                     <div class="col-md-3 as-table per-page">
@@ -17,7 +19,12 @@
                 </div>
 
                 <div class="row" ng-hide="items.length">
-                    Não foram encontrados veículos com base nos critérios de pesquisa.
+                    <div class="col-xs-12 col-sm-12">
+                        <div class="bs-callout bs-callout-danger" id="callout-inline-form-width">
+                            <h4>Ooops...</h4>
+                            <p>Não foram encontrados veículos com base nos critérios de pesquisa.</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row" ng-show="items.length" dir-paginate="item in items | itemsPerPage: itemsPerPage" total-items="totalItems">
