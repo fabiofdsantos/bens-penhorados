@@ -13,10 +13,10 @@ class CreateVehiclesTable extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->string('code');
             $table->foreign('code')->references('code')->on('items');
-            $table->string('make');
-            $table->string('model');
-            $table->integer('year');
-            $table->enum('type', array('Car', 'Truck', 'Motorcycle', 'Boat', 'Other'));
+            $table->string('make')->nullable();
+            $table->string('model')->nullable();
+            $table->integer('year')->nullable();
+            $table->enum('type', array('Car', 'Truck', 'Motorcycle', 'Boat', 'Other'))->nullable();
             $table->enum('fuel', array('Gasoline', 'Diesel', 'Hybrid', 'Electric', 'Alternative'))->nullable();
             $table->integer('color_id')->nullable();
             //$table->foreign('color_id')->references('id')->on('vehicles_colors');
