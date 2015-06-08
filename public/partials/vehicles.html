@@ -1,0 +1,40 @@
+<div class="section">
+    <div class="container">
+        <h1 class="page-header">Veículos penhorados</h1>
+        <div class="row">
+            <div class="col-md-3">sidebar</div>
+
+            <div class="col-md-9">
+                <div class="row results-per-page">
+                    <div class="col-md-9 as-table">
+                        <span ng-bind="itemsFrom"></span><span>-</span><span ng-bind="itemsTo"></span> de
+                        <span ng-bind="totalItems"></span> veículos encontrados
+                    </div>
+                    <div class="col-md-3 as-table per-page">
+                        <span class="table-cell-middle">Ver p/página:</span>
+                        <select class="form-control" ng-model="itemsPerPage" ng-options="itemsPerPage.name as itemsPerPage.name for itemsPerPage in itemsPerPageValues" ng-init="itemsPerPage = itemsPerPageValues[0].name"></select>
+                    </div>
+                </div>
+
+                <div class="row" ng-hide="items.length">
+                    Não foram encontrados veículos com base nos critérios de pesquisa.
+                </div>
+
+                <div class="row" ng-show="items.length" dir-paginate="item in items | itemsPerPage: itemsPerPage" total-items="totalItems">
+                    <div class="col-xs-12 col-sm-12 results-show-item">
+                        <div class="col-md-3">
+                            <img class="img-responsive img-thumbnail" alt="" ng-src="../images/{{ item.image != null ? item.image : 'empty.jpg' }}">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="results-show-price">
+                                <strong ng-bind="item.price != null ? '€' + item.price : 'À melhor oferta'"></strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <dir-pagination-controls class="center" on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>

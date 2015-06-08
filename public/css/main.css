@@ -1,86 +1,99 @@
 /* Global Styles */
 
-html,
-body {
+html, body {
     height: 100%;
 }
-
 body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
-
+.center {
+    text-align: center;
+}
+.as-table {
+    display: table !important;
+}
+.table-cell-middle {
+    display: table-cell !important;
+    vertical-align: middle;
+}
 .slogan {
     margin-bottom: 2%;
 }
-
 .slogan-background {
     padding-top: 5%;
-    background-image:url('/img/home.jpg');
+    background-image: url('/img/home.jpg');
     background-position: 50% 43%;
 }
-
 .home-price {
-
-  background-color: rgba(147, 145, 145, 0.79);
-  font-weight: 900;
-  color: rgb(253, 251, 251);
-  margin: 0;
-  position: absolute;
-  bottom: 15%;
-  left: 6%;
-  font-size: 30px;
-
+    background-color: rgba(147, 145, 145, 0.79);
+    font-weight: 900;
+    color: rgb(253, 251, 251);
+    margin: 0;
+    position: absolute;
+    bottom: 15%;
+    left: 6%;
+    font-size: 30px;
 }
-
-#loginbox{
+.results-per-page {
+    padding: 5px 5px 5px 15px;
+}
+.per-page select {
+    width: auto;
+    float: right;
+}
+.results-show-item {
+    margin-bottom: 15px;
+}
+.results-show-price {}
+#loginbox {
     margin-top: 30px;
 }
-
 #form > div {
     margin-bottom: 25px;
 }
-
 .dropdown {
     cursor: pointer;
 }
-
 .img-home-item {
     margin-bottom: 30px;
 }
-
 .tab-pane {
     margin-top: 15px;
 }
-/* Page Sections */
-
-.section,
-.section-colored {
-    padding: 50px 0;
+.page-header {
+    margin: 0px 0px 20px;
+    font-size: 30px;
 }
 
+/* Page Sections */
+
+.section, .section-colored {
+    padding: 30px 0;
+}
 .section-colored {
     background-color: #e1e1e1;
     /* change this to change the background color of a colored section */
 }
+
 /* 404 Page Styles */
 
 .error-404 {
     font-size: 8em;
 }
+
 /* Footer Styles */
 
 footer {
     margin: 50px 0;
 }
+
 /* Responsive Styles */
 
 @media (max-width: 767px) {
-
     .slogan h2 {
         font-size: 25px;
     }
-
     .slogan {
         margin-bottom: 5%;
     }
