@@ -14,7 +14,7 @@
                             <span ng-bind="totalItems"></span> veículos encontrados
                         </div>
                         <div class="text-right" style="width:100%;">Ver p/página:</div>
-                        <div class="col-xs-9 col-sm-6">
+                        <div>
                             <select class="form-control" ng-model="itemsPerPage" ng-options="itemsPerPage.name as itemsPerPage.name for itemsPerPage in itemsPerPageValues" ng-init="itemsPerPage = itemsPerPageValues[0].name"></select>
                         </div>
                     </div>
