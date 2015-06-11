@@ -40,6 +40,9 @@ class ItemGeneric extends Job
 
         if (preg_match('/(\d+?\.?\d+\,\d+)/', $data->price, $match)) {
             $item->price = $match[0];
+            $item->price = str_replace('.', '', $item->price);
+            $item->price = str_replace(',', '.', $item->price);
+
             if (preg_match('/IVA incluído/i', $data->price, $match)) {
                 $item->incl_vat = true;
             } else {
