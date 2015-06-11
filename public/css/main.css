@@ -13,9 +13,13 @@ body {
 .as-table {
     display: table !important;
 }
-.table-cell-middle {
+.as-table > div {
     display: table-cell !important;
     vertical-align: middle;
+    white-space: nowrap;
+}
+.as-table select {
+    width: auto;
 }
 .slogan {
     margin-bottom: 2%;
@@ -38,9 +42,8 @@ body {
 .results-per-page {
     padding: 5px 5px 5px 15px;
 }
-.per-page select {
-    width: auto;
-    float: right;
+.results-per-page select {
+    margin-left: 10px;
 }
 .results-show-item {
     margin-bottom: 15px;
