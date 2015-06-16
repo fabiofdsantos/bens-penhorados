@@ -8,10 +8,10 @@
                 <div class="row results-per-page">
                     <div class="col-xs-12 col-sm-12 as-table">
                         <div>
-                            <span ng-bind="itemsFrom"></span>
+                            <span ng-bind="itemsFrom || 0"></span>
                             <span>-</span>
-                            <span ng-bind="itemsTo"></span> de
-                            <span ng-bind="totalItems"></span> veículos encontrados
+                            <span ng-bind="itemsTo || 0"></span> de
+                            <span ng-bind="totalItems || 0"></span> veículos encontrados
                         </div>
                         <div class="text-right" style="width:100%;">Ver p/página:</div>
                         <div>
