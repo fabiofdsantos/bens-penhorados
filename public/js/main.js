@@ -83,9 +83,11 @@ app.controller('VehiclesCtrl', function($scope, $http) {
     };
 
     function getResultsPage(pageNumber) {
-        $http.post('../api/v1/vehicles', {
-            page: pageNumber,
-            limit: $scope.itemsPerPage,
+        $http.get('../api/v1/vehicles', {
+            params: {
+                page: pageNumber,
+                limit: $scope.itemsPerPage
+            }
         }).then(function(response) {
             $scope.items = response.data.items;
             $scope.totalItems = response.data.total;
