@@ -35,7 +35,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-7">
                             <div class="results-show-price">
-                                <strong ng-bind="item.price != null ? '€' + item.price : 'À melhor oferta'"></strong>
+                                <strong ng-bind="item.price != null ? (item.price | currency:'€') : 'À melhor oferta'"></strong>
                             </div>
                         </div>
                     </div>
