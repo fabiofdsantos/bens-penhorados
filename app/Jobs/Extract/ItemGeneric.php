@@ -43,14 +43,14 @@ class ItemGeneric extends Job
             $item->price = str_replace('.', '', $item->price);
             $item->price = str_replace(',', '.', $item->price);
 
-            if (preg_match('/IVA incluído/i', $data->price, $match)) {
-                $item->incl_vat = true;
+            if (preg_match('/(\d+)(,\d+)?% IVA incluído/ui', $data->price, $match)) {
+                $item->vat = $match[0];
             } else {
-                $item->incl_vat = false;
+                $item->vat = null;
             }
         } else {
             $item->price = null;
-            $item->incl_vat = null;
+            $item->vat = null;
         }
 
         $item->lat = $data->lat;

@@ -17,7 +17,7 @@ class CreateItemsTable extends Migration
             $table->string('status');
             $table->string('mode');
             $table->decimal('price', 15, 2)->nullable();
-            $table->boolean('incl_vat')->nullable();
+            $table->integer('vat')->nullable();
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
             $table->text('images')->nullable();
