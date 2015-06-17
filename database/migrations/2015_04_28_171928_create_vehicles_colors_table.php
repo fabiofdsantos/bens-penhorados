@@ -15,6 +15,7 @@ class CreateVehiclesColorsTable extends Migration {
 		Schema::create('vehicles_colors', function (Blueprint $table) {
 			$table->increments('id');
 			$table->string('name');
+			$table->integer('parent_id')->nullable();
 		});
 	}
 
