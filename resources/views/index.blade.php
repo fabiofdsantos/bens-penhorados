@@ -30,6 +30,7 @@
 
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-route.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-resource.min.js"></script>
     <script src="js/modules/dirPagination.js"></script>
     <script src="js/modules/loading-bar.min.js"></script>
 
