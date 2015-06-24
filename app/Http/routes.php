@@ -15,7 +15,7 @@ $app->get('/', function () {
     return view('index');
 });
 
-$app->group(['namespace' => 'App\Http\Controllers'], function () use ($app) {
-    $app->get('api/v1/home', ['uses' => 'HomeController@index']);
-    $app->get('api/v1/vehicles', ['uses' => 'VehicleController@index']);
+$app->group(['prefix' => 'api/v1/', 'namespace' => 'App\Http\Controllers'], function () use ($app) {
+    $app->get('home', ['uses' => 'HomeController@index']);
+    $app->get('vehicles', ['uses' => 'VehicleController@index']);
 });
