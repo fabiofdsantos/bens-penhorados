@@ -21,6 +21,9 @@ body {
 .as-table select {
     width: auto;
 }
+.carousel {
+    cursor: pointer;
+}
 .slogan {
     margin-bottom: 2%;
 }

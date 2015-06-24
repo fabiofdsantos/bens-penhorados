@@ -15,4 +15,14 @@ class VehicleController extends Controller
 
         return response()->json($data, 200);
     }
+
+    public function show($code)
+    {
+        $data = Vehicle::join('items', 'items.code', '=', 'vehicles.code')
+        ->where('vehicles.code', '=', $code)->firstOrFail();
+
+        $data->images = json_decode($data->images);
+
+        return response()->json($data, 200);
+    }
 }

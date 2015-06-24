@@ -1,7 +1,9 @@
 var app = angular.module('bens-penhorados', [
     'ngRoute',
+    'ngResource',
     'angularUtils.directives.dirPagination',
-    'angular-loading-bar'
+    'angular-loading-bar',
+    'ui.bootstrap'
 ]);
 
 app.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
@@ -12,7 +14,14 @@ app.config(function(paginationTemplateProvider) {
     paginationTemplateProvider.setPath('js/modules/dirPagination.tpl.html');
 });
 
-app.config(['$routeProvider', function($routeProvider) {
+app.config(function($locationProvider) {
+
+});
+
+app.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
+    $locationProvider.html5Mode({
+      enabled: true
+    });
     $routeProvider
         .when('/', {
             templateUrl: 'partials/home.html',
@@ -31,6 +40,10 @@ app.config(['$routeProvider', function($routeProvider) {
         .when('/vehicles', {
             templateUrl: 'partials/vehicles.html',
             controller: 'VehiclesCtrl'
+        })
+        .when('/vehicles/:id', {
+            templateUrl: 'partials/vehicles-single.html',
+            controller: 'VehicleCtrl'
         })
         .otherwise({
             redirectTo: '/404'
@@ -95,4 +108,10 @@ app.controller('VehiclesCtrl', function($scope, $http) {
             $scope.itemsTo = response.data.to;
         });
     }
+});
+
+app.controller('VehicleCtrl', function($scope, $http, $routeParams) {
+    $http.get('../api/v1/vehicles/' + $routeParams.id).then(function(response) {
+        $scope.vehicle = response.data;
+    });
 });
