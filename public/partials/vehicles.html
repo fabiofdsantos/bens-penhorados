@@ -8,18 +8,18 @@
                 <div class="row results-per-page">
                     <div class="col-xs-12 col-sm-12 as-table">
                         <div>
-                            <span ng-bind="itemsFrom || 0"></span>
+                            <span ng-bind="result.from || 0"></span>
                             <span>-</span>
-                            <span ng-bind="itemsTo || 0"></span> de
-                            <span ng-bind="totalItems || 0"></span> veículos encontrados
+                            <span ng-bind="result.to || 0"></span> de
+                            <span ng-bind="result.total || 0"></span> veículos encontrados
                         </div>
                         <div class="text-right" style="width:100%;">Ver p/página:</div>
                         <div>
-                            <select class="form-control" ng-model="itemsPerPage" ng-options="itemsPerPage.name as itemsPerPage.name for itemsPerPage in itemsPerPageValues" ng-init="itemsPerPage = itemsPerPageValues[0].name"></select>
+                            <select class="form-control" ng-model="itemsPerPage" ng-options="number for number in itemsPerPageValues" ng-init="itemsPerPage"></select>
                         </div>
                     </div>
                 </div>
-                <div class="row" ng-hide="items.length">
+                <div class="row" ng-hide="result.items.length">
                     <div class="col-xs-12 col-sm-12">
                         <div class="bs-callout bs-callout-danger" id="callout-inline-form-width">
                             <h4>Ooops...</h4>
@@ -28,7 +28,7 @@
                     </div>
                 </div>
 
-                <div class="row" ng-show="items.length" dir-paginate="item in items | itemsPerPage: itemsPerPage" total-items="totalItems">
+                <div class="row" ng-show="result.items.length" dir-paginate="item in result.items | itemsPerPage: itemsPerPage" total-items="result.total">
                     <div class="col-xs-12 col-sm-12 results-show-item">
                         <div class="col-xs-12 col-sm-3">
                             <img class="img-responsive img-thumbnail" alt="" ng-src="../images/{{ item.image != null ? item.image : 'empty.jpg' }}">

@@ -43,6 +43,12 @@
 
     <script src="js/main.js"></script>
 
+    <!-- Controllers -->
+    <script src="js/controllers/VehicleController.js"></script>
+
+    <!-- Services -->
+    <script src="js/services/VehicleService.js"></script>
+
 </body>
 
 </html>
