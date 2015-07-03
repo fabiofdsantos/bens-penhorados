@@ -6,6 +6,8 @@ namespace App\Helpers;
  * Breaks either on whitespace or on word boundaries (ex.: dots, commas, etc)
  * Does not include white space or word boundaries in tokens.
  *
+ * Original source: https://github.com/angeloskath/php-nlp-tools
+ *
  * @author: Sam Hocevar <sam@hocevar.net>
  */
 class WhitespaceAndPunctuationTokenizer
