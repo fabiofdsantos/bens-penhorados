@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class VehiclesColorsTableSeeder extends Seeder
+class VehiclesMakesModelsTableSeeder extends Seeder
 {
     public function run()
     {
