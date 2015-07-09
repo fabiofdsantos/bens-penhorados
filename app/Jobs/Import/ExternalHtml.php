@@ -29,10 +29,10 @@ class ExternalHtml extends Job
 
     public function __construct($taxOffice, $year, $itemId, $hash, $lat, $lng, $isUpdate)
     {
-        $this->folder = 'rawdata/';
-        $this->oldFolder = 'rawdata/old/';
+        $this->folder = env('BP_RAW_FOLDER','rawdata/');
+        $this->oldFolder = env('BP_RAW_OLD_FOLDER','rawdata/old/');
         $this->itemCode = $taxOffice.'.'.$year.'.'.$itemId;
-        $this->extension = '.raw';
+        $this->extension = env('BP_RAW_FILE_EXT','.raw');
         $this->taxOffice = $taxOffice;
         $this->year = $year;
         $this->itemId = $itemId;
@@ -88,7 +88,5 @@ class ExternalHtml extends Job
         $item->lat = $this->lat;
         $item->lng = $this->lng;
         $item->save();
-
-        Bus::dispatch(new RawDataExtended($this->itemCode, $filePath, $this->lat, $this->lng));
     }
 }
