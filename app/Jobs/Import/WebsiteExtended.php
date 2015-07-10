@@ -28,13 +28,13 @@ class WebsiteExtended extends Job
     {
         $guzzle = new GuzzleHttp\Client();
 
-        print "\n > Getting items from category number $this->category (page $this->currentPage) \n";
+        print "\n > Getting items from category number ".$this->category->code." (page $this->currentPage) \n";
 
-        $request = $guzzle->createRequest('GET', 'www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta='.$this->category.'&page='.$this->currentPage, [
+        $request = $guzzle->createRequest('GET', 'www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta='.$this->category->code.'&page='.$this->currentPage, [
             'headers' => [
                 'User-Agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
                 'Accept'     => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                'Referer' => 'http://www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta='.$this->category,
+                'Referer' => 'http://www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta='.$this->category->code,
             ],
             'debug' => false,
             ]);
@@ -77,12 +77,12 @@ class WebsiteExtended extends Job
 
                         if (array_key_exists($itemCode, $this->existingItems)) {
                             if (!Hash::check($dataToBeHashed, $this->existingItems[$itemCode])) {
-                                Bus::dispatch(new ExternalHtml($taxOffice, $year, $itemId, $hash, null, null, true));
+                                Bus::dispatch(new ExternalHtml($this->category->id, $taxOffice, $year, $itemId, $hash, null, null, true));
 
                                 print "\n *** Updating item: $itemCode *** \n";
                             }
                         } else {
-                            Bus::dispatch(new ExternalHtml($taxOffice, $year, $itemId, $hash, null, null, false));
+                            Bus::dispatch(new ExternalHtml($this->category->id, $taxOffice, $year, $itemId, $hash, null, null, false));
 
                             print "\n *** New item found: $itemCode *** \n";
                         }

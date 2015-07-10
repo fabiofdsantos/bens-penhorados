@@ -16,9 +16,10 @@ use Bus;
 class ExternalHtml extends Job
 {
     protected $folder;
-    protected $itemCode;
     protected $extension;
     protected $oldFolder;
+    protected $itemCode;
+    protected $categoryId;
     protected $taxOffice;
     protected $year;
     protected $itemId;
@@ -27,12 +28,13 @@ class ExternalHtml extends Job
     protected $lng;
     protected $isUpdate;
 
-    public function __construct($taxOffice, $year, $itemId, $hash, $lat, $lng, $isUpdate)
+    public function __construct($categoryId, $taxOffice, $year, $itemId, $hash, $lat, $lng, $isUpdate)
     {
         $this->folder = env('BP_RAW_FOLDER','rawdata/');
         $this->oldFolder = env('BP_RAW_OLD_FOLDER','rawdata/old/');
-        $this->itemCode = $taxOffice.'.'.$year.'.'.$itemId;
         $this->extension = env('BP_RAW_FILE_EXT','.raw');
+        $this->categoryId = $categoryId;
+        $this->itemCode = $taxOffice.'.'.$year.'.'.$itemId;
         $this->taxOffice = $taxOffice;
         $this->year = $year;
         $this->itemId = $itemId;
@@ -87,6 +89,7 @@ class ExternalHtml extends Job
         $item->hash = $this->hash;
         $item->lat = $this->lat;
         $item->lng = $this->lng;
+        $item->category_id = $this->categoryId;
         $item->save();
     }
 }

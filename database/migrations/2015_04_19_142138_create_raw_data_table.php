@@ -15,6 +15,7 @@ class CreateRawDataTable extends Migration
             $table->string('hash')->nullable();
             $table->string('lat')->nullable();
             $table->string('lng')->nullable();
+            $table->string('category_id')->references('id')->on('raw_data_categories')->nullable();
             $table->timestamps();
         });
     }
