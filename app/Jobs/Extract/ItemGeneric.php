@@ -166,10 +166,10 @@ class ItemGeneric extends Job
 
             for ($c = 1; $c <= ($headerImages->filter('img')->count()); $c++) {
                 $images[$c - 1] = $headerImages->filter('img:nth-child('.$c.')')->attr('src');
-                $images[$c - 1] = preg_replace('/1(?=\.jpg)/', '2', $this->data->images[$c - 1]);
+                $images[$c - 1] = preg_replace('/1(?=\.jpg)/', '2', $images[$c - 1]);
             }
 
-            $item->images = extractImages($images);
+            $item->images = $this->extractImages($images);
 
             $item->save();
 
