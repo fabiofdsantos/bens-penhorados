@@ -2,11 +2,11 @@
 
 namespace App\Jobs\Import;
 
-use Symfony\Component\DomCrawler\Crawler;
 use App\Jobs\Job;
+use Bus;
 use GuzzleHttp;
 use Hash;
-use Bus;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Description here...
@@ -34,7 +34,7 @@ class WebsiteExtended extends Job
             'headers' => [
                 'User-Agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
                 'Accept'     => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                'Referer' => 'http://www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta='.$this->category->code,
+                'Referer'    => 'http://www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta='.$this->category->code,
             ],
             'debug' => false,
             ]);

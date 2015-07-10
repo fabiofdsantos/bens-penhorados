@@ -2,10 +2,10 @@
 
 namespace App\Jobs\Import;
 
-use App\Models\RawData;
 use App\Jobs\Job;
-use GuzzleHttp;
+use App\Models\RawData;
 use DB;
+use GuzzleHttp;
 
 /**
  * Description here...
@@ -27,13 +27,13 @@ class Map extends Job
                 'headers' => [
                     'User-Agent' => '"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0"',
                     'Accept'     => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                    'Referer' => 'http://www.e-financas.gov.pt/fovendas/mapa.jsp?iddistrito='.$location,
+                    'Referer'    => 'http://www.e-financas.gov.pt/fovendas/mapa.jsp?iddistrito='.$location,
                 ],
                 'body' => [
-                    'where' => 'EDISTRTO LIKE \''.$location.'\'',
-                    'outFields' => 'EREPFIN,DANO,XNRORDEM,XLAT,XLON',
+                    'where'          => 'EDISTRTO LIKE \''.$location.'\'',
+                    'outFields'      => 'EREPFIN,DANO,XNRORDEM,XLAT,XLON',
                     'returnGeometry' => 'false',
-                    'f' => 'json',
+                    'f'              => 'json',
                 ],
                 'debug' => false,
                 ]);

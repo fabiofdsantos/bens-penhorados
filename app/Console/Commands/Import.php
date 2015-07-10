@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
 use Bus;
 use DB;
+use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputOption;
 
 class Import extends Command
 {

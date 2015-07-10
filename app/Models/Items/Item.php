@@ -2,8 +2,8 @@
 
 namespace App\Models\Items;
 
-use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {

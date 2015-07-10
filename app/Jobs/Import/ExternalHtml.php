@@ -2,13 +2,11 @@
 
 namespace App\Jobs\Import;
 
-use Symfony\Component\DomCrawler\Crawler;
-use App\Jobs\Extract\RawDataExtended;
-use App\Models\RawData;
 use App\Jobs\Job;
+use App\Models\RawData;
 use GuzzleHttp;
 use Storage;
-use Bus;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Description here...
@@ -30,9 +28,9 @@ class ExternalHtml extends Job
 
     public function __construct($categoryId, $taxOffice, $year, $itemId, $hash, $lat, $lng, $isUpdate)
     {
-        $this->folder = env('BP_RAW_FOLDER','rawdata/');
-        $this->oldFolder = env('BP_RAW_OLD_FOLDER','rawdata/old/');
-        $this->extension = env('BP_RAW_FILE_EXT','.raw');
+        $this->folder = env('BP_RAW_FOLDER', 'rawdata/');
+        $this->oldFolder = env('BP_RAW_OLD_FOLDER', 'rawdata/old/');
+        $this->extension = env('BP_RAW_FILE_EXT', '.raw');
         $this->categoryId = $categoryId;
         $this->itemCode = $taxOffice.'.'.$year.'.'.$itemId;
         $this->taxOffice = $taxOffice;
@@ -54,7 +52,7 @@ class ExternalHtml extends Job
         'headers' => [
         'User-Agent' => '"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0"',
         'Accept'     => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        'Referer' => 'http://www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta=02&modalidade=&distrito=&concelho=&minimo=++.+++.+++.+++%2C++&maximo=++.+++.+++.+++%2C++&dataMin=&dataMax=',
+        'Referer'    => 'http://www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta=02&modalidade=&distrito=&concelho=&minimo=++.+++.+++.+++%2C++&maximo=++.+++.+++.+++%2C++&dataMin=&dataMax=',
         ],
         'debug' => false,
         ]);

@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateVehiclesTable extends Migration
 {
@@ -16,8 +16,8 @@ class CreateVehiclesTable extends Migration
             $table->string('make')->nullable();
             $table->string('model')->nullable();
             $table->integer('year')->nullable();
-            $table->enum('type', array('Car', 'Truck', 'Motorcycle', 'Boat', 'Other'))->nullable();
-            $table->enum('fuel', array('Gasoline', 'Diesel', 'Hybrid', 'Electric', 'Alternative'))->nullable();
+            $table->enum('type', ['Car', 'Truck', 'Motorcycle', 'Boat', 'Other'])->nullable();
+            $table->enum('fuel', ['Gasoline', 'Diesel', 'Hybrid', 'Electric', 'Alternative'])->nullable();
             $table->integer('color_id')->nullable();
             //$table->foreign('color_id')->references('id')->on('vehicles_colors');
             $table->boolean('isGoodCondition')->nullable();

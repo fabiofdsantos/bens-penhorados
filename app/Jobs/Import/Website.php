@@ -2,18 +2,17 @@
 
 namespace App\Jobs\Import;
 
-use Symfony\Component\DomCrawler\Crawler;
 use App\Jobs\Job;
-use GuzzleHttp;
-use DB;
 use Bus;
+use DB;
+use GuzzleHttp;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Description here...
  */
 class Website extends Job
 {
-
     protected $categories;
     protected $lastPage;
 
@@ -33,8 +32,8 @@ class Website extends Job
             $request = $guzzle->createRequest('GET', 'www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta='.$category->code, [
                 'headers' => [
                     'User-Agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
-                    'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                    'Referer' => 'http://www.e-financas.gov.pt/vendas/consultaVendasCursoForm.action?tipoConsulta='.$category->code,
+                    'Accept'     => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                    'Referer'    => 'http://www.e-financas.gov.pt/vendas/consultaVendasCursoForm.action?tipoConsulta='.$category->code,
                 ],
                 'debug' => false,
                 ]);

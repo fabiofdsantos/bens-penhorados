@@ -2,13 +2,13 @@
 
 namespace App\Jobs\Extract;
 
-use Symfony\Component\DomCrawler\Crawler;
-use Intervention\Image\ImageManager;
-use App\Models\Items\Item;
-use Carbon\Carbon;
 use App\Jobs\Job;
+use App\Models\Items\Item;
 use Bus;
+use Carbon\Carbon;
+use Intervention\Image\ImageManager;
 use Storage;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Description here...
@@ -162,7 +162,7 @@ class ItemGeneric extends Job
             }
 
             $headerImages = $crawler->filter('#trFotoP > th:nth-child(2)');
-            $images = array();
+            $images = [];
 
             for ($c = 1; $c <= ($headerImages->filter('img')->count()); $c++) {
                 $images[$c - 1] = $headerImages->filter('img:nth-child('.$c.')')->attr('src');
@@ -263,7 +263,7 @@ class ItemGeneric extends Job
 
     public function extractStartEndDateTime($str)
     {
-        $preview_dt = array();
+        $preview_dt = [];
 
         if (preg_match('/\d+\-\d+\-\d+/', $str, $match)) {
             preg_match_all('/\d+\-\d+\-\d+/', $str, $match_date);
@@ -305,7 +305,7 @@ class ItemGeneric extends Job
             return;
         } else {
             $i = 1;
-            $images = array();
+            $images = [];
             $manager = new ImageManager();
             foreach ($external_images as $ext_img) {
                 try {
@@ -341,7 +341,7 @@ class ItemGeneric extends Job
      */
     public function tokenize($str)
     {
-        $result = array();
+        $result = [];
 
         $pattern = '/([\pZ\pC]*)([^\pP\pZ\pC]+|.)([\pZ\pC]*)/u';
         preg_match_all($pattern, $str, $result);

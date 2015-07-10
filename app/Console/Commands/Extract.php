@@ -2,12 +2,12 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
-use App\Models\RawData;
 use App\Jobs\Extract\ItemGeneric;
+use App\Models\RawData;
 use Bus;
 use DB;
+use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputOption;
 
 class Extract extends Command
 {
