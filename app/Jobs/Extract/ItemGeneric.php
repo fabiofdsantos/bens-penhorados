@@ -328,7 +328,7 @@ class ItemGeneric extends Job
     /**
      * Splits a given text into smaller units called token. Breaks either on
      * whitespace or on word boundaries (ex.: dots, commas, etc). Does not
-     * include white space or word boundaries in tokens.
+     * include punctuation characters.
      *
      * Regex explanation:
      * \pP matches any kind of punctuation character
@@ -343,7 +343,7 @@ class ItemGeneric extends Job
     {
         $result = [];
 
-        $pattern = '/([\pZ\pC]*)([^\pP\pZ\pC]+|.)([\pZ\pC]*)/u';
+        $pattern = '/([\pZ\pC]*)([^\pP\pZ\pC]+|.)([\pP\pZ\pC]*)/u';
         preg_match_all($pattern, $str, $result);
 
         return $result[2];
