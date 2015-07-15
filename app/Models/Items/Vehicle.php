@@ -36,8 +36,18 @@ class Vehicle extends Model
         return $data;
     }
 
+    public static function allColors()
+    {
+        return DB::table('vehicles_colors')->get();
+    }
+
     public static function allMakes()
     {
         return DB::table('vehicles_makes_models')->where('parent_id', null)->get();
+    }
+
+    public static function allMakesAndModels()
+    {
+        return DB::table('vehicles_makes_models')->get();
     }
 }

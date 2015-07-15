@@ -33,8 +33,10 @@ class ItemVehicle extends Job
         $vehicle->code = $this->code;
 
         foreach ($this->desc as $descKey => $descValue) {
-            if (preg_match('/c[oóòôõ]r/ui', $descValue)) {
+            if (preg_match('/^c[oóòôõ]r$/ui', $descValue)) {
                 $vehicle->color_id = $this->extractColor($descKey, 3);
+            } elseif (preg_match('/^ano$/ui', $descValue)) {
+                $vehicle->year = $this->extractYear($descKey, 2);
             }
         }
 
@@ -45,24 +47,52 @@ class ItemVehicle extends Job
     {
         $this->foundAttr = [
             'color' => false,
+            'year'  => false,
         ];
     }
 
     public function extractColor($key, $limit)
     {
         $i = 1;
-
-        while ($this->foundAttr['color'] == false && $i < $limit) {
+        while ($this->foundAttr['color'] == false && $i <= $limit) {
             $value = $this->desc[$key + $i];
 
-            foreach (Vehicle::getAllColors() as $color) {
-                if (preg_match("/$value/ui", $color->name)) {
+            foreach (Vehicle::allColors() as $color) {
+                if (preg_match("/^$value$/ui", $color->name)) {
                     $this->foundAttr['color'] = true;
 
                     return is_null($color->parent_id) ? $color->id : $color->parent_id;
                 }
             }
             $i++;
+        }
+
+        return;
+    }
+
+    public function extractYear($key, $limit)
+    {
+        $i = 1;
+        while ($this->foundAttr['year'] == false && $i <= $limit) {
+            $value = $this->desc[$key + $i];
+
+            if (preg_match('/^([0-9]{4})$/', $value, $match)) {
+                if ($this->isValidDate($match[0])) {
+                    $this->foundAttr['year'] = true;
+
+                    return $value;
+                }
+            }
+            $i++;
+        }
+
+        return;
+    }
+
+    public function isValidDate($y)
+    {
+        if ($y <= $this->currentYear && $y >= 1950) {
+            return true;
         }
 
         return;
