@@ -34,7 +34,7 @@ class ItemVehicle extends Job
 
         foreach ($this->desc as $descKey => $descValue) {
             if (preg_match('/c[oóòôõ]r/ui', $descValue)) {
-                $vehicle->color_id = $this->extractColor($descKey);
+                $vehicle->color_id = $this->extractColor($descKey, 3);
             }
         }
 
@@ -48,10 +48,11 @@ class ItemVehicle extends Job
         ];
     }
 
-    public function extractColor($key)
+    public function extractColor($key, $limit)
     {
         $i = 1;
-        while ($this->foundAttr['color'] == false && $i < 3) {
+
+        while ($this->foundAttr['color'] == false && $i < $limit) {
             $value = $this->desc[$key + $i];
 
             foreach (Vehicle::getAllColors() as $color) {
