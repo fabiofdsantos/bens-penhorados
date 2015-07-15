@@ -2,90 +2,68 @@
 
 namespace App\Jobs\Extract;
 
-use App\Models\Items\Vehicle;
 use App\Jobs\Job;
+use App\Models\Items\Vehicle;
 
 /**
  * Description here...
  */
 class ItemVehicle extends Job
 {
+    protected $foundAttr;
     protected $code;
     protected $desc;
+    protected $makesModels;
     protected $colors;
+    protected $currentYear;
 
-    public function __construct($code, $description, $colors)
+    public function __construct($code, $description)
     {
         $this->code = $code;
         $this->desc = $description;
-        $this->colors = $colors;
+        $this->currentYear = idate('Y');
+        $this->initFoundAttributes();
     }
 
     public function handle()
     {
+        print "\n > Extracting vehicle attributes of $this->code ... \n";
+
         $vehicle = new Vehicle();
         $vehicle->code = $this->code;
 
-        //    $vehicle->make;
-        //    $vehicle->model;
-
-        if (preg_match('/ano de.?([0-9]{4})/im', $this->desc, $match)) {
-            $vehicle->year = $match[1];
-        } elseif (preg_match('/de.?([0-9]{4})/im', $this->desc, $match)) {
-            $vehicle->year = $match[1];
-        } else {
-            $vehicle->year = null;
-        }
-        /*
-        $categories = ['ligeiro', 'motociclo', 'empilhador'];
-        foreach ($categories as $category) {
-            if (preg_match("/$category/im", $this->desc)) {
-                $vehicle->category = $category;
-                break;
+        foreach ($this->desc as $descKey => $descValue) {
+            if (preg_match('/c[oóòôõ]r/ui', $descValue)) {
+                $vehicle->color_id = $this->extractColor($descKey);
             }
-        }
-
-        $types = ['passageiros', 'mercadorias'];
-        foreach ($types as $type) {
-            if (preg_match("/$type/im", $this->desc)) {
-                $vehicle->type = $type;
-                break;
-            }
-        }
-        */
-        foreach ($this->colors as $color) {
-            if (preg_match("/$color->name/im", $this->desc)) {
-                $vehicle->color_id = is_null($color->parent_id) ? $color->id : $color->parent_id;
-                break;
-            }
-        }
-
-        if (preg_match('/gasolina/im', $this->desc)) {
-            $vehicle->fuel = 'Gasolina';
-        } elseif (preg_match('/gasoleo/iu', $this->desc)) {
-            $vehicle->fuel = 'Diesel';
-        } elseif (preg_match('/diesel/im', $this->desc)) {
-            $vehicle->fuel = 'Diesel';
-        } else {
-            $vehicle->fuel = null;
-        }
-
-        if (preg_match('/mau estado/im', $this->desc)) {
-            $vehicle->isGoodCondition = false;
-        } elseif (preg_match('/bom estado/im', $this->desc)) {
-            $vehicle->isGoodCondition = true;
-        } elseif (preg_match('/avariado/im', $this->desc)) {
-            $vehicle->isGoodCondition = false;
-        } elseif (preg_match('/regular estado/im', $this->desc)) {
-            $vehicle->isGoodCondition = true;
-        } elseif (preg_match('/razoavel estado/uim', $this->desc)) {
-            $vehicle->isGoodCondition = true;
-        } elseif (preg_match('/sucata/im', $this->desc)) {
-            $vehicle->isGoodCondition = false;
-        } else {
-            $vehicle->isGoodCondition = null;
         }
 
         $vehicle->save();
+    }
+
+    public function initFoundAttributes()
+    {
+        $this->foundAttr = [
+            'color' => false,
+        ];
+    }
+
+    public function extractColor($key)
+    {
+        $i = 1;
+        while ($this->foundAttr['color'] == false && $i < 3) {
+            $value = $this->desc[$key + $i];
+
+            foreach (Vehicle::getAllColors() as $color) {
+                if (preg_match("/$value/ui", $color->name)) {
+                    $this->foundAttr['color'] = true;
+
+                    return is_null($color->parent_id) ? $color->id : $color->parent_id;
+                }
+            }
+            $i++;
+        }
+
+        return;
     }
 }

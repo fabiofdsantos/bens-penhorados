@@ -3,6 +3,7 @@
 namespace App\Models\Items;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Vehicle extends Model
 {
@@ -19,7 +20,7 @@ class Vehicle extends Model
             return;
         }
 
-        $data = array();
+        $data = [];
         $data['from'] = $results->firstItem();
         $data['to'] = $results->lastItem();
         $data['total'] = $results->total();
@@ -33,5 +34,9 @@ class Vehicle extends Model
         }
 
         return $data;
+    }
+
+    public static function allColors() {
+        return DB::table('vehicles_colors')->get();
     }
 }
