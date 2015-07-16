@@ -234,7 +234,7 @@ class ItemGeneric extends Job
 
     public function extractName($str)
     {
-        preg_replace('/(\\n)|(\\t)/', '', $str);
+        $str = preg_replace('/(\\n)|(\\t)/', '', $str);
 
         if (preg_match('/^[^(]+(?=$|\s)/ui', $str, $match)) {
             return $match[0];
@@ -326,12 +326,12 @@ class ItemGeneric extends Job
     }
 
     /**
-     * Splits a given text into smaller units called token. Breaks either on
-     * whitespace or on word boundaries (ex.: dots, commas, etc). Does not
-     * include punctuation characters.
+     * Splits a given text into smaller units called token. Remove punctuation
+     * characters except "-" and breaks on whitespace.
      *
      * Regex explanation:
      * \pP matches any kind of punctuation character
+     * \PP matches any characters that \pP does not
      * \pZ matches any kind of whitespace or invisible separator
      * \pC matches invisible control characters and unused code points.
      *
@@ -341,11 +341,8 @@ class ItemGeneric extends Job
      */
     public function tokenize($str)
     {
-        $result = [];
+        $str = preg_replace('/[^\PP-]/ui', '', $str);
 
-        $pattern = '/([\pZ\pC]*)([^\pP\pZ\pC]+|.)([\pP\pZ\pC]*)/u';
-        preg_match_all($pattern, $str, $result);
-
-        return $result[2];
+        return preg_split('/[\pZ\pC]/ui', $str, null, PREG_SPLIT_NO_EMPTY);
     }
 }
