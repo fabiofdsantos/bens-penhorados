@@ -1,7 +1,6 @@
 {
-    "name": "laravel/lumen",
-    "description": "The Laravel Lumen Framework.",
-    "keywords": ["framework", "laravel", "lumen"],
+    "name": "ffsantos92/bens-penhorados",
+    "description": "Bachelor's capstone project.",
     "license": "MIT",
     "type": "project",
     "require": {
