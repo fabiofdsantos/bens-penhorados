@@ -326,7 +326,7 @@ class ItemGeneric extends Job
     }
 
     /**
-     * Splits a given text into smaller units called token. Remove punctuation
+     * Splits a given text into smaller units called token. Removes punctuation
      * characters except "-" and breaks on whitespace.
      *
      * Regex explanation:
