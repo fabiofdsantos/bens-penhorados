@@ -66,6 +66,7 @@ class ItemVehicle extends Job
             foreach (Vehicle::allColors() as $color) {
                 if (preg_match("/^$value$/ui", $color->name)) {
                     $this->foundAttr['color'] = true;
+                    $this->unsetValues($key, $i);
 
                     return is_null($color->parent_id) ? $color->id : $color->parent_id;
                 }
@@ -85,6 +86,7 @@ class ItemVehicle extends Job
             if (preg_match('/^([0-9]{4})$/', $value, $match)) {
                 if ($this->isValidDate($match[0])) {
                     $this->foundAttr['year'] = true;
+                    $this->unsetValues($key, $i);
 
                     return $value;
                 }
@@ -102,9 +104,10 @@ class ItemVehicle extends Job
             $value = $this->desc[$key + $i];
 
             if (preg_match('/^(\d+)cc$/ui', $value, $match)) {
-                $this->foundAttr['engine_displacement'] = true;
-
                 $match[1] += (isset($prev_value) ? $prev_value : 0);
+
+                $this->foundAttr['engine_displacement'] = true;
+                $this->unsetValues($key, $i);
 
                 return $match[1];
             }
@@ -116,6 +119,7 @@ class ItemVehicle extends Job
             if (preg_match('/^[cc|cm3]$/ui', $value)) {
                 if (isset($prev_value)) {
                     $this->foundAttr['engine_displacement'] = true;
+                    $this->unsetValues($key, $i);
 
                     return $prev_value;
                 } else {
@@ -140,12 +144,14 @@ class ItemVehicle extends Job
 
             if (preg_match("/^$general_pattern$/ui", $value)) {
                 $this->foundAttr['reg_plate_code'] = true;
+                $this->unsetValues($key, $i);
 
                 return $value;
             }
 
             if (preg_match("/^$trailers_pattern$/ui", $value)) {
                 $this->foundAttr['reg_plate_code'] = true;
+                $this->unsetValues($key, $i);
 
                 return $value;
             }
@@ -163,5 +169,13 @@ class ItemVehicle extends Job
         }
 
         return;
+    }
+
+    public function unsetValues($key, $i)
+    {
+        while ($i >= 0) {
+            unset($this->desc[$key + $i]);
+            $i--;
+        }
     }
 }
