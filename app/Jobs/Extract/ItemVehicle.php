@@ -39,6 +39,8 @@ class ItemVehicle extends Job
                 $vehicle->year = $this->extractYear($descKey, 2);
             } elseif (preg_match('/^c[iíì]l[iìí]ndrada$/ui', $descValue)) {
                 $vehicle->engine_displacement = $this->extractEngineDisplacement($descKey, 3);
+            } elseif (preg_match('/^matr[iíì]cula$/ui', $descValue)) {
+                $vehicle->reg_plate_code = $this->extractRegPlateCode($descKey, 1);
             }
         }
 
@@ -51,6 +53,7 @@ class ItemVehicle extends Job
             'color'               => false,
             'year'                => false,
             'engine_displacement' => false,
+            'reg_plate_code'      => false,
         ];
     }
 
@@ -118,6 +121,33 @@ class ItemVehicle extends Job
                 } else {
                     return;
                 }
+            }
+
+            $i++;
+        }
+
+        return;
+    }
+
+    public function extractRegPlateCode($key, $limit)
+    {
+        $i = 1;
+        $general_pattern = '\d{2}-\d{2}-[a-z]{2}|\d{2}-[a-z]{2}-\d{2}|[a-z]{2}-\d{2}-\d{2}';
+        $trailers_pattern = '[a-z]{1,2}-\d{1,6}';
+
+        while ($this->foundAttr['reg_plate_code'] == false && $i <= $limit) {
+            $value = $this->desc[$key + $i];
+
+            if (preg_match("/^$general_pattern$/ui", $value)) {
+                $this->foundAttr['reg_plate_code'] = true;
+
+                return $value;
+            }
+
+            if (preg_match("/^$trailers_pattern$/ui", $value)) {
+                $this->foundAttr['reg_plate_code'] = true;
+
+                return $value;
             }
 
             $i++;

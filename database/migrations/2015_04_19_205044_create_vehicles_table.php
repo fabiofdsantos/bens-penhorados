@@ -17,6 +17,7 @@ class CreateVehiclesTable extends Migration
             $table->string('model')->nullable();
             $table->integer('year')->nullable();
             $table->integer('engine_displacement')->nullable();
+            $table->string('reg_plate_code')->nullable();
             $table->enum('type', ['Car', 'Truck', 'Motorcycle', 'Boat', 'Other'])->nullable();
             $table->enum('fuel', ['Gasoline', 'Diesel', 'Hybrid', 'Electric', 'Alternative'])->nullable();
             $table->integer('color_id')->nullable();
