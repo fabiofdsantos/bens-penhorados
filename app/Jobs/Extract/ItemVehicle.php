@@ -49,7 +49,7 @@ class ItemVehicle extends Job
         $vehicle->save();
     }
 
-    public function initFoundAttributes()
+    private function initFoundAttributes()
     {
         $this->foundAttr = [
             'color'               => false,
@@ -60,7 +60,7 @@ class ItemVehicle extends Job
         ];
     }
 
-    public function extractColor($key, $limit)
+    private function extractColor($key, $limit)
     {
         $i = 1;
         while ($this->foundAttr['color'] == false && $i <= $limit) {
@@ -80,7 +80,7 @@ class ItemVehicle extends Job
         return;
     }
 
-    public function extractYear($key, $limit)
+    private function extractYear($key, $limit)
     {
         $i = 1;
         while ($this->foundAttr['year'] == false && $i <= $limit) {
@@ -100,7 +100,7 @@ class ItemVehicle extends Job
         return;
     }
 
-    public function extractEngineDisplacement($key, $limit)
+    private function extractEngineDisplacement($key, $limit)
     {
         $i = 1;
         $prev_value = 0;
@@ -137,7 +137,7 @@ class ItemVehicle extends Job
         return;
     }
 
-    public function extractRegPlateCode($key, $limit)
+    private function extractRegPlateCode($key, $limit)
     {
         $i = 1;
         $general_pattern = '\d{2}-\d{2}-[a-z]{2}|\d{2}-[a-z]{2}-\d{2}|[a-z]{2}-\d{2}-\d{2}';
@@ -166,7 +166,7 @@ class ItemVehicle extends Job
         return;
     }
 
-    public function extractMake($key, $limit)
+    private function extractMake($key, $limit)
     {
         $i = 1;
         while ($this->foundAttr['make'] == false && $i <= $limit) {
@@ -186,7 +186,7 @@ class ItemVehicle extends Job
         return;
     }
 
-    public function isValidDate($y)
+    private function isValidDate($y)
     {
         if ($y <= $this->currentYear && $y >= 1950) {
             return true;
@@ -195,7 +195,7 @@ class ItemVehicle extends Job
         return;
     }
 
-    public function unsetValues($key, $i)
+    private function unsetValues($key, $i)
     {
         while ($i >= 0) {
             unset($this->desc[$key + $i]);
