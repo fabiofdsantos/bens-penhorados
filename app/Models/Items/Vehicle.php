@@ -8,7 +8,7 @@ class Vehicle extends Model
 {
     protected $table = 'vehicles';
     protected $primaryKey = 'code';
-    
+
     public static function paginated($limit)
     {
         $results = Item::join('vehicles', 'vehicles.code', '=', 'items.code')
