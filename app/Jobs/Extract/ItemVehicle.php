@@ -62,8 +62,7 @@ class ItemVehicle extends Job
 
     private function extractColor($key, $limit)
     {
-        $i = 1;
-        while ($this->foundAttr['color'] == false && $i <= $limit) {
+        for ($i = 1; $i <= $limit; $i++) {
             $value = $this->desc[$key + $i];
 
             foreach (Vehicle::allColors() as $color) {
@@ -74,7 +73,6 @@ class ItemVehicle extends Job
                     return is_null($color->parent_id) ? $color->id : $color->parent_id;
                 }
             }
-            $i++;
         }
 
         return;
@@ -82,8 +80,7 @@ class ItemVehicle extends Job
 
     private function extractYear($key, $limit)
     {
-        $i = 1;
-        while ($this->foundAttr['year'] == false && $i <= $limit) {
+        for ($i = 1; $i <= $limit; $i++) {
             $value = $this->desc[$key + $i];
 
             if (preg_match('/^([0-9]{4})$/', $value, $match)) {
@@ -94,7 +91,6 @@ class ItemVehicle extends Job
                     return $value;
                 }
             }
-            $i++;
         }
 
         return;
@@ -102,9 +98,8 @@ class ItemVehicle extends Job
 
     private function extractEngineDisplacement($key, $limit)
     {
-        $i = 1;
         $prev_value = 0;
-        while ($this->foundAttr['engine_displacement'] == false && $i <= $limit) {
+        for ($i = 1; $i <= $limit; $i++) {
             $value = $this->desc[$key + $i];
 
             if (preg_match('/^(\d+)cc$/ui', $value, $match)) {
@@ -130,8 +125,6 @@ class ItemVehicle extends Job
                     return;
                 }
             }
-
-            $i++;
         }
 
         return;
@@ -139,11 +132,10 @@ class ItemVehicle extends Job
 
     private function extractRegPlateCode($key, $limit)
     {
-        $i = 1;
         $general_pattern = '\d{2}-\d{2}-[a-z]{2}|\d{2}-[a-z]{2}-\d{2}|[a-z]{2}-\d{2}-\d{2}';
         $trailers_pattern = '[a-z]{1,2}-\d{1,6}';
 
-        while ($this->foundAttr['reg_plate_code'] == false && $i <= $limit) {
+        for ($i = 1; $i <= $limit; $i++) {
             $value = $this->desc[$key + $i];
 
             if (preg_match("/^$general_pattern$/ui", $value)) {
@@ -159,8 +151,6 @@ class ItemVehicle extends Job
 
                 return $value;
             }
-
-            $i++;
         }
 
         return;
@@ -168,8 +158,7 @@ class ItemVehicle extends Job
 
     private function extractMake($key, $limit)
     {
-        $i = 1;
-        while ($this->foundAttr['make'] == false && $i <= $limit) {
+        for ($i = 1; $i <= $limit; $i++) {
             $value = $this->desc[$key + $i];
 
             foreach (Vehicle::allMakes() as $make) {
@@ -180,7 +169,6 @@ class ItemVehicle extends Job
                     return $make->id;
                 }
             }
-            $i++;
         }
 
         return;
