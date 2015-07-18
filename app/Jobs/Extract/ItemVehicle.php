@@ -116,7 +116,7 @@ class ItemVehicle extends Job
                 $prev_value += $value;
             }
 
-            if (preg_match('/^[cc|cm3]$/ui', $value)) {
+            if (preg_match('/^cc|cm3$/ui', $value)) {
                 if (isset($prev_value)) {
                     $this->foundAttr['engine_displacement'] = true;
                     $this->unsetValues($key, $i);
