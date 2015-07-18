@@ -6,7 +6,7 @@ class VehiclesColorsTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('vehicles_colors')->truncate();
+        DB::table('vehicles_colors')->delete();
 
         $colors = [
             ['id' => 1, 'name' => 'preto', 'parent_id' => null],

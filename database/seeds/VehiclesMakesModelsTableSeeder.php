@@ -6,7 +6,7 @@ class VehiclesMakesModelsTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('vehicles_makes_models')->truncate();
+        DB::table('vehicles_makes_models')->delete();
 
         $makes = [
             ['id' => 1, 'name' => 'Abarth', 'parent_id' => null],

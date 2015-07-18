@@ -6,13 +6,11 @@ class RawDataCategoriesTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('raw_data_categories')->truncate();
+        DB::table('raw_data_categories')->delete();
 
         $categories = [
             ['name' => 'vehicles', 'code' => '01'],
             ['name' => 'real-estates', 'code' => '02'],
-            //['name' => 'social-quotas', 'code' => '05'],
-            //['name' => 'shops', 'code' => '08'],
             ['name' => 'others', 'code' => '09'],
         ];
 
