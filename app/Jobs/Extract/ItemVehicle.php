@@ -41,6 +41,8 @@ class ItemVehicle extends Job
                 $vehicle->engine_displacement = $this->extractEngineDisplacement($descKey, 3);
             } elseif (preg_match('/^matr[iíì]cula$/ui', $descValue)) {
                 $vehicle->reg_plate_code = $this->extractRegPlateCode($descKey, 1);
+            } elseif (preg_match('/^marca$/ui', $descValue)) {
+                $vehicle->make = $this->extractMake($descKey, 1);
             }
         }
 
@@ -54,6 +56,7 @@ class ItemVehicle extends Job
             'year'                => false,
             'engine_displacement' => false,
             'reg_plate_code'      => false,
+            'make'                => false,
         ];
     }
 
@@ -156,6 +159,26 @@ class ItemVehicle extends Job
                 return $value;
             }
 
+            $i++;
+        }
+
+        return;
+    }
+
+    public function extractMake($key, $limit)
+    {
+        $i = 1;
+        while ($this->foundAttr['make'] == false && $i <= $limit) {
+            $value = $this->desc[$key + $i];
+
+            foreach (Vehicle::allMakes() as $make) {
+                if (preg_match("/$make->name/ui", $value)) {
+                    $this->foundAttr['make'] = true;
+                    $this->unsetValues($key, $i);
+
+                    return $make->id;
+                }
+            }
             $i++;
         }
 
