@@ -103,11 +103,12 @@ class ItemVehicle extends Job
     public function extractEngineDisplacement($key, $limit)
     {
         $i = 1;
+        $prev_value = 0;
         while ($this->foundAttr['engine_displacement'] == false && $i <= $limit) {
             $value = $this->desc[$key + $i];
 
             if (preg_match('/^(\d+)cc$/ui', $value, $match)) {
-                $match[1] += (isset($prev_value) ? $prev_value : 0);
+                $match[1] += $prev_value;
 
                 $this->foundAttr['engine_displacement'] = true;
                 $this->unsetValues($key, $i);
