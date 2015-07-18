@@ -11,18 +11,21 @@ class CreateVehiclesTable extends Migration
     public function up()
     {
         Schema::create('vehicles', function (Blueprint $table) {
-            $table->string('code');
-            $table->foreign('code')->references('code')->on('items');
-            $table->string('make')->nullable();
-            $table->string('model')->nullable();
+            $table->string('code')->references('code')->on('items');
             $table->integer('year')->nullable();
             $table->integer('engine_displacement')->nullable();
             $table->string('reg_plate_code')->nullable();
-            $table->enum('type', ['Car', 'Truck', 'Motorcycle', 'Boat', 'Other'])->nullable();
-            $table->enum('fuel', ['Gasoline', 'Diesel', 'Hybrid', 'Electric', 'Alternative'])->nullable();
-            $table->integer('color_id')->nullable();
-            //$table->foreign('color_id')->references('id')->on('vehicles_colors');
             $table->boolean('isGoodCondition')->nullable();
+
+            $table->integer('make_id')->unsigned()->nullable();
+            $table->foreign('make_id')->references('id')->on('vehicles_makes_models')->nullable();
+
+            $table->integer('model_id')->unsigned()->nullable();
+            $table->foreign('model_id')->references('id')->on('vehicles_makes_models')->nullable();
+
+            $table->integer('color_id')->unsigned()->nullable();
+            $table->foreign('color_id')->references('id')->on('vehicles_colors');
+
             $table->timestamps();
         });
     }
@@ -32,6 +35,6 @@ class CreateVehiclesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('vehicles');
+        Schema::dropIfExists('vehicles');
     }
 }

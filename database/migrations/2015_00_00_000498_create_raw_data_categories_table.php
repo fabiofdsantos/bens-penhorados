@@ -3,17 +3,17 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateImportTable extends Migration
+class CreateRawDataCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up()
     {
-        Schema::create('import', function (Blueprint $table) {
+        Schema::create('raw_data_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('status', ['Agendada', 'Em execução', 'Com falhas', 'Concluída']);
-            $table->timestamps();
+            $table->string('name');
+            $table->string('code');
         });
     }
 
@@ -22,6 +22,6 @@ class CreateImportTable extends Migration
      */
     public function down()
     {
-        Schema::drop('import');
+        Schema::dropIfExists('raw_data_categories');
     }
 }

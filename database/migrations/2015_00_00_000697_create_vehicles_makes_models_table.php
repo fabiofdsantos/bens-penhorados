@@ -3,17 +3,17 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateRawDataCategoriesTable extends Migration
+class CreateVehiclesMakesModelsTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up()
     {
-        Schema::create('raw_data_categories', function (Blueprint $table) {
+        Schema::create('vehicles_makes_models', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('code');
+            $table->integer('parent_id')->nullable();
         });
     }
 
@@ -22,6 +22,6 @@ class CreateRawDataCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('raw_data_categories');
+        Schema::dropIfExists('vehicles_makes_models');
     }
 }

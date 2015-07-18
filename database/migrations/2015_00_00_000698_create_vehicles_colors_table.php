@@ -3,26 +3,29 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateLocationsTable extends Migration
+class CreateVehiclesColorsTable extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
     public function up()
     {
-        Schema::create('locations', function (Blueprint $table) {
+        Schema::create('vehicles_colors', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('parent_id')->nullable();
             $table->string('name');
-            $table->string('code');
+            $table->integer('parent_id')->nullable();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
     public function down()
     {
-        Schema::drop('locations');
+        Schema::dropIfExists('vehicles_colors');
     }
 }
