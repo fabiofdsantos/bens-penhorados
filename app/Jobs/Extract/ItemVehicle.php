@@ -3,6 +3,8 @@
 namespace App\Jobs\Extract;
 
 use App\Jobs\Job;
+use App\Models\Items\Attributes\Color;
+use App\Models\Items\Attributes\MakeAndModel;
 use App\Models\Items\Vehicle;
 
 /**
@@ -42,7 +44,11 @@ class ItemVehicle extends Job
             } elseif (preg_match('/^matr[iíì]cula$/ui', $descValue)) {
                 $vehicle->reg_plate_code = $this->extractRegPlateCode($descKey, 1);
             } elseif (preg_match('/^marca$/ui', $descValue)) {
-                $vehicle->make = $this->extractMake($descKey, 1);
+                $vehicle->make_id = $this->extractMake($descKey, 1);
+            } elseif (preg_match('/^modelo$/ui', $descValue)) {
+                if (isset($vehicle->make_id)) {
+                    $vehicle->model_id = $this->extractModel($descKey, 3, $vehicle->make_id);
+                }
             }
         }
 
@@ -57,6 +63,7 @@ class ItemVehicle extends Job
             'engine_displacement' => false,
             'reg_plate_code'      => false,
             'make'                => false,
+            'model'               => false,
         ];
     }
 
@@ -65,7 +72,7 @@ class ItemVehicle extends Job
         for ($i = 1; $i <= $limit; $i++) {
             $value = $this->desc[$key + $i];
 
-            foreach (Vehicle::allColors() as $color) {
+            foreach (Color::all() as $color) {
                 if (preg_match("/^$value$/ui", $color->name)) {
                     $this->foundAttr['color'] = true;
                     $this->unsetValues($key, $i);
@@ -161,12 +168,30 @@ class ItemVehicle extends Job
         for ($i = 1; $i <= $limit; $i++) {
             $value = $this->desc[$key + $i];
 
-            foreach (Vehicle::allMakes() as $make) {
+            foreach (MakeAndModel::makes() as $make) {
                 if (preg_match("/$make->name/ui", $value)) {
                     $this->foundAttr['make'] = true;
                     $this->unsetValues($key, $i);
 
                     return $make->id;
+                }
+            }
+        }
+
+        return;
+    }
+
+    private function extractModel($key, $limit, $make_id)
+    {
+        for ($i = 1; $i <= $limit; $i++) {
+            $value = $this->desc[$key + $i];
+
+            foreach (MakeAndModel::models($make_id) as $model) {
+                if (preg_match("/$model->name/ui", $value)) {
+                    $this->foundAttr['model'] = true;
+                    $this->unsetValues($key, $i);
+
+                    return $model->id;
                 }
             }
         }
