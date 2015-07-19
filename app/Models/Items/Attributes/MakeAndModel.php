@@ -2,6 +2,7 @@
 
 namespace App\Models\Items\Attributes;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class MakeAndModel extends Model
@@ -23,9 +24,11 @@ class MakeAndModel extends Model
     /**
      * Scope a query to only include makes.
      *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeMakes($query)
+    public function scopeMakes(Builder $query)
     {
         return $query->where('parent_id', null)->get();
     }
@@ -33,9 +36,11 @@ class MakeAndModel extends Model
     /**
      * Scope a query to only include models of a given make.
      *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeModels($query, $make_id)
+    public function scopeModels(Builder $query, $make_id)
     {
         return $query->where('parent_id', $make_id)->get();
     }
