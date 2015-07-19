@@ -60,7 +60,8 @@ class WebsiteExtended extends Job
             $dataToBeHashed = $crawler->filter('table.w100 > tr:nth-child('.$i.') > td:nth-child(1) > div:nth-child(1) > table:nth-child(1)')->html();
             $hash = Hash::make($dataToBeHashed);
 
-            for ($x = 1; $x <= ($item->filter('span')->count()); $x++) {
+            $spans_total = $item->filter('span')->count();
+            for ($x = 1; $x <= $spans_total; $x++) {
                 $currentSpan = $item->filter('span:nth-child('.$x.')')->text();
 
                 if (preg_match('/Nº Venda:/i', $currentSpan, $match)) {
