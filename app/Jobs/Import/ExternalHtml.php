@@ -100,14 +100,14 @@ class ExternalHtml extends Job
     /**
      * Create a new job instance.
      *
-     * @param int $categoryId
-     * @param int $taxOffice
-     * @param int $year
-     * @param int $itemId
+     * @param int    $categoryId
+     * @param int    $taxOffice
+     * @param int    $year
+     * @param int    $itemId
      * @param string $hash
      * @param string $lat
      * @param string $lng
-     * @param bool $isUpdate
+     * @param bool   $isUpdate
      */
     public function __construct($categoryId, $taxOffice, $year, $itemId, $hash, $lat, $lng, $isUpdate)
     {

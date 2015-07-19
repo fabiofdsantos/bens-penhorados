@@ -11,9 +11,9 @@ use Symfony\Component\DomCrawler\Crawler;
 class Website extends Job
 {
     /**
-     * The list of categories.
+     * The collection of categories.
      *
-     * @var array
+     * @var Collection
      */
     protected $categories;
 
@@ -27,8 +27,8 @@ class Website extends Job
     /**
      * Create a new job instance.
      *
-     * @param array $categories
-     * @param int $lastPage
+     * @param Collection $categories
+     * @param int        $lastPage
      */
     public function __construct($categories, $lastPage)
     {

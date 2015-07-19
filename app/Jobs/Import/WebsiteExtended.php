@@ -10,11 +10,6 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class WebsiteExtended extends Job
 {
-    /**
-     * The current category code.
-     *
-     * @var int
-     */
     protected $category;
 
     /**
@@ -34,9 +29,8 @@ class WebsiteExtended extends Job
     /**
      * Create a new job instance.
      *
-     * @param $category
      * @param array $existingItems
-     * @param int $currentPage
+     * @param int   $currentPage
      */
     public function __construct($category, $existingItems, $currentPage)
     {

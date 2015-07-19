@@ -34,7 +34,7 @@ class ItemVehicle extends Job
      * Create a new job instance.
      *
      * @param string $code
-     * @param array $description
+     * @param array  $description
      */
     public function __construct($code, $description)
     {
