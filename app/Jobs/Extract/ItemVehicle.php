@@ -82,7 +82,7 @@ class ItemVehicle extends Job
      * @param int $key
      * @param int $limit
      *
-     * @return mixed
+     * @return int
      */
     private function extractColor($key, $limit)
     {
@@ -163,7 +163,7 @@ class ItemVehicle extends Job
      * @param int $key
      * @param int $limit
      *
-     * @return mixed
+     * @return string
      */
     private function extractRegPlateCode($key, $limit)
     {
@@ -255,6 +255,8 @@ class ItemVehicle extends Job
      *
      * @param int $key
      * @param int $i
+     *
+     * @return void
      */
     private function unsetValues($key, $i)
     {
