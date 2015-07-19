@@ -8,15 +8,36 @@ use GuzzleHttp;
 use Hash;
 use Symfony\Component\DomCrawler\Crawler;
 
-/**
- * Description here...
- */
 class WebsiteExtended extends Job
 {
+    /**
+     * The current category code.
+     *
+     * @var int
+     */
     protected $category;
+
+    /**
+     * The list of existing items on database.
+     *
+     * @var array
+     */
     protected $existingItems;
+
+    /**
+     * The number of the current page.
+     *
+     * @var int
+     */
     protected $currentPage;
 
+    /**
+     * Create a new job instance.
+     *
+     * @param $category
+     * @param array $existingItems
+     * @param int $currentPage
+     */
     public function __construct($category, $existingItems, $currentPage)
     {
         $this->category = $category;
@@ -24,6 +45,11 @@ class WebsiteExtended extends Job
         $this->currentPage = $currentPage;
     }
 
+    /**
+     * Execute the job.
+     *
+     * @return mixed
+     */
     public function handle()
     {
         $guzzle = new GuzzleHttp\Client();
@@ -32,12 +58,12 @@ class WebsiteExtended extends Job
 
         $request = $guzzle->createRequest('GET', 'www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta='.$this->category->code.'&page='.$this->currentPage, [
             'headers' => [
-                'User-Agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
-                'Accept'     => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                'Referer'    => 'http://www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta='.$this->category->code,
+                'User-Agent'  => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
+                'Accept'      => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Referrer'    => 'http://www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta='.$this->category->code,
             ],
             'debug' => false,
-            ]);
+        ]);
 
         $response = $guzzle->send($request);
 
@@ -80,7 +106,7 @@ class WebsiteExtended extends Job
                             if (!Hash::check($dataToBeHashed, $this->existingItems[$itemCode])) {
                                 Bus::dispatch(new ExternalHtml($this->category->id, $taxOffice, $year, $itemId, $hash, null, null, true));
 
-                                print "\n *** Updating item: $itemCode *** \n";
+                                print "\n *** Item needs to be updated: $itemCode *** \n";
                             }
                         } else {
                             Bus::dispatch(new ExternalHtml($this->category->id, $taxOffice, $year, $itemId, $hash, null, null, false));

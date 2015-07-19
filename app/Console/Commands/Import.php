@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\Import\Map;
+use App\Jobs\Import\Website;
 use Bus;
 use DB;
 use Illuminate\Console\Command;
@@ -51,7 +53,10 @@ class Import extends Command
      */
     public function fromMap()
     {
-        Bus::dispatch(new \App\Jobs\Import\Map());
+        $locations = DB::table('locations')->where('parent_id', '=', null)->lists('code');
+        $existingItems = DB::table('raw_data')->lists('code');
+
+        Bus::dispatch(new Map($locations, $existingItems));
     }
 
     /**
@@ -69,7 +74,7 @@ class Import extends Command
             $categories = DB::table('raw_data_categories')->get();
         }
 
-        Bus::dispatch(new \App\Jobs\Import\Website($categories, $lastPage));
+        Bus::dispatch(new Website($categories, $lastPage));
     }
 
     /**

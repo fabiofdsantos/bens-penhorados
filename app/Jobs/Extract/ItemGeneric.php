@@ -10,18 +10,57 @@ use Intervention\Image\ImageManager;
 use Storage;
 use Symfony\Component\DomCrawler\Crawler;
 
-/**
- * Description here...
- */
 class ItemGeneric extends Job
 {
+    /**
+     * The item code.
+     *
+     * @var string
+     */
     protected $code;
+
+    /**
+     * The item latitude.
+     *
+     * @var string
+     */
     protected $lat;
+
+    /**
+     * The item longitude.
+     *
+     * @var string
+     */
     protected $lng;
+
+    /**
+     * The complete path to the file on disk.
+     *
+     * @var string
+     */
     protected $filePath;
+
+    /**
+     * The item description.
+     *
+     * @var string
+     */
     protected $description;
+
+    /**
+     * The item category.
+     *
+     * @var int
+     */
     protected $category;
 
+    /**
+     * Create a new job instance.
+     *
+     * @param string $code
+     * @param string $lat
+     * @param string $lng
+     */
     public function __construct($code, $lat, $lng)
     {
         $this->code = $code;
@@ -30,6 +69,11 @@ class ItemGeneric extends Job
         $this->filePath = env('BP_RAW_FOLDER', 'rawdata/').$code.env('BP_RAW_FILE_EXT', '.raw');
     }
 
+    /***
+     * Execute the job.
+     *
+     * @return mixed
+     */
     public function handle()
     {
         $crawler = new Crawler();
@@ -188,7 +232,14 @@ class ItemGeneric extends Job
         }
     }
 
-    public function itemExists($crawler)
+    /**
+     * Check if the item exists.
+     * 
+     * @param Crawler $crawler
+     *
+     * @return bool
+     */
+    public function itemExists(Crawler $crawler)
     {
         if ($crawler->filter('.info-element-title > p:nth-child(1)')->count() > 0) {
             // dupla verificação
@@ -204,6 +255,13 @@ class ItemGeneric extends Job
         return true;
     }
 
+    /**
+     * Extract the price.
+     *
+     * @param string $str
+     *
+     * @return mixed
+     */
     public function extractPrice($str)
     {
         if (preg_match('/(\d+?\.?\d+\,\d+)/', $str, $match)) {
@@ -211,30 +269,54 @@ class ItemGeneric extends Job
             $match[0] = str_replace(',', '.', $match[0]);
 
             return $match[0];
-        } else {
-            return;
         }
     }
 
+    /**
+     * Extract the vat.
+     *
+     * @param string $str
+     *
+     * @return mixed
+     */
     public function extractVat($str)
     {
         if (preg_match('/(\d+)(,\d+)?% IVA incluído/ui', $str, $match)) {
             return $match[0];
-        } else {
-            return;
         }
     }
 
+    /**
+     * Extract the current status.
+     * 
+     * @param string $str
+     *
+     * @return mixed
+     */
     public function extractStatus($str)
     {
         return $str;
     }
 
+    /**
+     * Extract the mode.
+     * 
+     * @param string $str
+     *
+     * @return mixed
+     */
     public function extractMode($str)
     {
         return $str;
     }
 
+    /**
+     * Extract the name.
+     * 
+     * @param string $str
+     *
+     * @return mixed
+     */
     public function extractName($str)
     {
         $str = preg_replace('/(\\n)|(\\t)/', '', $str);
@@ -242,28 +324,43 @@ class ItemGeneric extends Job
         if (preg_match('/^[^(]+(?=$|\s)/ui', $str, $match)) {
             return $match[0];
         }
-
-        return;
     }
 
+    /**
+     * Extract the phone number.
+     * 
+     * @param string $str
+     *
+     * @return mixed
+     */
     public function extractPhoneNumber($str)
     {
         if (preg_match('/\d{9,}/', $str, $match)) {
             return $match[0];
         }
-
-        return;
     }
 
+    /**
+     * Extract the email.
+     * 
+     * @param string $str
+     *
+     * @return string
+     */
     public function extractEmail($str)
     {
         if (preg_match('/\w+@\w+\.\w{1,}/i', $str, $match)) {
             return strtolower($match[0]);
         }
-
-        return;
     }
 
+    /**
+     * Extract the start and end datetime.
+     *
+     * @param string $str
+     *
+     * @return array
+     */
     public function extractStartEndDateTime($str)
     {
         $preview_dt = [];
@@ -285,6 +382,13 @@ class ItemGeneric extends Job
         return $preview_dt;
     }
 
+    /**
+     * Extract a single datetime.
+     * 
+     * @param string $str
+     *
+     * @return Carbon object
+     */
     public function extractSingleDateTime($str)
     {
         if (preg_match('/\d+\-\d+\-\d+/', $str, $match_date)) {
@@ -297,16 +401,19 @@ class ItemGeneric extends Job
 
                 return Carbon::createFromFormat('Y-m-d', $dt);
             }
-        } else {
-            return;
         }
     }
 
+    /**
+     * Extract all images and save them on disk.
+     * 
+     * @param array $external_images
+     *
+     * @return string
+     */
     public function extractImages($external_images)
     {
-        if (preg_match('/img_semfoto/', $external_images[0])) {
-            return;
-        } else {
+        if (!preg_match('/img_semfoto/', $external_images[0])) {
             $i = 1;
             $images = [];
             $manager = new ImageManager();
@@ -317,11 +424,12 @@ class ItemGeneric extends Job
                     $img->fit(600, 400);
                     $img->encode('jpg', 90);
                     $img->save('public/images/'.$filename);
+
+                    $images[] = $filename;
                 } catch (\Exception $e) {
                     // to do
                 }
                 $i++;
-                $images[] = $filename;
             }
 
             return json_encode($images);
@@ -329,8 +437,8 @@ class ItemGeneric extends Job
     }
 
     /**
-     * Splits a given text into smaller units called token. Removes punctuation
-     * characters except "-" and breaks on whitespace.
+     * Split a given text into smaller units called token. Remove punctuation
+     * characters except "-" and break on whitespace.
      *
      * Regex explanation:
      * \pP matches any kind of punctuation character

@@ -7,26 +7,47 @@ use App\Models\Items\Attributes\Color;
 use App\Models\Items\Attributes\MakeAndModel;
 use App\Models\Items\Vehicle;
 
-/**
- * Description here...
- */
 class ItemVehicle extends Job
 {
-    protected $foundAttr;
+    /**
+     * The vehicle code.
+     *
+     * @var string
+     */
     protected $code;
+
+    /**
+     * The vehicle description.
+     *
+     * @var array
+     */
     protected $desc;
-    protected $makesModels;
-    protected $colors;
+
+    /**
+     * The current year.
+     *
+     * @var int
+     */
     protected $currentYear;
 
+    /**
+     * Create a new job instance.
+     *
+     * @param string $code
+     * @param array $description
+     */
     public function __construct($code, $description)
     {
         $this->code = $code;
         $this->desc = $description;
         $this->currentYear = idate('Y');
-        $this->initFoundAttributes();
     }
 
+    /**
+     * Execute the job.
+     *
+     * @return mixed
+     */
     public function handle()
     {
         print "\n > Extracting vehicle attributes of $this->code ... \n";
@@ -55,18 +76,14 @@ class ItemVehicle extends Job
         $vehicle->save();
     }
 
-    private function initFoundAttributes()
-    {
-        $this->foundAttr = [
-            'color'               => false,
-            'year'                => false,
-            'engine_displacement' => false,
-            'reg_plate_code'      => false,
-            'make'                => false,
-            'model'               => false,
-        ];
-    }
-
+    /**
+     * Extract the color.
+     *
+     * @param int $key
+     * @param int $limit
+     *
+     * @return mixed
+     */
     private function extractColor($key, $limit)
     {
         for ($i = 1; $i <= $limit; $i++) {
@@ -74,17 +91,22 @@ class ItemVehicle extends Job
 
             foreach (Color::all() as $color) {
                 if (preg_match("/^$value$/ui", $color->name)) {
-                    $this->foundAttr['color'] = true;
                     $this->unsetValues($key, $i);
 
                     return is_null($color->parent_id) ? $color->id : $color->parent_id;
                 }
             }
         }
-
-        return;
     }
 
+    /**
+     * Extract the year.
+     *
+     * @param int $key
+     * @param int $limit
+     *
+     * @return int
+     */
     private function extractYear($key, $limit)
     {
         for ($i = 1; $i <= $limit; $i++) {
@@ -92,17 +114,22 @@ class ItemVehicle extends Job
 
             if (preg_match('/^([0-9]{4})$/', $value, $match)) {
                 if ($this->isValidDate($match[0])) {
-                    $this->foundAttr['year'] = true;
                     $this->unsetValues($key, $i);
 
                     return $value;
                 }
             }
         }
-
-        return;
     }
 
+    /**
+     * Extract the engine displacement.
+     *
+     * @param int $key
+     * @param int $limit
+     *
+     * @return int
+     */
     private function extractEngineDisplacement($key, $limit)
     {
         $prev_value = 0;
@@ -111,8 +138,6 @@ class ItemVehicle extends Job
 
             if (preg_match('/^(\d+)cc$/ui', $value, $match)) {
                 $match[1] += $prev_value;
-
-                $this->foundAttr['engine_displacement'] = true;
                 $this->unsetValues($key, $i);
 
                 return $match[1];
@@ -124,19 +149,22 @@ class ItemVehicle extends Job
 
             if (preg_match('/^cc|cm3$/ui', $value)) {
                 if (isset($prev_value)) {
-                    $this->foundAttr['engine_displacement'] = true;
                     $this->unsetValues($key, $i);
 
                     return $prev_value;
-                } else {
-                    return;
                 }
             }
         }
-
-        return;
     }
 
+    /**
+     * Extract the registration plate code.
+     *
+     * @param int $key
+     * @param int $limit
+     *
+     * @return mixed
+     */
     private function extractRegPlateCode($key, $limit)
     {
         $general_pattern = '\d{2}-\d{2}-[a-z]{2}|\d{2}-[a-z]{2}-\d{2}|[a-z]{2}-\d{2}-\d{2}';
@@ -146,23 +174,27 @@ class ItemVehicle extends Job
             $value = $this->desc[$key + $i];
 
             if (preg_match("/^$general_pattern$/ui", $value)) {
-                $this->foundAttr['reg_plate_code'] = true;
                 $this->unsetValues($key, $i);
 
                 return $value;
             }
 
             if (preg_match("/^$trailers_pattern$/ui", $value)) {
-                $this->foundAttr['reg_plate_code'] = true;
                 $this->unsetValues($key, $i);
 
                 return $value;
             }
         }
-
-        return;
     }
 
+    /**
+     * Extract the make.
+     *
+     * @param int $key
+     * @param int $limit
+     *
+     * @return int
+     */
     private function extractMake($key, $limit)
     {
         for ($i = 1; $i <= $limit; $i++) {
@@ -170,17 +202,23 @@ class ItemVehicle extends Job
 
             foreach (MakeAndModel::makes() as $make) {
                 if (preg_match("/$make->name/ui", $value)) {
-                    $this->foundAttr['make'] = true;
                     $this->unsetValues($key, $i);
 
                     return $make->id;
                 }
             }
         }
-
-        return;
     }
 
+    /**
+     * Extract the model.
+     *
+     * @param int $key
+     * @param int $limit
+     * @param int $make_id
+     *
+     * @return int
+     */
     private function extractModel($key, $limit, $make_id)
     {
         for ($i = 1; $i <= $limit; $i++) {
@@ -188,26 +226,36 @@ class ItemVehicle extends Job
 
             foreach (MakeAndModel::models($make_id) as $model) {
                 if (preg_match("/$model->name/ui", $value)) {
-                    $this->foundAttr['model'] = true;
                     $this->unsetValues($key, $i);
 
                     return $model->id;
                 }
             }
         }
-
-        return;
     }
 
+    /**
+     * Check if a given year is valid.
+     *
+     * @param int $y
+     *
+     * @return bool
+     */
     private function isValidDate($y)
     {
         if ($y <= $this->currentYear && $y >= 1950) {
             return true;
         }
 
-        return;
+        return false;
     }
 
+    /**
+     * Unset the attributes found in vehicle description.
+     *
+     * @param int $key
+     * @param int $i
+     */
     private function unsetValues($key, $i)
     {
         while ($i >= 0) {

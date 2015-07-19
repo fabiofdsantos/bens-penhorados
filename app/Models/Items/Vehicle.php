@@ -6,30 +6,54 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vehicle extends Model
 {
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'vehicles';
+
+    /**
+     * The primary key column.
+     *
+     * @var string
+     */
     protected $primaryKey = 'code';
 
-    public static function paginated($limit)
+    /**
+     * Indicate if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = true;
+
+    /**
+     * Get vehicles with pagination.
+     *
+     * @param int $perPage
+     *
+     * @return array
+     */
+    public static function withPagination($perPage)
     {
         $results = Item::join('vehicles', 'vehicles.code', '=', 'items.code')
         ->select('items.price', 'items.images')
-        ->paginate($limit);
-
-        if ($results->isEmpty()) {
-            return;
-        }
+        ->paginate($perPage);
 
         $data = [];
-        $data['from'] = $results->firstItem();
-        $data['to'] = $results->lastItem();
-        $data['total'] = $results->total();
-        $data['limit'] = $results->perPage();
+        if (!$results->isEmpty()) {
+            $data['from'] = $results->firstItem();
+            $data['to'] = $results->lastItem();
+            $data['total'] = $results->total();
+            $data['limit'] = $results->perPage();
 
-        foreach ($results as $result) {
-            $item = new self();
-            $item->price = $result->price;
-            $item->image = json_decode($result->images)[0];
-            $data['items'][] = $item;
+            foreach ($results as $result) {
+                $item = new self();
+                $item->price = $result->price;
+                $item->image = json_decode($result->images)[0];
+
+                $data['items'][] = $item;
+            }
         }
 
         return $data;

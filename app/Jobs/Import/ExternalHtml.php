@@ -13,19 +13,102 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class ExternalHtml extends Job
 {
+    /**
+     * The main folder for raw files.
+     *
+     * @var string
+     */
     protected $folder;
+
+    /**
+     * The raw file extension.
+     *
+     * @var string
+     */
     protected $extension;
+
+    /**
+     * The backup folder for raw files.
+     *
+     * @var string
+     */
     protected $oldFolder;
+
+    /**
+     * The item code.
+     *
+     * @var string
+     */
     protected $itemCode;
+
+    /**
+     * The category id.
+     *
+     * @var int
+     */
     protected $categoryId;
+
+    /**
+     * The tax office number.
+     *
+     * @var int
+     */
     protected $taxOffice;
+
+    /**
+     * The year.
+     *
+     * @var int
+     */
     protected $year;
+
+    /**
+     * The external item id.
+     *
+     * @var int
+     */
     protected $itemId;
+
+    /**
+     * The item hash value.
+     *
+     * @var string
+     */
     protected $hash;
+
+    /**
+     * The item latitude.
+     *
+     * @var string
+     */
     protected $lat;
+
+    /**
+     * The item longitude.
+     *
+     * @var string
+     */
     protected $lng;
+
+    /**
+     * Define the job mode.
+     *
+     * @var bool
+     */
     protected $isUpdate;
 
+    /**
+     * Create a new job instance.
+     *
+     * @param int $categoryId
+     * @param int $taxOffice
+     * @param int $year
+     * @param int $itemId
+     * @param string $hash
+     * @param string $lat
+     * @param string $lng
+     * @param bool $isUpdate
+     */
     public function __construct($categoryId, $taxOffice, $year, $itemId, $hash, $lat, $lng, $isUpdate)
     {
         $this->folder = env('BP_RAW_FOLDER', 'rawdata/');
@@ -42,6 +125,11 @@ class ExternalHtml extends Job
         $this->isUpdate = $isUpdate;
     }
 
+    /**
+     * Execute the job.
+     *
+     * @return mixed
+     */
     public function handle()
     {
         $guzzle = new GuzzleHttp\Client();
@@ -49,12 +137,12 @@ class ExternalHtml extends Job
         print "\n > Saving $this->itemCode html as raw data... \n";
 
         $request = $guzzle->createRequest('GET', 'http://www.e-financas.gov.pt/vendas/detalheVenda.action?idVenda='.$this->itemId.'&sf='.$this->taxOffice.'&ano='.$this->year, [
-        'headers' => [
-        'User-Agent' => '"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0"',
-        'Accept'     => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        'Referer'    => 'http://www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta=02&modalidade=&distrito=&concelho=&minimo=++.+++.+++.+++%2C++&maximo=++.+++.+++.+++%2C++&dataMin=&dataMax=',
-        ],
-        'debug' => false,
+            'headers' => [
+                'User-Agent'  => '"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0"',
+                'Accept'      => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Referrer'    => 'http://www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta=02&modalidade=&distrito=&concelho=&minimo=++.+++.+++.+++%2C++&maximo=++.+++.+++.+++%2C++&dataMin=&dataMax=',
+            ],
+            'debug' => false,
         ]);
 
         $response = $guzzle->send($request);
