@@ -61,7 +61,7 @@ class ItemGeneric extends Job
                             $nodeText = trim($headerDetails->filter('span:nth-child('.($x + 1).')')->text());
                             $item->price = $this->extractPrice($nodeText);
 
-                            if ($item->price != null) {
+                            if (isset($item->price)) {
                                 $item->vat = $this->extractVat($nodeText);
                             }
                         } catch (\Exception $e) {
@@ -107,7 +107,7 @@ class ItemGeneric extends Job
                             $item->depositary_email = null;
                         }
 
-                        if ($item->depositary_name != null) {
+                        if (isset($item->depositary_name)) {
                             $item->depositary_phone = $this->extractPhoneNumber($nodeText);
 
                             if (preg_match('/Email/i', $nodeText, $match)) {
@@ -125,7 +125,7 @@ class ItemGeneric extends Job
                             $item->mediator_email = null;
                         }
 
-                        if ($item->mediator_name != null) {
+                        if (isset($item->mediator_name)) {
                             $item->mediator_phone = $this->extractPhoneNumber($nodeText);
 
                             if (preg_match('/Email/i', $nodeText, $match)) {
