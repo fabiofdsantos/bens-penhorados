@@ -52,7 +52,8 @@ class ItemGeneric extends Job
 
             $headerDetails = $crawler->filter('#trFotoP > th:nth-child(1)');
 
-            for ($x = 1; $x <= ($headerDetails->filter('span')->count() + 5); $x++) {
+            $spans_total = $headerDetails->filter('span')->count();
+            for ($x = 1; $x <= ($spans_total + 5); $x++) {
                 if ($headerDetails->filter('span:nth-child('.$x.')')->count()) {
                     $currentSpan = $headerDetails->filter('span:nth-child('.$x.')')->text();
 
@@ -88,7 +89,8 @@ class ItemGeneric extends Job
 
             $footerDetails = $crawler->filter('#dataTable > tr:nth-child(3) > td:nth-child(1) > table:nth-child(1) > tr:nth-child(1)');
 
-            for ($i = 1; $i <= ($footerDetails->filter('th:nth-child(1) > span')->count() + 6); $i++) {
+            $spans_total = $footerDetails->filter('th:nth-child(1) > span')->count();
+            for ($i = 1; $i <= ($spans_total + 6); $i++) {
                 if ($footerDetails->filter('th:nth-child(1) > span:nth-child('.$i.')')->count()) {
                     $currentSpan = trim($footerDetails->filter('th:nth-child(1) > span:nth-child('.$i.')')->text());
                     if (preg_match('/Caracter/i', $currentSpan, $match)) {
@@ -164,7 +166,8 @@ class ItemGeneric extends Job
             $headerImages = $crawler->filter('#trFotoP > th:nth-child(2)');
             $images = [];
 
-            for ($c = 1; $c <= ($headerImages->filter('img')->count()); $c++) {
+            $image_total = $headerImages->filter('img')->count();
+            for ($c = 1; $c <= $image_total; $c++) {
                 $images[$c - 1] = $headerImages->filter('img:nth-child('.$c.')')->attr('src');
                 $images[$c - 1] = preg_replace('/1(?=\.jpg)/', '2', $images[$c - 1]);
             }
