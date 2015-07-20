@@ -163,9 +163,7 @@ class ItemVehicle extends Job
 
             if (preg_match('/^\d+$/', $value)) {
                 $prev_value += $value;
-            }
-
-            if (preg_match('/^cc|cm3$/ui', $value)) {
+            } elseif (preg_match('/^cc|cm3$/ui', $value)) {
                 if (isset($prev_value)) {
                     $this->unsetValues($key, $i);
 
@@ -195,9 +193,7 @@ class ItemVehicle extends Job
                 $this->unsetValues($key, $i);
 
                 return $value;
-            }
-
-            if (preg_match("/^$trailers_pattern$/ui", $value)) {
+            } elseif (preg_match("/^$trailers_pattern$/ui", $value)) {
                 $this->unsetValues($key, $i);
 
                 return $value;
