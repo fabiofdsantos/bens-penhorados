@@ -22,6 +22,9 @@ class VehiclesColorsTableSeeder extends Seeder
             ['id'   => 11, 'name' => 'Rosa', 'parent_id' => null],
             ['id'   => 12, 'name' => 'Roxo', 'parent_id' => null],
             ['id'   => 13, 'name' => 'Bege', 'parent_id' => null],
+        ];
+
+        $alternative_colors = [
             ['name' => 'Preta', 'parent_id' => 1],
             ['name' => 'Branca', 'parent_id' => 2],
             ['name' => 'Cinzenta', 'parent_id' => 3],
@@ -32,5 +35,6 @@ class VehiclesColorsTableSeeder extends Seeder
         ];
 
         DB::table('vehicles_colors')->insert($colors);
+        DB::table('vehicles_colors')->insert($alternative_colors);
     }
 }
