@@ -71,7 +71,7 @@ class VehiclesMakesModelsTableSeeder extends Seeder
             ['id' => 60, 'name' => 'Toyota', 'parent_id' => null],
             ['id' => 61, 'name' => 'Triumph', 'parent_id' => null],
             ['id' => 62, 'name' => 'Volvo', 'parent_id' => null],
-            ['id' => 63, 'name' => 'VW', 'parent_id' => null],
+            ['id' => 63, 'name' => 'Volkswagen', 'parent_id' => null],
         ];
 
         $models = [
@@ -1222,7 +1222,7 @@ class VehiclesMakesModelsTableSeeder extends Seeder
             ['name' => 'XC70', 'parent_id' => 62],
             ['name' => 'XC90', 'parent_id' => 62],
 
-            // VW
+            // Volkswagen
             ['name' => 'Golf', 'parent_id' => 63],
             ['name' => 'Golf Cabriolet', 'parent_id' => 63],
             ['name' => 'Golf I', 'parent_id' => 63],
