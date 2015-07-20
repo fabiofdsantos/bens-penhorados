@@ -251,13 +251,13 @@ class ItemVehicle extends Job
     /**
      * Check if a given year is valid.
      *
-     * @param int $y
+     * @param int $year
      *
      * @return bool
      */
-    private function isValidYear($y)
+    private function isValidYear($year)
     {
-        if ($y <= $this->currentYear && $y >= 1950) {
+        if ($year <= $this->currentYear && $year >= 1950) {
             return true;
         }
 
