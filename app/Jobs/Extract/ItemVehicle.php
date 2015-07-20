@@ -60,23 +60,33 @@ class ItemVehicle extends Job
                 if (preg_match('/^c[oóòôõ]r$/ui', $descValue)) {
                     $vehicle->color_id = $this->extractColor($descKey, 3);
                 }
-            } elseif (is_null($vehicle->year)) {
-                if (preg_match('/^ano$/ui', $descValue)) {
-                    $vehicle->year = $this->extractYear($descKey, 2);
+            }
+
+            if (is_null($vehicle->year)) {
+                if (preg_match('/\d{4}/', $descValue)) {
+                    $vehicle->year = $this->extractYear($descKey, $descValue);
                 }
-            } elseif (is_null($vehicle->engine_displacement)) {
+            }
+
+            if (is_null($vehicle->engine_displacement)) {
                 if (preg_match('/^c[iíì]l[iìí]ndrada$/ui', $descValue)) {
                     $vehicle->engine_displacement = $this->extractEngineDisplacement($descKey, 3);
                 }
-            } elseif (is_null($vehicle->reg_plate_code)) {
+            }
+
+            if (is_null($vehicle->reg_plate_code)) {
                 if (preg_match('/^matr[iíì]cula$/ui', $descValue)) {
                     $vehicle->reg_plate_code = $this->extractRegPlateCode($descKey, 1);
                 }
-            } elseif (is_null($vehicle->make_id)) {
+            }
+
+            if (is_null($vehicle->make_id)) {
                 if (preg_match('/^marca$/ui', $descValue)) {
                     $vehicle->make_id = $this->extractMake($descKey, 1);
                 }
-            } elseif (is_null($vehicle->model_id)) {
+            }
+
+            if (is_null($vehicle->model_id)) {
                 if (preg_match('/^modelo$/ui', $descValue) && isset($vehicle->make_id)) {
                     $vehicle->model_id = $this->extractModel($descKey, 3, $vehicle->make_id);
                 }
@@ -113,21 +123,19 @@ class ItemVehicle extends Job
      * Extract the year.
      *
      * @param int $key
-     * @param int $limit
+     * @param int $year
      *
      * @return int
      */
-    private function extractYear($key, $limit)
+    private function extractYear($key, $year)
     {
-        for ($i = 1; $i <= $limit; $i++) {
-            $value = $this->desc[$key + $i];
+        if ($this->isValidDate($year)) {
+            $nextValue = (isset($this->desc[$key + 1]) ? $this->desc[$key + 1] : null);
 
-            if (preg_match('/^([0-9]{4})$/', $value, $match)) {
-                if ($this->isValidDate($match[0])) {
-                    $this->unsetValues($key, $i);
+            if (!preg_match('/^\d+|cc|cm3$/', $nextValue)) {
+                $this->unsetValues($key, 0);
 
-                    return $value;
-                }
+                return $year;
             }
         }
     }
