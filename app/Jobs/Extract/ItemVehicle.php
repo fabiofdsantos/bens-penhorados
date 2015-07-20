@@ -56,18 +56,28 @@ class ItemVehicle extends Job
         $vehicle->code = $this->code;
 
         foreach ($this->desc as $descKey => $descValue) {
-            if (preg_match('/^c[oóòôõ]r$/ui', $descValue)) {
-                $vehicle->color_id = $this->extractColor($descKey, 3);
-            } elseif (preg_match('/^ano$/ui', $descValue)) {
-                $vehicle->year = $this->extractYear($descKey, 2);
-            } elseif (preg_match('/^c[iíì]l[iìí]ndrada$/ui', $descValue)) {
-                $vehicle->engine_displacement = $this->extractEngineDisplacement($descKey, 3);
-            } elseif (preg_match('/^matr[iíì]cula$/ui', $descValue)) {
-                $vehicle->reg_plate_code = $this->extractRegPlateCode($descKey, 1);
-            } elseif (preg_match('/^marca$/ui', $descValue)) {
-                $vehicle->make_id = $this->extractMake($descKey, 1);
-            } elseif (preg_match('/^modelo$/ui', $descValue)) {
-                if (isset($vehicle->make_id)) {
+            if (is_null($vehicle->color_id)) {
+                if (preg_match('/^c[oóòôõ]r$/ui', $descValue)) {
+                    $vehicle->color_id = $this->extractColor($descKey, 3);
+                }
+            } elseif (is_null($vehicle->year)) {
+                if (preg_match('/^ano$/ui', $descValue)) {
+                    $vehicle->year = $this->extractYear($descKey, 2);
+                }
+            } elseif (is_null($vehicle->engine_displacement)) {
+                if (preg_match('/^c[iíì]l[iìí]ndrada$/ui', $descValue)) {
+                    $vehicle->engine_displacement = $this->extractEngineDisplacement($descKey, 3);
+                }
+            } elseif (is_null($vehicle->reg_plate_code)) {
+                if (preg_match('/^matr[iíì]cula$/ui', $descValue)) {
+                    $vehicle->reg_plate_code = $this->extractRegPlateCode($descKey, 1);
+                }
+            } elseif (is_null($vehicle->make_id)) {
+                if (preg_match('/^marca$/ui', $descValue)) {
+                    $vehicle->make_id = $this->extractMake($descKey, 1);
+                }
+            } elseif (is_null($vehicle->model_id)) {
+                if (preg_match('/^modelo$/ui', $descValue) && isset($vehicle->make_id)) {
                     $vehicle->model_id = $this->extractModel($descKey, 3, $vehicle->make_id);
                 }
             }
