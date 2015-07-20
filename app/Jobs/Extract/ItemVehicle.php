@@ -129,7 +129,7 @@ class ItemVehicle extends Job
      */
     private function extractYear($key, $year)
     {
-        if ($this->isValidDate($year)) {
+        if ($this->isValidYear($year)) {
             $nextValue = (isset($this->desc[$key + 1]) ? $this->desc[$key + 1] : null);
 
             if (!preg_match('/^\d+|cc|cm3$/', $nextValue)) {
@@ -255,7 +255,7 @@ class ItemVehicle extends Job
      *
      * @return bool
      */
-    private function isValidDate($y)
+    private function isValidYear($y)
     {
         if ($y <= $this->currentYear && $y >= 1950) {
             return true;
