@@ -36,6 +36,7 @@ class Extract extends Command
 
         $categories = $this->option('only');
         $maxResults = $this->option('take');
+        $ignoreImages = $this->option('ignore-images');
 
         if (isset($categories)) {
             $categories = explode(',', $categories);
@@ -51,7 +52,7 @@ class Extract extends Command
         }
 
         foreach ($items as $item) {
-            Bus::dispatch(new ItemGeneric($item->code, $item->lat, $item->lng));
+            Bus::dispatch(new ItemGeneric($item->code, $item->lat, $item->lng, $ignoreImages));
         }
 
         $this->info('Jobs are successfully queued!');
@@ -67,6 +68,7 @@ class Extract extends Command
         return [
             ['only', 'o', InputOption::VALUE_OPTIONAL, 'Comma-separated list of categories codes'],
             ['take', 't', InputOption::VALUE_OPTIONAL, 'Total of items'],
+            ['ignore-images', 'ni', InputOption::VALUE_NONE, 'If set, images won\'t be extracted'],
         ];
     }
 }

@@ -55,18 +55,27 @@ class ItemGeneric extends Job
     protected $category;
 
     /**
+     * If true, images will be extracted.
+     *
+     * @var bool
+     */
+    protected $downloadImages;
+
+    /**
      * Create a new job instance.
      *
      * @param string $code
      * @param string $lat
      * @param string $lng
+     * @param bool   $ignoreImages
      */
-    public function __construct($code, $lat, $lng)
+    public function __construct($code, $lat, $lng, $ignoreImages)
     {
         $this->code = $code;
         $this->lat = $lat;
         $this->lng = $lng;
         $this->filePath = env('BP_RAW_FOLDER', 'rawdata/').$code.env('BP_RAW_FILE_EXT', '.raw');
+        $this->downloadImages = ($ignoreImages == false ? true : false);
     }
 
     /***
@@ -207,16 +216,18 @@ class ItemGeneric extends Job
                 }
             }
 
-            $headerImages = $crawler->filter('#trFotoP > th:nth-child(2)');
-            $images = [];
+            if ($this->downloadImages) {
+                $headerImages = $crawler->filter('#trFotoP > th:nth-child(2)');
+                $images = [];
 
-            $image_total = $headerImages->filter('img')->count();
-            for ($c = 1; $c <= $image_total; $c++) {
-                $images[$c - 1] = $headerImages->filter('img:nth-child('.$c.')')->attr('src');
-                $images[$c - 1] = preg_replace('/1(?=\.jpg)/', '2', $images[$c - 1]);
+                $image_total = $headerImages->filter('img')->count();
+                for ($c = 1; $c <= $image_total; $c++) {
+                    $images[$c - 1] = $headerImages->filter('img:nth-child('.$c.')')->attr('src');
+                    $images[$c - 1] = preg_replace('/1(?=\.jpg)/', '2', $images[$c - 1]);
+                }
+
+                $item->images = $this->extractImages($images);
             }
-
-            $item->images = $this->extractImages($images);
 
             $item->save();
 
