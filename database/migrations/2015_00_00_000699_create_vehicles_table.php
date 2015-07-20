@@ -15,7 +15,7 @@ class CreateVehiclesTable extends Migration
             $table->integer('year')->nullable();
             $table->integer('engine_displacement')->nullable();
             $table->string('reg_plate_code')->nullable();
-            $table->boolean('isGoodCondition')->nullable();
+            $table->boolean('is_good_condition')->nullable();
 
             $table->integer('make_id')->unsigned()->nullable();
             $table->foreign('make_id')->references('id')->on('vehicles_makes_models')->nullable();
