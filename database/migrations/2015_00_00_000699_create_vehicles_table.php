@@ -11,7 +11,9 @@ class CreateVehiclesTable extends Migration
     public function up()
     {
         Schema::create('vehicles', function (Blueprint $table) {
-            $table->string('code')->references('code')->on('items');
+            $table->string('code')->primary();
+            $table->foreign('code')->references('code')->on('items');
+
             $table->integer('year')->nullable();
             $table->integer('engine_displacement')->nullable();
             $table->string('reg_plate_code')->nullable();
