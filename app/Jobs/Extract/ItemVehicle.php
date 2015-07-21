@@ -4,6 +4,7 @@ namespace App\Jobs\Extract;
 
 use App\Jobs\Job;
 use App\Models\Items\Attributes\Color;
+use App\Models\Items\Attributes\Fuel;
 use App\Models\Items\Attributes\MakeAndModel;
 use App\Models\Items\Vehicle;
 
@@ -89,6 +90,12 @@ class ItemVehicle extends Job
             if (is_null($vehicle->model_id)) {
                 if (preg_match('/^modelo$/ui', $descValue) && isset($vehicle->make_id)) {
                     $vehicle->model_id = $this->extractModel($descKey, 3, $vehicle->make_id);
+                }
+            }
+
+            if (is_null($vehicle->fuel_id)) {
+                if (preg_match('/^combust[iíì]vel$/ui', $descValue)) {
+                    $vehicle->fuel_id = $this->extractFuelType($descKey, 1);
                 }
             }
         }
@@ -243,6 +250,31 @@ class ItemVehicle extends Job
                     $this->unsetValues($key, $i);
 
                     return $model->id;
+                }
+            }
+        }
+    }
+
+    /**
+     * Extract the fuel type.
+     *
+     * @param $key
+     * @param $limit
+     */
+    private function extractFuelType($key, $limit)
+    {
+        for ($i = 1; $i <= $limit; $i++) {
+            $value = $this->desc[$key + $i];
+
+            foreach (Fuel::all() as $fuel) {
+                if (preg_match("/$fuel->name/ui", $value)) {
+                    $this->unsetValues($key, $i);
+
+                    return $fuel->id;
+                } elseif (preg_match("/$fuel->alternative_name/ui", $value)) {
+                    $this->unsetValues($key, $i);
+
+                    return $fuel->id;
                 }
             }
         }

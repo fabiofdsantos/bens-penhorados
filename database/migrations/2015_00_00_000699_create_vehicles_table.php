@@ -28,6 +28,9 @@ class CreateVehiclesTable extends Migration
             $table->integer('color_id')->unsigned()->nullable();
             $table->foreign('color_id')->references('id')->on('vehicles_colors');
 
+            $table->integer('fuel_id')->unsigned()->nullable();
+            $table->foreign('fuel_id')->references('id')->on('vehicles_fuels');
+
             $table->timestamps();
         });
     }
