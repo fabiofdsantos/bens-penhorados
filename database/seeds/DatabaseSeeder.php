@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call('RawDataCategoriesTableSeeder');
         $this->call('VehiclesColorsTableSeeder');
         $this->call('VehiclesMakesModelsTableSeeder');
+        $this->call('VehiclesFuelsTableSeeder');
     }
 }
