@@ -13,7 +13,7 @@ class CreateVehiclesFuelsTable extends Migration
         Schema::create('vehicles_fuels', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('alternative_name')->nullable();
+            $table->string('regex');
         });
     }
 

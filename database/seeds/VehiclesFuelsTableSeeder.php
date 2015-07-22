@@ -9,11 +9,11 @@ class VehiclesFuelsTableSeeder extends Seeder
         DB::table('vehicles_fuels')->delete();
 
         $fuels = [
-            ['name' => 'Gasolina', 'alternative_name' => null],
-            ['name' => 'Diesel', 'alternative_name' => 'Gasóleo'],
-            ['name' => 'GPL', 'alternative_name' => 'Gás'],
-            ['name' => 'Híbrido', 'alternative_name' => null],
-            ['name' => 'Eléctrico', 'alternative_name' => null],
+            ['name' => 'Gasolina', 'regex' => '/\bgasolina\b/i'],
+            ['name' => 'Diesel', 'regex' => '/\bgas[oó]leo\b/iu'],
+            ['name' => 'GPL', 'regex' => '/\bgpl|g[aá]s\b/iu'],
+            ['name' => 'Híbrido', 'regex' => '/\bh[íi]brido\b/iu'],
+            ['name' => 'Eléctrico', 'regex' => '/\bel[ée]c?trico\b/iu'],
         ];
 
         DB::table('vehicles_fuels')->insert($fuels);
