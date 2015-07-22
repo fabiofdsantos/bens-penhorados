@@ -157,7 +157,7 @@ class ItemVehicle extends Job
      * Extract the model.
      *
      * @param string $str
-     * @param int $makeId
+     * @param int    $makeId
      *
      * @return int
      */
