@@ -22,7 +22,7 @@ class ItemVehicle extends Job
      *
      * @var array
      */
-    protected $desc;
+    protected $description;
 
     /**
      * The current year.
@@ -40,7 +40,7 @@ class ItemVehicle extends Job
     public function __construct($code, $description)
     {
         $this->code = $code;
-        $this->desc = $description;
+        $this->description = $description;
         $this->currentYear = idate('Y');
     }
 
@@ -56,46 +56,46 @@ class ItemVehicle extends Job
         $vehicle = new Vehicle();
         $vehicle->code = $this->code;
 
-        foreach ($this->desc as $descKey => $descValue) {
-            if (is_null($vehicle->color_id)) {
-                if (preg_match('/^c[oóòôõ]r$/ui', $descValue)) {
-                    $vehicle->color_id = $this->extractColor($descKey, 3);
-                }
-            }
-
+        foreach ($this->description as $key => $value) {
             if (is_null($vehicle->year)) {
-                if (preg_match('/\d{4}/', $descValue)) {
-                    $vehicle->year = $this->extractYear($descKey, $descValue);
+                if (preg_match('/(ano|de)\s*\pP?\s*(\d{4})/i', $value, $match)) {
+                    $vehicle->year = ($this->isValidYear($match[2]) ? $match[2] : null);
                 }
             }
 
             if (is_null($vehicle->engine_displacement)) {
-                if (preg_match('/^c[iíì]l[iìí]ndrada$/ui', $descValue)) {
-                    $vehicle->engine_displacement = $this->extractEngineDisplacement($descKey, 3);
+                if (preg_match('/[^\-]cc|cm[³3]\b/iu', $value)) {
+                    $vehicle->engine_displacement = $this->extractEngineDisplacement($value);
                 }
             }
 
             if (is_null($vehicle->reg_plate_code)) {
-                if (preg_match('/^matr[iíì]cula$/ui', $descValue)) {
-                    $vehicle->reg_plate_code = $this->extractRegPlateCode($descKey, 1);
+                if (preg_match('/matr[iíì]cula/iu', $value)) {
+                    $vehicle->reg_plate_code = $this->extractRegPlateCode($value);
                 }
             }
 
             if (is_null($vehicle->make_id)) {
-                if (preg_match('/^marca$/ui', $descValue)) {
-                    $vehicle->make_id = $this->extractMake($descKey, 1);
+                if (preg_match('/\bmarca\b/i', $value)) {
+                    $vehicle->make_id = $this->extractMake($value);
                 }
             }
 
             if (is_null($vehicle->model_id)) {
-                if (preg_match('/^modelo$/ui', $descValue) && isset($vehicle->make_id)) {
-                    $vehicle->model_id = $this->extractModel($descKey, 3, $vehicle->make_id);
+                if (preg_match('/\bmodelo\b/i', $value) && isset($vehicle->make_id)) {
+                    $vehicle->model_id = $this->extractModel($value, $vehicle->make_id);
+                }
+            }
+
+            if (is_null($vehicle->color_id)) {
+                if (preg_match('/\bc[oóòôõ]r\b/iu', $value)) {
+                    $vehicle->color_id = $this->extractColor($value);
                 }
             }
 
             if (is_null($vehicle->fuel_id)) {
-                if (preg_match('/^combust[iíì]vel$/ui', $descValue)) {
-                    $vehicle->fuel_id = $this->extractFuelType($descKey, 1);
+                if (preg_match('/combust[iíì]vel/iu', $value)) {
+                    $vehicle->fuel_id = $this->extractFuelType($value);
                 }
             }
         }
@@ -104,129 +104,51 @@ class ItemVehicle extends Job
     }
 
     /**
-     * Extract the color.
-     *
-     * @param int $key
-     * @param int $limit
-     *
-     * @return int
-     */
-    private function extractColor($key, $limit)
-    {
-        for ($i = 1; $i <= $limit; $i++) {
-            $value = $this->desc[$key + $i];
-
-            foreach (Color::all() as $color) {
-                if (preg_match("/^$value$/ui", $color->name)) {
-                    $this->unsetValues($key, $i);
-
-                    return is_null($color->parent_id) ? $color->id : $color->parent_id;
-                }
-            }
-        }
-    }
-
-    /**
-     * Extract the year.
-     *
-     * @param int $key
-     * @param int $year
-     *
-     * @return int
-     */
-    private function extractYear($key, $year)
-    {
-        if ($this->isValidYear($year)) {
-            $nextValue = (isset($this->desc[$key + 1]) ? $this->desc[$key + 1] : null);
-
-            if (!preg_match('/^\d+|cc|cm3$/', $nextValue)) {
-                $this->unsetValues($key, 0);
-
-                return $year;
-            }
-        }
-    }
-
-    /**
      * Extract the engine displacement.
      *
-     * @param int $key
-     * @param int $limit
+     * @param string $str
      *
      * @return int
      */
-    private function extractEngineDisplacement($key, $limit)
+    private function extractEngineDisplacement($str)
     {
-        $prev_value = 0;
-        for ($i = 1; $i <= $limit; $i++) {
-            $value = $this->desc[$key + $i];
-
-            if (preg_match('/^(\d+)cc$/ui', $value, $match)) {
-                $match[1] += $prev_value;
-                $this->unsetValues($key, $i);
-
-                return $match[1];
-            }
-
-            if (preg_match('/^\d+$/', $value)) {
-                $prev_value += $value;
-            } elseif (preg_match('/^cc|cm3$/ui', $value)) {
-                if (isset($prev_value)) {
-                    $this->unsetValues($key, $i);
-
-                    return $prev_value;
-                }
-            }
+        if (preg_match('/(\d+)\s*(cc|cm[³3])/iu', $str, $match)) {
+            return $match[1];
         }
     }
 
     /**
      * Extract the registration plate code.
      *
-     * @param int $key
-     * @param int $limit
+     * @param string $str
      *
      * @return string
      */
-    private function extractRegPlateCode($key, $limit)
+    private function extractRegPlateCode($str)
     {
-        $general_pattern = '\d{2}-\d{2}-[a-z]{2}|\d{2}-[a-z]{2}-\d{2}|[a-z]{2}-\d{2}-\d{2}';
-        $trailers_pattern = '[a-z]{1,2}-\d{1,6}';
+        $regex_general = '/\d{2}-\d{2}-[a-z]{2}|\d{2}-[a-z]{2}-\d{2}|[a-z]{2}-\d{2}-\d{2}/i';
+        if (preg_match($regex_general, $str, $match)) {
+            return $match[0];
+        }
 
-        for ($i = 1; $i <= $limit; $i++) {
-            $value = $this->desc[$key + $i];
-
-            if (preg_match("/^$general_pattern$/ui", $value)) {
-                $this->unsetValues($key, $i);
-
-                return $value;
-            } elseif (preg_match("/^$trailers_pattern$/ui", $value)) {
-                $this->unsetValues($key, $i);
-
-                return $value;
-            }
+        $regex_trailers = '/[a-z]{1,2}-\d{1,6}/i';
+        if (preg_match($regex_trailers, $str, $match)) {
+            return $match[0];
         }
     }
 
     /**
      * Extract the make.
      *
-     * @param int $key
-     * @param int $limit
+     * @param string $str
      *
      * @return int
      */
-    private function extractMake($key, $limit)
+    private function extractMake($str)
     {
-        for ($i = 1; $i <= $limit; $i++) {
-            $value = $this->desc[$key + $i];
-
-            foreach (MakeAndModel::makes() as $make) {
-                if (preg_match("/$make->name/ui", $value)) {
-                    $this->unsetValues($key, $i);
-
-                    return $make->id;
-                }
+        foreach (MakeAndModel::makes() as $make) {
+            if (preg_match("/$make->name/ui", $str)) {
+                return $make->id;
             }
         }
     }
@@ -234,23 +156,32 @@ class ItemVehicle extends Job
     /**
      * Extract the model.
      *
-     * @param int $key
-     * @param int $limit
-     * @param int $make_id
+     * @param string $str
+     * @param int $makeId
      *
      * @return int
      */
-    private function extractModel($key, $limit, $make_id)
+    private function extractModel($str, $makeId)
     {
-        for ($i = 1; $i <= $limit; $i++) {
-            $value = $this->desc[$key + $i];
+        foreach (MakeAndModel::models($makeId) as $model) {
+            if (preg_match("/$model->name/ui", $str)) {
+                return $model->id;
+            }
+        }
+    }
 
-            foreach (MakeAndModel::models($make_id) as $model) {
-                if (preg_match("/$model->name/ui", $value)) {
-                    $this->unsetValues($key, $i);
-
-                    return $model->id;
-                }
+    /**
+     * Extract the color.
+     *
+     * @param string $str
+     *
+     * @return int
+     */
+    private function extractColor($str)
+    {
+        foreach (Color::all() as $color) {
+            if (preg_match($color->regex, $str)) {
+                return $color->id;
             }
         }
     }
@@ -258,24 +189,13 @@ class ItemVehicle extends Job
     /**
      * Extract the fuel type.
      *
-     * @param $key
-     * @param $limit
+     * @param string $str
      */
-    private function extractFuelType($key, $limit)
+    private function extractFuelType($str)
     {
-        for ($i = 1; $i <= $limit; $i++) {
-            $value = $this->desc[$key + $i];
-
-            foreach (Fuel::all() as $fuel) {
-                if (preg_match("/$fuel->name/ui", $value)) {
-                    $this->unsetValues($key, $i);
-
-                    return $fuel->id;
-                } elseif (preg_match("/$fuel->alternative_name/ui", $value)) {
-                    $this->unsetValues($key, $i);
-
-                    return $fuel->id;
-                }
+        foreach (Fuel::all() as $fuel) {
+            if (preg_match($fuel->regex, $str)) {
+                return $fuel->id;
             }
         }
     }
@@ -294,21 +214,5 @@ class ItemVehicle extends Job
         }
 
         return false;
-    }
-
-    /**
-     * Unset the attributes found in vehicle description.
-     *
-     * @param int $key
-     * @param int $i
-     *
-     * @return void
-     */
-    private function unsetValues($key, $i)
-    {
-        while ($i >= 0) {
-            unset($this->desc[$key + $i]);
-            $i--;
-        }
     }
 }
