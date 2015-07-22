@@ -10,7 +10,7 @@ class VehiclesFuelsTableSeeder extends Seeder
 
         $fuels = [
             ['name' => 'Gasolina', 'regex' => '/\bgasolina\b/i'],
-            ['name' => 'Diesel', 'regex' => '/\bgas[oó]leo\b/iu'],
+            ['name' => 'Diesel', 'regex' => '/\bdiesel|gas[oó]leo\b/iu'],
             ['name' => 'GPL', 'regex' => '/\bgpl|g[aá]s\b/iu'],
             ['name' => 'Híbrido', 'regex' => '/\bh[íi]brido\b/iu'],
             ['name' => 'Eléctrico', 'regex' => '/\bel[ée]c?trico\b/iu'],
