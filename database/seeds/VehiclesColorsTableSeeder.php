@@ -9,32 +9,21 @@ class VehiclesColorsTableSeeder extends Seeder
         DB::table('vehicles_colors')->delete();
 
         $colors = [
-            ['id'   => 1, 'name' => 'Preto', 'parent_id' => null],
-            ['id'   => 2, 'name' => 'Branco', 'parent_id' => null],
-            ['id'   => 3, 'name' => 'Cinzento', 'parent_id' => null],
-            ['id'   => 4, 'name' => 'Azul', 'parent_id' => null],
-            ['id'   => 5, 'name' => 'Vermelho', 'parent_id' => null],
-            ['id'   => 6, 'name' => 'Verde', 'parent_id' => null],
-            ['id'   => 7, 'name' => 'Amarelo', 'parent_id' => null],
-            ['id'   => 8, 'name' => 'Castanho', 'parent_id' => null],
-            ['id'   => 9, 'name' => 'Prateado', 'parent_id' => null],
-            ['id'   => 10, 'name' => 'Dourado', 'parent_id' => null],
-            ['id'   => 11, 'name' => 'Rosa', 'parent_id' => null],
-            ['id'   => 12, 'name' => 'Roxo', 'parent_id' => null],
-            ['id'   => 13, 'name' => 'Bege', 'parent_id' => null],
-        ];
-
-        $alternative_colors = [
-            ['name' => 'Preta', 'parent_id' => 1],
-            ['name' => 'Branca', 'parent_id' => 2],
-            ['name' => 'Cinzenta', 'parent_id' => 3],
-            ['name' => 'Vermelha', 'parent_id' => 5],
-            ['name' => 'Dourada', 'parent_id' => 10],
-            ['name' => 'Prateada', 'parent_id' => 9],
-            ['name' => 'Castanha', 'parent_id' => 8],
+            ['id'   => 1, 'name' => 'Preto', 'regex' => '/\bpret[o|a]\b/i'],
+            ['id'   => 2, 'name' => 'Branco', 'regex' => '/\bbranc[o|a]\b/i'],
+            ['id'   => 3, 'name' => 'Cinzento', 'regex' => '/\bcinzent[oa]\b/i'],
+            ['id'   => 4, 'name' => 'Azul', 'regex' => '/\baz[uú]l\b/iu'],
+            ['id'   => 5, 'name' => 'Vermelho', 'regex' => '/\bvermelh[oa]\b/i'],
+            ['id'   => 6, 'name' => 'Verde', 'regex' => '/\bverde\b/i'],
+            ['id'   => 7, 'name' => 'Amarelo', 'regex' => '/\bamarel[oa]\b/i'],
+            ['id'   => 8, 'name' => 'Castanho', 'regex' => '/\bcastanh[oa]\b/i'],
+            ['id'   => 9, 'name' => 'Prateado', 'regex' => '/\bpratead[oa]\b/i'],
+            ['id'   => 10, 'name' => 'Dourado', 'regex' => '/\bdourad[oa]\b/i'],
+            ['id'   => 11, 'name' => 'Rosa', 'regex' => '/\brosa\b/i'],
+            ['id'   => 12, 'name' => 'Roxo', 'regex' => '/\broxo\b/i'],
+            ['id'   => 13, 'name' => 'Bege', 'regex' => '/\bbege\b/i'],
         ];
 
         DB::table('vehicles_colors')->insert($colors);
-        DB::table('vehicles_colors')->insert($alternative_colors);
     }
 }
