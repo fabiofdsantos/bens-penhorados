@@ -234,7 +234,7 @@ class ItemGeneric extends Job
             if (preg_match('/Imóveis/ui', $this->category)) {
                 // to do
             } elseif (preg_match('/Veículos/ui', $this->category)) {
-                Bus::dispatch(new ItemVehicle($this->code, $this->tokenize($this->description)));
+                Bus::dispatch(new ItemVehicle($this->code, $this->splitter($this->description)));
             } else {
                 // to do
             }
@@ -448,23 +448,18 @@ class ItemGeneric extends Job
     }
 
     /**
-     * Split a given text into smaller units called token. Remove punctuation
-     * characters except "-" and break on whitespace.
-     *
-     * Regex explanation:
-     * \pP matches any kind of punctuation character
-     * \PP matches any characters that \pP does not
-     * \pZ matches any kind of whitespace or invisible separator
-     * \pC matches invisible control characters and unused code points.
+     * Split a given string into an array of substrings.
+     *  1. Remove dots/commas between numbers;
+     *  2. Break on dots/commas.
      *
      * @param string $str
      *
      * @return array
      */
-    public function tokenize($str)
+    public function splitter($str)
     {
-        $str = preg_replace('/[^\PP-]/ui', '', $str);
+        $str = preg_replace('/(\d+)[,\.](\d+)/', '${1}${1}', $str);
 
-        return preg_split('/[\pZ\pC]/ui', $str, null, PREG_SPLIT_NO_EMPTY);
+        return preg_split('/\s*[,\.]\s*/', $str, null, PREG_SPLIT_NO_EMPTY);
     }
 }
