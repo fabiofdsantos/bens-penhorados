@@ -18,5 +18,5 @@ class VehicleColor extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'code';
+    protected $primaryKey = 'id';
 }
