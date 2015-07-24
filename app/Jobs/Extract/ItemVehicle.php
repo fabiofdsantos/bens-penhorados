@@ -3,9 +3,10 @@
 namespace App\Jobs\Extract;
 
 use App\Jobs\Job;
-use App\Models\Items\Attributes\Color;
-use App\Models\Items\Attributes\Fuel;
-use App\Models\Items\Attributes\MakeAndModel;
+use App\Models\Items\Attributes\VehicleColor;
+use App\Models\Items\Attributes\VehicleFuel;
+use App\Models\Items\Attributes\VehicleMake;
+use App\Models\Items\Attributes\VehicleModel;
 use App\Models\Items\Vehicle;
 
 class ItemVehicle extends Job
@@ -146,8 +147,8 @@ class ItemVehicle extends Job
      */
     private function extractMake($str)
     {
-        foreach (MakeAndModel::makes() as $make) {
-            if (preg_match("/$make->name/ui", $str)) {
+        foreach (VehicleMake::all() as $make) {
+            if (preg_match($make->regex, $str)) {
                 return $make->id;
             }
         }
@@ -163,7 +164,7 @@ class ItemVehicle extends Job
      */
     private function extractModel($str, $makeId)
     {
-        foreach (MakeAndModel::models($makeId) as $model) {
+        foreach (VehicleModel::ofMake($makeId) as $model) {
             if (preg_match("/$model->name/ui", $str)) {
                 return $model->id;
             }
@@ -179,7 +180,7 @@ class ItemVehicle extends Job
      */
     private function extractColor($str)
     {
-        foreach (Color::all() as $color) {
+        foreach (VehicleColor::all() as $color) {
             if (preg_match($color->regex, $str)) {
                 return $color->id;
             }
@@ -193,7 +194,7 @@ class ItemVehicle extends Job
      */
     private function extractFuelType($str)
     {
-        foreach (Fuel::all() as $fuel) {
+        foreach (VehicleFuel::all() as $fuel) {
             if (preg_match($fuel->regex, $str)) {
                 return $fuel->id;
             }
