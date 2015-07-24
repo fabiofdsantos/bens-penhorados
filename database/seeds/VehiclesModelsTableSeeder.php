@@ -1,0 +1,73 @@
+<?php
+
+use Illuminate\Database\Seeder;
+
+class VehiclesModelsTableSeeder extends Seeder
+{
+    public function run()
+    {
+        $this->call('VehiclesModels\Abarth');
+        $this->call('VehiclesModels\Acura');
+        $this->call('VehiclesModels\AlfaRomeo');
+        $this->call('VehiclesModels\AstonMartin');
+        $this->call('VehiclesModels\Audi');
+        $this->call('VehiclesModels\Austin');
+        $this->call('VehiclesModels\Bentley');
+        $this->call('VehiclesModels\BMW');
+        $this->call('VehiclesModels\Cadillac');
+        $this->call('VehiclesModels\Chevrolet');
+        $this->call('VehiclesModels\Chrysler');
+        $this->call('VehiclesModels\Citroen');
+        $this->call('VehiclesModels\Corvette');
+        $this->call('VehiclesModels\Dacia');
+        $this->call('VehiclesModels\Daihatsu');
+        $this->call('VehiclesModels\Dodge');
+        $this->call('VehiclesModels\Ferrari');
+        $this->call('VehiclesModels\Fiat');
+        $this->call('VehiclesModels\Ford');
+        $this->call('VehiclesModels\Honda');
+        $this->call('VehiclesModels\Hummer');
+        $this->call('VehiclesModels\Hyundai');
+        $this->call('VehiclesModels\Isuzu');
+        $this->call('VehiclesModels\Iveco');
+        $this->call('VehiclesModels\Jaguar');
+        $this->call('VehiclesModels\Jeep');
+        $this->call('VehiclesModels\Kia');
+        $this->call('VehiclesModels\Lada');
+        $this->call('VehiclesModels\Lamborghini');
+        $this->call('VehiclesModels\Lancia');
+        $this->call('VehiclesModels\LandRover');
+        $this->call('VehiclesModels\Lexus');
+        $this->call('VehiclesModels\Lincoln');
+        $this->call('VehiclesModels\Lotus');
+        $this->call('VehiclesModels\Maserati');
+        $this->call('VehiclesModels\Maybach');
+        $this->call('VehiclesModels\Mazda');
+        $this->call('VehiclesModels\Mercedes');
+        $this->call('VehiclesModels\MG');
+        $this->call('VehiclesModels\Mini');
+        $this->call('VehiclesModels\Mitsubishi');
+        $this->call('VehiclesModels\Morgan');
+        $this->call('VehiclesModels\Nissan');
+        $this->call('VehiclesModels\Opel');
+        $this->call('VehiclesModels\Peugeot');
+        $this->call('VehiclesModels\Piaggio');
+        $this->call('VehiclesModels\Pontiac');
+        $this->call('VehiclesModels\Porsche');
+        $this->call('VehiclesModels\Renault');
+        $this->call('VehiclesModels\RollsRoyce');
+        $this->call('VehiclesModels\Rover');
+        $this->call('VehiclesModels\Saab');
+        $this->call('VehiclesModels\Seat');
+        $this->call('VehiclesModels\Skoda');
+        $this->call('VehiclesModels\Smart');
+        $this->call('VehiclesModels\Ssangyong');
+        $this->call('VehiclesModels\Subaru');
+        $this->call('VehiclesModels\Suzuki');
+        $this->call('VehiclesModels\Tata');
+        $this->call('VehiclesModels\Toyota');
+        $this->call('VehiclesModels\Triumph');
+        $this->call('VehiclesModels\Volvo');
+        $this->call('VehiclesModels\Volkswagen');
+    }
+}

@@ -20,10 +20,10 @@ class CreateVehiclesTable extends Migration
             $table->boolean('is_good_condition')->nullable();
 
             $table->integer('make_id')->unsigned()->nullable();
-            $table->foreign('make_id')->references('id')->on('vehicles_makes_models');
+            $table->foreign('make_id')->references('id')->on('vehicles_makes');
 
             $table->integer('model_id')->unsigned()->nullable();
-            $table->foreign('model_id')->references('id')->on('vehicles_makes_models');
+            $table->foreign('model_id')->references('id')->on('vehicles_models');
 
             $table->integer('color_id')->unsigned()->nullable();
             $table->foreign('color_id')->references('id')->on('vehicles_colors');
