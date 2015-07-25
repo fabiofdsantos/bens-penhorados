@@ -235,4 +235,20 @@ class ItemVehicle extends Job
 
         return false;
     }
+
+    /**
+     * Check if there are empty attributes.
+     *
+     * @return bool
+     */
+    private function hasEmptyAttributes()
+    {
+        foreach ($this->attributes as $attr) {
+            if (is_null($attr)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
