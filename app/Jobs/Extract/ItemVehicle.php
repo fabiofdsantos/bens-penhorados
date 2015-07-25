@@ -12,11 +12,21 @@ use App\Models\Items\Vehicle;
 class ItemVehicle extends Job
 {
     /**
-     * The vehicle code.
+     * The vehicle attributes.
      *
-     * @var string
+     * @var array
      */
-    protected $code;
+    protected $attributes = [
+        'code'                => null,
+        'year'                => null,
+        'engine_displacement' => null,
+        'reg_plate_code'      => null,
+        'is_good_condition'   => null,
+        'make_id'             => null,
+        'model_id'            => null,
+        'color_id'            => null,
+        'fuel_id'             => null,
+    ];
 
     /**
      * The vehicle description.
@@ -40,7 +50,7 @@ class ItemVehicle extends Job
      */
     public function __construct($code, $description)
     {
-        $this->code = $code;
+        $this->attributes['code'] = $code;
         $this->description = $description;
         $this->currentYear = idate('Y');
     }
@@ -52,56 +62,63 @@ class ItemVehicle extends Job
      */
     public function handle()
     {
-        print "\n > Extracting vehicle attributes of $this->code ... \n";
+        print "\n > Extracting vehicle attributes of {$this->attributes['code']} ... \n";
 
-        $vehicle = new Vehicle();
-        $vehicle->code = $this->code;
+        $this->extractAttributes();
 
+        Vehicle::create($this->attributes);
+    }
+
+    /**
+     * Extract attributes from the vehicle description.
+     *
+     * @return void
+     */
+    private function extractAttributes()
+    {
         foreach ($this->description as $key => $value) {
-            if (is_null($vehicle->year)) {
+            if (is_null($this->attributes['year'])) {
                 if (preg_match('/(ano|de)\s*\pP?\s*(\d{4})/i', $value, $match)) {
-                    $vehicle->year = ($this->isValidYear($match[2]) ? $match[2] : null);
+                    $this->attributes['year'] = ($this->isValidYear($match[2]) ? $match[2] : null);
                 }
             }
 
-            if (is_null($vehicle->engine_displacement)) {
+            if (is_null($this->attributes['engine_displacement'])) {
                 if (preg_match('/[^\-]cc|cm[³3]\b/iu', $value)) {
-                    $vehicle->engine_displacement = $this->extractEngineDisplacement($value);
+                    $this->attributes['engine_displacement'] = $this->extractEngineDisplacement($value);
                 }
             }
 
-            if (is_null($vehicle->reg_plate_code)) {
+            if (is_null($this->attributes['reg_plate_code'])) {
                 if (preg_match('/matr[iíì]cula/iu', $value)) {
-                    $vehicle->reg_plate_code = $this->extractRegPlateCode($value);
+                    $this->attributes['reg_plate_code'] = $this->extractRegPlateCode($value);
                 }
             }
 
-            if (is_null($vehicle->make_id)) {
+            if (is_null($this->attributes['make_id'])) {
                 if (preg_match('/\bmarca\b/i', $value)) {
-                    $vehicle->make_id = $this->extractMake($value);
+                    $this->attributes['make_id'] = $this->extractMake($value);
                 }
             }
 
-            if (is_null($vehicle->model_id)) {
-                if (preg_match('/\bmodelo\b/i', $value) && isset($vehicle->make_id)) {
-                    $vehicle->model_id = $this->extractModel($value, $vehicle->make_id);
+            if (is_null($this->attributes['model_id'])) {
+                if (preg_match('/\bmodelo\b/i', $value) && isset($this->attributes['make_id'])) {
+                    $this->attributes['model_id'] = $this->extractModel($value, $this->attributes['make_id']);
                 }
             }
 
-            if (is_null($vehicle->color_id)) {
+            if (is_null($this->attributes['color_id'])) {
                 if (preg_match('/\bc[oóòôõ]r\b/iu', $value)) {
-                    $vehicle->color_id = $this->extractColor($value);
+                    $this->attributes['color_id'] = $this->extractColor($value);
                 }
             }
 
-            if (is_null($vehicle->fuel_id)) {
+            if (is_null($this->attributes['fuel_id'])) {
                 if (preg_match('/combust[iíì]vel/iu', $value)) {
-                    $vehicle->fuel_id = $this->extractFuelType($value);
+                    $this->attributes['fuel_id'] = $this->extractFuelType($value);
                 }
             }
         }
-
-        $vehicle->save();
     }
 
     /**
