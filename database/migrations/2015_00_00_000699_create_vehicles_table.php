@@ -31,6 +31,9 @@ class CreateVehiclesTable extends Migration
             $table->integer('fuel_id')->unsigned()->nullable();
             $table->foreign('fuel_id')->references('id')->on('vehicles_fuels');
 
+            $table->integer('category_id')->unsigned()->nullable();
+            $table->foreign('category_id')->references('id')->on('vehicles_categories');
+
             $table->integer('type_id')->unsigned()->nullable();
             $table->foreign('type_id')->references('id')->on('vehicles_types');
 
