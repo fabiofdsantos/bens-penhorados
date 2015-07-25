@@ -28,6 +28,13 @@ class Vehicle extends Model
     public $timestamps = true;
 
     /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = ['created_at', 'updated_at'];
+
+    /**
      * Get vehicles with pagination.
      *
      * @param int $perPage
