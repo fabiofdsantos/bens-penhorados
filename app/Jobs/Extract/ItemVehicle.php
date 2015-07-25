@@ -3,6 +3,7 @@
 namespace App\Jobs\Extract;
 
 use App\Jobs\Job;
+use App\Models\Items\Attributes\VehicleCategory;
 use App\Models\Items\Attributes\VehicleColor;
 use App\Models\Items\Attributes\VehicleFuel;
 use App\Models\Items\Attributes\VehicleMake;
@@ -27,6 +28,7 @@ class ItemVehicle extends Job
         'model_id'            => null,
         'color_id'            => null,
         'fuel_id'             => null,
+        'category_id'         => null,
         'type_id'             => null,
     ];
 
@@ -125,6 +127,12 @@ class ItemVehicle extends Job
                 }
             }
 
+            if (is_null($this->attributes['category_id'])) {
+                if (preg_match('/ve[ií]culo|categoria/iu', $value)) {
+                    $this->attributes['category_id'] = $this->extractVehicleCategory($value);
+                }
+            }
+
             if (is_null($this->attributes['type_id'])) {
                 if (preg_match('/\btipo\b/i', $value)) {
                     $this->attributes['type_id'] = $this->extractVehicleType($value, false);
@@ -155,6 +163,10 @@ class ItemVehicle extends Job
 
             if (is_null($this->attributes['fuel_id'])) {
                 $this->attributes['fuel_id'] = $this->extractFuelType($value);
+            }
+
+            if (is_null($this->attributes['category_id'])) {
+                $this->attributes['category_id'] = $this->extractVehicleCategory($value);
             }
 
             if (is_null($this->attributes['type_id'])) {
@@ -258,6 +270,22 @@ class ItemVehicle extends Job
         foreach (VehicleFuel::all() as $fuel) {
             if (preg_match($fuel->regex, $str)) {
                 return $fuel->id;
+            }
+        }
+    }
+
+    /**
+     * Extract the vehicle category.
+     *
+     * @param string $str
+     *
+     * @return int|null
+     */
+    private function extractVehicleCategory($str)
+    {
+        foreach (VehicleCategory::all() as $category) {
+            if (preg_match($category->regex, $str)) {
+                return $category->id;
             }
         }
     }
