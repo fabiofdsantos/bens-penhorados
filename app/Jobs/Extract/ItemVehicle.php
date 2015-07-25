@@ -7,6 +7,7 @@ use App\Models\Items\Attributes\VehicleColor;
 use App\Models\Items\Attributes\VehicleFuel;
 use App\Models\Items\Attributes\VehicleMake;
 use App\Models\Items\Attributes\VehicleModel;
+use App\Models\Items\Attributes\VehicleType;
 use App\Models\Items\Vehicle;
 
 class ItemVehicle extends Job
@@ -26,6 +27,7 @@ class ItemVehicle extends Job
         'model_id'            => null,
         'color_id'            => null,
         'fuel_id'             => null,
+        'type_id'             => null,
     ];
 
     /**
@@ -122,6 +124,12 @@ class ItemVehicle extends Job
                     $this->attributes['fuel_id'] = $this->extractFuelType($value);
                 }
             }
+
+            if (is_null($this->attributes['type_id'])) {
+                if (preg_match('/\btipo\b/i', $value)) {
+                    $this->attributes['type_id'] = $this->extractVehicleType($value, false);
+                }
+            }
         }
     }
 
@@ -147,6 +155,10 @@ class ItemVehicle extends Job
 
             if (is_null($this->attributes['fuel_id'])) {
                 $this->attributes['fuel_id'] = $this->extractFuelType($value);
+            }
+
+            if (is_null($this->attributes['type_id'])) {
+                $this->attributes['type_id'] = $this->extractVehicleType($value, true);
             }
         }
     }
@@ -247,6 +259,32 @@ class ItemVehicle extends Job
             if (preg_match($fuel->regex, $str)) {
                 return $fuel->id;
             }
+        }
+    }
+
+    /**
+     * Extract the vehicle type.
+     *
+     * @param string $str
+     * @param bool   $isForceExtraction
+     *
+     * @return int|null
+     */
+    private function extractVehicleType($str, $isForceExtraction)
+    {
+        foreach (VehicleType::all() as $type) {
+            if (preg_match($type->regex, $str)) {
+                if ($isForceExtraction) {
+                    $tempType = $type->id;
+                    $numTypes += (isset($numTypes) ? ($numTypes + 1) : 0);
+                } else {
+                    return $type->id;
+                }
+            }
+        }
+
+        if ($numTypes == 1) {
+            return $tempType;
         }
     }
 
