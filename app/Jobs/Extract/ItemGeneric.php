@@ -245,7 +245,7 @@ class ItemGeneric extends Job
 
     /**
      * Check if the item exists.
-     * 
+     *
      * @param Crawler $crawler
      *
      * @return bool
@@ -299,7 +299,7 @@ class ItemGeneric extends Job
 
     /**
      * Extract the current status.
-     * 
+     *
      * @param string $str
      *
      * @return mixed
@@ -311,7 +311,7 @@ class ItemGeneric extends Job
 
     /**
      * Extract the mode.
-     * 
+     *
      * @param string $str
      *
      * @return mixed
@@ -323,7 +323,7 @@ class ItemGeneric extends Job
 
     /**
      * Extract the name.
-     * 
+     *
      * @param string $str
      *
      * @return mixed
@@ -339,7 +339,7 @@ class ItemGeneric extends Job
 
     /**
      * Extract the phone number.
-     * 
+     *
      * @param string $str
      *
      * @return mixed
@@ -353,7 +353,7 @@ class ItemGeneric extends Job
 
     /**
      * Extract the email.
-     * 
+     *
      * @param string $str
      *
      * @return string
@@ -395,7 +395,7 @@ class ItemGeneric extends Job
 
     /**
      * Extract a single datetime.
-     * 
+     *
      * @param string $str
      *
      * @return Carbon object
@@ -417,7 +417,7 @@ class ItemGeneric extends Job
 
     /**
      * Extract all images and save them on disk.
-     * 
+     *
      * @param array $external_images
      *
      * @return string
@@ -448,7 +448,7 @@ class ItemGeneric extends Job
     }
 
     /**
-     * Split a given string into an array of substrings.
+     * Split a given string into an array of substrings:
      *  1. Remove dots/commas between numbers;
      *  2. Break on dots/commas.
      *
