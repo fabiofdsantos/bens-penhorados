@@ -300,11 +300,13 @@ class ItemVehicle extends Job
      */
     private function extractVehicleType($str, $isForceExtraction)
     {
+        $numTypes = 0;
+
         foreach (VehicleType::all() as $type) {
             if (preg_match($type->regex, $str)) {
                 if ($isForceExtraction) {
                     $tempType = $type->id;
-                    $numTypes += (isset($numTypes) ? ($numTypes + 1) : 0);
+                    $numTypes++;
                 } else {
                     return $type->id;
                 }
