@@ -66,6 +66,10 @@ class ItemVehicle extends Job
 
         $this->extractAttributes();
 
+        if ($this->hasEmptyAttributes()) {
+            $this->forceExtraction();
+        }
+
         Vehicle::create($this->attributes);
     }
 
@@ -117,6 +121,32 @@ class ItemVehicle extends Job
                 if (preg_match('/combust[iíì]vel/iu', $value)) {
                     $this->attributes['fuel_id'] = $this->extractFuelType($value);
                 }
+            }
+        }
+    }
+
+    /**
+     * Force the extraction of some empty attributes.
+     *
+     * @return void
+     */
+    private function forceExtraction()
+    {
+        foreach ($this->description as $key => $value) {
+            if (is_null($this->attributes['make_id'])) {
+                $this->attributes['make_id'] = $this->extractMake($value);
+            }
+
+            if (is_null($this->attributes['model_id']) && isset($this->attributes['make_id'])) {
+                $this->attributes['model_id'] = $this->extractModel($value, $this->attributes['make_id']);
+            }
+
+            if (is_null($this->attributes['reg_plate_code'])) {
+                $this->attributes['reg_plate_code'] = $this->extractRegPlateCode($value);
+            }
+
+            if (is_null($this->attributes['fuel_id'])) {
+                $this->attributes['fuel_id'] = $this->extractFuelType($value);
             }
         }
     }
