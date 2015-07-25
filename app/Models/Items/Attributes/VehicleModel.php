@@ -31,6 +31,6 @@ class VehicleModel extends Model
      */
     public function scopeOfMake(Builder $query, $makeId)
     {
-        return $query->where('make_id', $make_id)->get();
+        return $query->where('make_id', $makeId)->get();
     }
 }
