@@ -126,7 +126,7 @@ class ItemVehicle extends Job
      *
      * @param string $str
      *
-     * @return int
+     * @return int|null
      */
     private function extractEngineDisplacement($str)
     {
@@ -140,7 +140,7 @@ class ItemVehicle extends Job
      *
      * @param string $str
      *
-     * @return string
+     * @return string|null
      */
     private function extractRegPlateCode($str)
     {
@@ -160,7 +160,7 @@ class ItemVehicle extends Job
      *
      * @param string $str
      *
-     * @return int
+     * @return int|null
      */
     private function extractMake($str)
     {
@@ -177,7 +177,7 @@ class ItemVehicle extends Job
      * @param string $str
      * @param int    $makeId
      *
-     * @return int
+     * @return int|null
      */
     private function extractModel($str, $makeId)
     {
@@ -193,7 +193,7 @@ class ItemVehicle extends Job
      *
      * @param string $str
      *
-     * @return int
+     * @return int|null
      */
     private function extractColor($str)
     {
@@ -208,6 +208,8 @@ class ItemVehicle extends Job
      * Extract the fuel type.
      *
      * @param string $str
+     *
+     * @return int|null
      */
     private function extractFuelType($str)
     {
