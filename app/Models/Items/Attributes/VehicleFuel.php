@@ -4,6 +4,13 @@ namespace App\Models\Items\Attributes;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * This is the vehicle's fuel model class.
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $regex
+ */
 class VehicleFuel extends Model
 {
     /**

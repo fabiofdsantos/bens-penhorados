@@ -5,6 +5,14 @@ namespace App\Models\Items\Attributes;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * This is the vehicle's model model class.
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $regex
+ * @property int $make_id
+ */
 class VehicleModel extends Model
 {
     /**
