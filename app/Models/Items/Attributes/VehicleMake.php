@@ -18,7 +18,7 @@ class VehicleMake extends Model
      *
      * @var string
      */
-    protected $table = 'vehicles_makes';
+    protected $table = 'vehicle_makes';
 
     /**
      * The primary key column.

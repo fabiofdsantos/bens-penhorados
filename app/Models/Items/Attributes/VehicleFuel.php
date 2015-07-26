@@ -18,7 +18,7 @@ class VehicleFuel extends Model
      *
      * @var string
      */
-    protected $table = 'vehicles_fuels';
+    protected $table = 'vehicle_fuels';
 
     /**
      * The primary key column.

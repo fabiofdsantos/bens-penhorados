@@ -18,7 +18,7 @@ class VehicleColor extends Model
      *
      * @var string
      */
-    protected $table = 'vehicles_colors';
+    protected $table = 'vehicle_colors';
 
     /**
      * The primary key column.

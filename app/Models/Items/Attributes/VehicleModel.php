@@ -20,7 +20,7 @@ class VehicleModel extends Model
      *
      * @var string
      */
-    protected $table = 'vehicles_models';
+    protected $table = 'vehicle_models';
 
     /**
      * The primary key column.

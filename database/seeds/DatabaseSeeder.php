@@ -14,11 +14,11 @@ class DatabaseSeeder extends Seeder
 
         $this->call('LocationsTableSeeder');
         $this->call('RawDataCategoriesTableSeeder');
-        $this->call('VehiclesColorsTableSeeder');
-        $this->call('VehiclesMakesTableSeeder');
-        $this->call('VehiclesModelsTableSeeder');
-        $this->call('VehiclesFuelsTableSeeder');
-        $this->call('VehiclesCategoriesTableSeeder');
-        $this->call('VehiclesTypesTableSeeder');
+        $this->call('VehicleColorsTableSeeder');
+        $this->call('VehicleMakesTableSeeder');
+        $this->call('VehicleModelsTableSeeder');
+        $this->call('VehicleFuelsTableSeeder');
+        $this->call('VehicleCategoriesTableSeeder');
+        $this->call('VehicleTypesTableSeeder');
     }
 }

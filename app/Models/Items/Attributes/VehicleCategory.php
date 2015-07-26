@@ -18,7 +18,7 @@ class VehicleCategory extends Model
      *
      * @var string
      */
-    protected $table = 'vehicles_categories';
+    protected $table = 'vehicle_categories';
 
     /**
      * The primary key column.
