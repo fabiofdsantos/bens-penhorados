@@ -39,7 +39,7 @@ class Citroen extends Seeder
             ['name' => 'Grand C4 Picasso', 'regex' => '/grand[\pP\s]?c4[\pP\s]?picasso/i', 'make_id' => $makeId],
             ['name' => 'Jumper', 'regex' => '/jumper/i', 'make_id' => $makeId],
             ['name' => 'Jumpy', 'regex' => '/jumpy/i', 'make_id' => $makeId],
-            ['name' => 'Méhari', 'regex' => '/m[eéèêẽë]hari/iu', 'make_id' => $makeId],
+            ['name' => 'Méhari', 'regex' => '/mehari/i', 'make_id' => $makeId],
             ['name' => 'Nemo', 'regex' => '/nemo/i', 'make_id' => $makeId],
             ['name' => 'Saxo', 'regex' => '/saxo/i', 'make_id' => $makeId],
             ['name' => 'Visa', 'regex' => '/visa/i', 'make_id' => $makeId],

@@ -19,7 +19,7 @@ class Chevrolet extends Seeder
             ['name' => 'Captiva', 'regex' => '/captiva/i', 'make_id' => $makeId],
             ['name' => 'Corvette C4', 'regex' => '/corvette[\pP\s]?c4/i', 'make_id' => $makeId],
             ['name' => 'Corvette C5', 'regex' => '/corvette[\pP\s]?c5/i', 'make_id' => $makeId],
-            ['name' => 'Coupé', 'regex' => '/coup[eéèêẽë]/iu', 'make_id' => $makeId],
+            ['name' => 'Coupé', 'regex' => '/coupe/i', 'make_id' => $makeId],
             ['name' => 'Cruze', 'regex' => '/cruze/i', 'make_id' => $makeId],
             ['name' => 'Epica', 'regex' => '/epica/i', 'make_id' => $makeId],
             ['name' => 'Lacetti', 'regex' => '/lacetti/i', 'make_id' => $makeId],

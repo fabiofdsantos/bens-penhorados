@@ -14,7 +14,7 @@ class Hyundai extends Seeder
         $models = [
             ['name' => 'Accent', 'regex' => '/accent/i', 'make_id' => $makeId],
             ['name' => 'Atos', 'regex' => '/atos/i', 'make_id' => $makeId],
-            ['name' => 'Coupé', 'regex' => '/coup[eéèêẽë]/iu', 'make_id' => $makeId],
+            ['name' => 'Coupé', 'regex' => '/coupe/i', 'make_id' => $makeId],
             ['name' => 'Elantra', 'regex' => '/elantra/i', 'make_id' => $makeId],
             ['name' => 'Galloper', 'regex' => '/galloper/i', 'make_id' => $makeId],
             ['name' => 'Getz', 'regex' => '/getz/i', 'make_id' => $makeId],

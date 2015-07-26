@@ -26,7 +26,7 @@ class Mini extends Seeder
             ['name' => 'One', 'regex' => '/one/i', 'make_id' => $makeId],
             ['name' => 'One Cabriolet', 'regex' => '/one[\pP\s]?cabriolet/i', 'make_id' => $makeId],
             ['name' => 'Countryman', 'regex' => '/countryman/i', 'make_id' => $makeId],
-            ['name' => 'Coupé', 'regex' => '/coup[eéèêẽë]/iu', 'make_id' => $makeId],
+            ['name' => 'Coupé', 'regex' => '/coupe/i', 'make_id' => $makeId],
             ['name' => 'Paceman', 'regex' => '/paceman/i', 'make_id' => $makeId],
         ];
 

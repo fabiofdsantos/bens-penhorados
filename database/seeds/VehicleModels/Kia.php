@@ -15,7 +15,7 @@ class Kia extends Seeder
             ['name' => 'Bongo', 'regex' => '/bongo/i', 'make_id' => $makeId],
             ['name' => 'Carens', 'regex' => '/carens/i', 'make_id' => $makeId],
             ['name' => 'Carnival', 'regex' => '/carnival/i', 'make_id' => $makeId],
-            ['name' => 'Cee\'d', 'regex' => '/cee[\pP\s]?d/i', 'make_id' => $makeId],
+            ['name' => 'Cee\'d', 'regex' => '/cee[\pP\s]?[\pP\s]?d/i', 'make_id' => $makeId],
             ['name' => 'Cerato', 'regex' => '/cerato/i', 'make_id' => $makeId],
             ['name' => 'Clarus', 'regex' => '/clarus/i', 'make_id' => $makeId],
             ['name' => 'Magentis', 'regex' => '/magentis/i', 'make_id' => $makeId],

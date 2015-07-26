@@ -32,7 +32,7 @@ class Opel extends Seeder
             ['name' => 'GT', 'regex' => '/gt/i', 'make_id' => $makeId],
             ['name' => 'Insignia', 'regex' => '/insignia/i', 'make_id' => $makeId],
             ['name' => 'Kadett', 'regex' => '/kadett/i', 'make_id' => $makeId],
-            ['name' => 'Kapitän', 'regex' => '/kapit[aáàâãä]n/iu', 'make_id' => $makeId],
+            ['name' => 'Kapitän', 'regex' => '/kapitan/i', 'make_id' => $makeId],
             ['name' => 'Manta', 'regex' => '/manta/i', 'make_id' => $makeId],
             ['name' => 'Meriva', 'regex' => '/meriva/i', 'make_id' => $makeId],
             ['name' => 'Mokka', 'regex' => '/mokka/i', 'make_id' => $makeId],
