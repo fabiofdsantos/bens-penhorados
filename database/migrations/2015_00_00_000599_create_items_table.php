@@ -12,6 +12,8 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->string('code')->primary();
+            $table->string('title')->nullable();
+            $table->string('slug')->nullable();
             $table->integer('tax_office');
             $table->integer('year');
             $table->string('status');

@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
  * This is the item model class.
  *
  * @property string $code
+ * @property string $title
+ * @property string $slug
  * @property int $tax_office
  * @property int $year
  * @property string $status
