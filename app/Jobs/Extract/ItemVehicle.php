@@ -14,7 +14,7 @@ use App\Models\Items\Vehicle;
 class ItemVehicle extends Job
 {
     /**
-     * The vehicle attributes.
+     * The attributes that should be extracted.
      *
      * @var array
      */
@@ -33,7 +33,7 @@ class ItemVehicle extends Job
     ];
 
     /**
-     * The vehicle description.
+     * The vehicle's description.
      *
      * @var array
      */
@@ -78,7 +78,7 @@ class ItemVehicle extends Job
     }
 
     /**
-     * Extract attributes from the vehicle description.
+     * Extract attributes from the vehicle's description.
      *
      * @return void
      */
@@ -142,7 +142,7 @@ class ItemVehicle extends Job
     }
 
     /**
-     * Force the extraction of some empty attributes.
+     * Force the extraction of some attributes.
      *
      * @return void
      */
@@ -176,7 +176,7 @@ class ItemVehicle extends Job
     }
 
     /**
-     * Extract the engine displacement.
+     * Extract the vehicle's engine displacement.
      *
      * @param string $str
      *
@@ -190,7 +190,7 @@ class ItemVehicle extends Job
     }
 
     /**
-     * Extract the registration plate code.
+     * Extract the vehicle's registration plate code.
      *
      * @param string $str
      *
@@ -210,7 +210,7 @@ class ItemVehicle extends Job
     }
 
     /**
-     * Extract the make.
+     * Extract the vehicle's make.
      *
      * @param string $str
      *
@@ -226,7 +226,7 @@ class ItemVehicle extends Job
     }
 
     /**
-     * Extract the model.
+     * Extract the vehicle's model.
      *
      * @param string $str
      * @param int    $makeId
@@ -243,7 +243,7 @@ class ItemVehicle extends Job
     }
 
     /**
-     * Extract the color.
+     * Extract the vehicle's color.
      *
      * @param string $str
      *
@@ -259,7 +259,7 @@ class ItemVehicle extends Job
     }
 
     /**
-     * Extract the fuel type.
+     * Extract the vehicle's fuel type.
      *
      * @param string $str
      *
@@ -275,7 +275,7 @@ class ItemVehicle extends Job
     }
 
     /**
-     * Extract the vehicle category.
+     * Extract the vehicle's category.
      *
      * @param string $str
      *
@@ -291,7 +291,7 @@ class ItemVehicle extends Job
     }
 
     /**
-     * Extract the vehicle type.
+     * Extract the vehicle's type.
      *
      * @param string $str
      * @param bool   $isForceExtraction
