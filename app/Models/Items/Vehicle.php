@@ -4,6 +4,19 @@ namespace App\Models\Items;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * This is the vehicle model class.
+ *
+ * @property string $code
+ * @property int|null $year
+ * @property bool|null $is_good_condition
+ * @property int|null $make_id
+ * @property int|null $model_id
+ * @property int|null $color_id
+ * @property int|null $fuel_id
+ * @property int|null $category_id
+ * @property int|null $type_id
+ */
 class Vehicle extends Model
 {
     /**
