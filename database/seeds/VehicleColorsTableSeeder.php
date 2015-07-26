@@ -12,7 +12,7 @@ class VehicleColorsTableSeeder extends Seeder
             ['name' => 'Preto', 'regex' => '/\bpret[o|a]\b/i'],
             ['name' => 'Branco', 'regex' => '/\bbranc[o|a]\b/i'],
             ['name' => 'Cinzento', 'regex' => '/\bcinzent[oa]\b/i'],
-            ['name' => 'Azul', 'regex' => '/\baz[uú]l\b/iu'],
+            ['name' => 'Azul', 'regex' => '/\bazul\b/i'],
             ['name' => 'Vermelho', 'regex' => '/\bvermelh[oa]\b/i'],
             ['name' => 'Verde', 'regex' => '/\bverde\b/i'],
             ['name' => 'Amarelo', 'regex' => '/\bamarel[oa]\b/i'],

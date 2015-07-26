@@ -20,7 +20,7 @@ class VehicleMakesTableSeeder extends Seeder
             ['name' => 'Cadillac', 'regex' => '/cadillac/i'],
             ['name' => 'Chevrolet', 'regex' => '/chevrolet/i'],
             ['name' => 'Chrysler', 'regex' => '/chrysler/i'],
-            ['name' => 'Citroën', 'regex' => '/citro[eë]n/iu'],
+            ['name' => 'Citroën', 'regex' => '/citroen/i'],
             ['name' => 'Corvette', 'regex' => '/corvette/i'],
             ['name' => 'Dacia', 'regex' => '/dacia/i'],
             ['name' => 'Daihatsu', 'regex' => '/daihatsu/i'],

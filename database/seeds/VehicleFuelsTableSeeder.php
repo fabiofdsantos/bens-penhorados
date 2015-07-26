@@ -10,10 +10,10 @@ class VehicleFuelsTableSeeder extends Seeder
 
         $fuels = [
             ['name' => 'Gasolina', 'regex' => '/\bgasolina\b/i'],
-            ['name' => 'Diesel', 'regex' => '/\bdiesel|gas[oó]leo\b/iu'],
-            ['name' => 'GPL', 'regex' => '/\bgpl|g[aá]s\b/iu'],
-            ['name' => 'Híbrido', 'regex' => '/\bh[íi]brido\b/iu'],
-            ['name' => 'Eléctrico', 'regex' => '/\bel[ée]c?trico\b/iu'],
+            ['name' => 'Diesel', 'regex' => '/\bdiesel|gasoleo\b/i'],
+            ['name' => 'GPL', 'regex' => '/\bgpl|gas\b/i'],
+            ['name' => 'Híbrido', 'regex' => '/\bhibrido\b/i'],
+            ['name' => 'Eléctrico', 'regex' => '/\belec?trico\b/i'],
         ];
 
         DB::table('vehicle_fuels')->insert($fuels);
