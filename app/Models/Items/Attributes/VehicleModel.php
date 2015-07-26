@@ -41,4 +41,14 @@ class VehicleModel extends Model
     {
         return $query->where('make_id', $makeId)->get();
     }
+
+    /**
+     * A model belongs to a make.
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function make()
+    {
+        return $this->belongsTo(VehicleMake::class);
+    }
 }

@@ -26,4 +26,14 @@ class VehicleMake extends Model
      * @var string
      */
     protected $primaryKey = 'id';
+
+    /**
+     * A make can have many models.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function models()
+    {
+        return $this->hasMany(VehicleModel::class);
+    }
 }
