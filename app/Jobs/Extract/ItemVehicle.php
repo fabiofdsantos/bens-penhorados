@@ -10,6 +10,7 @@ use App\Models\Items\Attributes\VehicleMake;
 use App\Models\Items\Attributes\VehicleModel;
 use App\Models\Items\Attributes\VehicleType;
 use App\Models\Items\Vehicle;
+use Illuminate\Support\Str;
 
 class ItemVehicle extends Job
 {
@@ -85,6 +86,8 @@ class ItemVehicle extends Job
     private function extractAttributes()
     {
         foreach ($this->description as $key => $value) {
+            $value = $this->removeAccents($value);
+
             if (is_null($this->attributes['year'])) {
                 if (preg_match('/(ano|de)\s*\pP?\s*(\d{4})/i', $value, $match)) {
                     $this->attributes['year'] = ($this->isValidYear($match[2]) ? $match[2] : null);
@@ -98,7 +101,7 @@ class ItemVehicle extends Job
             }
 
             if (is_null($this->attributes['reg_plate_code'])) {
-                if (preg_match('/matr[iíì]cula/iu', $value)) {
+                if (preg_match('/matricula/i', $value)) {
                     $this->attributes['reg_plate_code'] = $this->extractRegPlateCode($value);
                 }
             }
@@ -116,19 +119,19 @@ class ItemVehicle extends Job
             }
 
             if (is_null($this->attributes['color_id'])) {
-                if (preg_match('/\bc[oóòôõ]r\b/iu', $value)) {
+                if (preg_match('/\bcor\b/i', $value)) {
                     $this->attributes['color_id'] = $this->extractColor($value);
                 }
             }
 
             if (is_null($this->attributes['fuel_id'])) {
-                if (preg_match('/combust[iíì]vel/iu', $value)) {
+                if (preg_match('/combustivel/i', $value)) {
                     $this->attributes['fuel_id'] = $this->extractFuelType($value);
                 }
             }
 
             if (is_null($this->attributes['category_id'])) {
-                if (preg_match('/ve[ií]culo|categoria/iu', $value)) {
+                if (preg_match('/veiculo|categoria/i', $value)) {
                     $this->attributes['category_id'] = $this->extractVehicleCategory($value);
                 }
             }
@@ -149,6 +152,8 @@ class ItemVehicle extends Job
     private function forceExtraction()
     {
         foreach ($this->description as $key => $value) {
+            $value = $this->removeAccents($value);
+
             if (is_null($this->attributes['make_id'])) {
                 $this->attributes['make_id'] = $this->extractMake($value);
             }
@@ -348,5 +353,17 @@ class ItemVehicle extends Job
         }
 
         return false;
+    }
+
+    /**
+     * Remove accents from a given string.
+     *
+     * @param string $str
+     *
+     * @return string
+     */
+    private function removeAccents($str)
+    {
+        return Str::ascii($str);
     }
 }
