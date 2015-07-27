@@ -5,6 +5,7 @@ namespace App\Models\Items;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 /**
  * This is the item model class.
@@ -101,5 +102,24 @@ class Item extends Model
     public function scopeEndingSoon(Builder $query, $howMany)
     {
         return $query->orderBy('acceptance_dt', 'asc')->take($howMany)->get();
+    }
+
+    /**
+     * Set the items's slug.
+     *
+     * @param string $value
+     *
+     * @return string
+     */
+    public function setSlugAttribute($value)
+    {
+        if (Str::contains($value, $this->attributes['code'])) {
+            $this->attributes['slug'] = Str::slug($value);
+        } else {
+            $newValue = $this->attributes['code'];
+            $newValue .= "-$value";
+
+            $this->attributes['slug'] = Str::slug($newValue);
+        }
     }
 }
