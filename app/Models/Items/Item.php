@@ -105,6 +105,19 @@ class Item extends Model
     }
 
     /**
+     * Scope a query to only include the item with a given slug.
+     *
+     * @param Builder $query
+     * @param string  $slug
+     *
+     * @return Builder
+     */
+    public function scopeWithSlug(Builder $query, $slug)
+    {
+        return $query->where('slug', $slug)->first();
+    }
+
+    /**
      * Set the items's slug.
      *
      * @param string $value
