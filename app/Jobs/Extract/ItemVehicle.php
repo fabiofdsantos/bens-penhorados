@@ -387,12 +387,16 @@ class ItemVehicle extends Job
             if (isset($this->attributes['model_id'])) {
                 $title .= " {$vehicle->model()->pluck('name')}";
             }
-        } else {
-            $title = $vehicle->code;
-        }
 
-        if (isset($this->attributes['year'])) {
-            $title .= " ({$this->attributes['year']})";
+            if (isset($this->attributes['year'])) {
+                $title .= " ({$this->attributes['year']})";
+            }
+        } else {
+            $title = "{$this->attributes['code']}";
+
+            if (isset($this->attributes['year'])) {
+                $title .= " - Veículo de {$this->attributes['year']}";
+            }
         }
 
         return $title;
