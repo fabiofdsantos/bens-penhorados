@@ -27,16 +27,13 @@ class VehicleController extends Controller
     /**
      * Show a single vehicle.
      *
-     * @param string $code
+     * @param string $slug
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function show($code)
+    public function show($slug)
     {
-        $data = Vehicle::join('items', 'items.code', '=', 'vehicles.code')
-            ->where('vehicles.code', '=', $code)->firstOrFail();
-
-        $data->images = json_decode($data->images);
+        $data = $this->getSingleVehicle($slug);
 
         return response()->json($data, 200);
     }
@@ -75,5 +72,23 @@ class VehicleController extends Controller
          }
 
          return $data;
+     }
+
+     /**
+      * Get a single vehicle.
+      *
+      * @param  string $slug
+      *
+      * @return array
+      */
+     public function getSingleVehicle($slug)
+     {
+         $result = Item::withSlug($slug);
+
+         $vehicle = [
+             'images' => json_decode($result->images),
+         ];
+
+         return $vehicle;
      }
 }
