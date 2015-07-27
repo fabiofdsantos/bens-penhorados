@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Items\Item;
 use App\Models\Items\Vehicle;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,7 @@ class VehicleController extends Controller
     {
         $perPage = $request->input('limit') ?: 15;
 
-        $data = Vehicle::withPagination($perPage);
+        $data = $this->getVehicles($perPage);
 
         return response()->json($data, 200);
     }
@@ -39,4 +40,40 @@ class VehicleController extends Controller
 
         return response()->json($data, 200);
     }
+
+     /**
+      * Get vehicles with pagination.
+      *
+      * @param int $perPage
+      *
+      * @return array
+      */
+     public function getVehicles($perPage)
+     {
+         $results = Item::paginate($perPage);
+
+         if (!$results->isEmpty()) {
+             $data['from'] = $results->firstItem();
+             $data['to'] = $results->lastItem();
+             $data['total'] = $results->total();
+             $data['limit'] = $results->perPage();
+
+             foreach ($results as $result) {
+                 $item = [
+                    'title' => $result->title,
+                    'slug'  => $result->slug,
+                    'price' => $result->price,
+                    'image' => json_decode($result->images)[0],
+                    'make'  => $result->vehicle->make()->pluck('name'),
+                    'model' => $result->vehicle->model()->pluck('name'),
+                    'year'  => $result->vehicle->year,
+                    'fuel'  => $result->vehicle->fuel()->pluck('name'),
+                ];
+
+                 $data['items'][] = $item;
+             }
+         }
+
+         return $data;
+     }
 }
