@@ -18,5 +18,5 @@ $app->get('/', function () {
 $app->group(['prefix' => 'api/v1/', 'namespace' => 'App\Http\Controllers'], function () use ($app) {
     $app->get('home', ['uses' => 'HomeController@index']);
     $app->get('vehicles', ['uses' => 'VehicleController@index']);
-    $app->get('vehicles/{code}', ['uses' => 'VehicleController@show']);
+    $app->get('vehicles/{slug}', ['uses' => 'VehicleController@show']);
 });
