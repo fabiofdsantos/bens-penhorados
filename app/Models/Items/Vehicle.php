@@ -54,6 +54,16 @@ class Vehicle extends Model
     protected $guarded = ['created_at', 'updated_at'];
 
     /**
+     * A vehicle belongs to a item.
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function item()
+    {
+        return $this->belongsTo(Item::class, 'code', 'code');
+    }
+
+    /**
      * A vehicle can have one make.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -111,37 +121,5 @@ class Vehicle extends Model
     public function type()
     {
         return $this->hasOne(VehicleType::class, 'id', 'fuel_id');
-    }
-
-    /**
-     * Get vehicles with pagination.
-     *
-     * @param int $perPage
-     *
-     * @return array
-     */
-    public static function withPagination($perPage)
-    {
-        $results = Item::join('vehicles', 'vehicles.code', '=', 'items.code')
-        ->select('items.price', 'items.images')
-        ->paginate($perPage);
-
-        $data = [];
-        if (!$results->isEmpty()) {
-            $data['from'] = $results->firstItem();
-            $data['to'] = $results->lastItem();
-            $data['total'] = $results->total();
-            $data['limit'] = $results->perPage();
-
-            foreach ($results as $result) {
-                $item = new self();
-                $item->price = $result->price;
-                $item->image = json_decode($result->images)[0];
-
-                $data['items'][] = $item;
-            }
-        }
-
-        return $data;
     }
 }

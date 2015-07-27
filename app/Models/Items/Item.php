@@ -68,6 +68,16 @@ class Item extends Model
     }
 
     /**
+     * A item can be also a vehicle vehicle.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function vehicle()
+    {
+        return $this->hasOne(Vehicle::class, 'code', 'code');
+    }
+
+    /**
      * Scope a query to only include the latest items.
      *
      * @param Builder $query
