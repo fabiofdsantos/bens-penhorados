@@ -3,6 +3,7 @@
 namespace App\Models\Items;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -67,47 +68,28 @@ class Item extends Model
     }
 
     /**
-     * Get latest items.
+     * Scope a query to only include the latest items.
      *
-     * @return array
+     * @param Builder $query
+     * @param int     $howMany
+     *
+     * @return Builder
      */
-    public static function latest()
+    public function scopeLatest(Builder $query, $howMany)
     {
-        $results = self::select('price', 'images')->orderBy('created_at', 'desc')->take(6)->get();
-
-        $items = [];
-
-        foreach ($results as $result) {
-            $item = new self();
-            $item->price = $result->price;
-            $item->image = json_decode($result->images)[0];
-
-            $items[] = $item;
-        }
-
-        return $items;
+        return $query->orderBy('created_at', 'desc')->take($howMany)->get();
     }
 
     /**
-     * Get items ending soon.
+     * Scope a query to only include the items ending soon.
      *
-     * @return array
+     * @param Builder $query
+     * @param int     $howMany
+     *
+     * @return Builder
      */
-    public static function endingSoon()
+    public function scopeEndingSoon(Builder $query, $howMany)
     {
-        $results = self::select('price', 'images', 'acceptance_dt')->orderBy('acceptance_dt', 'asc')->take(6)->get();
-
-        $items = [];
-
-        foreach ($results as $result) {
-            $item = new self();
-            $item->price = $result->price;
-            $item->image = json_decode($result->images)[0];
-            $item->timeleft = Carbon::now()->diffForHumans($result->acceptance_dt, true);
-
-            $items[] = $item;
-        }
-
-        return $items;
+        return $query->orderBy('acceptance_dt', 'asc')->take($howMany)->get();
     }
 }
