@@ -9,6 +9,7 @@ use App\Models\Items\Attributes\VehicleFuel;
 use App\Models\Items\Attributes\VehicleMake;
 use App\Models\Items\Attributes\VehicleModel;
 use App\Models\Items\Attributes\VehicleType;
+use App\Models\Items\Item;
 use App\Models\Items\Vehicle;
 use Illuminate\Support\Str;
 
@@ -75,7 +76,11 @@ class ItemVehicle extends Job
             $this->forceExtraction();
         }
 
-        Vehicle::create($this->attributes);
+        $vehicle = Vehicle::create($this->attributes);
+
+        $item = Item::findOrFail($this->attributes['code']);
+        $item->title = $this->generateTitle($vehicle);
+        $item->save();
     }
 
     /**
@@ -365,5 +370,31 @@ class ItemVehicle extends Job
     private function removeAccents($str)
     {
         return Str::ascii($str);
+    }
+
+    /**
+     * Generate the vehicle's title.
+     *
+     * @param Vehicle $vehicle
+     *
+     * @return string
+     */
+    private function generateTitle(Vehicle $vehicle)
+    {
+        if (isset($this->attributes['make_id'])) {
+            $title = $vehicle->make()->pluck('name');
+
+            if (isset($this->attributes['model_id'])) {
+                $title .= " {$vehicle->model()->pluck('name')}";
+            }
+        } else {
+            $title = $vehicle->code;
+        }
+
+        if (isset($this->attributes['year'])) {
+            $title .= " ({$this->attributes['year']})";
+        }
+
+        return $title;
     }
 }
