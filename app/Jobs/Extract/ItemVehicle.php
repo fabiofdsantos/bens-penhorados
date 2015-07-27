@@ -80,6 +80,7 @@ class ItemVehicle extends Job
 
         $item = Item::findOrFail($this->attributes['code']);
         $item->title = $this->generateTitle($vehicle);
+        $item->slug = $item->title;
         $item->save();
     }
 
