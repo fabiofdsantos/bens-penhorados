@@ -22,10 +22,18 @@ app.controller('VehicleListCtrl', ['$scope', '$http', 'Vehicle', function($scope
     });
 
     function getResultsPage(pageNumber) {
+        $scope.waitResults = true;
+
         $scope.result = Vehicle.query({
             page: pageNumber,
             limit: $scope.itemsPerPage
         });
+
+        $scope.waitResults = false;
+
+        if (!$scope.result) {
+            $scope.noResults = true;
+        }
     }
 
     $scope.pageChanged = function(newPage) {

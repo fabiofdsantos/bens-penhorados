@@ -71,6 +71,9 @@ body {
     margin: 0px 0px 20px;
     font-size: 30px;
 }
+
+/* Messages */
+
 .bs-callout {
     padding: 20px;
     margin: 20px 0px;
@@ -85,11 +88,16 @@ body {
     border-radius: 3px;
 }
 .bs-callout-danger {
-    border-left-color: #CE4844 !important;
+    background-color: #fcf2f2;
+    border-color: #dFb5b4;
 }
-.bs-callout-danger h2 {
-    font-size: 18px;
-    color: #CE4844;
+.bs-callout-warning {
+    background-color: #fefbed;
+    border-color: #f1e7bc;
+}
+.bs-callout-info {
+    background-color: #f0f7fd;
+    border-color: #d0e3f0;
 }
 
 /* Page Sections */
