@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $slug
  * @property int $code
  */
-class VehicleCategory extends Model
+class ItemCategory extends Model
 {
     /**
      * The table associated with the model.
