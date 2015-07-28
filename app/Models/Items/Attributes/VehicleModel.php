@@ -30,6 +30,16 @@ class VehicleModel extends Model
     protected $primaryKey = 'id';
 
     /**
+     * A model belongs to a make.
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function make()
+    {
+        return $this->belongsTo(VehicleMake::class);
+    }
+
+    /**
      * Scope a query to only include models of a given make.
      *
      * @param Builder $query
@@ -40,15 +50,5 @@ class VehicleModel extends Model
     public function scopeOfMake(Builder $query, $makeId)
     {
         return $query->where('make_id', $makeId)->get();
-    }
-
-    /**
-     * A model belongs to a make.
-     *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function make()
-    {
-        return $this->belongsTo(VehicleMake::class);
     }
 }
