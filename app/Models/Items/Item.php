@@ -2,6 +2,7 @@
 
 namespace App\Models\Items;
 
+use App\Models\Items\Attributes\ItemCategory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -74,7 +75,17 @@ class Item extends Model
     }
 
     /**
-     * A item can be also a vehicle vehicle.
+     * An item must have a category.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function category()
+    {
+        return $this->hasOne(ItemCategory::class, 'id', 'category_id');
+    }
+
+    /**
+     * An item can be also a vehicle vehicle.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
