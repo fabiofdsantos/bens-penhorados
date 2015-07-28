@@ -32,15 +32,9 @@ body {
     background-image: url('/img/home.jpg');
     background-position: 50% 43%;
 }
-.home-price {
-    background-color: rgba(147, 145, 145, 0.79);
-    font-weight: 900;
-    color: rgb(253, 251, 251);
-    margin: 0;
-    position: absolute;
-    bottom: 15%;
-    left: 6%;
-    font-size: 30px;
+.caption h3 {
+    font-size: 18px;
+    color: #777;
 }
 .results-per-page {
     padding: 5px 5px 5px 15px;
@@ -48,10 +42,13 @@ body {
 .results-per-page select {
     margin-left: 10px;
 }
-.results-show-item {
+.results-title {
     margin-bottom: 15px;
 }
-.results-show-price {}
+.results-price {
+    text-align: center;
+    font-size: 30px;
+}
 #loginbox {
     margin-top: 30px;
 }

@@ -14,8 +14,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data['newItems'] = $this->getLatestItems(6);
-        $data['endingSoon'] = $this->getItemsEndingSoon(6);
+        $data['latest'] = $this->getLatestItems(8);
+        $data['endingSoon'] = $this->getItemsEndingSoon(8);
 
         return response()->json($data, 200);
     }
@@ -37,8 +37,11 @@ class HomeController extends Controller
 
         foreach ($results as $result) {
             $item = [
-                'price' => $result->price,
-                'image' => json_decode($result->images)[0],
+                'title'          => $result->title,
+                'itemSlug'       => $result->slug,
+                'categorySlug'   => $result->category()->pluck('slug'),
+                'price'          => $result->price,
+                'image'          => json_decode($result->images)[0],
             ];
 
             $items[] = $item;
@@ -64,9 +67,12 @@ class HomeController extends Controller
 
         foreach ($results as $result) {
             $item = [
-                'price'    => $result->price,
-                'image'    => json_decode($result->images)[0],
-                'timeleft' => $result->acceptance_dt->diffForHumans(Carbon::now(), true),
+                'title'         => $result->title,
+                'itemSlug'      => $result->slug,
+                'categorySlug'  => $result->category()->pluck('slug'),
+                'price'         => $result->price,
+                'image'         => json_decode($result->images)[0],
+                'timeleft'      => $result->acceptance_dt->diffForHumans(Carbon::now(), true),
             ];
 
             $items[] = $item;
