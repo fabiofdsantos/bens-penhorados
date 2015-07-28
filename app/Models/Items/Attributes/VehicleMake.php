@@ -2,6 +2,8 @@
 
 namespace App\Models\Items\Attributes;
 
+use App\Models\Items\Vehicle;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -35,5 +37,21 @@ class VehicleMake extends Model
     public function models()
     {
         return $this->hasMany(VehicleModel::class);
+    }
+
+    /**
+     * Scope a query to only include makes assigned at least to one vehicle.
+     *
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeAssigned(Builder $query)
+    {
+        $makes = Vehicle::distinct()->lists('make_id');
+
+        return $query->whereIn('id', $makes)
+                ->orderBy('name')
+                ->lists('name', 'id');
     }
 }
