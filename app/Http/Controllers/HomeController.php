@@ -29,7 +29,7 @@ class HomeController extends Controller
      */
     public function getLatestItems($howMany)
     {
-        $results = Item::latest($howMany);
+        $results = Item::latest($howMany)->get();
 
         if ($results->isEmpty()) {
             return [];
@@ -56,7 +56,7 @@ class HomeController extends Controller
      */
     public function getItemsEndingSoon($howMany)
     {
-        $results = Item::endingSoon($howMany);
+        $results = Item::endingSoon($howMany)->get();
 
         if ($results->isEmpty()) {
             return [];

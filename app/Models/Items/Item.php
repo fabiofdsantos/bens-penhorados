@@ -93,7 +93,7 @@ class Item extends Model
      */
     public function scopeLatest(Builder $query, $howMany)
     {
-        return $query->orderBy('created_at', 'desc')->take($howMany)->get();
+        return $query->orderBy('created_at', 'desc')->take($howMany);
     }
 
     /**
@@ -106,7 +106,7 @@ class Item extends Model
      */
     public function scopeEndingSoon(Builder $query, $howMany)
     {
-        return $query->orderBy('acceptance_dt', 'asc')->take($howMany)->get();
+        return $query->orderBy('acceptance_dt', 'asc')->take($howMany);
     }
 
     /**
@@ -119,7 +119,7 @@ class Item extends Model
      */
     public function scopeWithSlug(Builder $query, $slug)
     {
-        return $query->where('slug', $slug)->first();
+        return $query->where('slug', $slug);
     }
 
     /**

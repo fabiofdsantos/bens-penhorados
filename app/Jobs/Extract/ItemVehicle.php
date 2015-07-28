@@ -229,7 +229,9 @@ class ItemVehicle extends Job
      */
     private function extractMake($str)
     {
-        foreach (VehicleMake::all() as $make) {
+        $makes = VehicleMake::all();
+
+        foreach ($makes as $make) {
             if (preg_match($make->regex, $str)) {
                 return $make->id;
             }
@@ -246,7 +248,9 @@ class ItemVehicle extends Job
      */
     private function extractModel($str, $makeId)
     {
-        foreach (VehicleModel::ofMake($makeId) as $model) {
+        $models = VehicleModel::ofMake($makeId)->get();
+
+        foreach ($models as $model) {
             if (preg_match("/$model->name/ui", $str)) {
                 return $model->id;
             }
@@ -262,7 +266,9 @@ class ItemVehicle extends Job
      */
     private function extractColor($str)
     {
-        foreach (VehicleColor::all() as $color) {
+        $colors = VehicleColor::all();
+
+        foreach ($colors as $color) {
             if (preg_match($color->regex, $str)) {
                 return $color->id;
             }
@@ -278,7 +284,9 @@ class ItemVehicle extends Job
      */
     private function extractFuelType($str)
     {
-        foreach (VehicleFuel::all() as $fuel) {
+        $fuels = VehicleFuel::all();
+
+        foreach ($fuels as $fuel) {
             if (preg_match($fuel->regex, $str)) {
                 return $fuel->id;
             }
@@ -294,7 +302,9 @@ class ItemVehicle extends Job
      */
     private function extractVehicleCategory($str)
     {
-        foreach (VehicleCategory::all() as $category) {
+        $categories = VehicleCategory::all();
+
+        foreach ($categories as $category) {
             if (preg_match($category->regex, $str)) {
                 return $category->id;
             }
@@ -312,8 +322,9 @@ class ItemVehicle extends Job
     private function extractVehicleType($str, $isForceExtraction)
     {
         $numTypes = 0;
+        $types = VehicleType::all();
 
-        foreach (VehicleType::all() as $type) {
+        foreach ($types as $type) {
             if (preg_match($type->regex, $str)) {
                 if ($isForceExtraction) {
                     $tempType = $type->id;

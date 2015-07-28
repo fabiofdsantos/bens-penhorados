@@ -50,8 +50,6 @@ class VehicleMake extends Model
     {
         $makes = Vehicle::distinct()->lists('make_id');
 
-        return $query->whereIn('id', $makes)
-                ->orderBy('name')
-                ->lists('name', 'id');
+        return $query->whereIn('id', $makes)->orderBy('name');
     }
 }

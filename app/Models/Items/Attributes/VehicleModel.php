@@ -2,6 +2,7 @@
 
 namespace App\Models\Items\Attributes;
 
+use App\Models\Items\Vehicle;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -49,6 +50,6 @@ class VehicleModel extends Model
      */
     public function scopeOfMake(Builder $query, $makeId)
     {
-        return $query->where('make_id', $makeId)->get();
+        return $query->where('make_id', $makeId);
     }
 }
