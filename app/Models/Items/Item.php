@@ -65,7 +65,12 @@ class Item extends Model
      */
     public function getDates()
     {
-        return ['preview_dt_start', 'preview_dt_end', 'acceptance_dt', 'opening_dt'];
+        return [
+            'preview_dt_start',
+            'preview_dt_end',
+            'acceptance_dt',
+            'opening_dt',
+        ];
     }
 
     /**
