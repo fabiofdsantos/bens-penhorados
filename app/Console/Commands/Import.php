@@ -69,9 +69,9 @@ class Import extends Command
 
         if (isset($categories)) {
             $categories = explode(',', $categories);
-            $categories = DB::table('raw_data_categories')->whereIn('code', $categories)->get();
+            $categories = DB::table('item_categories')->whereIn('code', $categories)->get();
         } else {
-            $categories = DB::table('raw_data_categories')->get();
+            $categories = DB::table('item_categories')->get();
         }
 
         Bus::dispatch(new Website($categories, $lastPage));

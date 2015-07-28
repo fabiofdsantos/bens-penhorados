@@ -40,19 +40,19 @@ class Extract extends Command
 
         if (isset($categories)) {
             $categories = explode(',', $categories);
-            $categories_ids = DB::table('raw_data_categories')->whereIn('code', $categories)->lists('id');
+            $categoriesIds = DB::table('item_categories')->whereIn('code', $categories)->lists('id');
 
             if (isset($maxResults)) {
-                $items = RawData::whereIn('category_id', $categories_ids)->take($maxResults)->get();
+                $items = RawData::whereIn('category_id', $categoriesIds)->take($maxResults)->get();
             } else {
-                $items = RawData::whereIn('category_id', $categories_ids)->get();
+                $items = RawData::whereIn('category_id', $categoriesIds)->get();
             }
         } else {
             $items = isset($maxResults) ? RawData::take($maxResults)->get() : RawData::all();
         }
 
         foreach ($items as $item) {
-            Bus::dispatch(new ItemGeneric($item->code, $item->lat, $item->lng, $ignoreImages));
+            Bus::dispatch(new ItemGeneric($item->code, $item->category_id, $item->lat, $item->lng, $ignoreImages));
         }
 
         $this->info('Jobs are successfully queued!');
