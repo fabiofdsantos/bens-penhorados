@@ -40,14 +40,17 @@
 
                 <div class="row list-group" ng-show="result.items.length" dir-paginate="item in result.items | itemsPerPage: itemsPerPage" total-items="result.total">
                     <div class="col-xs-12 col-sm-12">
-                        <a class="list-group-item col-xs-12 col-sm-12" ng-href="../vehicles/{{ item.slug }}">
+                        <a class="list-group-item col-xs-12 col-sm-12" ng-href="../veiculos/{{ item.slug }}">
                             <div class="col-xs-12 col-sm-3">
                                 <img class="img-responsive img-thumbnail" alt="" ng-src="../images/{{ item.image != null ? item.image : 'empty.jpg' }}">
                             </div>
-                            <div class="col-xs-12 col-sm-7">
-                                <div class="results-show-title">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="results-title">
                                     <strong ng-bind="item.title"></strong>
                                 </div>
+                            </div>
+                            <div class="results-price col-xs-12 col-sm-3">
+                                <span ng-bind="item.price ? (item.price | currency:'€') : 'À melhor oferta'"></span>
                             </div>
                         </a>
                     </div>

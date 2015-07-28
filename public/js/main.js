@@ -33,11 +33,11 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
         .when('/register', {
             templateUrl: 'partials/register.html'
         })
-        .when('/vehicles', {
+        .when('/veiculos', {
             templateUrl: 'partials/vehicles.html',
             controller: 'VehicleListCtrl'
         })
-        .when('/vehicles/:slug', {
+        .when('/veiculos/:slug', {
             templateUrl: 'partials/vehicles-single.html',
             controller: 'VehicleCtrl'
         })
@@ -48,7 +48,7 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
 
 app.controller('HomeCtrl', function($scope, $http) {
     $http.get('../api/v1/home').then(function(response) {
-        $scope.newItems = response.data.newItems;
+        $scope.latest = response.data.latest;
         $scope.endingSoon = response.data.endingSoon;
     });
 });
