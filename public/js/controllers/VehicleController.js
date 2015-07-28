@@ -40,8 +40,8 @@ app.controller('VehicleListCtrl', ['$scope', 'Vehicle', function($scope, Vehicle
 app.controller('VehicleCtrl', ['$scope', '$routeParams', '$location', 'Vehicle', function($scope, $routeParams, $location, Vehicle) {
     Vehicle.get({
         slug: $routeParams.slug
-    }, function(success) {
-        $scope.vehicle = success.data;
+    }, function(data) {
+        $scope.vehicle = data;
     }, function(error) {
         if (error.status === 404) {
             $location.path("/404");
