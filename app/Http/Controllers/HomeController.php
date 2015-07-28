@@ -31,6 +31,10 @@ class HomeController extends Controller
     {
         $results = Item::latest($howMany);
 
+        if (empty($results)) {
+            return [];
+        }
+
         foreach ($results as $result) {
             $item = [
                 'price' => $result->price,
@@ -53,6 +57,10 @@ class HomeController extends Controller
     public function getItemsEndingSoon($howMany)
     {
         $results = Item::endingSoon($howMany);
+
+        if (empty($results)) {
+            return [];
+        }
 
         foreach ($results as $result) {
             $item = [

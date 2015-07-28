@@ -49,14 +49,17 @@ class VehicleController extends Controller
      {
          $results = Item::paginate($perPage);
 
-         if (!$results->isEmpty()) {
-             $data['from'] = $results->firstItem();
-             $data['to'] = $results->lastItem();
-             $data['total'] = $results->total();
-             $data['limit'] = $results->perPage();
+         if (empty($results)) {
+             return [];
+         }
 
-             foreach ($results as $result) {
-                 $item = [
+         $data['from'] = $results->firstItem();
+         $data['to'] = $results->lastItem();
+         $data['total'] = $results->total();
+         $data['limit'] = $results->perPage();
+
+         foreach ($results as $result) {
+             $item = [
                     'title' => $result->title,
                     'slug'  => $result->slug,
                     'price' => $result->price,
@@ -67,8 +70,7 @@ class VehicleController extends Controller
                     'fuel'  => $result->vehicle->fuel()->pluck('name'),
                 ];
 
-                 $data['items'][] = $item;
-             }
+             $data['items'][] = $item;
          }
 
          return $data;
@@ -84,6 +86,10 @@ class VehicleController extends Controller
      public function getSingleVehicle($slug)
      {
          $result = Item::withSlug($slug);
+
+         if (empty($result)) {
+             return [];
+         }
 
          $vehicle = [
              'images' => json_decode($result->images),
