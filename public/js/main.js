@@ -37,7 +37,7 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
             templateUrl: 'partials/vehicles.html',
             controller: 'VehicleListCtrl'
         })
-        .when('/vehicles/:id', {
+        .when('/vehicles/:slug', {
             templateUrl: 'partials/vehicles-single.html',
             controller: 'VehicleCtrl'
         })

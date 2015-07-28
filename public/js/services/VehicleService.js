@@ -4,8 +4,8 @@ var app = angular.module('bens-penhorados');
 
 app.factory('Vehicle', ['$resource', function($resource) {
     return $resource(
-        '../api/v1/vehicles/:id', {
-            id: '@_id'
+        '../api/v1/vehicles/:slug', {
+            id: '@_slug'
         }, {
             'query': {
                 method: 'GET',

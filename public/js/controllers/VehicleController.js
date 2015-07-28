@@ -2,7 +2,7 @@
 
 var app = angular.module('bens-penhorados');
 
-app.controller('VehicleListCtrl', ['$scope', '$http', 'Vehicle', function($scope, $http, Vehicle) {
+app.controller('VehicleListCtrl', ['$scope', 'Vehicle', function($scope, Vehicle) {
     $scope.items = [];
     $scope.totalItems = 0;
     $scope.itemsFrom = 0;
@@ -37,8 +37,14 @@ app.controller('VehicleListCtrl', ['$scope', '$http', 'Vehicle', function($scope
     };
 }]);
 
-app.controller('VehicleCtrl', ['$scope', '$http', '$routeParams', 'Vehicle', function($scope, $http, $routeParams, Vehicle) {
-    $scope.vehicle = Vehicle.get({
-        id: $routeParams.id
+app.controller('VehicleCtrl', ['$scope', '$routeParams', '$location', 'Vehicle', function($scope, $routeParams, $location, Vehicle) {
+    Vehicle.get({
+        slug: $routeParams.slug
+    }, function(success) {
+        $scope.vehicle = success.data;
+    }, function(error) {
+        if (error.status === 404) {
+            $location.path("/404");
+        }
     });
 }]);

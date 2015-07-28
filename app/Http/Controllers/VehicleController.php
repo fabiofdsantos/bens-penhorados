@@ -35,6 +35,10 @@ class VehicleController extends Controller
     {
         $data = $this->getSingleVehicle($slug);
 
+        if (empty($data)) {
+            return response()->json($data, 404);
+        }
+
         return response()->json($data, 200);
     }
 
@@ -87,7 +91,7 @@ class VehicleController extends Controller
      {
          $result = Item::withSlug($slug);
 
-         if (empty($result)) {
+         if (!$result->exists()) {
              return [];
          }
 
