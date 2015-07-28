@@ -52,4 +52,18 @@ class VehicleModel extends Model
     {
         return $query->where('make_id', $makeId);
     }
+
+    /**
+     * Scope a query to only include models assigned at least to one vehicle.
+     *
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeAssigned(Builder $query)
+    {
+        $models = Vehicle::distinct()->lists('model_id');
+
+        return $query->whereIn('id', $models)->orderBy('name');
+    }
 }
