@@ -89,9 +89,9 @@ class VehicleController extends Controller
       */
      public function getSingleVehicle($slug)
      {
-         $result = Item::withSlug($slug);
+         $result = Item::withSlug($slug)->first();
 
-         if (!$result->exists()) {
+         if (empty($result)) {
              return [];
          }
 
