@@ -49,7 +49,7 @@ class VehicleController extends Controller
      {
          $results = Item::paginate($perPage);
 
-         if (empty($results)) {
+         if ($results->isEmpty()) {
              return [];
          }
 

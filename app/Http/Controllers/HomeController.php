@@ -31,7 +31,7 @@ class HomeController extends Controller
     {
         $results = Item::latest($howMany);
 
-        if (empty($results)) {
+        if ($results->isEmpty()) {
             return [];
         }
 
@@ -58,7 +58,7 @@ class HomeController extends Controller
     {
         $results = Item::endingSoon($howMany);
 
-        if (empty($results)) {
+        if ($results->isEmpty()) {
             return [];
         }
 
