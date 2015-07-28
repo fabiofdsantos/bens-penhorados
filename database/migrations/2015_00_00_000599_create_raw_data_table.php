@@ -17,7 +17,7 @@ class CreateRawDataTable extends Migration
             $table->string('lng')->nullable();
 
             $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('raw_data_categories');
+            $table->foreign('category_id')->references('id')->on('item_categories');
 
             $table->timestamps();
         });

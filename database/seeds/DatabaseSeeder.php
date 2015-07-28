@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call('LocationsTableSeeder');
-        $this->call('RawDataCategoriesTableSeeder');
+        $this->call('ItemCategoriesTableSeeder');
         $this->call('VehicleColorsTableSeeder');
         $this->call('VehicleMakesTableSeeder');
         $this->call('VehicleModelsTableSeeder');
