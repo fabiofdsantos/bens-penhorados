@@ -12,9 +12,9 @@
 namespace App\Console\Commands;
 
 use App\Jobs\Extract\ItemGeneric;
+use App\Models\Items\Attributes\ItemCategory;
 use App\Models\RawData;
 use Bus;
-use DB;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -44,20 +44,20 @@ class Extract extends Command
         $this->info('Creating queue jobs to extract data from imported items...');
 
         $categories = $this->option('only');
-        $maxResults = $this->option('take');
+        $total = $this->option('take');
         $ignoreImages = $this->option('ignore-images');
 
         if (isset($categories)) {
             $categories = explode(',', $categories);
-            $categoriesIds = DB::table('item_categories')->whereIn('code', $categories)->lists('id');
+            $catIds = ItemCategory::whereCodeIn($categories)->lists('id');
 
-            if (isset($maxResults)) {
-                $items = RawData::whereIn('category_id', $categoriesIds)->take($maxResults)->get();
+            if (isset($total)) {
+                $items = RawData::whereCategoryIn($catIds)->take($total)->get();
             } else {
-                $items = RawData::whereIn('category_id', $categoriesIds)->get();
+                $items = RawData::whereCategoryIn($catIds)->get();
             }
         } else {
-            $items = isset($maxResults) ? RawData::take($maxResults)->get() : RawData::all();
+            $items = isset($total) ? RawData::take($total)->get() : RawData::all();
         }
 
         foreach ($items as $item) {
