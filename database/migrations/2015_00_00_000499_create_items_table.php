@@ -36,6 +36,7 @@ class CreateItemsTable extends Migration
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
             $table->text('images')->nullable();
+            $table->text('full_description');
             $table->string('depositary_name')->nullable();
             $table->integer('depositary_phone')->nullable();
             $table->string('depositary_email')->nullable();
