@@ -11,6 +11,7 @@
 
 namespace App\Jobs\Extract;
 
+use App\Helpers\Text;
 use App\Jobs\Job;
 use App\Models\Items\Attributes\VehicleCategory;
 use App\Models\Items\Attributes\VehicleColor;
@@ -20,7 +21,6 @@ use App\Models\Items\Attributes\VehicleModel;
 use App\Models\Items\Attributes\VehicleType;
 use App\Models\Items\Item;
 use App\Models\Items\Vehicle;
-use Illuminate\Support\Str;
 
 class ItemVehicle extends Job
 {
@@ -89,7 +89,6 @@ class ItemVehicle extends Job
 
         $item = Item::findOrFail($this->attributes['code']);
         $item->title = $this->generateTitle($vehicle);
-        $item->slug = $item->title;
         $item->save();
     }
 
@@ -101,7 +100,7 @@ class ItemVehicle extends Job
     private function extractAttributes()
     {
         foreach ($this->description as $key => $value) {
-            $value = $this->removeAccents($value);
+            $value = Text::removeAccents($value);
 
             if (is_null($this->attributes['year'])) {
                 if (preg_match('/(ano|de)\s*\pP?\s*(\d{4})/i', $value, $match)) {
@@ -173,7 +172,7 @@ class ItemVehicle extends Job
     private function forceExtraction()
     {
         foreach ($this->description as $key => $value) {
-            $value = $this->removeAccents($value);
+            $value = Text::removeAccents($value);
 
             if (is_null($this->attributes['make_id'])) {
                 $this->attributes['make_id'] = $this->extractMake($value);
@@ -426,18 +425,6 @@ class ItemVehicle extends Job
         }
 
         return false;
-    }
-
-    /**
-     * Remove accents from a given string.
-     *
-     * @param string $str
-     *
-     * @return string
-     */
-    private function removeAccents($str)
-    {
-        return Str::ascii($str);
     }
 
     /**
