@@ -55,6 +55,13 @@ class ItemGeneric extends Job
     protected $category;
 
     /**
+     * The item category id.
+     *
+     * @var int
+     */
+    protected $category_id;
+
+    /**
      * If true, images will be extracted.
      *
      * @var bool
@@ -65,13 +72,15 @@ class ItemGeneric extends Job
      * Create a new job instance.
      *
      * @param string $code
+     * @param int    $category_id
      * @param string $lat
      * @param string $lng
      * @param bool   $ignoreImages
      */
-    public function __construct($code, $lat, $lng, $ignoreImages)
+    public function __construct($code, $categoryId, $lat, $lng, $ignoreImages)
     {
         $this->code = $code;
+        $this->category_id = $categoryId;
         $this->lat = $lat;
         $this->lng = $lng;
         $this->filePath = env('BP_RAW_FOLDER', 'rawdata/').$code.env('BP_RAW_FILE_EXT', '.raw');
@@ -93,6 +102,7 @@ class ItemGeneric extends Job
 
             $item = new Item();
             $item->code = $this->code;
+            $item->category_id = $this->category_id;
             $item->lat = $this->lat;
             $item->lng = $this->lng;
 
