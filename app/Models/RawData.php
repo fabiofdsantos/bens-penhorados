@@ -44,4 +44,17 @@ class RawData extends Model
      * @var bool
      */
     public $timestamps = true;
+
+    /**
+     * Scope a query to only include the raw data of certain categories.
+     *
+     * @param Builder $query
+     * @param array   $categories
+     *
+     * @return Builder
+     */
+    public function scopeWhereCategoryIn(Builder $query, $categories)
+    {
+        return $query->whereIn('category_id', $categories);
+    }
 }
