@@ -121,6 +121,12 @@ class ItemVehicle extends Job
                 }
             }
 
+            if (is_null($this->attributes['is_good_condition'])) {
+                if (preg_match('/\bestado\b/i', $value)) {
+                    $this->attributes['is_good_condition'] = $this->extractCondition($value);
+                }
+            }
+
             if (is_null($this->attributes['make_id'])) {
                 if (preg_match('/\bmarca\b/i', $value)) {
                     $this->attributes['make_id'] = $this->extractMake($value);
@@ -181,6 +187,10 @@ class ItemVehicle extends Job
                 $this->attributes['reg_plate_code'] = $this->extractRegPlateCode($value);
             }
 
+            if (is_null($this->attributes['is_good_condition'])) {
+                $this->attributes['is_good_condition'] = $this->extractCondition($value);
+            }
+
             if (is_null($this->attributes['fuel_id'])) {
                 $this->attributes['fuel_id'] = $this->extractFuelType($value);
             }
@@ -226,6 +236,43 @@ class ItemVehicle extends Job
         $regex_trailers = '/[a-z]{1,2}-\d{1,6}/i';
         if (preg_match($regex_trailers, $str, $match)) {
             return $match[0];
+        }
+    }
+
+    /**
+     * Extract and check the vehicle's condition.
+     *
+     * @param string $str
+     *
+     * @return bool|null
+     */
+    private function extractCondition($str)
+    {
+        $ok_keywords = [
+            'razoavel estado',
+            'estado razoavel',
+            'bom estado',
+            'regular estado',
+        ];
+
+        foreach ($ok_keywords as $keyword) {
+            if (preg_match("/\b$keyword\b/i", $str)) {
+                return true;
+            }
+        }
+
+        $notOk_keywords = [
+            'mau estado',
+            'sucata',
+            'avariado',
+            'mal tratado',
+            'pintura riscada',
+        ];
+
+        foreach ($notOk_keywords as $keyword) {
+            if (preg_match("/\b$keyword\b/i", $str)) {
+                return false;
+            }
         }
     }
 
