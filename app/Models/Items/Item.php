@@ -150,14 +150,16 @@ class Item extends Model
     }
 
     /**
-     * Set the items's slug.
+     * Set the items's title and slug.
      *
      * @param string $value
      *
      * @return string
      */
-    public function setSlugAttribute($value)
+    public function setTitleAttribute($value)
     {
+        $this->attributes['title'] = $value;
+
         if (Str::contains($value, $this->attributes['code'])) {
             $this->attributes['slug'] = Str::slug($value);
         } else {
