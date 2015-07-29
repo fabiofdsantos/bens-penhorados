@@ -22,49 +22,49 @@ use Symfony\Component\DomCrawler\Crawler;
 class ItemGeneric extends Job
 {
     /**
-     * The item code.
+     * The item's code.
      *
      * @var string
      */
     protected $code;
 
     /**
-     * The item latitude.
+     * The item's latitude.
      *
      * @var string
      */
     protected $lat;
 
     /**
-     * The item longitude.
+     * The item's longitude.
      *
      * @var string
      */
     protected $lng;
 
     /**
-     * The complete path to the file on disk.
+     * The complete path to the raw data file on disk.
      *
      * @var string
      */
     protected $filePath;
 
     /**
-     * The item description.
+     * The item's description.
      *
      * @var string
      */
     protected $description;
 
     /**
-     * The item category.
+     * The item's category.
      *
      * @var int
      */
     protected $category;
 
     /**
-     * The item category id.
+     * The item's category id.
      *
      * @var int
      */
@@ -286,7 +286,7 @@ class ItemGeneric extends Job
     }
 
     /**
-     * Extract the price.
+     * Extract the item's price.
      *
      * @param string $str
      *
@@ -303,7 +303,7 @@ class ItemGeneric extends Job
     }
 
     /**
-     * Extract the vat.
+     * Extract the item's vat.
      *
      * @param string $str
      *
@@ -317,7 +317,7 @@ class ItemGeneric extends Job
     }
 
     /**
-     * Extract the current status.
+     * Extract the item's status.
      *
      * @param string $str
      *
@@ -341,7 +341,7 @@ class ItemGeneric extends Job
     }
 
     /**
-     * Extract the name.
+     * Extract a name.
      *
      * @param string $str
      *
@@ -357,7 +357,7 @@ class ItemGeneric extends Job
     }
 
     /**
-     * Extract the phone number.
+     * Extract a phone number.
      *
      * @param string $str
      *
@@ -371,7 +371,7 @@ class ItemGeneric extends Job
     }
 
     /**
-     * Extract the email.
+     * Extract an email.
      *
      * @param string $str
      *
@@ -385,7 +385,7 @@ class ItemGeneric extends Job
     }
 
     /**
-     * Extract the start and end datetime.
+     * Extract a start and end datetime.
      *
      * @param string $str
      *
