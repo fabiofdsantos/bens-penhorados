@@ -36,4 +36,17 @@ class ItemCategory extends Model
      * @var string
      */
     protected $primaryKey = 'id';
+
+    /**
+     * Scope a query to only include the categories with the given codes.
+     *
+     * @param Builder $query
+     * @param array   $codes
+     *
+     * @return Builder
+     */
+    public function scopeWhereCodeIn(Builder $query, $codes)
+    {
+        return $query->whereIn('code', $codes);
+    }
 }
