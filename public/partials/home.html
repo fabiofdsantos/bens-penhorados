@@ -26,7 +26,7 @@
                     <div class="caption text-center">
                         <h3 ng-bind="newItem.title"></h3>
                         <p>
-                            <strong ng-bind="newItem.price ? (newItem.price | currency:'€') : 'À melhor oferta'"></strong>
+                            <strong ng-bind="newItem.price ? (newItem.price | currency:'€':0) : 'À melhor oferta'"></strong>
                         </p>
                     </div>
                 </a>
@@ -48,7 +48,7 @@
                     <div class="caption text-center">
                         <h3 ng-bind="endingItem.title"></h3>
                         <p>
-                            <strong ng-bind="endingItem.price ? (endingItem.price | currency:'€') : 'À melhor oferta'"></strong>
+                            <strong ng-bind="endingItem.price ? (endingItem.price | currency:'€':0) : 'À melhor oferta'"></strong>
                         </p>
                     </div>
                 </a>

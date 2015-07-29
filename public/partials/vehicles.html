@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="results-price col-xs-12 col-sm-3">
-                                <span ng-bind="item.price ? (item.price | currency:'€') : 'À melhor oferta'"></span>
+                                <span ng-bind="item.price ? (item.price | currency:'€':0) : 'À melhor oferta'"></span>
                             </div>
                         </a>
                     </div>
