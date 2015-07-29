@@ -15,13 +15,13 @@
 
 <div class="section">
     <div class="container">
-        <div class="row ">
+        <div class="row">
             <div class="col-lg-12 text-center">
                 <h2>Últimas Inserções</h2>
                 <hr>
             </div>
             <div class="list-group col-lg-3" ng-repeat="newItem in latest">
-                <a class="list-group-item thumbnail" ng-href="../{{ newItem.categorySlug }}/{{ newItem.itemSlug }}">
+                <a class="list-group-item" ng-href="../{{ newItem.categorySlug }}/{{ newItem.itemSlug }}">
                     <img class="img-responsive" ng-src="../images/{{ newItem.image != null ? newItem.image : 'empty.jpg'}}">
                     <div class="caption text-center">
                         <h3 ng-bind="newItem.title"></h3>
@@ -43,7 +43,7 @@
                 <hr>
             </div>
             <div class="list-group col-lg-3" ng-repeat="endingItem in endingSoon">
-                <a class="list-group-item thumbnail" ng-href="../{{ endingItem.categorySlug }}/{{ endingItem.itemSlug }}">
+                <a class="list-group-item" ng-href="../{{ endingItem.categorySlug }}/{{ endingItem.itemSlug }}">
                     <img class="img-responsive" ng-src="../images/{{ endingItem.image != null ? endingItem.image : 'empty.jpg'}}">
                     <div class="caption text-center">
                         <h3 ng-bind="endingItem.title"></h3>
