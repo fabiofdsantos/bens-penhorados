@@ -247,29 +247,28 @@ class ItemVehicle extends Job
      */
     private function extractCondition($str)
     {
-        $ok_keywords = [
-            'razoavel estado',
-            'estado razoavel',
-            'bom estado',
-            'regular estado',
+        $regex_goodCondition = [
+            '/\b(bom|razoavel|regular)\s(estado)\b/i',
+            '/\bestado razoavel\b/i',
         ];
 
-        foreach ($ok_keywords as $keyword) {
-            if (preg_match("/\b$keyword\b/i", $str)) {
+        foreach ($regex_goodCondition as $regex) {
+            if (preg_match($regex, $str)) {
                 return true;
             }
         }
 
-        $notOk_keywords = [
-            'mau estado',
-            'sucata',
-            'avariado',
-            'mal tratado',
-            'pintura riscada',
+        $regex_badCondition = [
+            '/\bmau estado\b/i',
+            '/\bsucata\b/i',
+            '/\bavariado\b/i',
+            '/\bmal tratado\b/i',
+            '/\bpintura riscada\b/i',
+            '/\b(amolgad)(o|elas?)\b/i',
         ];
 
-        foreach ($notOk_keywords as $keyword) {
-            if (preg_match("/\b$keyword\b/i", $str)) {
+        foreach ($regex_badCondition as $regex) {
+            if (preg_match($regex, $str)) {
                 return false;
             }
         }
