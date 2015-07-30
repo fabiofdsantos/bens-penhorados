@@ -29,7 +29,7 @@ class CreateCorporatesTable extends Migration
             $table->string('activity');
             $table->string('nature');
             $table->decimal('capital');
-            $table->capital_currency('EUR');
+            $table->string('capital_currency');
             $table->boolean('is_active');
             $table->string('email')->nullable();
             $table->integer('phone')->nullable();
