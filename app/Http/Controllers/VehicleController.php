@@ -60,7 +60,7 @@ class VehicleController extends Controller
       */
      public function getVehicles($perPage)
      {
-         $results = Item::paginate($perPage);
+         $results = Item::vehicles()->paginate($perPage);
 
          if ($results->isEmpty()) {
              return [];

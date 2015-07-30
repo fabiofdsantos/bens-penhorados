@@ -150,6 +150,20 @@ class Item extends Model
     }
 
     /**
+     * Scope a query to only include vehicles.
+     *
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeVehicles(Builder $query)
+    {
+        $catId = ItemCategory::where('name', 'Veículos')->pluck('id');
+
+        return $query->where('category_id', $catId);
+    }
+
+    /**
      * Set the items's title and slug.
      *
      * @param string $value
