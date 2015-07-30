@@ -39,7 +39,8 @@ class Handler extends ExceptionHandler
 
     /**
      * Render an exception into an HTTP response.
-     * Every 404 must be redirected back to the main view, otherwise AngularJS Routing fails.
+     * Every 404 must be redirected back to the main view, otherwise
+     * AngularJS Routing fails.
      *
      * @param \Illuminate\Http\Request $request
      * @param \Exception               $e
