@@ -22,15 +22,15 @@ class CreateCorporatesTable extends Migration
         Schema::create('corporates', function (Blueprint $table) {
             $table->integer('nif')->primary();
             $table->string('name');
-            $table->string('address');
-            $table->string('postal_code');
-            $table->string('city');
-            $table->string('cae');
-            $table->string('activity');
-            $table->string('nature');
-            $table->decimal('capital');
-            $table->string('capital_currency');
-            $table->boolean('is_active');
+            $table->string('address')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->string('city')->nullable();
+            $table->string('cae')->nullable();
+            $table->string('activity')->nullable();
+            $table->string('nature')->nullable();
+            $table->decimal('capital')->nullable();
+            $table->string('capital_currency')->nullable();
+            $table->boolean('is_active')->nullable();
             $table->string('email')->nullable();
             $table->integer('phone')->nullable();
             $table->string('website')->nullable();
