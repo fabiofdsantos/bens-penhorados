@@ -22,15 +22,16 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * This is the vehicle model class.
  *
- * @property string $code
+ * @property int $id
  * @property int|null $year
  * @property bool|null $is_good_condition
- * @property int|null $make_id
- * @property int|null $model_id
- * @property int|null $color_id
- * @property int|null $fuel_id
- * @property int|null $category_id
- * @property int|null $type_id
+ * @property Item $item
+ * @property VehicleMake|null $make
+ * @property VehicleModel|null $model
+ * @property VehicleColor|null $color
+ * @property VehicleFuel|null $fuel
+ * @property VehicleCategory|null $category
+ * @property VehicleType|null $type
  */
 class Vehicle extends Model
 {
