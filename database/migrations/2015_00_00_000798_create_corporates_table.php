@@ -29,7 +29,6 @@ class CreateCorporatesTable extends Migration
             $table->string('activity')->nullable();
             $table->string('nature')->nullable();
             $table->decimal('capital')->nullable();
-            $table->string('capital_currency')->nullable();
             $table->boolean('is_active')->nullable();
             $table->string('email')->nullable();
             $table->integer('phone')->nullable();
