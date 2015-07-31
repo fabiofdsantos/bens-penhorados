@@ -22,7 +22,7 @@ use App\Models\Items\Attributes\VehicleType;
 use App\Models\Items\Item;
 use App\Models\Items\Vehicle;
 
-class ItemVehicle extends Job
+class VehicleAttributes extends Job
 {
     /**
      * The attributes that should be extracted.
@@ -30,7 +30,6 @@ class ItemVehicle extends Job
      * @var array
      */
     protected $attributes = [
-        'code'                => null,
         'year'                => null,
         'engine_displacement' => null,
         'reg_plate_code'      => null,
@@ -42,6 +41,13 @@ class ItemVehicle extends Job
         'category_id'         => null,
         'type_id'             => null,
     ];
+
+    /**
+     * The item's code.
+     *
+     * @var string
+     */
+    protected $code;
 
     /**
      * The vehicle's description.
@@ -65,7 +71,7 @@ class ItemVehicle extends Job
      */
     public function __construct($code, $description)
     {
-        $this->attributes['code'] = $code;
+        $this->code = $code;
         $this->description = $description;
         $this->currentYear = idate('Y');
     }
@@ -77,19 +83,26 @@ class ItemVehicle extends Job
      */
     public function handle()
     {
-        print "\n > Extracting vehicle attributes of {$this->attributes['code']} ... \n";
+        print "\n > Extracting vehicle attributes of {$this->code} ... \n";
 
+        // Start the normal extraction of attributes
         $this->extractAttributes();
 
+        // Check if there are still empty attributes
         if ($this->hasEmptyAttributes()) {
             $this->forceExtraction();
         }
 
+        // Create a new vehicle
         $vehicle = Vehicle::create($this->attributes);
 
-        $item = Item::findOrFail($this->attributes['code']);
-        $item->title = $this->generateTitle($vehicle);
-        $item->save();
+        // Set the polymorphic relationship
+        Item::setPolymorphicRelation($this->code, $vehicle);
+
+        // Update the item's title
+        $vehicle->item->update([
+            'title' => $this->generateTitle($vehicle),
+        ]);
     }
 
     /**
@@ -99,7 +112,7 @@ class ItemVehicle extends Job
      */
     private function extractAttributes()
     {
-        foreach ($this->description as $key => $value) {
+        foreach ($this->description as $value) {
             $value = Text::removeAccents($value);
 
             if (is_null($this->attributes['year'])) {
@@ -171,7 +184,7 @@ class ItemVehicle extends Job
      */
     private function forceExtraction()
     {
-        foreach ($this->description as $key => $value) {
+        foreach ($this->description as $value) {
             $value = Text::removeAccents($value);
 
             if (is_null($this->attributes['make_id'])) {
@@ -442,7 +455,7 @@ class ItemVehicle extends Job
                 $title .= " {$vehicle->model()->pluck('name')}";
             }
         } else {
-            $title = "{$this->attributes['code']}";
+            $title = $this->code;
         }
 
         if (isset($this->attributes['year'])) {

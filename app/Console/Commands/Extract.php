@@ -11,7 +11,7 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\Extract\ItemGeneric;
+use App\Jobs\Extract\GenericAttributes;
 use App\Models\Items\Attributes\ItemCategory;
 use App\Models\RawData;
 use Bus;
@@ -61,7 +61,7 @@ class Extract extends Command
         }
 
         foreach ($items as $item) {
-            Bus::dispatch(new ItemGeneric($item->code, $item->category_id, $item->lat, $item->lng, $ignoreImages));
+            Bus::dispatch(new GenericAttributes($item->code, $item->category_id, $item->lat, $item->lng, $ignoreImages));
         }
 
         $this->info('Jobs are successfully queued!');

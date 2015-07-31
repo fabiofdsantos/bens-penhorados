@@ -21,7 +21,7 @@ use Intervention\Image\ImageManager;
 use Storage;
 use Symfony\Component\DomCrawler\Crawler;
 
-class ItemGeneric extends Job
+class GenericAttributes extends Job
 {
     /**
      * The attributes that should be extracted.
@@ -97,33 +97,41 @@ class ItemGeneric extends Job
         $crawler = new Crawler();
         $crawler->addHtmlContent(Storage::get($this->filePath));
 
+        // Check if the item exists
         if ($this->itemExists($crawler)) {
-            print "\n > Creating a generic item of {$this->attributes['code']} ... \n";
+            print "\n > Extracting generic attributes of {$this->attributes['code']} ... \n";
 
+            // Extract the tax office number and the year of publication
             preg_match_all('/\d{1,}/', $this->attributes['code'], $match);
             $this->attributes['tax_office'] = $match[0][0];
             $this->attributes['year'] = $match[0][1];
 
+            // Extract attributes from top of the raw data
             $topCrawler = $crawler->filter('#trFotoP > th:nth-child(1)');
             $this->extractTopAttributes($topCrawler);
 
+            // Extract attributes from the bottom of the raw data
             $bottomCrawler = $crawler->filter('#dataTable > tr:nth-child(3) > td:nth-child(1) > table:nth-child(1) > tr:nth-child(1)');
             $this->extractBottomAttributes($bottomCrawler);
 
+            // Extract images
             if ($this->downloadImages) {
                 $mediaCrawler = $crawler->filter('#trFotoP > th:nth-child(2)');
                 $this->attributes['images'] = $this->extractImages($mediaCrawler);
             }
 
+            // Create a new generic item
             Item::create($this->attributes);
 
+            // Get the category's name and split the description
             $category = ItemCategory::find($this->attributes['category_id']);
             $description = Text::splitter($this->attributes['full_description']);
 
+            // Call the right command to extract specific category's attributes
             if ($category->name === 'Imóveis') {
                 // to do
             } elseif ($category->name === 'Veículos') {
-                Bus::dispatch(new ItemVehicle($this->attributes['code'], $description));
+                Bus::dispatch(new VehicleAttributes($this->attributes['code'], $description));
             } elseif ($category->name === 'Participações sociais') {
                 // to do
             } else {

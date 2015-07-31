@@ -91,6 +91,16 @@ class Item extends Model
     }
 
     /**
+     * Get all of the owning itemable models.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function itemable()
+    {
+        return $this->morphTo();
+    }
+
+    /**
      * An item must have a category.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -101,13 +111,18 @@ class Item extends Model
     }
 
     /**
-     * An item can be also a vehicle vehicle.
+     * Scope a query to set polymorphic relation with this model.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @param Builder $query
+     * @param string  $code
+     * @param Model   $model
      */
-    public function vehicle()
+    public function scopeSetPolymorphicRelation(Builder $query, $code, $model)
     {
-        return $this->hasOne(Vehicle::class, 'code', 'code');
+        return $query->where('code', $code)->update([
+            'itemable_id'   => $model->getKey(),
+            'itemable_type' => $model->getMorphClass(),
+        ]);
     }
 
     /**
@@ -150,21 +165,7 @@ class Item extends Model
     }
 
     /**
-     * Scope a query to only include vehicles.
-     *
-     * @param Builder $query
-     *
-     * @return Builder
-     */
-    public function scopeVehicles(Builder $query)
-    {
-        $catId = ItemCategory::where('name', 'Veículos')->pluck('id');
-
-        return $query->where('category_id', $catId);
-    }
-
-    /**
-     * Set the items's title and slug.
+     * Set the item's title and slug.
      *
      * @param string $value
      *

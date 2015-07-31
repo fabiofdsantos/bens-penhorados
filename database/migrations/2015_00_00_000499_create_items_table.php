@@ -47,6 +47,9 @@ class CreateItemsTable extends Migration
             $table->dateTime('preview_dt_end')->nullable();
             $table->dateTime('acceptance_dt');
             $table->dateTime('opening_dt')->nullable();
+
+            $table->integer('itemable_id')->unsigned();
+            $table->string('itemable_type');
             $table->timestamps();
         });
     }

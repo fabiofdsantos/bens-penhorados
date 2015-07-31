@@ -46,7 +46,7 @@ class Vehicle extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'code';
+    protected $primaryKey = 'id';
 
     /**
      * Indicate if the model should be timestamped.
@@ -62,15 +62,15 @@ class Vehicle extends Model
      */
     protected $guarded = ['created_at', 'updated_at'];
 
-    /**
-     * A vehicle belongs to a item.
-     *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function item()
-    {
-        return $this->belongsTo(Item::class, 'code', 'code');
-    }
+     /**
+      * Get the vehicle's generic data.
+      *
+      * @return Illuminate\Database\Eloquent\Relations\MorphOne
+      */
+     public function item()
+     {
+         return $this->morphOne(Item::class, 'itemable');
+     }
 
     /**
      * A vehicle can have one make.

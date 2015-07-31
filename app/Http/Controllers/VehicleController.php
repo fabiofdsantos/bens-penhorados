@@ -60,27 +60,27 @@ class VehicleController extends Controller
       */
      public function getVehicles($perPage)
      {
-         $results = Item::vehicles()->paginate($perPage);
+         $vehicles = Vehicle::paginate($perPage);
 
-         if ($results->isEmpty()) {
+         if ($vehicles->isEmpty()) {
              return [];
          }
 
-         $data['from'] = $results->firstItem();
-         $data['to'] = $results->lastItem();
-         $data['total'] = $results->total();
-         $data['limit'] = $results->perPage();
+         $data['from'] = $vehicles->firstItem();
+         $data['to'] = $vehicles->lastItem();
+         $data['total'] = $vehicles->total();
+         $data['limit'] = $vehicles->perPage();
 
-         foreach ($results as $result) {
+         foreach ($vehicles as $vehicle) {
              $item = [
-                    'title' => $result->title,
-                    'slug'  => $result->slug,
-                    'price' => $result->price,
-                    'image' => json_decode($result->images)[0],
-                    'make'  => $result->vehicle->make()->pluck('name'),
-                    'model' => $result->vehicle->model()->pluck('name'),
-                    'year'  => $result->vehicle->year,
-                    'fuel'  => $result->vehicle->fuel()->pluck('name'),
+                    'title' => $vehicle->item->title,
+                    'slug'  => $vehicle->item->slug,
+                    'price' => $vehicle->item->price,
+                    'image' => json_decode($vehicle->item->images)[0],
+                    'make'  => $vehicle->make()->pluck('name'),
+                    'model' => $vehicle->model()->pluck('name'),
+                    'year'  => $vehicle->year,
+                    'fuel'  => $vehicle->fuel()->pluck('name'),
                 ];
 
              $data['items'][] = $item;
