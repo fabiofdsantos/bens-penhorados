@@ -20,7 +20,7 @@ class CreateCorporatesTable extends Migration
     public function up()
     {
         Schema::create('corporates', function (Blueprint $table) {
-            $table->integer('nif')->primary();
+            $table->integer('nif')->unsigned()->primary();
             $table->string('name');
             $table->string('address')->nullable();
             $table->string('postal_code')->nullable();
