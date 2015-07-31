@@ -43,7 +43,7 @@ class VehicleAttributes extends Job
     ];
 
     /**
-     * The item's code.
+     * The vehicle's code.
      *
      * @var string
      */
