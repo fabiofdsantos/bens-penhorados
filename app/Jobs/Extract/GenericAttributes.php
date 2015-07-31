@@ -133,7 +133,7 @@ class GenericAttributes extends Job
             } elseif ($category->name === 'Veículos') {
                 Bus::dispatch(new VehicleAttributes($this->attributes['code'], $description));
             } elseif ($category->name === 'Participações sociais') {
-                // to do
+                Bus::dispatch(new CorporateShareAttributes($this->attributes['code'], $description));
             } else {
                 // to do
             }
