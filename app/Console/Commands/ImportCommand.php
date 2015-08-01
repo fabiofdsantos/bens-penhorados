@@ -43,7 +43,7 @@ class ImportCommand extends Command
     {
         $this->info('Creating queue jobs to import items from the source...');
 
-        $mode = $this->choice('From where do you want to import the items?', ['All', 'Map', 'Website'], false);
+        $mode = $this->choice('From where do you want to import the items?', ['All', 'Map', 'Website'], null, null, false);
 
         if ($mode == 'Map') {
             $this->fromMap();
@@ -83,7 +83,7 @@ class ImportCommand extends Command
             $categories = DB::table('item_categories')->get();
         }
 
-        Bus::dispatch(new Website($categories, $lastPage));
+        Bus::dispatch(new Website($categories, (integer) $lastPage));
     }
 
     /**
