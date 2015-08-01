@@ -22,8 +22,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\Import',
-        'App\Console\Commands\Extract',
+        'App\Console\Commands\ImportCommand',
+        'App\Console\Commands\ExtractCommand',
     ];
 
     /**

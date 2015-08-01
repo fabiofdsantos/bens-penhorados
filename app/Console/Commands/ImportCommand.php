@@ -18,7 +18,7 @@ use DB;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 
-class Import extends Command
+class ImportCommand extends Command
 {
     /**
      * The console command name.

@@ -18,7 +18,7 @@ use Bus;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 
-class Extract extends Command
+class ExtractCommand extends Command
 {
     /**
      * The console command name.
