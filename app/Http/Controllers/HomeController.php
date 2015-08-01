@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $data = [];
         $data['latest'] = $this->getLatestItems(8);
         $data['endingSoon'] = $this->getItemsEndingSoon(8);
 
@@ -40,10 +41,7 @@ class HomeController extends Controller
     {
         $results = Item::latest($howMany)->get();
 
-        if ($results->isEmpty()) {
-            return [];
-        }
-
+        $items = [];
         foreach ($results as $result) {
             $item = [
                 'title'          => $result->title,
@@ -70,10 +68,7 @@ class HomeController extends Controller
     {
         $results = Item::endingSoon($howMany)->get();
 
-        if ($results->isEmpty()) {
-            return [];
-        }
-
+        $items = [];
         foreach ($results as $result) {
             $item = [
                 'title'         => $result->title,

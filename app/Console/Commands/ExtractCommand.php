@@ -45,7 +45,7 @@ class ExtractCommand extends Command
 
         $categories = $this->option('only');
         $total = $this->option('take');
-        $ignoreImages = $this->option('ignore-images');
+        $ignoreImages = (boolean) $this->option('ignore-images');
 
         if (isset($categories)) {
             $categories = explode(',', $categories);

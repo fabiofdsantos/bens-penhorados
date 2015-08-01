@@ -51,28 +51,29 @@ class VehicleController extends Controller
         return response()->json($data, 200);
     }
 
-     /**
-      * Get vehicles with pagination.
-      *
-      * @param int $perPage
-      *
-      * @return array
-      */
-     public function getVehicles($perPage)
-     {
-         $vehicles = Vehicle::paginate($perPage);
+    /**
+     * Get vehicles with pagination.
+     *
+     * @param int $perPage
+     *
+     * @return array
+     */
+    public function getVehicles($perPage)
+    {
+        $vehicles = Vehicle::paginate($perPage);
 
-         if ($vehicles->isEmpty()) {
-             return [];
-         }
+        if ($vehicles->isEmpty()) {
+            return [];
+        }
 
-         $data['from'] = $vehicles->firstItem();
-         $data['to'] = $vehicles->lastItem();
-         $data['total'] = $vehicles->total();
-         $data['limit'] = $vehicles->perPage();
+        $data = [];
+        $data['from'] = $vehicles->firstItem();
+        $data['to'] = $vehicles->lastItem();
+        $data['total'] = $vehicles->total();
+        $data['limit'] = $vehicles->perPage();
 
-         foreach ($vehicles as $vehicle) {
-             $item = [
+        foreach ($vehicles as $vehicle) {
+            $item = [
                     'title' => $vehicle->item->title,
                     'slug'  => $vehicle->item->slug,
                     'price' => $vehicle->item->price,
@@ -83,31 +84,31 @@ class VehicleController extends Controller
                     'fuel'  => $vehicle->fuel()->pluck('name'),
                 ];
 
-             $data['items'][] = $item;
-         }
+            $data['items'][] = $item;
+        }
 
-         return $data;
-     }
+        return $data;
+    }
 
-     /**
-      * Get a single vehicle.
-      *
-      * @param  string $slug
-      *
-      * @return array
-      */
-     public function getSingleVehicle($slug)
-     {
-         $result = Item::withSlug($slug)->first();
+    /**
+     * Get a single vehicle.
+     *
+     * @param string $slug
+     *
+     * @return array
+     */
+    public function getSingleVehicle($slug)
+    {
+        $result = Item::withSlug($slug)->first();
 
-         if (empty($result)) {
-             return [];
-         }
+        if (empty($result)) {
+            return [];
+        }
 
-         $vehicle = [
+        $vehicle = [
              'images' => json_decode($result->images),
          ];
 
-         return $vehicle;
-     }
+        return $vehicle;
+    }
 }
