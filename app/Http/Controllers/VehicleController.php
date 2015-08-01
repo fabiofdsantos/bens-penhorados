@@ -106,8 +106,8 @@ class VehicleController extends Controller
         }
 
         $vehicle = [
-             'images' => json_decode($result->images),
-         ];
+                'images' => json_decode($result->images),
+            ];
 
         return $vehicle;
     }
