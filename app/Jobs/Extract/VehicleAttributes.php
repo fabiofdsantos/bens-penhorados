@@ -389,6 +389,7 @@ class VehicleAttributes extends Job
     private function extractVehicleType($str, $isForceExtraction)
     {
         $numTypes = 0;
+        $tempType = null;
         $types = VehicleType::all();
 
         foreach ($types as $type) {
@@ -402,7 +403,7 @@ class VehicleAttributes extends Job
             }
         }
 
-        if ($numTypes == 1) {
+        if ($numTypes === 1) {
             return $tempType;
         }
     }
