@@ -53,7 +53,8 @@ class Map extends Job
 
         print " > Getting items from map ... \n";
 
-        foreach ($locations as $location) {
+        $i = 0;
+        foreach ($this->locations as $location) {
             $request = $guzzle->createRequest('POST', 'http://www.e-financas.gov.pt/fovendas/proxy.jsp?http://ags/arcgis/rest/services/vendas/fovendas/MapServer/0/query', [
                 'headers' => [
                     'User-Agent'  => '"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0"',
@@ -74,11 +75,10 @@ class Map extends Job
 
             $result = json_decode($response->getBody());
 
-            $i = 0;
             foreach ($result->features as $item) {
                 $itemCode = $item->attributes->EREPFIN.'.'.$item->attributes->DANO.'.'.$item->attributes->XNRORDEM;
 
-                if (!in_array($itemCode, $existingItems)) {
+                if (!in_array($itemCode, $this->existingItems)) {
                     $rawItem = new RawData();
                     $rawItem->code = $itemCode;
                 } else {
