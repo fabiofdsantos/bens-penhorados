@@ -104,7 +104,7 @@ class ExtractCorporateShareAttributes extends Job
     private function extractNif($str)
     {
         if (preg_match('/\b[12568][0-9]{8}\b/', $str, $match)) {
-            return $match[0];
+            return (integer) $match[0];
         }
     }
 
