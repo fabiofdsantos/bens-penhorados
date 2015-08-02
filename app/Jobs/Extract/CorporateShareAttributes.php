@@ -71,20 +71,23 @@ class CorporateShareAttributes extends Job
             // Check if the nif was extracted
             if (isset($this->attributes['corporate_nif'])) {
 
-                // Get a corporate with the extracted nif. Otherwise, create
-                // a new corporate record on the database
-                $corporate = Corporate::firstOrCreate($this->getCorporateInfo());
-
                 // Create a new corporate share
                 $corporateShare = CorporateShare::create($this->attributes);
 
                 // Set the polymorphic relationship
                 Item::setPolymorphicRelation($this->code, $corporateShare);
 
-                // Update the item's title
-                $corporateShare->item->update([
-                    'title' => $this->generateTitle($corporate),
-                ]);
+                // Get a corporate with the extracted nif. Otherwise, create
+                // a new corporate record on the database
+                $corporateInfo = $this->getCorporateInfo();
+                if (isset($corporateInfo)) {
+                    $corporate = Corporate::firstOrCreate($corporateInfo);
+
+                    // Update the item's title
+                    $corporateShare->item->update([
+                        'title' => $this->generateTitle($corporate),
+                    ]);
+                }
 
                 break;
             }
