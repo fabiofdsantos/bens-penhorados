@@ -49,14 +49,17 @@ class ImportCommand extends Command
         $this->info('Creating queue jobs to import items from the source...');
 
         $mode = $this->choice('From where do you want to import the items?', ['All', 'Map', 'Website'], null, null, false);
+        $categories = $this->option('only');
+        $lastPage = (string) $this->option('last-page');
+        $lastPage = empty($lastPage) ? null : (integer) $lastPage;
 
         if ($mode === 'Map') {
             $this->fromMap();
         } elseif ($mode === 'Website') {
-            $this->fromWebsite();
+            $this->fromWebsite($categories, $lastPage);
         } else {
             $this->fromMap();
-            $this->fromWebsite();
+            $this->fromWebsite($categories, $lastPage);
         }
 
         $this->info('Jobs are successfully queued!');
@@ -75,12 +78,12 @@ class ImportCommand extends Command
 
     /**
      * Import items from website.
+     *
+     * @param array|null $categories
+     * @param int|null   $lastPage
      */
-    public function fromWebsite()
+    public function fromWebsite($categories, $lastPage)
     {
-        $categories = $this->option('only');
-        $lastPage = $this->option('last-page');
-
         if (isset($categories)) {
             $categories = explode(',', $categories);
             $categories = DB::table('item_categories')->whereIn('code', $categories)->get();

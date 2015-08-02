@@ -41,13 +41,13 @@ class ImportFromWebsiteJob extends Job
     /**
      * Create a new job instance.
      *
-     * @param Collection  $categories
-     * @param string|null $lastPage
+     * @param Collection $categories
+     * @param int|null   $lastPage
      */
     public function __construct($categories, $lastPage)
     {
         $this->categories = $categories;
-        $this->lastPage = isset($lastPage) ? (integer) $lastPage : null;
+        $this->lastPage = $lastPage;
     }
 
     /**
