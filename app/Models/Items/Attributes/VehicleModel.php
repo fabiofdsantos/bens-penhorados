@@ -42,7 +42,7 @@ class VehicleModel extends Model
     /**
      * A model belongs to a make.
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function make()
     {
