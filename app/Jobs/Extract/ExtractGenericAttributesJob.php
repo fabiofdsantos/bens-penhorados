@@ -132,12 +132,12 @@ class ExtractGenericAttributesJob extends Job
             $description = Text::splitter($this->attributes['full_description']);
 
             // Call the right command to extract specific category's attributes
-            $categoryName = ItemCategory::find($this->attributes['category_id'])->pluck('name');
-            if ($categoryName === 'Imóveis') {
+            $category = ItemCategory::find($this->attributes['category_id']);
+            if ($category->name === 'Imóveis') {
                 // to do
-            } elseif ($categoryName === 'Veículos') {
+            } elseif ($category->name === 'Veículos') {
                 Bus::dispatch(new ExtractVehicleAttributesJob($this->attributes['code'], $description));
-            } elseif ($categoryName === 'Participações sociais') {
+            } elseif ($category->name === 'Participações sociais') {
                 Bus::dispatch(new ExtractCorporateShareAttributesJob($this->attributes['code'], $description));
             }
         } else {
