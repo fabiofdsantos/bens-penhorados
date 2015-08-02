@@ -227,7 +227,7 @@ class VehicleAttributes extends Job
     private function extractEngineDisplacement($str)
     {
         if (preg_match('/(\d+)\s*(cc|cm[³3])/iu', $str, $match)) {
-            return $match[1];
+            return (integer) $match[1];
         }
     }
 

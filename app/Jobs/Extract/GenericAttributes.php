@@ -84,7 +84,7 @@ class GenericAttributes extends Job
         $this->attributes['lat'] = $lat;
         $this->attributes['lng'] = $lng;
         $this->filePath = $this->getFilePath($code);
-        $this->downloadImages = ($ignoreImages == false ? true : false);
+        $this->downloadImages = ($ignoreImages === false ? true : false);
     }
 
     /***
@@ -256,7 +256,7 @@ class GenericAttributes extends Job
             $match[0] = str_replace('.', '', $match[0]);
             $match[0] = str_replace(',', '.', $match[0]);
 
-            return $match[0];
+            return (integer) $match[0];
         }
     }
 
@@ -270,7 +270,7 @@ class GenericAttributes extends Job
     private function extractVat($str)
     {
         if (preg_match('/(\d+)(,\d+)?% IVA incluído/ui', $str, $match)) {
-            return $match[0];
+            return (integer) $match[0];
         }
     }
 
@@ -322,7 +322,7 @@ class GenericAttributes extends Job
     private function extractPhoneNumber($str)
     {
         if (preg_match('/\d{9,}/', $str, $match)) {
-            return $match[0];
+            return (integer) $match[0];
         }
     }
 
@@ -349,6 +349,7 @@ class GenericAttributes extends Job
      */
     private function extractStartEndDateTime($str)
     {
+        $preview_dt = [];
         if (preg_match('/\d+\-\d+\-\d+/', $str, $match)) {
             preg_match_all('/\d+\-\d+\-\d+/', $str, $match_date);
             preg_match_all('/\d+\:\d+/', $str, $match_time);
