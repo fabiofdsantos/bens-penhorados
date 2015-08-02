@@ -54,12 +54,12 @@ class ImportCommand extends Command
         $lastPage = empty($lastPage) ? null : (integer) $lastPage;
 
         if ($mode === 'Map') {
-            $this->fromMap();
+            $this->importFromMap();
         } elseif ($mode === 'Website') {
-            $this->fromWebsite($categories, $lastPage);
+            $this->importFromWebsite($categories, $lastPage);
         } else {
-            $this->fromMap();
-            $this->fromWebsite($categories, $lastPage);
+            $this->importFromMap();
+            $this->importFromWebsite($categories, $lastPage);
         }
 
         $this->info('Jobs are successfully queued!');
@@ -68,7 +68,7 @@ class ImportCommand extends Command
     /**
      * Import items from map.
      */
-    public function fromMap()
+    public function importFromMap()
     {
         $locations = DB::table('locations')->where('parent_id', '=', null)->lists('code');
         $existingItems = DB::table('raw_data')->lists('code');
@@ -82,13 +82,13 @@ class ImportCommand extends Command
      * @param array|null $categories
      * @param int|null   $lastPage
      */
-    public function fromWebsite($categories, $lastPage)
+    public function importFromWebsite($categories, $lastPage)
     {
         if (isset($categories)) {
             $categories = explode(',', $categories);
-            $categories = DB::table('item_categories')->whereIn('code', $categories)->get();
+            $categories = ItemCategory::whereCodeIn($categories)->get();
         } else {
-            $categories = DB::table('item_categories')->get();
+            $categories = ItemCategory::all();
         }
 
         Bus::dispatch(new ImportFromWebsiteJob($categories, $lastPage));
