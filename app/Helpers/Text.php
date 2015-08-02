@@ -13,6 +13,11 @@ namespace App\Helpers;
 
 use Illuminate\Support\Str;
 
+/**
+ * This is the text helper class.
+ *
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ */
 class Text
 {
     /**
