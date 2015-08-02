@@ -22,7 +22,7 @@ use App\Models\Items\Attributes\VehicleType;
 use App\Models\Items\Item;
 use App\Models\Items\Vehicle;
 
-class VehicleAttributes extends Job
+class ExtractVehicleAttributes extends Job
 {
     /**
      * The attributes that should be extracted.

@@ -17,7 +17,7 @@ use App\Models\Items\CorporateShare;
 use App\Models\Items\Item;
 use GuzzleHttp;
 
-class CorporateShareAttributes extends Job
+class ExtractCorporateShareAttributes extends Job
 {
     /**
      * The attributes that should be extracted.

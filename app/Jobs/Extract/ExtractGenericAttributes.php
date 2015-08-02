@@ -21,7 +21,7 @@ use Intervention\Image\ImageManager;
 use Storage;
 use Symfony\Component\DomCrawler\Crawler;
 
-class GenericAttributes extends Job
+class ExtractGenericAttributes extends Job
 {
     /**
      * The attributes that should be extracted.
@@ -131,9 +131,9 @@ class GenericAttributes extends Job
             if ($category->name === 'Imóveis') {
                 // to do
             } elseif ($category->name === 'Veículos') {
-                Bus::dispatch(new VehicleAttributes($this->attributes['code'], $description));
+                Bus::dispatch(new ExtractVehicleAttributes($this->attributes['code'], $description));
             } elseif ($category->name === 'Participações sociais') {
-                Bus::dispatch(new CorporateShareAttributes($this->attributes['code'], $description));
+                Bus::dispatch(new ExtractCorporateShareAttributes($this->attributes['code'], $description));
             } else {
                 // to do
             }
