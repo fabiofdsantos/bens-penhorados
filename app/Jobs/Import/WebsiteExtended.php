@@ -107,12 +107,12 @@ class WebsiteExtended extends Job
 
                         if (array_key_exists($itemCode, $this->existingItems)) {
                             if (!Hash::check($dataToBeHashed, $this->existingItems[$itemCode])) {
-                                Bus::dispatch(new ExternalHtml($this->category->id, $taxOffice, $year, $itemId, $hash, null, null, true));
+                                Bus::dispatch(new BackupItemPageJob($this->category->id, $taxOffice, $year, $itemId, $hash, null, null, true));
 
                                 print "\n *** Item needs to be updated: $itemCode *** \n";
                             }
                         } else {
-                            Bus::dispatch(new ExternalHtml($this->category->id, $taxOffice, $year, $itemId, $hash, null, null, false));
+                            Bus::dispatch(new BackupItemPageJob($this->category->id, $taxOffice, $year, $itemId, $hash, null, null, false));
 
                             print "\n *** New item found: $itemCode *** \n";
                         }

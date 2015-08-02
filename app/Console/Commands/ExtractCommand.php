@@ -11,12 +11,18 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\Extract\ExtractGenericAttributesJob;
 use App\Models\Items\Attributes\ItemCategory;
 use App\Models\RawData;
 use Bus;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 
+/**
+ * This is the extract command class.
+ *
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ */
 class ExtractCommand extends Command
 {
     /**
@@ -51,16 +57,16 @@ class ExtractCommand extends Command
             $catIds = ItemCategory::whereCodeIn($categories)->lists('id');
 
             if (isset($total)) {
-                $items = RawData::whereCategoryIn($catIds)->take($total)->get();
+                $items = RawData::whereCategoryIn($catIds)->take((integer) $total)->get();
             } else {
                 $items = RawData::whereCategoryIn($catIds)->get();
             }
         } else {
-            $items = isset($total) ? RawData::take($total)->get() : RawData::all();
+            $items = isset($total) ? RawData::take((integer) $total)->get() : RawData::all();
         }
 
         foreach ($items as $item) {
-            Bus::dispatch(new ExtractGenericAttributes($item->code, $item->category_id, $item->lat, $item->lng, $ignoreImages));
+            Bus::dispatch(new ExtractGenericAttributesJob($item->code, $item->category_id, $item->lat, $item->lng, $ignoreImages));
         }
 
         $this->info('Jobs are successfully queued!');

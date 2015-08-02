@@ -11,13 +11,18 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\Import\Map;
-use App\Jobs\Import\Website;
+use App\Jobs\Import\ImportFromMapJob;
+use App\Jobs\Import\ImportFromWebsiteJob;
 use Bus;
 use DB;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 
+/**
+ * This is the import command class.
+ *
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ */
 class ImportCommand extends Command
 {
     /**
@@ -45,9 +50,9 @@ class ImportCommand extends Command
 
         $mode = $this->choice('From where do you want to import the items?', ['All', 'Map', 'Website'], null, null, false);
 
-        if ($mode == 'Map') {
+        if ($mode === 'Map') {
             $this->fromMap();
-        } elseif ($mode == 'Website') {
+        } elseif ($mode === 'Website') {
             $this->fromWebsite();
         } else {
             $this->fromMap();
@@ -65,7 +70,7 @@ class ImportCommand extends Command
         $locations = DB::table('locations')->where('parent_id', '=', null)->lists('code');
         $existingItems = DB::table('raw_data')->lists('code');
 
-        Bus::dispatch(new Map($locations, $existingItems));
+        Bus::dispatch(new ImportFromMapJob($locations, $existingItems));
     }
 
     /**
@@ -83,7 +88,7 @@ class ImportCommand extends Command
             $categories = DB::table('item_categories')->get();
         }
 
-        Bus::dispatch(new Website($categories, (integer) $lastPage));
+        Bus::dispatch(new ImportFromWebsiteJob($categories, $lastPage));
     }
 
     /**

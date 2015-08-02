@@ -15,7 +15,12 @@ use App\Jobs\Job;
 use App\Models\RawData;
 use GuzzleHttp;
 
-class Map extends Job
+/**
+ * This is the import from map job.
+ *
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ */
+class ImportFromMapJob extends Job
 {
     /**
      * The list of locations.

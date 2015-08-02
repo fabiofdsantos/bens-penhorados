@@ -15,6 +15,11 @@ use App\Models\Items\Item;
 use App\Models\Items\Vehicle;
 use Illuminate\Http\Request;
 
+/**
+ * This is the vehicle controller class.
+ *
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ */
 class VehicleController extends Controller
 {
     /**

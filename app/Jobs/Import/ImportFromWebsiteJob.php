@@ -17,7 +17,12 @@ use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\DomCrawler\Crawler;
 
-class Website extends Job
+/**
+ * This is the import from website job.
+ *
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ */
+class ImportFromWebsiteJob extends Job
 {
     /**
      * The collection of categories.
@@ -29,20 +34,20 @@ class Website extends Job
     /**
      * The number of the last page to be crawled.
      *
-     * @var int
+     * @var int|null
      */
     protected $lastPage;
 
     /**
      * Create a new job instance.
      *
-     * @param Collection $categories
-     * @param int        $lastPage
+     * @param Collection  $categories
+     * @param string|null $lastPage
      */
     public function __construct($categories, $lastPage)
     {
         $this->categories = $categories;
-        $this->lastPage = $lastPage;
+        $this->lastPage = isset($lastPage) ? (integer) $lastPage : null;
     }
 
     /**

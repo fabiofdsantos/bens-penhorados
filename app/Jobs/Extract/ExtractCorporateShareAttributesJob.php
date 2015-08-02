@@ -17,7 +17,12 @@ use App\Models\Items\CorporateShare;
 use App\Models\Items\Item;
 use GuzzleHttp;
 
-class ExtractCorporateShareAttributes extends Job
+/**
+ * This is the extract corporate share attributes job.
+ *
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ */
+class ExtractCorporateShareAttributesJob extends Job
 {
     /**
      * The attributes that should be extracted.

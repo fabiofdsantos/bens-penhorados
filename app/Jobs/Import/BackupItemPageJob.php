@@ -18,9 +18,11 @@ use Storage;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Description here...
+ * This is the backup item page job.
+ *
+ * @author Fábio Santos <ffsantos92@gmail.com>
  */
-class ExternalHtml extends Job
+class BackupItemPageJob extends Job
 {
     /**
      * The main folder for raw files.
@@ -122,7 +124,7 @@ class ExternalHtml extends Job
     {
         $this->folder = env('BP_RAW_FOLDER', 'rawdata/');
         $this->oldFolder = env('BP_RAW_OLD_FOLDER', 'rawdata/old/');
-        $this->extension = env('BP_RAW_FILE_EXT', '.raw');
+        $this->extension = env('BP_RAW_FILE_EXT', '.html.part');
         $this->categoryId = $categoryId;
         $this->itemCode = $taxOffice.'.'.$year.'.'.$itemId;
         $this->taxOffice = $taxOffice;

@@ -21,7 +21,12 @@ use Intervention\Image\ImageManager;
 use Storage;
 use Symfony\Component\DomCrawler\Crawler;
 
-class ExtractGenericAttributes extends Job
+/**
+ * This is the extract generic attributes job.
+ *
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ */
+class ExtractGenericAttributesJob extends Job
 {
     /**
      * The attributes that should be extracted.
@@ -123,19 +128,17 @@ class ExtractGenericAttributes extends Job
             // Create a new generic item
             Item::create($this->attributes);
 
-            // Get the category's name and split the description
-            $category = ItemCategory::find($this->attributes['category_id']);
+            // Split the description
             $description = Text::splitter($this->attributes['full_description']);
 
             // Call the right command to extract specific category's attributes
-            if ($category->name === 'Imóveis') {
+            $categoryName = ItemCategory::find($this->attributes['category_id'])->pluck('name');
+            if ($categoryName === 'Imóveis') {
                 // to do
-            } elseif ($category->name === 'Veículos') {
-                Bus::dispatch(new ExtractVehicleAttributes($this->attributes['code'], $description));
-            } elseif ($category->name === 'Participações sociais') {
-                Bus::dispatch(new ExtractCorporateShareAttributes($this->attributes['code'], $description));
-            } else {
-                // to do
+            } elseif ($categoryName === 'Veículos') {
+                Bus::dispatch(new ExtractVehicleAttributesJob($this->attributes['code'], $description));
+            } elseif ($categoryName === 'Participações sociais') {
+                Bus::dispatch(new ExtractCorporateShareAttributesJob($this->attributes['code'], $description));
             }
         } else {
             print "\n > The item {$this->attributes[code]} is unavailable! \n";

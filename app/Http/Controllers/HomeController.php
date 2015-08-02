@@ -14,6 +14,11 @@ namespace App\Http\Controllers;
 use App\Models\Items\Item;
 use Carbon\Carbon;
 
+/**
+ * This is the home controller class.
+ *
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ */
 class HomeController extends Controller
 {
     /**
