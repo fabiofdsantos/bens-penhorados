@@ -12,18 +12,18 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateLocationsTable extends Migration
+class CreatePtDistrictsTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up()
     {
-        Schema::create('locations', function (Blueprint $table) {
+        Schema::create('pt_districts', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('parent_id')->nullable();
             $table->string('name');
             $table->string('code');
+            $table->string('regex');
         });
     }
 
@@ -32,6 +32,6 @@ class CreateLocationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('locations');
+        Schema::dropIfExists('pt_districts');
     }
 }
