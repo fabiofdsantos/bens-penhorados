@@ -51,15 +51,15 @@ class CorporateShare extends Model
      */
     protected $guarded = ['created_at', 'updated_at'];
 
-     /**
-      * Get the corporate share's generic data.
-      *
-      * @return Illuminate\Database\Eloquent\Relations\MorphOne
-      */
-     public function item()
-     {
-         return $this->morphOne(Item::class, 'itemable');
-     }
+    /**
+     * Get the corporate share's generic data.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
+    public function item()
+    {
+        return $this->morphOne(Item::class, 'itemable');
+    }
 
     /**
      * A corporate share should have a corporate.

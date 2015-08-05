@@ -65,15 +65,15 @@ class Vehicle extends Model
      */
     protected $guarded = ['created_at', 'updated_at'];
 
-     /**
-      * Get the vehicle's generic data.
-      *
-      * @return Illuminate\Database\Eloquent\Relations\MorphOne
-      */
-     public function item()
-     {
-         return $this->morphOne(Item::class, 'itemable');
-     }
+    /**
+     * Get the vehicle's generic data.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
+    public function item()
+    {
+        return $this->morphOne(Item::class, 'itemable');
+    }
 
     /**
      * A vehicle can have one make.

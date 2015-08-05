@@ -73,7 +73,7 @@ class VehicleController extends Controller
 
         $data = [];
         $data['from'] = ($noResults ? 0 : $vehicles->firstItem());
-        $data['to'] = ($noResults ?  0 : $vehicles->lastItem());
+        $data['to'] = ($noResults ? 0 : $vehicles->lastItem());
         $data['total'] = ($noResults ? 0 : $vehicles->total());
         $data['limit'] = ($noResults ? 0 : $vehicles->perPage());
 
@@ -96,27 +96,29 @@ class VehicleController extends Controller
         return $data;
     }
 
-     /**
-      * Get vehicles.
-      *
-      * @param int $perPage
-      * @param int|null $makeId
-      * @param int|null $modelId
-      */
-     public function getVehicles($perPage, $makeId, $modelId)
-     {
-         $query = Vehicle::active();
+    /**
+     * Get vehicles.
+     *
+     * @param int      $perPage
+     * @param int|null $makeId
+     * @param int|null $modelId
+     *
+     * @return LengthAwarePaginator
+     */
+    public function getVehicles($perPage, $makeId, $modelId)
+    {
+        $query = Vehicle::active();
 
-         if (isset($makeId)) {
-             $query->whereMakeId($makeId);
-         }
+        if (isset($makeId)) {
+            $query->whereMakeId($makeId);
+        }
 
-         if (isset($modelId)) {
-             $query->whereModelId($modelId);
-         }
+        if (isset($modelId)) {
+            $query->whereModelId($modelId);
+        }
 
-         return $query->paginate($perPage);
-     }
+        return $query->paginate($perPage);
+    }
 
     /**
      * Get a single vehicle.
