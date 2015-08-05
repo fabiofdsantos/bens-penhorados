@@ -17,6 +17,7 @@ use App\Models\Items\Attributes\VehicleFuel;
 use App\Models\Items\Attributes\VehicleMake;
 use App\Models\Items\Attributes\VehicleModel;
 use App\Models\Items\Attributes\VehicleType;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -132,6 +133,22 @@ class Vehicle extends Model
     public function type()
     {
         return $this->hasOne(VehicleType::class, 'id', 'fuel_id');
+    }
+
+    /**
+     * Scope a query to only include active items (vehicles).
+     *
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeActive(Builder $query)
+    {
+        $ids = Item::where('itemable_type', self::class)
+                ->where('acceptance_dt', '<', Carbon::now())
+                ->lists('itemable_id');
+
+        return $query->whereIn('id', $ids);
     }
 
     /**
