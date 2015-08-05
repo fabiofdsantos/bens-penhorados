@@ -17,6 +17,7 @@ use App\Models\Items\Attributes\VehicleFuel;
 use App\Models\Items\Attributes\VehicleMake;
 use App\Models\Items\Attributes\VehicleModel;
 use App\Models\Items\Attributes\VehicleType;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -131,5 +132,18 @@ class Vehicle extends Model
     public function type()
     {
         return $this->hasOne(VehicleType::class, 'id', 'fuel_id');
+    }
+
+    /**
+     * Scope a query to only include items of a specific make.
+     *
+     * @param Builder $query
+     * @param int     $makeId
+     *
+     * @return Builder
+     */
+    public function scopeWhereMakeIs(Builder $query, $makeId)
+    {
+        return $query->where('make_id', $makeId);
     }
 }
