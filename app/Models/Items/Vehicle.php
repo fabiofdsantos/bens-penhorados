@@ -146,4 +146,17 @@ class Vehicle extends Model
     {
         return $query->where('make_id', $makeId);
     }
+
+    /**
+     * Scope a query to only include items of a specific model.
+     *
+     * @param Builder $query
+     * @param int     $modelId
+     *
+     * @return Builder
+     */
+    public function scopeWhereModelIs(Builder $query, $modelId)
+    {
+        return $query->where('model_id', $modelId);
+    }
 }
