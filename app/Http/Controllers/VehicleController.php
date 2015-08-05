@@ -14,6 +14,7 @@ namespace App\Http\Controllers;
 use App\Models\Items\Item;
 use App\Models\Items\Vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 /**
  * This is the vehicle controller class.
@@ -32,8 +33,11 @@ class VehicleController extends Controller
     public function index(Request $request)
     {
         $perPage = $request->input('limit') ?: 15;
+        $makeId = $request->input('make');
+        $modelId = $request->input('model');
 
-        $data = $this->getVehicles($perPage);
+        $vehicles = $this->getVehicles($perPage, $makeId, $modelId);
+        $data = $this->paginateVehicles($vehicles);
 
         return response()->json($data, 200);
     }
@@ -57,16 +61,14 @@ class VehicleController extends Controller
     }
 
     /**
-     * Get vehicles with pagination.
+     * Paginate vehicles.
      *
-     * @param int $perPage
+     * @param LengthAwarePaginator $vehicles
      *
      * @return array
      */
-    public function getVehicles($perPage)
+    public function paginateVehicles(LengthAwarePaginator $vehicles)
     {
-        $vehicles = Vehicle::paginate($perPage);
-
         $noResults = ($vehicles->isEmpty() ? true : false);
 
         $data = [];
@@ -93,6 +95,28 @@ class VehicleController extends Controller
 
         return $data;
     }
+
+     /**
+      * Get vehicles.
+      *
+      * @param int $perPage
+      * @param int|null $makeId
+      * @param int|null $modelId
+      */
+     public function getVehicles($perPage, $makeId, $modelId)
+     {
+         $query = Vehicle::where('id', '>', 0);
+
+         if (isset($makeId)) {
+             $query->whereMakeId($makeId);
+         }
+
+         if (isset($modelId)) {
+             $query->whereModelId($modelId);
+         }
+
+         return $query->paginate($perPage);
+     }
 
     /**
      * Get a single vehicle.
