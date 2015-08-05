@@ -13,8 +13,10 @@ namespace App\Console\Commands;
 
 use App\Jobs\Import\ImportFromMapJob;
 use App\Jobs\Import\ImportFromWebsiteJob;
+use App\Models\Items\Attributes\District;
+use App\Models\Items\Attributes\ItemCategory;
+use App\Models\RawData;
 use Bus;
-use DB;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -70,8 +72,8 @@ class ImportCommand extends Command
      */
     public function importFromMap()
     {
-        $locations = DB::table('locations')->where('parent_id', '=', null)->lists('code');
-        $existingItems = DB::table('raw_data')->lists('code');
+        $locations = District::lists('code');
+        $existingItems = RawData::lists('code');
 
         Bus::dispatch(new ImportFromMapJob($locations, $existingItems));
     }
