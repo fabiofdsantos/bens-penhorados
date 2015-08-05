@@ -81,8 +81,8 @@ class ImportCommand extends Command
     /**
      * Import items from website.
      *
-     * @param array|null $categories
-     * @param int|null   $lastPage
+     * @param string|null $categories
+     * @param int|null    $lastPage
      */
     public function importFromWebsite($categories, $lastPage)
     {
