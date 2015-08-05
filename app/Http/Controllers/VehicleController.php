@@ -105,7 +105,7 @@ class VehicleController extends Controller
       */
      public function getVehicles($perPage, $makeId, $modelId)
      {
-         $query = Vehicle::where('id', '>', 0);
+         $query = Vehicle::active();
 
          if (isset($makeId)) {
              $query->whereMakeId($makeId);
