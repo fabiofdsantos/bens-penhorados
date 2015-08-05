@@ -67,16 +67,15 @@ class VehicleController extends Controller
     {
         $vehicles = Vehicle::paginate($perPage);
 
-        if ($vehicles->isEmpty()) {
-            return [];
-        }
+        $noResults = ($vehicles->isEmpty() ? true : false);
 
         $data = [];
-        $data['from'] = $vehicles->firstItem();
-        $data['to'] = $vehicles->lastItem();
-        $data['total'] = $vehicles->total();
-        $data['limit'] = $vehicles->perPage();
+        $data['from'] = ($noResults ? 0 : $vehicles->firstItem());
+        $data['to'] = ($noResults ?  0 : $vehicles->lastItem());
+        $data['total'] = ($noResults ? 0 : $vehicles->total());
+        $data['limit'] = ($noResults ? 0 : $vehicles->perPage());
 
+        $data['items'] = [];
         foreach ($vehicles as $vehicle) {
             $item = [
                     'title' => $vehicle->item->title,

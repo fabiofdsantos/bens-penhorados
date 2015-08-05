@@ -22,14 +22,13 @@ app.controller('VehicleListCtrl', ['$scope', 'Vehicle', function($scope, Vehicle
     });
 
     function getResultsPage(pageNumber) {
-        $scope.result = Vehicle.query({
+        Vehicle.query({
             page: pageNumber,
             limit: $scope.itemsPerPage
-        });
-
-        if (!$scope.result) {
-            $scope.noResults = true;
-        }
+        }, function(data) {
+            $scope.result = data;
+            $scope.noResults = ((data.items.length) ? false : true);
+        }, function(error) {});
     }
 
     $scope.pageChanged = function(newPage) {
