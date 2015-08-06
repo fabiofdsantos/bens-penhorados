@@ -51,9 +51,8 @@ class ImportCommand extends Command
         $this->info('Creating queue jobs to import items from the source...');
 
         $mode = $this->choice('From where do you want to import the items?', ['All', 'Map', 'Website'], null, null, false);
-        $categories = $this->option('only');
-        $lastPage = (string) $this->option('last-page');
-        $lastPage = empty($lastPage) ? null : (integer) $lastPage;
+        $categories = (string) $this->option('only') ?: null;
+        $lastPage = (int) $this->option('last-page') ?: null;
 
         if ($mode === 'Map') {
             $this->importFromMap();
