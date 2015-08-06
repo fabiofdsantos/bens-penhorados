@@ -54,12 +54,9 @@ class ImportCommand extends Command
         $categories = (string) $this->option('only') ?: null;
         $lastPage = (int) $this->option('last-page') ?: null;
 
-        if ($mode === 'Map') {
+        if ($mode === 'Map' || $mode === 'All') {
             $this->importFromMap();
-        } elseif ($mode === 'Website') {
-            $this->importFromWebsite($categories, $lastPage);
-        } else {
-            $this->importFromMap();
+        } elseif ($mode === 'Website' || $mode === 'All') {
             $this->importFromWebsite($categories, $lastPage);
         }
 
