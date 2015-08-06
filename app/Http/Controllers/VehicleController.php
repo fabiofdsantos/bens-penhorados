@@ -32,9 +32,9 @@ class VehicleController extends Controller
      */
     public function index(Request $request)
     {
-        $perPage = $request->input('limit') ?: 15;
-        $makeId = $request->input('make');
-        $modelId = $request->input('model');
+        $perPage = (int) $request->input('limit') ?: 15;
+        $makeId = (int) $request->input('make') ?: null;
+        $modelId = (int) $request->input('model') ?: null;
 
         $vehicles = $this->getVehicles($perPage, $makeId, $modelId);
         $data = $this->paginateVehicles($vehicles);
