@@ -12,6 +12,11 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 
+/**
+ * This is the database seeder class.
+ *
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ */
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -22,6 +27,7 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call('PtDistrictsTableSeeder');
+        $this->call('PtMunicipalitiesTableSeeder');
         $this->call('ItemCategoriesTableSeeder');
         $this->call('VehicleColorsTableSeeder');
         $this->call('VehicleMakesTableSeeder');
