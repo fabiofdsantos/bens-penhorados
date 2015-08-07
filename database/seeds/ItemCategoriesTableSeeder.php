@@ -20,7 +20,8 @@ class ItemCategoriesTableSeeder extends Seeder
         $categories = [
             ['name' => 'Veículos', 'slug' => 'veiculos', 'code' => '01'],
             ['name' => 'Imóveis', 'slug' => 'imoveis', 'code' => '02'],
-            ['name' => 'Participações sociais', 'slug' => 'part-sociais', 'code' => '05'],
+            ['name' => 'Participações sociais', 'slug' => 'participacoes-sociais', 'code' => '05'],
+            ['name' => 'Estabelecimentos comerciais', 'estabelecimentos-comerciais', 'code' => '08'],
             ['name' => 'Outros', 'slug' => 'outros', 'code' => '09'],
         ];
 
