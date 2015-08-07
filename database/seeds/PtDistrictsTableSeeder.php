@@ -11,6 +11,11 @@
 
 use Illuminate\Database\Seeder;
 
+/**
+ * This is the portuguese districts table seeder class.
+ *
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ */
 class PtDistrictsTableSeeder extends Seeder
 {
     public function run()
