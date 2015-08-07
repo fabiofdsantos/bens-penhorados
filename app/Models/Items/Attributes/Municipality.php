@@ -46,4 +46,17 @@ class Municipality extends Model
     {
         return $this->belongsTo(District::class);
     }
+
+    /**
+     * Scope a query to only include municipalities of a given district.
+     *
+     * @param Builder $query
+     * @param int     $districtId
+     *
+     * @return Builder
+     */
+    public function scopeOfDistrict(Builder $query, $districtId)
+    {
+        return $query->where('district_id', $districtId);
+    }
 }
