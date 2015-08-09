@@ -25,6 +25,14 @@ abstract class AbstractExtractorWrapper
         $this->extractors = static::EXTRACTORS;
     }
 
+    /**
+     * Call the properly extractor.
+     *
+     * @param string $func
+     * @param array  $params
+     *
+     * @return mixed
+     */
     public function __call($func, $params)
     {
         if (array_key_exists($func, $this->extractors)) {
