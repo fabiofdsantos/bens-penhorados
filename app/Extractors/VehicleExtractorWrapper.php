@@ -18,13 +18,13 @@ namespace App\Extractors;
  *
  * @method int|null    category(string $str)
  * @method int|null    color(string $str)
- * @method bool|null   condition(string $str, bool $bool)
+ * @method bool|null   condition(string $str)
  * @method int|null    engDispl(string $str)
  * @method int|null    fuel(string $str)
  * @method int|null    make(string $str)
  * @method int|null    model(string $str, int $int)
  * @method string|null regPlateCode(string $str)
- * @method int|null    type(string $str)
+ * @method int|null    type(string $str, bool $bool)
  */
 class VehicleExtractorWrapper extends AbstractExtractorWrapper
 {
