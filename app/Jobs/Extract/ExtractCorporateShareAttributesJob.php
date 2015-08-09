@@ -28,7 +28,7 @@ class ExtractCorporateShareAttributesJob extends Job
     /**
      * The corporate share extractor.
      *
-     * @var CorporateShareWrapper
+     * @var CorporateShareExtractorWrapper
      */
     protected $extractor;
 
