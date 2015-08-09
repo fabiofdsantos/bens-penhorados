@@ -11,14 +11,8 @@
 
 namespace App\Jobs\Extract;
 
-use App\Helpers\Text;
+use App\Extractors\VehicleExtractorWrapper;
 use App\Jobs\Job;
-use App\Models\Items\Attributes\VehicleCategory;
-use App\Models\Items\Attributes\VehicleColor;
-use App\Models\Items\Attributes\VehicleFuel;
-use App\Models\Items\Attributes\VehicleMake;
-use App\Models\Items\Attributes\VehicleModel;
-use App\Models\Items\Attributes\VehicleType;
 use App\Models\Items\Item;
 use App\Models\Items\Vehicle;
 
@@ -29,6 +23,13 @@ use App\Models\Items\Vehicle;
  */
 class ExtractVehicleAttributesJob extends Job
 {
+    /**
+     * The vehicle extractor.
+     *
+     * @var VehicleExtractorWrapper
+     */
+    protected $extractor;
+
     /**
      * The attributes that should be extracted.
      *
@@ -62,23 +63,18 @@ class ExtractVehicleAttributesJob extends Job
     protected $description;
 
     /**
-     * The current year.
-     *
-     * @var int
-     */
-    protected $currentYear;
-
-    /**
      * Create a new job instance.
      *
      * @param string $code
      * @param array  $description
+     *
+     * @return void
      */
     public function __construct($code, $description)
     {
         $this->code = $code;
         $this->description = $description;
-        $this->currentYear = idate('Y');
+        $this->extractor = new VehicleExtractorWrapper();
     }
 
     /**
@@ -118,8 +114,6 @@ class ExtractVehicleAttributesJob extends Job
     private function extractAttributes()
     {
         foreach ($this->description as $value) {
-            $value = Text::removeAccents($value);
-
             if (is_null($this->attributes['year'])) {
                 if (preg_match('/(ano|de)\s*\pP?\s*(\d{4})/i', $value, $match)) {
                     $this->attributes['year'] = ($this->isValidYear($match[2]) ? $match[2] : null);
@@ -128,55 +122,55 @@ class ExtractVehicleAttributesJob extends Job
 
             if (is_null($this->attributes['engine_displacement'])) {
                 if (preg_match('/[^\-]cc|cm[³3]\b/iu', $value)) {
-                    $this->attributes['engine_displacement'] = $this->extractEngineDisplacement($value);
+                    $this->attributes['engine_displacement'] = $this->extractor->engDispl($value);
                 }
             }
 
             if (is_null($this->attributes['reg_plate_code'])) {
                 if (preg_match('/matricula/i', $value)) {
-                    $this->attributes['reg_plate_code'] = $this->extractRegPlateCode($value);
+                    $this->attributes['reg_plate_code'] = $this->extractor->regPlateCode($value);
                 }
             }
 
             if (is_null($this->attributes['is_good_condition'])) {
                 if (preg_match('/\bestado\b/i', $value)) {
-                    $this->attributes['is_good_condition'] = $this->extractCondition($value);
+                    $this->attributes['is_good_condition'] = $this->extractor->condition($value);
                 }
             }
 
             if (is_null($this->attributes['make_id'])) {
                 if (preg_match('/\bmarca\b/i', $value)) {
-                    $this->attributes['make_id'] = $this->extractMake($value);
+                    $this->attributes['make_id'] = $this->extractor->make($value);
                 }
             }
 
             if (is_null($this->attributes['model_id'])) {
                 if (preg_match('/\bmodelo\b/i', $value) && isset($this->attributes['make_id'])) {
-                    $this->attributes['model_id'] = $this->extractModel($value, $this->attributes['make_id']);
+                    $this->attributes['model_id'] = $this->extractor->model($value, $this->attributes['make_id']);
                 }
             }
 
             if (is_null($this->attributes['color_id'])) {
                 if (preg_match('/\bcor\b/i', $value)) {
-                    $this->attributes['color_id'] = $this->extractColor($value);
+                    $this->attributes['color_id'] = $this->extractor->color($value);
                 }
             }
 
             if (is_null($this->attributes['fuel_id'])) {
                 if (preg_match('/combustivel/i', $value)) {
-                    $this->attributes['fuel_id'] = $this->extractFuelType($value);
+                    $this->attributes['fuel_id'] = $this->extractor->fuel($value);
                 }
             }
 
             if (is_null($this->attributes['category_id'])) {
                 if (preg_match('/veiculo|categoria/i', $value)) {
-                    $this->attributes['category_id'] = $this->extractVehicleCategory($value);
+                    $this->attributes['category_id'] = $this->extractor->category($value);
                 }
             }
 
             if (is_null($this->attributes['type_id'])) {
                 if (preg_match('/\btipo\b/i', $value)) {
-                    $this->attributes['type_id'] = $this->extractVehicleType($value, false);
+                    $this->attributes['type_id'] = $this->extractor->type($value, false);
                 }
             }
         }
@@ -190,226 +184,33 @@ class ExtractVehicleAttributesJob extends Job
     private function forceExtraction()
     {
         foreach ($this->description as $value) {
-            $value = Text::removeAccents($value);
-
             if (is_null($this->attributes['make_id'])) {
-                $this->attributes['make_id'] = $this->extractMake($value);
+                $this->attributes['make_id'] = $this->extractor->make($value);
             }
 
             if (is_null($this->attributes['model_id']) && isset($this->attributes['make_id'])) {
-                $this->attributes['model_id'] = $this->extractModel($value, $this->attributes['make_id']);
+                $this->attributes['model_id'] = $this->extractor->model($value, $this->attributes['make_id']);
             }
 
             if (is_null($this->attributes['reg_plate_code'])) {
-                $this->attributes['reg_plate_code'] = $this->extractRegPlateCode($value);
+                $this->attributes['reg_plate_code'] = $this->extractor->regPlateCode($value);
             }
 
             if (is_null($this->attributes['is_good_condition'])) {
-                $this->attributes['is_good_condition'] = $this->extractCondition($value);
+                $this->attributes['is_good_condition'] = $this->extractor->condition($value);
             }
 
             if (is_null($this->attributes['fuel_id'])) {
-                $this->attributes['fuel_id'] = $this->extractFuelType($value);
+                $this->attributes['fuel_id'] = $this->extractor->fuel($value);
             }
 
             if (is_null($this->attributes['category_id'])) {
-                $this->attributes['category_id'] = $this->extractVehicleCategory($value);
+                $this->attributes['category_id'] = $this->extractor->category($value);
             }
 
             if (is_null($this->attributes['type_id'])) {
-                $this->attributes['type_id'] = $this->extractVehicleType($value, true);
+                $this->attributes['type_id'] = $this->extractor->type($value, true);
             }
-        }
-    }
-
-    /**
-     * Extract the vehicle's engine displacement.
-     *
-     * @param string $str
-     *
-     * @return int|null
-     */
-    private function extractEngineDisplacement($str)
-    {
-        if (preg_match('/(\d+)\s*(cc|cm[³3])/iu', $str, $match)) {
-            return (integer) $match[1];
-        }
-    }
-
-    /**
-     * Extract the vehicle's registration plate code.
-     *
-     * @param string $str
-     *
-     * @return string|null
-     */
-    private function extractRegPlateCode($str)
-    {
-        $regex_general = '/\d{2}-\d{2}-[a-z]{2}|\d{2}-[a-z]{2}-\d{2}|[a-z]{2}-\d{2}-\d{2}/i';
-        if (preg_match($regex_general, $str, $match)) {
-            return $match[0];
-        }
-
-        $regex_trailers = '/[a-z]{1,2}-\d{1,6}/i';
-        if (preg_match($regex_trailers, $str, $match)) {
-            return $match[0];
-        }
-    }
-
-    /**
-     * Extract and check the vehicle's condition.
-     *
-     * @param string $str
-     *
-     * @return bool|null
-     */
-    private function extractCondition($str)
-    {
-        $regex_goodCondition = [
-            '/\b(bom|razoavel|regular)\s(estado)\b/i',
-            '/\bestado razoavel\b/i',
-        ];
-
-        foreach ($regex_goodCondition as $regex) {
-            if (preg_match($regex, $str)) {
-                return true;
-            }
-        }
-
-        $regex_badCondition = [
-            '/\bmau estado\b/i',
-            '/\bsucata\b/i',
-            '/\bavariado\b/i',
-            '/\bmal tratado\b/i',
-            '/\bpintura riscada\b/i',
-            '/\b(amolgad)(o|elas?)\b/i',
-        ];
-
-        foreach ($regex_badCondition as $regex) {
-            if (preg_match($regex, $str)) {
-                return false;
-            }
-        }
-    }
-
-    /**
-     * Extract the vehicle's make.
-     *
-     * @param string $str
-     *
-     * @return int|null
-     */
-    private function extractMake($str)
-    {
-        $makes = VehicleMake::all();
-
-        foreach ($makes as $make) {
-            if (preg_match($make->regex, $str)) {
-                return $make->id;
-            }
-        }
-    }
-
-    /**
-     * Extract the vehicle's model.
-     *
-     * @param string $str
-     * @param int    $makeId
-     *
-     * @return int|null
-     */
-    private function extractModel($str, $makeId)
-    {
-        $models = VehicleModel::ofMake($makeId)->get();
-
-        foreach ($models as $model) {
-            if (preg_match("/$model->name/ui", $str)) {
-                return $model->id;
-            }
-        }
-    }
-
-    /**
-     * Extract the vehicle's color.
-     *
-     * @param string $str
-     *
-     * @return int|null
-     */
-    private function extractColor($str)
-    {
-        $colors = VehicleColor::all();
-
-        foreach ($colors as $color) {
-            if (preg_match($color->regex, $str)) {
-                return $color->id;
-            }
-        }
-    }
-
-    /**
-     * Extract the vehicle's fuel type.
-     *
-     * @param string $str
-     *
-     * @return int|null
-     */
-    private function extractFuelType($str)
-    {
-        $fuels = VehicleFuel::all();
-
-        foreach ($fuels as $fuel) {
-            if (preg_match($fuel->regex, $str)) {
-                return $fuel->id;
-            }
-        }
-    }
-
-    /**
-     * Extract the vehicle's category.
-     *
-     * @param string $str
-     *
-     * @return int|null
-     */
-    private function extractVehicleCategory($str)
-    {
-        $categories = VehicleCategory::all();
-
-        foreach ($categories as $category) {
-            if (preg_match($category->regex, $str)) {
-                return $category->id;
-            }
-        }
-    }
-
-    /**
-     * Extract the vehicle's type.
-     *
-     * @param string $str
-     * @param bool   $isForceExtraction
-     *
-     * @return int|null
-     */
-    private function extractVehicleType($str, $isForceExtraction)
-    {
-        $numTypes = 0;
-        $tempType = null;
-        $types = VehicleType::all();
-
-        foreach ($types as $type) {
-            if (preg_match($type->regex, $str)) {
-                if ($isForceExtraction) {
-                    $tempType = $type->id;
-                    $numTypes++;
-                } else {
-                    return $type->id;
-                }
-            }
-        }
-
-        if ($numTypes === 1) {
-            return $tempType;
         }
     }
 
@@ -422,7 +223,7 @@ class ExtractVehicleAttributesJob extends Job
      */
     private function isValidYear($year)
     {
-        if ($year <= $this->currentYear && $year >= 1950) {
+        if ($year <= idate('Y') && $year >= 1950) {
             return true;
         }
 

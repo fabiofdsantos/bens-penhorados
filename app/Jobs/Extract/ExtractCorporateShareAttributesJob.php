@@ -11,6 +11,7 @@
 
 namespace App\Jobs\Extract;
 
+use App\Extractors\CorporateShareExtractorWrapper;
 use App\Jobs\Job;
 use App\Models\Items\Attributes\Corporate;
 use App\Models\Items\CorporateShare;
@@ -24,6 +25,13 @@ use GuzzleHttp;
  */
 class ExtractCorporateShareAttributesJob extends Job
 {
+    /**
+     * The corporate share extractor.
+     *
+     * @var CorporateShareWrapper
+     */
+    protected $extractor;
+
     /**
      * The attributes that should be extracted.
      *
@@ -52,11 +60,14 @@ class ExtractCorporateShareAttributesJob extends Job
      *
      * @param string $code
      * @param array  $description
+     *
+     * @return void
      */
     public function __construct($code, $description)
     {
         $this->code = $code;
         $this->description = $description;
+        $this->extractor = new CorporateShareExtractorWrapper();
     }
 
     /**
@@ -71,7 +82,7 @@ class ExtractCorporateShareAttributesJob extends Job
         foreach ($this->description as $value) {
 
             // Try to extract the nif
-            $this->attributes['corporate_nif'] = $this->extractNif($value);
+            $this->attributes['corporate_nif'] = $this->extractor->nif($value);
 
             // Check if the nif was extracted
             if (isset($this->attributes['corporate_nif'])) {
@@ -96,20 +107,6 @@ class ExtractCorporateShareAttributesJob extends Job
 
                 break;
             }
-        }
-    }
-
-    /**
-     * Extract corporate's nif.
-     *
-     * @param string $str
-     *
-     * @return int|null
-     */
-    private function extractNif($str)
-    {
-        if (preg_match('/\b[12568][0-9]{8}\b/', $str, $match)) {
-            return (integer) $match[0];
         }
     }
 

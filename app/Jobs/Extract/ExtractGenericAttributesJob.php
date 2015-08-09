@@ -11,12 +11,12 @@
 
 namespace App\Jobs\Extract;
 
+use App\Extractors\GenericExtractorWrapper;
 use App\Helpers\Text;
 use App\Jobs\Job;
 use App\Models\Items\Attributes\ItemCategory;
 use App\Models\Items\Item;
 use Bus;
-use Carbon\Carbon;
 use Intervention\Image\ImageManager;
 use Storage;
 use Symfony\Component\DomCrawler\Crawler;
@@ -28,6 +28,13 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class ExtractGenericAttributesJob extends Job
 {
+    /**
+     * The generic extractor.
+     *
+     * @var GenericExtractorWrapper
+     */
+    protected $extractor;
+
     /**
      * The attributes that should be extracted.
      *
@@ -81,6 +88,8 @@ class ExtractGenericAttributesJob extends Job
      * @param string $lat
      * @param string $lng
      * @param bool   $ignoreImages
+     *
+     * @return void
      */
     public function __construct($code, $categoryId, $lat, $lng, $ignoreImages)
     {
@@ -90,6 +99,7 @@ class ExtractGenericAttributesJob extends Job
         $this->attributes['lng'] = $lng;
         $this->filePath = $this->getFilePath($code);
         $this->downloadImages = ($ignoreImages === false ? true : false);
+        $this->extractor = new GenericExtractorWrapper();
     }
 
     /***
@@ -131,14 +141,16 @@ class ExtractGenericAttributesJob extends Job
             // Split the description
             $description = Text::splitter($this->attributes['full_description']);
 
-            // Call the right command to extract specific category's attributes
+            // Call the right command to extract specific attributes
             $category = ItemCategory::find($this->attributes['category_id']);
             if ($category->name === 'Imóveis') {
-                // to do
+                Bus::dispatch(new ExtractPropertyAttributesJob($this->attributes['code'], $description));
             } elseif ($category->name === 'Veículos') {
                 Bus::dispatch(new ExtractVehicleAttributesJob($this->attributes['code'], $description));
             } elseif ($category->name === 'Participações sociais') {
                 Bus::dispatch(new ExtractCorporateShareAttributesJob($this->attributes['code'], $description));
+            } elseif ($category->name === 'Estabelecimentos comerciais') {
+                Bus::dispatch(new ExtractBusinessEstablishmentAttributesJob($this->attributes['code'], $description));
             }
         } else {
             print "\n > The item {$this->attributes[code]} is unavailable! \n";
@@ -182,15 +194,15 @@ class ExtractGenericAttributesJob extends Job
             $text = $crawler->filter('span.info-element-text')->eq($i)->text();
 
             if (preg_match('/preco/i', $title)) {
-                $this->attributes['price'] = $this->extractPrice($text);
+                $this->attributes['price'] = $this->extractor->price($text);
 
                 if (isset($this->attributes['price'])) {
-                    $this->attributes['vat'] = $this->extractVat($text);
+                    $this->attributes['vat'] = $this->extractor->vat($text);
                 }
             } elseif (preg_match('/estado da venda/i', $title)) {
-                $this->attributes['status'] = $this->extractStatus($text);
+                $this->attributes['status'] = $this->extractor->status($text);
             } elseif (preg_match('/modalidade/i', $title)) {
-                $this->attributes['mode'] = $this->extractMode($text);
+                $this->attributes['mode'] = $this->extractor->mode($text);
             }
         }
     }
@@ -206,188 +218,40 @@ class ExtractGenericAttributesJob extends Job
     {
         foreach ($crawler->filter('span.info-element-title') as $i => $node) {
             $title = Text::removeAccents($node->nodeValue);
-
             $text = $crawler->filter('span.info-element-text')->eq($i)->text();
-            $text = Text::clean($text);
 
             if (preg_match('/caracteristicas/i', $title)) {
                 $this->attributes['full_description'] = $text;
             } elseif (preg_match('/fiel depositario/i', $title)) {
-                $this->attributes['depositary_name'] = $this->extractName($text);
+                $this->attributes['depositary_name'] = $this->extractor->fullName($text);
 
                 if (isset($this->attributes['depositary_name'])) {
-                    $this->attributes['depositary_phone'] = $this->extractPhoneNumber($text);
+                    $this->attributes['depositary_phone'] = $this->extractor->phoneNumber($text);
 
                     if (preg_match('/email/i', $text)) {
                         $text = $crawler->filter('span.info-element-text')->eq($i)->attr('href');
-                        $this->attributes['depositary_email'] = $this->extractEmail($text);
+                        $this->attributes['depositary_email'] = $this->extractor->email($text);
                     }
                 }
             } elseif (preg_match('/mediador/i', $title)) {
-                $this->attributes['mediator_name'] = $this->extractName($text);
+                $this->attributes['mediator_name'] = $this->extractor->fullName($text);
 
                 if (isset($this->attributes['mediator_name'])) {
-                    $this->attributes['mediator_phone'] = $this->extractPhoneNumber($text);
+                    $this->attributes['mediator_phone'] = $this->extractor->phoneNumber($text);
 
                     if (preg_match('/email/i', $text)) {
                         $text = $crawler->filter('span.info-element-text')->eq($i)->attr('href');
-                        $this->attributes['mediator_email'] = $this->extractEmail($text);
+                        $this->attributes['mediator_email'] = $this->extractor->email($text);
                     }
                 }
             } elseif (preg_match('/examinar o bem/i', $title)) {
-                $preview_dt = $this->extractStartEndDateTime($text);
+                $preview_dt = $this->extractor->startEndDatetime($text);
                 $this->attributes['preview_dt_start'] = $preview_dt[0];
                 $this->attributes['preview_dt_end'] = $preview_dt[1];
             } elseif (preg_match('/abertura das propostas/i', $title)) {
-                $this->attributes['opening_dt'] = $this->extractSingleDateTime($text);
+                $this->attributes['opening_dt'] = $this->extractor->datetime($text);
             } elseif (preg_match('/aceitacao das propostas/i', $title)) {
-                $this->attributes['acceptance_dt'] = $this->extractSingleDateTime($text);
-            }
-        }
-    }
-
-    /**
-     * Extract the item's price.
-     *
-     * @param string $str
-     *
-     * @return int|null
-     */
-    private function extractPrice($str)
-    {
-        if (preg_match('/(\d+?\.?\d+\,\d+)/', $str, $match)) {
-            $match[0] = str_replace('.', '', $match[0]);
-            $match[0] = str_replace(',', '.', $match[0]);
-
-            return (integer) $match[0];
-        }
-    }
-
-    /**
-     * Extract the item's vat.
-     *
-     * @param string $str
-     *
-     * @return int|null
-     */
-    private function extractVat($str)
-    {
-        if (preg_match('/(\d+)(,\d+)?% IVA incluído/ui', $str, $match)) {
-            return (integer) $match[0];
-        }
-    }
-
-    /**
-     * Extract the item's status.
-     *
-     * @param string $str
-     *
-     * @return string
-     */
-    private function extractStatus($str)
-    {
-        return $str;
-    }
-
-    /**
-     * Extract the mode.
-     *
-     * @param string $str
-     *
-     * @return string
-     */
-    private function extractMode($str)
-    {
-        return $str;
-    }
-
-    /**
-     * Extract a name.
-     *
-     * @param string $str
-     *
-     * @return string|null
-     */
-    private function extractName($str)
-    {
-        if (preg_match('/^[^(]+(?=$|\s)/ui', $str, $match)) {
-            return $match[0];
-        }
-    }
-
-    /**
-     * Extract a phone number.
-     *
-     * @param string $str
-     *
-     * @return int|null
-     */
-    private function extractPhoneNumber($str)
-    {
-        if (preg_match('/\d{9,}/', $str, $match)) {
-            return (integer) $match[0];
-        }
-    }
-
-    /**
-     * Extract an email.
-     *
-     * @param string $str
-     *
-     * @return string|null
-     */
-    private function extractEmail($str)
-    {
-        if (preg_match('/\w+@\w+\.\w{1,}/i', $str, $match)) {
-            return strtolower($match[0]);
-        }
-    }
-
-    /**
-     * Extract a start and end datetime.
-     *
-     * @param string $str
-     *
-     * @return array
-     */
-    private function extractStartEndDateTime($str)
-    {
-        $preview_dt = [];
-        if (preg_match('/\d+\-\d+\-\d+/', $str, $match)) {
-            preg_match_all('/\d+\-\d+\-\d+/', $str, $match_date);
-            preg_match_all('/\d+\:\d+/', $str, $match_time);
-
-            $dt_start = $match_date[0][0].'-'.$match_time[0][0];
-            $dt_end = $match_date[0][1].'-'.$match_time[0][1];
-
-            $preview_dt[0] = Carbon::createFromFormat('Y-m-d-H:i', $dt_start);
-            $preview_dt[1] = Carbon::createFromFormat('Y-m-d-H:i', $dt_end);
-        } else {
-            $preview_dt[0] = null;
-            $preview_dt[1] = null;
-        }
-
-        return $preview_dt;
-    }
-
-    /**
-     * Extract a single datetime.
-     *
-     * @param string $str
-     *
-     * @return Carbon|null
-     */
-    private function extractSingleDateTime($str)
-    {
-        if (preg_match('/\d+\-\d+\-\d+/', $str, $match_date)) {
-            if (preg_match('/\d+\:\d+/', $str, $match_time)) {
-                $dt = $match_date[0].'-'.$match_time[0];
-
-                return Carbon::createFromFormat('Y-m-d-H:i', $dt);
-            } else {
-                $dt = $match_date[0];
-
-                return Carbon::createFromFormat('Y-m-d', $dt);
+                $this->attributes['acceptance_dt'] = $this->extractor->datetime($text);
             }
         }
     }
