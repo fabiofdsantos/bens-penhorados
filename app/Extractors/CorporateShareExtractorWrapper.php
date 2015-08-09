@@ -16,7 +16,7 @@ namespace App\Extractors;
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  *
- * @method mixed nif()
+ * @method int|null nif(string $str)
  */
 class CorporateShareExtractorWrapper extends AbstractExtractorWrapper
 {

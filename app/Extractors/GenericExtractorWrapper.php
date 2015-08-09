@@ -16,15 +16,15 @@ namespace App\Extractors;
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  *
- * @method mixed datetime()
- * @method mixed email()
- * @method mixed fullName()
- * @method mixed mode()
- * @method mixed phoneNumber()
- * @method mixed price()
- * @method mixed startEndDatetime()
- * @method mixed status()
- * @method mixed vat()
+ * @method \Carbon\Carbon|null datetime(string $str)
+ * @method string|null         email(string $str)
+ * @method string|null         fullName(string $str)
+ * @method string|null         mode(string $str)
+ * @method int|null            phoneNumber(string $str)
+ * @method int|null            price(string $str)
+ * @method array               startEndDatetime(string $str)
+ * @method string              status(string $str)
+ * @method int|null            vat(string $str)
  */
 class GenericExtractorWrapper extends AbstractExtractorWrapper
 {

@@ -33,8 +33,6 @@ class NifExtractor implements ExtractorInterface
      * Create a new nif extractor instance.
      *
      * @param array $params
-     *
-     * @return void
      */
     public function __construct($params)
     {

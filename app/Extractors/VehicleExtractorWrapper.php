@@ -16,15 +16,15 @@ namespace App\Extractors;
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  *
- * @method mixed category()
- * @method mixed color()
- * @method mixed condition()
- * @method mixed engDispl()
- * @method mixed fuel()
- * @method mixed make()
- * @method mixed model()
- * @method mixed regPlateCode()
- * @method mixed type()
+ * @method int|null    category(string $str)
+ * @method int|null    color(string $str)
+ * @method bool|null   condition(string $str, bool $bool)
+ * @method int|null    engDispl(string $str)
+ * @method int|null    fuel(string $str)
+ * @method int|null    make(string $str)
+ * @method int|null    model(string $str, int $int)
+ * @method string|null regPlateCode(string $str)
+ * @method int|null    type(string $str)
  */
 class VehicleExtractorWrapper extends AbstractExtractorWrapper
 {
