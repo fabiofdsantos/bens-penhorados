@@ -12,8 +12,8 @@
 namespace App\Extractors\Vehicle;
 
 use App\Extractors\ExtractorInterface;
-use App\Models\Items\Attributes\VehicleColor;
 use App\Helpers\Text;
+use App\Models\Items\Attributes\VehicleColor;
 
 /**
  * This is the color extractor class.

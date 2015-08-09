@@ -12,8 +12,8 @@
 namespace App\Extractors\Vehicle;
 
 use App\Extractors\ExtractorInterface;
-use App\Models\Items\Attributes\VehicleCategory;
 use App\Helpers\Text;
+use App\Models\Items\Attributes\VehicleCategory;
 
 /**
  * This is the category extractor class.

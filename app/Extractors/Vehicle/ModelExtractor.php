@@ -12,8 +12,8 @@
 namespace App\Extractors\Vehicle;
 
 use App\Extractors\ExtractorInterface;
-use App\Models\Items\Attributes\VehicleModel;
 use App\Helpers\Text;
+use App\Models\Items\Attributes\VehicleModel;
 
 /**
  * This is the model extractor class.
