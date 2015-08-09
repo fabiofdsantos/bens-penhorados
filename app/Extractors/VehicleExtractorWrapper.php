@@ -28,12 +28,7 @@ namespace App\Extractors;
  */
 class VehicleExtractorWrapper extends AbstractExtractorWrapper
 {
-    /**
-     * The vehicle's extractors.
-     *
-     * @var array
-     */
-    protected $extractors = [
+    const EXTRACTORS = [
         'category'     => '\App\Extractors\Vehicle\CategoryExtractor',
         'color'        => '\App\Extractors\Vehicle\ColorExtractor',
         'condition'    => '\App\Extractors\Vehicle\ConditionExtractor',

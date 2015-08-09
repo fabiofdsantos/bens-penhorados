@@ -28,12 +28,7 @@ namespace App\Extractors;
  */
 class GenericExtractorWrapper extends AbstractExtractorWrapper
 {
-    /**
-     * The generic's extractors.
-     *
-     * @var array
-     */
-    protected $extractors = [
+    const EXTRACTORS = [
         'datetime'          => '\App\Extractors\Generic\DateTimeExtractor',
         'email'             => '\App\Extractors\Generic\EmailExtractor',
         'fullName'          => '\App\Extractors\Generic\FullNameExtractor',

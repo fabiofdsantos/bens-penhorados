@@ -20,12 +20,7 @@ namespace App\Extractors;
  */
 class CorporateShareExtractorWrapper extends AbstractExtractorWrapper
 {
-    /**
-     * The corporate share extractors.
-     *
-     * @var array
-     */
-    protected $extractors = [
+    const EXTRACTORS = [
         'nif' => '\App\Extractors\CorporateShare\NifExtractor',
     ];
 }

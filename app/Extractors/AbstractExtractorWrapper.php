@@ -18,6 +18,13 @@ namespace App\Extractors;
  */
 class AbstractExtractorWrapper
 {
+    protected $extractors;
+
+    public function __construct()
+    {
+        $this->extractors = static::EXTRACTORS;
+    }
+
     public function __call($func, $params)
     {
         if (array_key_exists($func, $this->extractors)) {
