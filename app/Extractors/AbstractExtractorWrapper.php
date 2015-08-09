@@ -16,7 +16,7 @@ namespace App\Extractors;
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
-class AbstractExtractorWrapper
+abstract class AbstractExtractorWrapper
 {
     protected $extractors;
 
