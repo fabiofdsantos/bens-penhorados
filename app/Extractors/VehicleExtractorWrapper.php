@@ -15,6 +15,16 @@ namespace App\Extractors;
  * This is the vehicle extractor wrapper.
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
+ *
+ * @method mixed category()
+ * @method mixed color()
+ * @method mixed condition()
+ * @method mixed engDispl()
+ * @method mixed fuel()
+ * @method mixed make()
+ * @method mixed model()
+ * @method mixed regPlateCode()
+ * @method mixed type()
  */
 class VehicleExtractorWrapper extends AbstractExtractorWrapper
 {

@@ -15,6 +15,8 @@ namespace App\Extractors;
  * This is the corporate share extractor wrapper.
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
+ *
+ * @method mixed nif()
  */
 class CorporateShareExtractorWrapper extends AbstractExtractorWrapper
 {

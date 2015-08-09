@@ -15,6 +15,16 @@ namespace App\Extractors;
  * This is the generic extractor wrapper.
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
+ *
+ * @method mixed datetime()
+ * @method mixed email()
+ * @method mixed fullName()
+ * @method mixed mode()
+ * @method mixed phoneNumber()
+ * @method mixed price()
+ * @method mixed startEndDatetime()
+ * @method mixed status()
+ * @method mixed vat()
  */
 class GenericExtractorWrapper extends AbstractExtractorWrapper
 {
