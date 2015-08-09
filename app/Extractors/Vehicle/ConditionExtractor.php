@@ -22,35 +22,35 @@ use App\Helpers\Text;
 class ConditionExtractor implements ExtractorInterface
 {
     const REGEX_GOOD = [
-         '/\b(bom|razoavel|regular)\s(estado)\b/i',
-         '/\bestado razoavel\b/i',
-     ];
+        '/\b(bom|razoavel|regular)\s(estado)\b/i',
+        '/\bestado razoavel\b/i',
+    ];
 
     const REGEX_BAD = [
-         '/\bmau estado\b/i',
-         '/\bsucata\b/i',
-         '/\bavariado\b/i',
-         '/\bmal tratado\b/i',
-         '/\bpintura riscada\b/i',
-         '/\b(amolgad)(o|elas?)\b/i',
-     ];
+        '/\bmau estado\b/i',
+        '/\bsucata\b/i',
+        '/\bavariado\b/i',
+        '/\bmal tratado\b/i',
+        '/\bpintura riscada\b/i',
+        '/\b(amolgad)(o|elas?)\b/i',
+    ];
 
-     /**
-      * The input string.
-      *
-      * @var string
-      */
-     protected $str;
+    /**
+     * The input string.
+     *
+     * @var string
+     */
+    protected $str;
 
-     /**
-      * Create a new condition extractor instance.
-      *
-      * @param array $params
-      */
-     public function __construct($params)
-     {
-         $this->str = Text::removeAccents($params[0]);
-     }
+    /**
+     * Create a new condition extractor instance.
+     *
+     * @param array $params
+     */
+    public function __construct($params)
+    {
+        $this->str = Text::removeAccents($params[0]);
+    }
 
     /**
      * Extract and check the condition.
