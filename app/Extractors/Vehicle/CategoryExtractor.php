@@ -40,8 +40,6 @@ class CategoryExtractor implements ExtractorInterface
      * Create a new category extractor instance.
      *
      * @param array $params
-     *
-     * @return void
      */
     public function __construct($params)
     {

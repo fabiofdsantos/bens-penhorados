@@ -32,8 +32,6 @@ class StatusExtractor implements ExtractorInterface
      * Create a new status extractor instance.
      *
      * @param array $params
-     *
-     * @return void
      */
     public function __construct($params)
     {

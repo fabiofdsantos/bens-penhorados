@@ -40,8 +40,6 @@ class ColorExtractor implements ExtractorInterface
      * Create a new color extractor instance.
      *
      * @param array $params
-     *
-     * @return void
      */
     public function __construct($params)
     {

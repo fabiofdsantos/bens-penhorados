@@ -35,8 +35,6 @@ class RegPlateCodeExtractor implements ExtractorInterface
      * Create a new registration plate code extractor instance.
      *
      * @param array $params
-     *
-     * @return void
      */
     public function __construct($params)
     {

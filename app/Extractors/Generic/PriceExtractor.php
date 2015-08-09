@@ -34,8 +34,6 @@ class PriceExtractor implements ExtractorInterface
      * Create a new price extractor instance.
      *
      * @param array $params
-     *
-     * @return void
      */
     public function __construct($params)
     {

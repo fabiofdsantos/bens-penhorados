@@ -32,8 +32,6 @@ class ModeExtractor implements ExtractorInterface
      * Create a new mode extractor instance.
      *
      * @param array $params
-     *
-     * @return void
      */
     public function __construct($params)
     {

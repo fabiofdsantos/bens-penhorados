@@ -47,8 +47,6 @@ class TypeExtractor implements ExtractorInterface
      * Create a new type extractor instance.
      *
      * @param array $params
-     *
-     * @return void
      */
     public function __construct($params)
     {

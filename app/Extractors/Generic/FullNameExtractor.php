@@ -34,8 +34,6 @@ class FullNameExtractor implements ExtractorInterface
      * Create a new full name extractor instance.
      *
      * @param array $params
-     *
-     * @return void
      */
     public function __construct($params)
     {

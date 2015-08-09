@@ -40,8 +40,6 @@ class MakeExtractor implements ExtractorInterface
      * Create a new make extractor instance.
      *
      * @param array $params
-     *
-     * @return void
      */
     public function __construct($params)
     {

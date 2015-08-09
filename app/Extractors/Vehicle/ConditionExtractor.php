@@ -46,8 +46,6 @@ class ConditionExtractor implements ExtractorInterface
       * Create a new condition extractor instance.
       *
       * @param array $params
-      *
-      * @return void
       */
      public function __construct($params)
      {

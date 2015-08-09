@@ -67,8 +67,6 @@ class ExtractVehicleAttributesJob extends Job
      *
      * @param string $code
      * @param array  $description
-     *
-     * @return void
      */
     public function __construct($code, $description)
     {

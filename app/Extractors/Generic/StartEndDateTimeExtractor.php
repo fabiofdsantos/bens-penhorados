@@ -36,8 +36,6 @@ class StartEndDateTimeExtractor implements ExtractorInterface
      * Create a new start/end datetime extractor instance.
      *
      * @param array $params
-     *
-     * @return void
      */
     public function __construct($params)
     {

@@ -36,8 +36,6 @@ class DateTimeExtractor implements ExtractorInterface
      * Create a new datetime extractor instance.
      *
      * @param array $params
-     *
-     * @return void
      */
     public function __construct($params)
     {

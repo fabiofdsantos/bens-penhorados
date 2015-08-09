@@ -40,8 +40,6 @@ class ModelExtractor implements ExtractorInterface
      * Create a new model extractor instance.
      *
      * @param array $params
-     *
-     * @return void
      */
     public function __construct($params)
     {

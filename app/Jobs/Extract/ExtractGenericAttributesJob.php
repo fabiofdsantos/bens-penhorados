@@ -88,8 +88,6 @@ class ExtractGenericAttributesJob extends Job
      * @param string $lat
      * @param string $lng
      * @param bool   $ignoreImages
-     *
-     * @return void
      */
     public function __construct($code, $categoryId, $lat, $lng, $ignoreImages)
     {

@@ -34,8 +34,6 @@ class PhoneNumberExtractor implements ExtractorInterface
      * Create a new phone number extractor instance.
      *
      * @param array $params
-     *
-     * @return void
      */
     public function __construct($params)
     {

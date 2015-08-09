@@ -34,8 +34,6 @@ class VatExtractor implements ExtractorInterface
      * Create a new vat extractor instance.
      *
      * @param array $params
-     *
-     * @return void
      */
     public function __construct($params)
     {

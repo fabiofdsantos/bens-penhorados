@@ -34,8 +34,6 @@ class EngineDisplacementExtractor implements ExtractorInterface
      * Create a new engine displacement extractor instance.
      *
      * @param array $params
-     *
-     * @return void
      */
     public function __construct($params)
     {

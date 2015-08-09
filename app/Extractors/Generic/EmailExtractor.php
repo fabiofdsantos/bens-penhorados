@@ -34,8 +34,6 @@ class EmailExtractor implements ExtractorInterface
      * Create a new email extractor instance.
      *
      * @param array $params
-     *
-     * @return void
      */
     public function __construct($params)
     {
