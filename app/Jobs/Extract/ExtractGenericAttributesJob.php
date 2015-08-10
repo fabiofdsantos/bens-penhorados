@@ -14,7 +14,7 @@ namespace App\Jobs\Extract;
 use App\Extractors\GenericExtractorWrapper;
 use App\Helpers\Text;
 use App\Jobs\Job;
-use App\Models\Items\Attributes\ItemCategory;
+use App\Models\Attributes\Generic\ItemCategory;
 use App\Models\Items\Item;
 use Bus;
 use Intervention\Image\ImageManager;

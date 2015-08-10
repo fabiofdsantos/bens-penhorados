@@ -13,7 +13,7 @@ namespace App\Jobs\Extract;
 
 use App\Extractors\CorporateShareExtractorWrapper;
 use App\Jobs\Job;
-use App\Models\Items\Attributes\Corporate;
+use App\Models\Attributes\CorporateShare\Corporate;
 use App\Models\Items\CorporateShare;
 use App\Models\Items\Item;
 use GuzzleHttp;
