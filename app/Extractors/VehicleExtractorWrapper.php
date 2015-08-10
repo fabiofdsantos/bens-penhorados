@@ -25,6 +25,7 @@ namespace App\Extractors;
  * @method int|null    model(string $str, int $int)
  * @method string|null regPlateCode(string $str)
  * @method int|null    type(string $str, bool $bool)
+ * @method int|null    year(string $str)
  */
 class VehicleExtractorWrapper extends AbstractExtractorWrapper
 {
@@ -38,5 +39,6 @@ class VehicleExtractorWrapper extends AbstractExtractorWrapper
         'model'        => '\App\Extractors\Vehicle\ModelExtractor',
         'regPlateCode' => '\App\Extractors\Vehicle\RegPlateCodeExtractor',
         'type'         => '\App\Extractors\Vehicle\TypeExtractor',
+        'year'         => '\App\Extractors\Vehicle\YearExtractor',
     ];
 }

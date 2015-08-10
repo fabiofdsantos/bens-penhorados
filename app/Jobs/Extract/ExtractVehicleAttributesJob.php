@@ -113,8 +113,8 @@ class ExtractVehicleAttributesJob extends Job
     {
         foreach ($this->description as $value) {
             if (is_null($this->attributes['year'])) {
-                if (preg_match('/(ano|de)\s*\pP?\s*(\d{4})/i', $value, $match)) {
-                    $this->attributes['year'] = ($this->isValidYear($match[2]) ? $match[2] : null);
+                if (preg_match('/\bano\b|\bde\b/i', $value)) {
+                    $this->attributes['year'] = $this->extractor->year($value);
                 }
             }
 
@@ -210,22 +210,6 @@ class ExtractVehicleAttributesJob extends Job
                 $this->attributes['type_id'] = $this->extractor->type($value, true);
             }
         }
-    }
-
-    /**
-     * Check if a given year is valid.
-     *
-     * @param int $year
-     *
-     * @return bool
-     */
-    private function isValidYear($year)
-    {
-        if ($year <= idate('Y') && $year >= 1950) {
-            return true;
-        }
-
-        return false;
     }
 
     /**
