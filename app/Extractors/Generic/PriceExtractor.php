@@ -21,7 +21,7 @@ use App\Helpers\Text;
  */
 class PriceExtractor implements ExtractorInterface
 {
-    const REGEX_PRICE = '/(\d+?\.?\d+\,\d+)/';
+    const REGEX_PRICE = '/€ (\d{0,}?\.?\d+\,\d+)/';
 
     /**
      * The input string.
@@ -48,10 +48,10 @@ class PriceExtractor implements ExtractorInterface
     public function extract()
     {
         if (preg_match(self::REGEX_PRICE, $this->str, $match)) {
-            $match[0] = str_replace('.', '', $match[0]);
-            $match[0] = str_replace(',', '.', $match[0]);
+            $match[1] = str_replace('.', '', $match[1]);
+            $match[1] = str_replace(',', '.', $match[1]);
 
-            return (integer) $match[0];
+            return (integer) $match[1];
         }
     }
 }
