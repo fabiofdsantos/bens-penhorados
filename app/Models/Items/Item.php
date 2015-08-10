@@ -11,7 +11,7 @@
 
 namespace App\Models\Items;
 
-use App\Models\Items\Attributes\ItemCategory;
+use App\Models\Attributes\Generic\ItemCategory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -20,30 +20,33 @@ use Illuminate\Support\Str;
 /**
  * This is the item model class.
  *
- * @property string $code
- * @property string $title
- * @property string $slug
- * @property int $tax_office
- * @property int $year
- * @property string $status
- * @property string $mode
- * @property float $price
- * @property int|null $vat
- * @property float|null $lat
- * @property float|null $lng
- * @property string $images
- * @property string|null $depositary_name
- * @property int|null $depositary_phone
- * @property string|null $depositary_email
- * @property string|null $mediator_name
- * @property int|null $mediator_phone
- * @property string|null $mediator_email
- * @property Carbon $preview_dt_start
- * @property Carbon $preview_dt_end
- * @property Carbon $acceptance_dt
- * @property Carbon $opening_dt
- * @property Carbon $updated_at
- * @property Carbon $created_at
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ *
+ * @property string       $code
+ * @property ItemCategory $category
+ * @property string       $title
+ * @property string       $slug
+ * @property int          $tax_office
+ * @property int          $year
+ * @property string       $status
+ * @property string       $mode
+ * @property float        $price
+ * @property int|null     $vat
+ * @property float|null   $lat
+ * @property float|null   $lng
+ * @property string       $images
+ * @property string|null  $depositary_name
+ * @property int|null     $depositary_phone
+ * @property string|null  $depositary_email
+ * @property string|null  $mediator_name
+ * @property int|null     $mediator_phone
+ * @property string|null  $mediator_email
+ * @property Carbon       $preview_dt_start
+ * @property Carbon       $preview_dt_end
+ * @property Carbon       $acceptance_dt
+ * @property Carbon       $opening_dt
+ * @property Carbon       $updated_at
+ * @property Carbon       $created_at
  */
 class Item extends Model
 {

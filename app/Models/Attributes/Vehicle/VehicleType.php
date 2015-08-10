@@ -9,14 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Models\Items\Attributes;
+namespace App\Models\Attributes\Vehicle;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * This is the vehicle's type model class.
  *
- * @property int $id
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ *
+ * @property int    $id
  * @property string $name
  * @property string $regex
  */

@@ -9,16 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Models\Items\Attributes;
+namespace App\Models\Attributes\Generic;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * This is the municipality model class.
  *
- * @property int $id
- * @property string $name
- * @property string $regex
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ *
+ * @property int      $id
+ * @property string   $name
+ * @property string   $regex
  * @property District $district
  */
 class Municipality extends Model

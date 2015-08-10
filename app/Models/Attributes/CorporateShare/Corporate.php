@@ -9,28 +9,30 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Models\Items\Attributes;
+namespace App\Models\Attributes\CorporateShare;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * This is the corporate model class.
  *
- * @property int $nif
- * @property string $name
- * @property string $address
- * @property string $postal_code
- * @property string $city
- * @property string $cae
- * @property string $activity
- * @property string $nature
- * @property float $capital
- * @property string $capital_currency
- * @property bool $is_active
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ *
+ * @property int         $nif
+ * @property string      $name
+ * @property string      $address
+ * @property string      $postal_code
+ * @property string      $city
+ * @property string      $cae
+ * @property string      $activity
+ * @property string      $nature
+ * @property float       $capital
+ * @property string      $capital_currency
+ * @property bool        $is_active
  * @property string|null $email
- * @property int|null $phone
+ * @property int|null    $phone
  * @property string|null $website
- * @property int|null $fax
+ * @property int|null    $fax
  */
 class Corporate extends Model
 {

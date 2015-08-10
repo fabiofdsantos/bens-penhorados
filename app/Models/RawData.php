@@ -17,11 +17,13 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * This is the raw data model class.
  *
- * @property string $code
- * @property string $hash
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ *
+ * @property string      $code
+ * @property string      $hash
  * @property string|null $lat
  * @property string|null $lng
- * @property int $category_id
+ * @property int         $category_id
  */
 class RawData extends Model
 {

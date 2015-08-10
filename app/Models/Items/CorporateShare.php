@@ -11,14 +11,16 @@
 
 namespace App\Models\Items;
 
-use App\Models\Items\Attributes\Corporate;
+use App\Models\Attributes\CorporateShare\Corporate;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * This is the corporate share model class.
  *
- * @property int $id
- * @property Item $item
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ *
+ * @property int       $id
+ * @property Item      $item
  * @property Corporate $corporate
  */
 class CorporateShare extends Model

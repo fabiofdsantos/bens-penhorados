@@ -11,12 +11,12 @@
 
 namespace App\Models\Items;
 
-use App\Models\Items\Attributes\VehicleCategory;
-use App\Models\Items\Attributes\VehicleColor;
-use App\Models\Items\Attributes\VehicleFuel;
-use App\Models\Items\Attributes\VehicleMake;
-use App\Models\Items\Attributes\VehicleModel;
-use App\Models\Items\Attributes\VehicleType;
+use App\Models\Attributes\Vehicle\VehicleCategory;
+use App\Models\Attributes\Vehicle\VehicleColor;
+use App\Models\Attributes\Vehicle\VehicleFuel;
+use App\Models\Attributes\Vehicle\VehicleMake;
+use App\Models\Attributes\Vehicle\VehicleModel;
+use App\Models\Attributes\Vehicle\VehicleType;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -24,16 +24,18 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * This is the vehicle model class.
  *
- * @property int $id
- * @property int|null $year
- * @property bool|null $is_good_condition
- * @property Item $item
- * @property VehicleMake|null $make
- * @property VehicleModel|null $model
- * @property VehicleColor|null $color
- * @property VehicleFuel|null $fuel
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ *
+ * @property int                  $id
+ * @property int|null             $year
+ * @property bool|null            $is_good_condition
+ * @property Item                 $item
+ * @property VehicleMake|null     $make
+ * @property VehicleModel|null    $model
+ * @property VehicleColor|null    $color
+ * @property VehicleFuel|null     $fuel
  * @property VehicleCategory|null $category
- * @property VehicleType|null $type
+ * @property VehicleType|null     $type
  */
 class Vehicle extends Model
 {

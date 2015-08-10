@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Models\Items\Attributes;
+namespace App\Models\Attributes\Vehicle;
 
 use App\Models\Items\Vehicle;
 use Illuminate\Database\Eloquent\Builder;
@@ -18,10 +18,12 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * This is the vehicle's model model class.
  *
- * @property int $id
- * @property string $name
- * @property string $regex
- * @property int $make_id
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ *
+ * @property int         $id
+ * @property string      $name
+ * @property string      $regex
+ * @property VehicleMake $make
  */
 class VehicleModel extends Model
 {
