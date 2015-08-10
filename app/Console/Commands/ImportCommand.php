@@ -13,8 +13,8 @@ namespace App\Console\Commands;
 
 use App\Jobs\Import\ImportFromMapJob;
 use App\Jobs\Import\ImportFromWebsiteJob;
-use App\Models\Items\Attributes\District;
-use App\Models\Items\Attributes\ItemCategory;
+use App\Models\Attributes\Generic\District;
+use App\Models\Attributes\Generic\ItemCategory;
 use App\Models\RawData;
 use Bus;
 use Illuminate\Console\Command;

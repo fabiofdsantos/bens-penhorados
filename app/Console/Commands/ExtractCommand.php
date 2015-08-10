@@ -12,7 +12,7 @@
 namespace App\Console\Commands;
 
 use App\Jobs\Extract\ExtractGenericAttributesJob;
-use App\Models\Items\Attributes\ItemCategory;
+use App\Models\Attributes\Generic\ItemCategory;
 use App\Models\RawData;
 use Bus;
 use Illuminate\Console\Command;
