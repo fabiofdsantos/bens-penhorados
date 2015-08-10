@@ -13,7 +13,7 @@ namespace App\Extractors\Vehicle;
 
 use App\Extractors\ExtractorInterface;
 use App\Helpers\Text;
-use App\Models\Items\Attributes\VehicleType;
+use App\Models\Attributes\Vehicle\VehicleType;
 
 /**
  * This is the type extractor class.

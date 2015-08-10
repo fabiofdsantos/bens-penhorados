@@ -13,7 +13,7 @@ namespace App\Extractors\Vehicle;
 
 use App\Extractors\ExtractorInterface;
 use App\Helpers\Text;
-use App\Models\Items\Attributes\VehicleMake;
+use App\Models\Attributes\Vehicle\VehicleMake;
 
 /**
  * This is the make extractor class.

@@ -13,7 +13,7 @@ namespace App\Extractors\Vehicle;
 
 use App\Extractors\ExtractorInterface;
 use App\Helpers\Text;
-use App\Models\Items\Attributes\VehicleFuel;
+use App\Models\Attributes\Vehicle\VehicleFuel;
 
 /**
  * This is the fuel extractor class.
