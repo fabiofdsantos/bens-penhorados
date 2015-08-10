@@ -43,7 +43,7 @@ class Text
      */
     public static function splitter($str)
     {
-        $str = preg_replace('/(\d+)[,\.](\d+)/', '${1}${1}', $str);
+        $str = preg_replace('/(\d+)[,\.](\d+)[,\.]?(\d+)?/', '${1}${2}${3}', $str);
 
         return preg_split('/\s*[,\.]\s*/', $str, null, PREG_SPLIT_NO_EMPTY);
     }
