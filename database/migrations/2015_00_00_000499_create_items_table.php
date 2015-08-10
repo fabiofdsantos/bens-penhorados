@@ -25,11 +25,13 @@ class CreateItemsTable extends Migration
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('item_categories');
 
+            $table->integer('status_id')->unsigned();
+            $table->foreign('status_id')->references('id')->on('item_statuses');
+
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
             $table->integer('tax_office');
             $table->integer('year');
-            $table->string('status');
             $table->string('mode');
             $table->decimal('price', 15, 2)->nullable();
             $table->integer('vat')->nullable();

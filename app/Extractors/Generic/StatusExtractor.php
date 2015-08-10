@@ -13,6 +13,7 @@ namespace App\Extractors\Generic;
 
 use App\Extractors\ExtractorInterface;
 use App\Helpers\Text;
+use App\Models\Attributes\Generic\ItemStatus;
 
 /**
  * This is the status extractor class.
@@ -29,6 +30,13 @@ class StatusExtractor implements ExtractorInterface
     protected $str;
 
     /**
+     * The item's status.
+     *
+     * @var \Illuminate\Support\Collection
+     */
+    protected $status;
+
+    /**
      * Create a new status extractor instance.
      *
      * @param array $params
@@ -36,15 +44,22 @@ class StatusExtractor implements ExtractorInterface
     public function __construct($params)
     {
         $this->str = Text::clean($params[0]);
+        $this->statuses = ItemStatus::all();
     }
 
     /**
      * Extract the status.
      *
-     * @return string
+     * @return int|null
      */
     public function extract()
     {
-        return $this->str;
+        $this->str = Text::removeAccents($this->str);
+
+        foreach ($this->statuses as $status) {
+            if (preg_match($status->regex, $this->str)) {
+                return $status->id;
+            }
+        }
     }
 }

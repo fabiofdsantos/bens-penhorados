@@ -12,6 +12,7 @@
 namespace App\Models\Items;
 
 use App\Models\Attributes\Generic\ItemCategory;
+use App\Models\Attributes\Generic\ItemStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -24,11 +25,11 @@ use Illuminate\Support\Str;
  *
  * @property string       $code
  * @property ItemCategory $category
+ * @property ItemStatus   $status
  * @property string       $title
  * @property string       $slug
  * @property int          $tax_office
  * @property int          $year
- * @property string       $status
  * @property string       $mode
  * @property float        $price
  * @property int|null     $vat
@@ -111,6 +112,16 @@ class Item extends Model
     public function category()
     {
         return $this->hasOne(ItemCategory::class, 'id', 'category_id');
+    }
+
+    /**
+     * An item must have a status.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function status()
+    {
+        return $this->hasOne(ItemStatus::class, 'id', 'status_id');
     }
 
     /**

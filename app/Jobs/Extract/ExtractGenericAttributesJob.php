@@ -43,10 +43,10 @@ class ExtractGenericAttributesJob extends Job
     protected $attributes = [
         'code'             => null,
         'category_id'      => null,
+        'status_id'        => null,
         'title'            => null,
         'tax_office'       => null,
         'year'             => null,
-        'status'           => null,
         'mode'             => null,
         'price'            => null,
         'vat'              => null,
@@ -198,7 +198,7 @@ class ExtractGenericAttributesJob extends Job
                     $this->attributes['vat'] = $this->extractor->vat($text);
                 }
             } elseif (preg_match('/estado da venda/i', $title)) {
-                $this->attributes['status'] = $this->extractor->status($text);
+                $this->attributes['status_id'] = $this->extractor->status($text);
             } elseif (preg_match('/modalidade/i', $title)) {
                 $this->attributes['mode'] = $this->extractor->mode($text);
             }

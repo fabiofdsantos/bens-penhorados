@@ -23,7 +23,7 @@ namespace App\Extractors;
  * @method int|null            phoneNumber(string $str)
  * @method int|null            price(string $str)
  * @method array               startEndDatetime(string $str)
- * @method string              status(string $str)
+ * @method int|null            status(string $str)
  * @method int|null            vat(string $str)
  */
 class GenericExtractorWrapper extends AbstractExtractorWrapper
