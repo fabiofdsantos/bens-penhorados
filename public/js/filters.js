@@ -1,10 +1,10 @@
 angular.module('bens-penhorados-filters', []).filter('vehicleCondition', function() {
     return function(goodCondition) {
         if (goodCondition === true) {
-            return 'Bom estado';
+            return 'Bom/Razoável';
         }
         if (goodCondition === false) {
-            return 'Mau estado';
+            return 'Mau';
         }
     }
 }).filter('generateLink', function() {
