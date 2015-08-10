@@ -261,6 +261,10 @@ class ExtractVehicleAttributesJob extends Job
             }
         } else {
             $title = $this->code;
+
+            if (isset($this->attributes['category_id'])) {
+                $title .= " - {$vehicle->category()->pluck('name')}";
+            }
         }
 
         if (isset($this->attributes['year'])) {
