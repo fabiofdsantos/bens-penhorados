@@ -18,8 +18,8 @@ class VehicleTypesTableSeeder extends Seeder
         DB::table('vehicle_types')->delete();
 
         $types = [
-            ['name' => 'Mercadorias', 'regex' => '/\\bmercadorias\b/i'],
-            ['name' => 'Passageiros', 'regex' => '/\\bpassageiros\b/i'],
+            ['name' => 'Mercadorias', 'regex' => '/\bmercadorias\b/i'],
+            ['name' => 'Passageiros', 'regex' => '/\bpassageiros\b/i'],
         ];
 
         DB::table('vehicle_types')->insert($types);
