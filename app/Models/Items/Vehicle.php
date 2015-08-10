@@ -147,7 +147,7 @@ class Vehicle extends Model
     public function scopeActive(Builder $query)
     {
         $ids = Item::where('itemable_type', self::class)
-                ->where('acceptance_dt', '<', Carbon::now())
+                ->where('acceptance_dt', '>', Carbon::now())
                 ->lists('itemable_id');
 
         return $query->whereIn('id', $ids);
