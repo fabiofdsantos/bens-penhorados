@@ -3,7 +3,8 @@ var app = angular.module('bens-penhorados', [
     'ngResource',
     'angularUtils.directives.dirPagination',
     'angular-loading-bar',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'bens-penhorados-filters'
 ]);
 
 app.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
