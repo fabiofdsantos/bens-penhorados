@@ -178,4 +178,17 @@ class Vehicle extends Model
     {
         return $query->where('model_id', $modelId);
     }
+
+    /**
+     * Scope a query to only include items of a specific color.
+     *
+     * @param Builder $query
+     * @param int     $colorId
+     *
+     * @return Builder
+     */
+    public function scopeWhereColorIs(Builder $query, $colorId)
+    {
+        return $query->where('color_id', $colorId);
+    }
 }
