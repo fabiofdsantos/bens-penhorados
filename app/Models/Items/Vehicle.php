@@ -217,4 +217,16 @@ class Vehicle extends Model
     {
         return $query->where('category_id', $categoryId);
     }
+    /**
+     * Scope a query to only include items of a specific type.
+     *
+     * @param Builder $query
+     * @param int     $typeId
+     *
+     * @return Builder
+     */
+    public function scopeWhereTypeIs(Builder $query, $typeId)
+    {
+        return $query->where('type_id', $typeId);
+    }
 }
