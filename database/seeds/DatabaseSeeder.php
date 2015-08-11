@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
         $this->call('PtMunicipalitiesTableSeeder');
         $this->call('ItemCategoriesTableSeeder');
         $this->call('ItemStatusesTableSeeder');
+        $this->call('ItemPurchaseTypesSeeder');
         $this->call('VehicleColorsTableSeeder');
         $this->call('VehicleMakesTableSeeder');
         $this->call('VehicleModelsTableSeeder');
