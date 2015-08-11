@@ -23,6 +23,8 @@ use Illuminate\Pagination\LengthAwarePaginator;
  */
 class VehicleController extends Controller
 {
+    const DATETIME_FORMAT = 'd-m-Y \à\s H:i';
+
     /**
      * Show a list of vehicles.
      *
@@ -129,16 +131,40 @@ class VehicleController extends Controller
      */
     public function getSingleVehicle($slug)
     {
-        $result = Item::withSlug($slug)->first();
+        $generic = Item::withSlug($slug)->first();
 
-        if (empty($result)) {
+        if (empty($generic)) {
             return [];
         }
 
-        $vehicle = [
-                'images' => json_decode($result->images),
-            ];
+        $vehicle = Vehicle::find($generic->itemable_id);
+        $item = [
+            'code'           => $generic->code,
+            'taxOffice'      => $generic->tax_office,
+            'title'          => $generic->title,
+            'slug'           => $generic->slug,
+            'price'          => $generic->price,
+            'vat'            => $generic->vat,
+            'status'         => $generic->status()->pluck('name'),
+            'mode'           => $generic->purchaseType()->pluck('name'),
+            'description'    => $generic->full_description,
+            'images'         => json_decode($generic->images),
+            'previewDtStart' => $generic->preview_dt_start->format(self::DATETIME_FORMAT),
+            'previewDtEnd'   => $generic->preview_dt_end->format(self::DATETIME_FORMAT),
+            'openingDt'      => $generic->opening_dt->format(self::DATETIME_FORMAT),
+            'acceptanceDt'   => $generic->acceptance_dt->format(self::DATETIME_FORMAT),
+            'year'           => $vehicle->year,
+            'make'           => $vehicle->make()->pluck('name'),
+            'model'          => $vehicle->model()->pluck('name'),
+            'category'       => $vehicle->category()->pluck('name'),
+            'type'           => $vehicle->type()->pluck('name'),
+            'color'          => $vehicle->color()->pluck('name'),
+            'fuel'           => $vehicle->fuel()->pluck('name'),
+            'goodCondition'  => is_null($vehicle->is_good_condition) ? null : (bool) $vehicle->is_good_condition,
+            'engDispl'       => $vehicle->engine_displacement,
+            'regPlateCode'   => $vehicle->reg_plate_code,
+        ];
 
-        return $vehicle;
+        return $item;
     }
 }

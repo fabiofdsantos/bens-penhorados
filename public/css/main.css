@@ -49,6 +49,17 @@ body {
     text-align: center;
     font-size: 30px;
 }
+.item-general-details p {
+    margin: 0px 0px 5px;
+}
+.item-price {
+    font-size: 30px;
+    color: #999;
+    margin-bottom: 15px;
+}
+.item-buttons .col-xs-12 {
+    margin-bottom: 10px;
+}
 #loginbox {
     margin-top: 30px;
 }

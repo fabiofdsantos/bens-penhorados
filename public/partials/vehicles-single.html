@@ -1,19 +1,151 @@
 <div class="section">
     <div ng-show="vehicle" class="container">
-        <h1 class="page-header" ng-bind="vehicle.code"></h1>
-        <div class="row">
+        <h1 class="page-header" ng-bind="vehicle.title"></h1>
+        <div class="row" style="margin-bottom: 15px">
             <div class="col-md-6 show-grid">
-                <div style="height: 305px">
+                <div style="max-width: 100%">
                     <carousel interval="2000">
                         <slide ng-repeat="image in vehicle.images">
                             <img ng-src="../images/{{ image }}" style="margin:auto;">
                         </slide>
                     </carousel>
-                    <img ng-hide="vehicle.images" ng-src="../images/empty.jpg" style="margin:auto; height: 305px">
+                    <img ng-hide="vehicle.images" ng-src="../images/empty.jpg" style="margin:auto; max-width: 100%">
                 </div>
-                <div class="col-md-6">
-
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12 center">
+                        <div class="row">
+                            <strong>Preço base de venda:</strong>
+                        </div>
+                        <div class="item-price row">
+                            <span ng-bind="vehicle.price ? (vehicle.price | currency:'€':0) : 'À melhor oferta'"></span>
+                            <span ng-show="vehicle.vat" ng-bind="' - Incl. ' + vehicle.vat + '% (IVA)'"></span>
+                        </div>
+                    </div>
                 </div>
+                <div class="item-general-details well">
+                    <div class="row">
+                        <div class="col-sm-12 center">
+                            <p class="small">
+                                <strong>Estado da venda: </strong>
+                                <span ng-switch="vehicle.status">
+                                    <span ng-switch-when="Em curso">
+                                        <span style="color: green;" ng-bind="vehicle.status"></span>
+                                    </span>
+                                    <span ng-switch-when="Suspenso">
+                                        <span style="color: red;" ng-bind="vehicle.status"></span>
+                                    </span>
+                                    <span ng-switch-default>
+                                        <span ng-bind="vehicle.status"></span>
+                                    </span>
+                                </span>
+                            </p>
+                            <p class="small">
+                                <strong>Serviço de finanças: </strong>
+                                <span ng-bind="vehicle.taxOffice"></span>
+                            </p>
+                            <p class="small">
+                                <strong>Modalidade: </strong>
+                                <span ng-bind="vehicle.mode"></span>
+                            </p>
+                            <p class="small">
+                                <strong>Código da venda: </strong>
+                                <span ng-bind="vehicle.code"></span>
+                            </p>
+                            <p class="small">
+                                <strong>Localização: </strong>
+                                <span ng-bind=""></span>
+                            </p>
+                            <br />
+                            <small ng-bind="'Apresentação de propostas até ' + vehicle.acceptanceDt"></small>
+                            <br />
+                            <small ng-bind="'Examinação do bem de ' + vehicle.previewDtStart"></small>
+                            <small ng-bind="' até ' + vehicle.previewDtEnd"></small>
+                            <br />
+                            <small ng-bind="'Abertura de propostas em ' + vehicle.openingDt"></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item-buttons col-md-6 center">
+                <div class="col-xs-12 col-sm-6">
+                    <a class="btn btn-primary" target="_blank" ng-href="{{ (vehicle.code | generateLink) }}" role="button"><i class="glyphicon glyphicon-link"></i> Ver anúncio original</a>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <a class="btn btn-warning" href="#" role="button"><i class="glyphicon glyphicon-pushpin"></i> Marcar como favorito</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                <h4>Detalhes</h4>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size: 12px;">
+                        <tr ng-show="vehicle.make">
+                            <th scope="row">Marca</th>
+                            <td ng-bind="vehicle.make"></td>
+                        </tr>
+                        <tr ng-show="vehicle.model">
+                            <th scope="row">Modelo</th>
+                            <td ng-bind="vehicle.model"></td>
+                        </tr>
+                        <tr ng-show="vehicle.year">
+                            <th scope="row">Ano</th>
+                            <td ng-bind="vehicle.year"></td>
+                        </tr>
+                        <tr ng-show="vehicle.engDispl">
+                            <th scope="row">Cilindrada</th>
+                            <td ng-bind="(vehicle.engDispl | number : 0) + ' cc'"></td>
+                        </tr>
+                        <tr ng-show="vehicle.fuel">
+                            <th scope="row">Combustível</th>
+                            <td ng-bind="vehicle.fuel"></td>
+                        </tr>
+                        <tr ng-show="vehicle.color">
+                            <th scope="row">Cor</th>
+                            <td ng-bind="vehicle.color"></td>
+                        </tr>
+                        <tr ng-show="vehicle.category">
+                            <th scope="row">Categoria</th>
+                            <td ng-bind="vehicle.category"></td>
+                        </tr>
+                        <tr ng-show="vehicle.type">
+                            <th scope="row">Tipo</th>
+                            <td ng-bind="vehicle.type"></td>
+                        </tr>
+                        <tr ng-show="vehicle.regPlateCode">
+                            <th scope="row">Matrícula</th>
+                            <td ng-bind="vehicle.regPlateCode"></td>
+                        </tr>
+                        <tr ng-show="vehicle.goodCondition != null">
+                            <th scope="row">Estado</th>
+                            <td ng-bind="vehicle.goodCondition | vehicleCondition"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-9">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                <h4>Descrição original do veículo</h4>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size: 12px;">
+                        <tr ng-show="vehicle.description">
+                            <td ng-bind="vehicle.description"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
