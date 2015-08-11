@@ -26,6 +26,19 @@ class TextHelperTest extends AbstractTestCase
         $this->assertEquals($expected, Text::removeAccents($text));
     }
 
+    public function testSplitter()
+    {
+        $text = 'Lorem 2,4.4 ipsum dolor, 4.1,2 sit. Amet, consectetur.';
+        $expected = [
+            'Lorem 244 ipsum dolor',
+            '412 sit',
+            'Amet',
+            'consectetur',
+        ];
+
+        $this->assertEquals($expected, Text::splitter($text));
+    }
+
     public function testClean()
     {
         $text = "Lorem  \nipsum  \tdolor sit amet,  consectetur adipiscing.";
