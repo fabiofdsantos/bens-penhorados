@@ -219,7 +219,7 @@ class ExtractGenericAttributesJob extends Job
             $text = $crawler->filter('span.info-element-text')->eq($i)->text();
 
             if (preg_match('/caracteristicas/i', $title)) {
-                $this->attributes['full_description'] = $text;
+                $this->attributes['full_description'] = Text::clean($text);
             } elseif (preg_match('/fiel depositario/i', $title)) {
                 $this->attributes['depositary_name'] = $this->extractor->fullName($text);
 
