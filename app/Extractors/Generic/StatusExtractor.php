@@ -30,7 +30,7 @@ class StatusExtractor implements ExtractorInterface
     protected $str;
 
     /**
-     * The item's status.
+     * The item's statuses.
      *
      * @var \Illuminate\Support\Collection
      */
