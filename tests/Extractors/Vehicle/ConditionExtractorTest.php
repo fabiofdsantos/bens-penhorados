@@ -25,8 +25,8 @@ class ConditionExtractorTest extends AbstractVehicleExtractorTest
             'em estado razoável',
         ];
 
-        foreach ($text as $value) {
-            $this->assertTrue($this->extractor->condition($value));
+        foreach ($text as $input) {
+            $this->assertTrue($this->extractor->condition($input));
         }
     }
 
@@ -43,8 +43,8 @@ class ConditionExtractorTest extends AbstractVehicleExtractorTest
             'pintura danificada',
         ];
 
-        foreach ($text as $value) {
-            $this->assertFalse($this->extractor->condition($value));
+        foreach ($text as $input) {
+            $this->assertFalse($this->extractor->condition($input));
         }
     }
 }

@@ -18,16 +18,15 @@ class EngineDisplacementExtractorTest extends AbstractVehicleExtractorTest
 {
     public function testExtractEngineDisplacement()
     {
-        $text = '120 cc';
-        $this->assertEquals(120, $this->extractor->engDispl($text));
+        $text = [
+            '120 cc'    => 120,
+            '121cc'     => 121,
+            '122 cm3'   => 122,
+            '123 cm³'  => 123,
+        ];
 
-        $text = '121cc';
-        $this->assertEquals(121, $this->extractor->engDispl($text));
-
-        $text = '122 cm3';
-        $this->assertEquals(122, $this->extractor->engDispl($text));
-
-        $text = '123 cm³';
-        $this->assertEquals(123, $this->extractor->engDispl($text));
+        foreach ($text as $input => $expected) {
+            $this->assertEquals($expected, $this->extractor->engDispl($input));
+        }
     }
 }

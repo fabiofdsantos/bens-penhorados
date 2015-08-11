@@ -18,31 +18,29 @@ class YearExtractorTest extends AbstractVehicleExtractorTest
 {
     public function testExtractValidYear()
     {
-        $text = 'ano: 2009';
-        $this->assertEquals(2009, $this->extractor->year($text));
+        $text = [
+            'ano: 2009'     => 2009,
+            'ano 2010'      => 2010,
+            'de: 2011'      => 2011,
+            'de 2012'       => 2012,
+            'de 01-02-2013' => 2013,
+            'de 01/02/2014' => 2014,
+        ];
 
-        $text = 'ano 2010';
-        $this->assertEquals(2010, $this->extractor->year($text));
-
-        $text = 'de: 2011';
-        $this->assertEquals(2011, $this->extractor->year($text));
-
-        $text = 'de 2012';
-        $this->assertEquals(2012, $this->extractor->year($text));
-
-        $text = 'de 01-02-2013';
-        $this->assertEquals(2013, $this->extractor->year($text));
-
-        $text = 'de 01/02/2014';
-        $this->assertEquals(2014, $this->extractor->year($text));
+        foreach ($text as $input => $expected) {
+            $this->assertEquals($expected, $this->extractor->year($input));
+        }
     }
 
     public function testExtractInvalidYear()
     {
-        $text = 'ano'.(idate('Y') + 1);
-        $this->assertNull($this->extractor->year($text));
+        $text = [
+            'ano '.(idate('Y') + 1),
+            'ano 1900',
+        ];
 
-        $text = 'ano 1900';
-        $this->assertNull($this->extractor->year($text));
+        foreach ($text as $input) {
+            $this->assertNull($this->extractor->year($input));
+        }
     }
 }
