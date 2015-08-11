@@ -33,6 +33,7 @@ class ConditionExtractor implements ExtractorInterface
         '/\bmal tratado\b/i',
         '/\bpintura riscada\b/i',
         '/\b(amolgad)(o|elas?)\b/i',
+        '/\bdanificad[oa]\b/i',
     ];
 
     /**
