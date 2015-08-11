@@ -11,7 +11,7 @@
 
 namespace App\Extractors\Generic;
 
-use App\Extractors\ExtractorInterface;
+use App\Extractors\AbstractExtractor;
 use App\Helpers\Text;
 
 /**
@@ -19,16 +19,9 @@ use App\Helpers\Text;
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
-class VatExtractor implements ExtractorInterface
+class VatExtractor extends AbstractExtractor
 {
     const REGEX_VAT = '/(\d+)(,\d+)?% IVA incluído/i';
-
-    /**
-     * The input string.
-     *
-     * @var string
-     */
-    protected $str;
 
     /**
      * Create a new vat extractor instance.

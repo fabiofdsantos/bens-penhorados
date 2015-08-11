@@ -11,7 +11,7 @@
 
 namespace App\Extractors\Vehicle;
 
-use App\Extractors\ExtractorInterface;
+use App\Extractors\AbstractExtractor;
 use App\Helpers\Text;
 use App\Models\Attributes\Vehicle\VehicleFuel;
 
@@ -20,7 +20,7 @@ use App\Models\Attributes\Vehicle\VehicleFuel;
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
-class FuelExtractor implements ExtractorInterface
+class FuelExtractor extends AbstractExtractor
 {
     /**
      * The input string.

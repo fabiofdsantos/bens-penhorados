@@ -11,7 +11,7 @@
 
 namespace App\Extractors\Generic;
 
-use App\Extractors\ExtractorInterface;
+use App\Extractors\AbstractExtractor;
 use App\Helpers\Text;
 
 /**
@@ -19,16 +19,9 @@ use App\Helpers\Text;
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
-class PriceExtractor implements ExtractorInterface
+class PriceExtractor extends AbstractExtractor
 {
     const REGEX_PRICE = '/€ (\d{0,}?\.?\d+\,\d+)/';
-
-    /**
-     * The input string.
-     *
-     * @var string
-     */
-    protected $str;
 
     /**
      * Create a new price extractor instance.

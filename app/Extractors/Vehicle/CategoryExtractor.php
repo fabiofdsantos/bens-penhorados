@@ -11,7 +11,7 @@
 
 namespace App\Extractors\Vehicle;
 
-use App\Extractors\ExtractorInterface;
+use App\Extractors\AbstractExtractor;
 use App\Helpers\Text;
 use App\Models\Attributes\Vehicle\VehicleCategory;
 
@@ -20,7 +20,7 @@ use App\Models\Attributes\Vehicle\VehicleCategory;
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
-class CategoryExtractor implements ExtractorInterface
+class CategoryExtractor extends AbstractExtractor
 {
     /**
      * The input string.

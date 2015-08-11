@@ -11,7 +11,7 @@
 
 namespace App\Extractors\Generic;
 
-use App\Extractors\ExtractorInterface;
+use App\Extractors\AbstractExtractor;
 use App\Helpers\Text;
 use App\Models\Attributes\Generic\ItemPurchaseType;
 
@@ -20,15 +20,8 @@ use App\Models\Attributes\Generic\ItemPurchaseType;
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
-class PurchaseTypeExtractor implements ExtractorInterface
+class PurchaseTypeExtractor extends AbstractExtractor
 {
-    /**
-     * The input string.
-     *
-     * @var string
-     */
-    protected $str;
-
     /**
      * The item's purchase types.
      *

@@ -11,7 +11,7 @@
 
 namespace App\Extractors\Vehicle;
 
-use App\Extractors\ExtractorInterface;
+use App\Extractors\AbstractExtractor;
 use App\Helpers\Text;
 
 /**
@@ -19,7 +19,7 @@ use App\Helpers\Text;
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
-class ConditionExtractor implements ExtractorInterface
+class ConditionExtractor extends AbstractExtractor
 {
     const REGEX_GOOD = [
         '/\b(bom|razoavel|regular)\s*(estado)\b/i',

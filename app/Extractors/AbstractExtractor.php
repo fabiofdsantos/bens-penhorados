@@ -12,16 +12,23 @@
 namespace App\Extractors;
 
 /**
- * This is the extractor interface.
+ * This is the abstract extractor class.
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
-interface ExtractorInterface
+abstract class AbstractExtractor
 {
+    /**
+     * The input string.
+     *
+     * @var string
+     */
+    protected $str;
+
     /**
      * Extract an attribute.
      *
      * @return mixed
      */
-    public function extract();
+    abstract public function extract();
 }

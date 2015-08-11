@@ -11,7 +11,7 @@
 
 namespace App\Extractors\Generic;
 
-use App\Extractors\ExtractorInterface;
+use App\Extractors\AbstractExtractor;
 use App\Helpers\Text;
 use Carbon\Carbon;
 
@@ -20,17 +20,10 @@ use Carbon\Carbon;
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
-class StartEndDateTimeExtractor implements ExtractorInterface
+class StartEndDateTimeExtractor extends AbstractExtractor
 {
     const REGEX_DATE = '/\d+\-\d+\-\d+/';
     const REGEX_TIME = '/\d+\:\d+/';
-
-    /**
-     * The input string.
-     *
-     * @var string
-     */
-    protected $str;
 
     /**
      * Create a new start/end datetime extractor instance.

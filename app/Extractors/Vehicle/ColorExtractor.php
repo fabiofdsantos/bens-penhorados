@@ -11,7 +11,7 @@
 
 namespace App\Extractors\Vehicle;
 
-use App\Extractors\ExtractorInterface;
+use App\Extractors\AbstractExtractor;
 use App\Helpers\Text;
 use App\Models\Attributes\Vehicle\VehicleColor;
 
@@ -20,7 +20,7 @@ use App\Models\Attributes\Vehicle\VehicleColor;
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
-class ColorExtractor implements ExtractorInterface
+class ColorExtractor extends AbstractExtractor
 {
     /**
      * The input string.

@@ -11,7 +11,7 @@
 
 namespace App\Extractors\Vehicle;
 
-use App\Extractors\ExtractorInterface;
+use App\Extractors\AbstractExtractor;
 use App\Helpers\Text;
 
 /**
@@ -19,7 +19,7 @@ use App\Helpers\Text;
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
-class YearExtractor implements ExtractorInterface
+class YearExtractor extends AbstractExtractor
 {
     const REGEX_YEAR = '/(\bano\b|\bde\b)[\pP\s]*?(\d+\pP\d+\pP)?(\d{4})/i';
 

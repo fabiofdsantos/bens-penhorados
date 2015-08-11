@@ -11,7 +11,7 @@
 
 namespace App\Extractors\Generic;
 
-use App\Extractors\ExtractorInterface;
+use App\Extractors\AbstractExtractor;
 use App\Helpers\Text;
 
 /**
@@ -19,16 +19,9 @@ use App\Helpers\Text;
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
-class FullNameExtractor implements ExtractorInterface
+class FullNameExtractor extends AbstractExtractor
 {
     const REGEX_FULLNAME = '/^[^(]+(?=$|\s)/ui';
-
-    /**
-     * The input string.
-     *
-     * @var string
-     */
-    protected $str;
 
     /**
      * Create a new full name extractor instance.

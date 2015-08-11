@@ -11,7 +11,7 @@
 
 namespace App\Extractors\Vehicle;
 
-use App\Extractors\ExtractorInterface;
+use App\Extractors\AbstractExtractor;
 use App\Helpers\Text;
 
 /**
@@ -19,7 +19,7 @@ use App\Helpers\Text;
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
-class RegPlateCodeExtractor implements ExtractorInterface
+class RegPlateCodeExtractor extends AbstractExtractor
 {
     const REGEX_GENERAL = '/\b(\d{2}-\d{2}-[a-z]{2}|\b\d{2}-[a-z]{2}-\d{2}|[a-z]{2}-\d{2}-\d{2})(?!\d|\[a-z])*\b/iu';
     const REGEX_TRAILERS = '/\b[a-z]{1,2}-\d{1,6}(?!-)\b/i';

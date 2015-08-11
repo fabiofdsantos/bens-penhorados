@@ -11,14 +11,14 @@
 
 namespace App\Extractors\Vehicle;
 
-use App\Extractors\ExtractorInterface;
+use App\Extractors\AbstractExtractor;
 
 /**
  * This is the engine displacement extractor class.
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
-class EngineDisplacementExtractor implements ExtractorInterface
+class EngineDisplacementExtractor extends AbstractExtractor
 {
     const REGEX_ENGDISPL = '/(\d+)\s*(cc|cm[³3])/iu';
 

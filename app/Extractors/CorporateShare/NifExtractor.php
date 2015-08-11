@@ -11,23 +11,16 @@
 
 namespace App\Extractors\CorporateShare;
 
-use App\Extractors\ExtractorInterface;
+use App\Extractors\AbstractExtractor;
 
 /**
  * This is the nif extractor class.
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
-class NifExtractor implements ExtractorInterface
+class NifExtractor extends AbstractExtractor
 {
     const REGEX_NIF = '/\b[125689][0-9]{8}\b/';
-
-    /**
-     * The input string.
-     *
-     * @var string
-     */
-    protected $str;
 
     /**
      * Create a new nif extractor instance.

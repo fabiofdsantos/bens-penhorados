@@ -11,7 +11,7 @@
 
 namespace App\Extractors\Generic;
 
-use App\Extractors\ExtractorInterface;
+use App\Extractors\AbstractExtractor;
 use App\Helpers\Text;
 
 /**
@@ -19,16 +19,9 @@ use App\Helpers\Text;
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
-class EmailExtractor implements ExtractorInterface
+class EmailExtractor extends AbstractExtractor
 {
     const REGEX_EMAIL = '/\w+@\w+\.\w{1,}/i';
-
-    /**
-     * The input string.
-     *
-     * @var string
-     */
-    protected $str;
 
     /**
      * Create a new email extractor instance.
