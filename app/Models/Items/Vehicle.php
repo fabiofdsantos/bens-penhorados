@@ -204,4 +204,17 @@ class Vehicle extends Model
     {
         return $query->where('fuel_id', $fuelId);
     }
+
+    /**
+     * Scope a query to only include items of a specific category.
+     *
+     * @param Builder $query
+     * @param int     $categoryId
+     *
+     * @return Builder
+     */
+    public function scopeWhereCategoryIs(Builder $query, $categoryId)
+    {
+        return $query->where('category_id', $categoryId);
+    }
 }
