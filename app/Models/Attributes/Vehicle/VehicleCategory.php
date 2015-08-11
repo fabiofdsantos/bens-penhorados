@@ -49,7 +49,7 @@ class VehicleCategory extends Model
      */
     public function scopeAssigned(Builder $query)
     {
-        $categories = Vehicle::distinct()->lists('category_id');
+        $categories = Vehicle::active()->distinct()->lists('category_id');
 
         return $query->whereIn('id', $categories)->orderBy('name');
     }

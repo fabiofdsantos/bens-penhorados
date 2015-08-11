@@ -49,7 +49,7 @@ class VehicleFuel extends Model
      */
     public function scopeAssigned(Builder $query)
     {
-        $fuels = Vehicle::distinct()->lists('fuel_id');
+        $fuels = Vehicle::active()->distinct()->lists('fuel_id');
 
         return $query->whereIn('id', $fuels)->orderBy('name');
     }

@@ -49,7 +49,7 @@ class VehicleType extends Model
      */
     public function scopeAssigned(Builder $query)
     {
-        $types = Vehicle::distinct()->lists('type_id');
+        $types = Vehicle::active()->distinct()->lists('type_id');
 
         return $query->whereIn('id', $types)->orderBy('name');
     }

@@ -73,7 +73,7 @@ class VehicleModel extends Model
      */
     public function scopeAssigned(Builder $query)
     {
-        $models = Vehicle::distinct()->lists('model_id');
+        $models = Vehicle::active()->distinct()->lists('model_id');
 
         return $query->whereIn('id', $models)->orderBy('name');
     }

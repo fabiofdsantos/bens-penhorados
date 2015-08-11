@@ -49,7 +49,7 @@ class VehicleColor extends Model
      */
     public function scopeAssigned(Builder $query)
     {
-        $colors = Vehicle::distinct()->lists('color_id');
+        $colors = Vehicle::active()->distinct()->lists('color_id');
 
         return $query->whereIn('id', $colors)->orderBy('name');
     }
