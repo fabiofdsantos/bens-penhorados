@@ -34,7 +34,7 @@ class StatusExtractor implements ExtractorInterface
      *
      * @var \Illuminate\Support\Collection
      */
-    protected $status;
+    protected $statuses;
 
     /**
      * Create a new status extractor instance.
