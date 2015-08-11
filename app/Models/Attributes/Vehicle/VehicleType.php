@@ -11,6 +11,8 @@
 
 namespace App\Models\Attributes\Vehicle;
 
+use App\Models\Items\Vehicle;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -37,4 +39,18 @@ class VehicleType extends Model
      * @var string
      */
     protected $primaryKey = 'id';
+
+    /**
+     * Scope a query to only include types assigned at least to one vehicle.
+     *
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeAssigned(Builder $query)
+    {
+        $types = Vehicle::distinct()->lists('type_id');
+
+        return $query->whereIn('id', $types)->orderBy('name');
+    }
 }
