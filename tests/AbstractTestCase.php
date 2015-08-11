@@ -9,7 +9,14 @@
  * file that was distributed with this source code.
  */
 
-class TestCase extends Laravel\Lumen\Testing\TestCase
+use Laravel\Lumen\Testing\TestCase;
+
+/**
+ * This is the abstract test case class.
+ *
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ */
+abstract class AbstractTestCase extends TestCase
 {
     /**
      * Creates the application.
@@ -18,6 +25,8 @@ class TestCase extends Laravel\Lumen\Testing\TestCase
      */
     public function createApplication()
     {
-        return require __DIR__.'/../bootstrap/app.php';
+        $app = require __DIR__.'/../bootstrap/app.php';
+
+        return $app;
     }
 }
