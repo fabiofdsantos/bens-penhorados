@@ -50,8 +50,8 @@ class Text
 
     /**
      * Clean a given string:
-     *  - Remove multiple occurences of whitespaces;
-     *  - Remove both \n and \t.
+     *  - Remove both \n and \t;
+     *  - Remove multiple occurences of whitespaces.
      *
      * @param string $str
      *
@@ -59,8 +59,8 @@ class Text
      */
     public static function clean($str)
     {
-        $str = preg_replace('/\s+/', ' ', $str);
         $str = preg_replace('/\\n|\\t/', '', $str);
+        $str = preg_replace('/\s+/', ' ', $str);
 
         return $str;
     }
