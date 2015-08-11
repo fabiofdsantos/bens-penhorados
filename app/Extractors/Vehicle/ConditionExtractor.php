@@ -22,16 +22,16 @@ use App\Helpers\Text;
 class ConditionExtractor implements ExtractorInterface
 {
     const REGEX_GOOD = [
-        '/\b(bom|razoavel|regular)\s(estado)\b/i',
-        '/\bestado razoavel\b/i',
+        '/\b(bom|razoavel|regular)\s*(estado)\b/i',
+        '/\b(estado)\s(razoavel|regular)\b/i',
     ];
 
     const REGEX_BAD = [
-        '/\bmau estado\b/i',
+        '/\bmau\s*estado\b/i',
         '/\bsucata\b/i',
         '/\bavariado\b/i',
-        '/\bmal tratado\b/i',
-        '/\bpintura riscada\b/i',
+        '/\bmal\s*tratado\b/i',
+        '/\bpintura\s*riscada\b/i',
         '/\b(amolgad)(o|elas?)\b/i',
         '/\bdanificad[oa]\b/i',
     ];
