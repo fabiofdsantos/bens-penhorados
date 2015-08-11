@@ -23,13 +23,6 @@ use App\Models\Attributes\Vehicle\VehicleFuel;
 class FuelExtractor extends AbstractExtractor
 {
     /**
-     * The input string.
-     *
-     * @var string
-     */
-    protected $str;
-
-    /**
      * The vehicle's fuels.
      *
      * @var \Illuminate\Support\Collection

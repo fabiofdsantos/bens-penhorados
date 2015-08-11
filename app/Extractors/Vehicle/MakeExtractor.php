@@ -23,13 +23,6 @@ use App\Models\Attributes\Vehicle\VehicleMake;
 class MakeExtractor extends AbstractExtractor
 {
     /**
-     * The input string.
-     *
-     * @var string
-     */
-    protected $str;
-
-    /**
      * The vehicle's makes.
      *
      * @var \Illuminate\Support\Collection

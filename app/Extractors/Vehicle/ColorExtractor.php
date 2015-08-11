@@ -23,13 +23,6 @@ use App\Models\Attributes\Vehicle\VehicleColor;
 class ColorExtractor extends AbstractExtractor
 {
     /**
-     * The input string.
-     *
-     * @var string
-     */
-    protected $str;
-
-    /**
      * The vehicle's colors.
      *
      * @var \Illuminate\Support\Collection

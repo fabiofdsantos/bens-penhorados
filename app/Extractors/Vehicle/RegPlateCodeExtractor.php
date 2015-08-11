@@ -25,13 +25,6 @@ class RegPlateCodeExtractor extends AbstractExtractor
     const REGEX_TRAILERS = '/\b[a-z]{1,2}-\d{1,6}(?!-)\b/i';
 
     /**
-     * The input string.
-     *
-     * @var string
-     */
-    protected $str;
-
-    /**
      * Create a new registration plate code extractor instance.
      *
      * @param array $params

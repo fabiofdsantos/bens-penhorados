@@ -23,13 +23,6 @@ use App\Models\Attributes\Vehicle\VehicleCategory;
 class CategoryExtractor extends AbstractExtractor
 {
     /**
-     * The input string.
-     *
-     * @var string
-     */
-    protected $str;
-
-    /**
      * The vehicle's categories.
      *
      * @var \Illuminate\Support\Collection

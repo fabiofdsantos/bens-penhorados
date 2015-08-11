@@ -23,13 +23,6 @@ use App\Models\Attributes\Vehicle\VehicleType;
 class TypeExtractor extends AbstractExtractor
 {
     /**
-     * The input string.
-     *
-     * @var str
-     */
-    protected $str;
-
-    /**
      * The vehicle's types.
      *
      * @var \Illuminate\Support\Collection

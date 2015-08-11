@@ -23,13 +23,6 @@ use App\Models\Attributes\Vehicle\VehicleModel;
 class ModelExtractor extends AbstractExtractor
 {
     /**
-     * The input string.
-     *
-     * @var string
-     */
-    protected $str;
-
-    /**
      * The vehicle's models.
      *
      * @var \Illuminate\Support\Collection

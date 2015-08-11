@@ -24,13 +24,6 @@ class YearExtractor extends AbstractExtractor
     const REGEX_YEAR = '/(\bano\b|\bde\b)[\pP\s]*?(\d+\pP\d+\pP)?(\d{4})/i';
 
     /**
-     * The input string.
-     *
-     * @var string
-     */
-    protected $str;
-
-    /**
      * Create a new year extractor instance.
      *
      * @param array $params

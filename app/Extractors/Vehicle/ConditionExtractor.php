@@ -37,13 +37,6 @@ class ConditionExtractor extends AbstractExtractor
     ];
 
     /**
-     * The input string.
-     *
-     * @var string
-     */
-    protected $str;
-
-    /**
      * Create a new condition extractor instance.
      *
      * @param array $params

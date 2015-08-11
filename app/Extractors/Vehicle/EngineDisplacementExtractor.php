@@ -23,13 +23,6 @@ class EngineDisplacementExtractor extends AbstractExtractor
     const REGEX_ENGDISPL = '/(\d+)\s*(cc|cm[³3])/iu';
 
     /**
-     * The input string.
-     *
-     * @var string
-     */
-    protected $str;
-
-    /**
      * Create a new engine displacement extractor instance.
      *
      * @param array $params
