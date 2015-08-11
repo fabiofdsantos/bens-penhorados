@@ -19,8 +19,8 @@ namespace App\Extractors;
  * @method \Carbon\Carbon|null datetime(string $str)
  * @method string|null         email(string $str)
  * @method string|null         fullName(string $str)
- * @method string|null         mode(string $str)
  * @method int|null            phoneNumber(string $str)
+ * @method int|null            purchaseType(string $str)
  * @method int|null            price(string $str)
  * @method array               startEndDatetime(string $str)
  * @method int|null            status(string $str)
@@ -32,7 +32,7 @@ class GenericExtractorWrapper extends AbstractExtractorWrapper
         'datetime'          => '\App\Extractors\Generic\DateTimeExtractor',
         'email'             => '\App\Extractors\Generic\EmailExtractor',
         'fullName'          => '\App\Extractors\Generic\FullNameExtractor',
-        'mode'              => '\App\Extractors\Generic\ModeExtractor',
+        'purchaseType'      => '\App\Extractors\Generic\PurchaseTypeExtractor',
         'phoneNumber'       => '\App\Extractors\Generic\PhoneNumberExtractor',
         'price'             => '\App\Extractors\Generic\PriceExtractor',
         'startEndDatetime'  => '\App\Extractors\Generic\StartEndDateTimeExtractor',
