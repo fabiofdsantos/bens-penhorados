@@ -11,6 +11,8 @@
 
 namespace App\Models\Attributes\Vehicle;
 
+use App\Models\Items\Vehicle;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -37,4 +39,18 @@ class VehicleColor extends Model
      * @var string
      */
     protected $primaryKey = 'id';
+
+    /**
+     * Scope a query to only include colors assigned at least to one vehicle.
+     *
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeAssigned(Builder $query)
+    {
+        $colors = Vehicle::distinct()->lists('color_id');
+
+        return $query->whereIn('id', $colors)->orderBy('name');
+    }
 }
