@@ -34,6 +34,7 @@ class ConditionExtractor extends AbstractExtractor
         '/\bpintura\s*riscada\b/i',
         '/\b(amolgad)(o|elas?)\b/i',
         '/\bdanificad[oa]\b/i',
+        '/\bavaria\b/i',
     ];
 
     /**
