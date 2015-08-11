@@ -16,7 +16,7 @@
  */
 class RegPlateCodeExtractorTest extends AbstractVehicleExtractorTest
 {
-    public function testExtractGeneralFormat()
+    public function testExtractValidGeneralFormat()
     {
         $text = 'AA-99-99';
         $this->assertEquals('AA-99-99', $this->extractor->regPlateCode($text));
@@ -28,7 +28,7 @@ class RegPlateCodeExtractorTest extends AbstractVehicleExtractorTest
         $this->assertEquals('99-99-AA', $this->extractor->regPlateCode($text));
     }
 
-    public function testExtractTrailerFormat()
+    public function testExtractValidTrailerFormat()
     {
         $text = 'X-0';
         $this->assertEquals('X-0', $this->extractor->regPlateCode($text));
@@ -41,5 +41,29 @@ class RegPlateCodeExtractorTest extends AbstractVehicleExtractorTest
 
         $text = 'XX-000000';
         $this->assertEquals('XX-000000', $this->extractor->regPlateCode($text));
+    }
+
+    public function testExtractInvalidGeneralFormat()
+    {
+        $text = 'AAA-00-00';
+        $this->assertNull($this->extractor->regPlateCode($text));
+
+        $text = 'BB-000-00';
+        $this->assertNull($this->extractor->regPlateCode($text));
+
+        $text = 'CC-00-000';
+        $this->assertNull($this->extractor->regPlateCode($text));
+    }
+
+    public function testExtractInvalidTrailerFormat()
+    {
+        $text = 'A-1234567';
+        $this->assertNull($this->extractor->regPlateCode($text));
+
+        $text = 'AA-1234567';
+        $this->assertNull($this->extractor->regPlateCode($text));
+
+        $text = 'AAA-123456';
+        $this->assertNull($this->extractor->regPlateCode($text));
     }
 }
