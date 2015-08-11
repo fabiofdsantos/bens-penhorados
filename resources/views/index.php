@@ -45,10 +45,11 @@
     <script src="js/filters.js"></script>
 
     <!-- Controllers -->
-    <script src="js/controllers/VehicleController.js"></script>
+    <script src="js/controllers/VehicleControllers.js"></script>
 
     <!-- Services -->
     <script src="js/services/VehicleService.js"></script>
+    <script src="js/services/VehicleFiltersService.js"></script>
 
 </body>
 
