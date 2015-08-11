@@ -12,7 +12,6 @@
 namespace App\Extractors\Vehicle;
 
 use App\Extractors\ExtractorInterface;
-use App\Helpers\Text;
 
 /**
  * This is the engine displacement extractor class.
@@ -37,7 +36,7 @@ class EngineDisplacementExtractor implements ExtractorInterface
      */
     public function __construct($params)
     {
-        $this->str = Text::removeAccents($params[0]);
+        $this->str = $params[0];
     }
 
     /**
