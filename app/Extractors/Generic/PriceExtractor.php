@@ -43,7 +43,7 @@ class PriceExtractor implements ExtractorInterface
     /**
      * Extract the price.
      *
-     * @return int|null
+     * @return float|null
      */
     public function extract()
     {
@@ -51,7 +51,7 @@ class PriceExtractor implements ExtractorInterface
             $match[1] = str_replace('.', '', $match[1]);
             $match[1] = str_replace(',', '.', $match[1]);
 
-            return (integer) $match[1];
+            return (float) $match[1];
         }
     }
 }

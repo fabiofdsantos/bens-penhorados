@@ -21,7 +21,7 @@ namespace App\Extractors;
  * @method string|null         fullName(string $str)
  * @method int|null            phoneNumber(string $str)
  * @method int|null            purchaseType(string $str)
- * @method int|null            price(string $str)
+ * @method float|null          price(string $str)
  * @method array               startEndDatetime(string $str)
  * @method int|null            status(string $str)
  * @method int|null            vat(string $str)
