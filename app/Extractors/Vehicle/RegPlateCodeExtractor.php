@@ -21,8 +21,8 @@ use App\Helpers\Text;
  */
 class RegPlateCodeExtractor implements ExtractorInterface
 {
-    const REGEX_GENERAL = '/\d{2}-\d{2}-[a-z]{2}|\d{2}-[a-z]{2}-\d{2}|[a-z]{2}-\d{2}-\d{2}/i';
-    const REGEX_TRAILERS = '/[a-z]{1,2}-\d{1,6}/i';
+    const REGEX_GENERAL = '/\b(\d{2}-\d{2}-[a-z]{2}|\b\d{2}-[a-z]{2}-\d{2}|[a-z]{2}-\d{2}-\d{2})(?!\d|\[a-z])*\b/iu';
+    const REGEX_TRAILERS = '/\b[a-z]{1,2}-\d{1,6}(?!-)\b/i';
 
     /**
      * The input string.
