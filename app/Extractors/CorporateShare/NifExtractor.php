@@ -20,7 +20,7 @@ use App\Extractors\ExtractorInterface;
  */
 class NifExtractor implements ExtractorInterface
 {
-    const REGEX_NIF = '/\b[12568][0-9]{8}\b/';
+    const REGEX_NIF = '/\b[125689][0-9]{8}\b/';
 
     /**
      * The input string.
