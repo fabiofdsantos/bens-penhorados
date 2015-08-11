@@ -21,7 +21,7 @@ use App\Helpers\Text;
  */
 class VatExtractor implements ExtractorInterface
 {
-    const REGEX_VAT = '/(\d+)(,\d+)?% IVA incluído/ui';
+    const REGEX_VAT = '/(\d+)(,\d+)?% IVA incluído/i';
 
     /**
      * The input string.
@@ -48,7 +48,7 @@ class VatExtractor implements ExtractorInterface
     public function extract()
     {
         if (preg_match(self::REGEX_VAT, $this->str, $match)) {
-            return (integer) $match[0];
+            return (integer) $match[1] != 0 ?: null;
         }
     }
 }
