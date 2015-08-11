@@ -41,6 +41,7 @@ class ConditionExtractorTest extends AbstractVehicleExtractorTest
             'algumas amolgadelas',
             'está danificado',
             'pintura danificada',
+            'avaria mecânica',
         ];
 
         foreach ($text as $input) {
