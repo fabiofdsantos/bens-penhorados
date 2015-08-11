@@ -29,17 +29,7 @@
                         <div class="col-sm-12 center">
                             <p class="small">
                                 <strong>Estado da venda: </strong>
-                                <span ng-switch="vehicle.status">
-                                    <span ng-switch-when="Em curso">
-                                        <span style="color: green;" ng-bind="vehicle.status"></span>
-                                    </span>
-                                    <span ng-switch-when="Suspenso">
-                                        <span style="color: red;" ng-bind="vehicle.status"></span>
-                                    </span>
-                                    <span ng-switch-default>
-                                        <span ng-bind="vehicle.status"></span>
-                                    </span>
-                                </span>
+                                <span ng-bind="vehicle.status" ng-style="vehicle.status == 'Em curso' ? {'color':'green'} : {'color':'red'}"></span>
                             </p>
                             <p class="small">
                                 <strong>Serviço de finanças: </strong>
