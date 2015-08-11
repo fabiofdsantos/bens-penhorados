@@ -12,6 +12,7 @@
 namespace App\Models\Items;
 
 use App\Models\Attributes\Generic\ItemCategory;
+use App\Models\Attributes\Generic\ItemPurchaseType;
 use App\Models\Attributes\Generic\ItemStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -23,31 +24,31 @@ use Illuminate\Support\Str;
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  *
- * @property string       $code
- * @property ItemCategory $category
- * @property ItemStatus   $status
- * @property string       $title
- * @property string       $slug
- * @property int          $tax_office
- * @property int          $year
- * @property string       $mode
- * @property float        $price
- * @property int|null     $vat
- * @property float|null   $lat
- * @property float|null   $lng
- * @property string       $images
- * @property string|null  $depositary_name
- * @property int|null     $depositary_phone
- * @property string|null  $depositary_email
- * @property string|null  $mediator_name
- * @property int|null     $mediator_phone
- * @property string|null  $mediator_email
- * @property Carbon       $preview_dt_start
- * @property Carbon       $preview_dt_end
- * @property Carbon       $acceptance_dt
- * @property Carbon       $opening_dt
- * @property Carbon       $updated_at
- * @property Carbon       $created_at
+ * @property string           $code
+ * @property ItemCategory     $category
+ * @property ItemStatus       $status
+ * @property ItemPurchaseType $purchaseType
+ * @property string           $title
+ * @property string           $slug
+ * @property int              $tax_office
+ * @property int              $year
+ * @property float            $price
+ * @property int|null         $vat
+ * @property float|null       $lat
+ * @property float|null       $lng
+ * @property string           $images
+ * @property string|null      $depositary_name
+ * @property int|null         $depositary_phone
+ * @property string|null      $depositary_email
+ * @property string|null      $mediator_name
+ * @property int|null         $mediator_phone
+ * @property string|null      $mediator_email
+ * @property Carbon           $preview_dt_start
+ * @property Carbon           $preview_dt_end
+ * @property Carbon           $acceptance_dt
+ * @property Carbon           $opening_dt
+ * @property Carbon           $updated_at
+ * @property Carbon           $created_at
  */
 class Item extends Model
 {
@@ -122,6 +123,16 @@ class Item extends Model
     public function status()
     {
         return $this->hasOne(ItemStatus::class, 'id', 'status_id');
+    }
+
+    /**
+     * An item must have a purchase type.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function purchaseType()
+    {
+        return $this->hasOne(ItemPurchaseType::class, 'id', 'status_id');
     }
 
     /**
