@@ -28,6 +28,9 @@ class CreateItemsTable extends Migration
             $table->integer('status_id')->unsigned();
             $table->foreign('status_id')->references('id')->on('item_statuses');
 
+            $table->integer('purchase_type_id')->unsigned();
+            $table->foreign('purchase_type_id')->references('id')->on('item_purchase_types');
+
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
             $table->integer('tax_office');
