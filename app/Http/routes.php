@@ -15,6 +15,11 @@ $app->get('/', function () {
 
 $app->group(['prefix' => 'api/v1/', 'namespace' => 'App\Http\Controllers'], function () use ($app) {
     $app->get('home', ['uses' => 'HomeController@index']);
+
+    /* Vehicles */
     $app->get('vehicles', ['uses' => 'VehicleResultsController@index']);
     $app->get('vehicles/{slug}', ['uses' => 'VehicleSinglePageController@show']);
+
+    /* Filtering attributes */
+    $app->get('attributes/vehicle', ['uses' => 'VehicleFilteringAttributesController@index']);
 });
