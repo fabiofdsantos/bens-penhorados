@@ -17,7 +17,7 @@ app.config(function(paginationTemplateProvider) {
 
 app.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
     $locationProvider.html5Mode({
-      enabled: true
+        enabled: true
     });
     $routeProvider
         .when('/', {
