@@ -191,4 +191,17 @@ class Vehicle extends Model
     {
         return $query->where('color_id', $colorId);
     }
+
+    /**
+     * Scope a query to only include items of a specific fuel type.
+     *
+     * @param Builder $query
+     * @param int     $fuelId
+     *
+     * @return Builder
+     */
+    public function scopeWhereFuelIs(Builder $query, $fuelId)
+    {
+        return $query->where('fuel_id', $fuelId);
+    }
 }
