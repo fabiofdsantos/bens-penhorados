@@ -15,5 +15,5 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    //
+    const DATETIME_FORMAT = 'd-m-Y \à\s H:i';
 }
