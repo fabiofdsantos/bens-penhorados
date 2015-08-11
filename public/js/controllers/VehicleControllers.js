@@ -18,7 +18,14 @@ app.controller('VehicleListCtrl', ['$scope', '$http', 'Vehicle', 'VehicleFilters
 
     getFilteringAttributes();
 
-    $scope.$watchGroup(['filterMake', 'filterModel', 'filterCategory', 'filterType'], function(newValues, oldValues, scope) {
+    var $toWatch = [
+        'filterMake',
+        'filterModel',
+        'filterCategory',
+        'filterType',
+    ];
+
+    $scope.$watchGroup($toWatch, function(newValues, oldValues, scope) {
         if (!angular.equals(newValues, oldValues)) {
             getFilteringAttributes();
             getResultsPage(1);
@@ -31,6 +38,8 @@ app.controller('VehicleListCtrl', ['$scope', '$http', 'Vehicle', 'VehicleFilters
             limit: $scope.itemsPerPage,
             make: $scope.filterMake,
             model: $scope.filterModel,
+            category: $scope.filterCategory,
+            type: $scope.filterType,
         }, function(data) {
             $scope.result = data;
             $scope.noResults = ((data.items.length) ? false : true);

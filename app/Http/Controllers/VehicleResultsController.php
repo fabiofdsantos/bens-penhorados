@@ -32,11 +32,15 @@ class VehicleResultsController extends Controller
      */
     public function index(Request $request)
     {
-        $perPage = (int) $request->input('limit') ?: 15;
-        $makeId = (int) $request->input('make') ?: null;
-        $modelId = (int) $request->input('model') ?: null;
+        $input = [
+            'per_page'    => (int) $request->input('limit') ?: 15,
+            'make_id'     => (int) $request->input('make') ?: null,
+            'model_id'    => (int) $request->input('model') ?: null,
+            'category_id' => (int) $request->input('category') ?: null,
+            'type_id'     => (int) $request->input('type') ?: null,
+        ];
 
-        $vehicles = $this->getVehicles($perPage, $makeId, $modelId);
+        $vehicles = $this->getVehicles($input);
         $data = $this->paginateVehicles($vehicles);
 
         return response()->json($data, 200);
@@ -81,24 +85,30 @@ class VehicleResultsController extends Controller
     /**
      * Get active vehicles.
      *
-     * @param int      $perPage
-     * @param int|null $makeId
-     * @param int|null $modelId
+     * @param array $input
      *
      * @return LengthAwarePaginator
      */
-    public function getVehicles($perPage, $makeId, $modelId)
+    public function getVehicles($input)
     {
         $query = Vehicle::active();
 
-        if (isset($makeId)) {
-            $query->whereMakeId($makeId);
+        if (isset($input['make_id'])) {
+            $query->whereMakeId($input['make_id']);
         }
 
-        if (isset($modelId)) {
-            $query->whereModelId($modelId);
+        if (isset($input['model_id'])) {
+            $query->whereModelId($input['model_id']);
         }
 
-        return $query->paginate($perPage);
+        if (isset($input['category_id'])) {
+            $query->whereCategoryId($input['category_id']);
+        }
+
+        if (isset($input['type_id'])) {
+            $query->whereTypeId($input['type_id']);
+        }
+
+        return $query->paginate($input['per_page']);
     }
 }
