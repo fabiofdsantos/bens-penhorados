@@ -11,6 +11,7 @@
 
 namespace App\Models\Attributes\Generic;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
