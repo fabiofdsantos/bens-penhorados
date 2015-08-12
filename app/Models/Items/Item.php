@@ -11,10 +11,12 @@
 
 namespace App\Models\Items;
 
+use App\Models\Attributes\Generic\District;
 use App\Models\Attributes\Generic\ItemCategory;
 use App\Models\Attributes\Generic\ItemPurchaseType;
 use App\Models\Attributes\Generic\ItemStatus;
 use App\Models\Attributes\Generic\ItemTaxOffice;
+use App\Models\Attributes\Generic\Municipality;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -30,6 +32,8 @@ use Illuminate\Support\Str;
  * @property ItemStatus       $status
  * @property ItemPurchaseType $purchaseType
  * @property ItemTaxOffice    $taxOffice
+ * @property District         $district
+ * @property Municipality     $municipality
  * @property string           $title
  * @property string           $slug
  * @property int              $year
@@ -144,6 +148,26 @@ class Item extends Model
     public function taxOffice()
     {
         return $this->hasOne(ItemTaxOffice::class, 'id', 'tax_office_id');
+    }
+
+    /**
+     * An item should be associated with a district.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function district()
+    {
+        return $this->hasOne(District::class, 'id', 'district_id');
+    }
+
+    /**
+     * An item should be associated with a municipality.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function municipality()
+    {
+        return $this->hasOne(Municipality::class, 'id', 'municipality_id');
     }
 
     /**
