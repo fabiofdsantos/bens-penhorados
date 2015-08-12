@@ -45,7 +45,7 @@ class ExtractGenericAttributesJob extends Job
         'category_id'      => null,
         'status_id'        => null,
         'title'            => null,
-        'tax_office'       => null,
+        'tax_office_id'    => null,
         'year'             => null,
         'purchase_type_id' => null,
         'price'            => null,
@@ -116,7 +116,7 @@ class ExtractGenericAttributesJob extends Job
 
             // Extract the tax office number and the year of publication
             preg_match_all('/\d{1,}/', $this->attributes['code'], $match);
-            $this->attributes['tax_office'] = $match[0][0];
+            $this->attributes['tax_office_id'] = $this->extractor->taxOffice($match[0][0]);
             $this->attributes['year'] = $match[0][1];
 
             // Extract attributes from top of the raw data

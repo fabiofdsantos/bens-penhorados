@@ -31,9 +31,11 @@ class CreateItemsTable extends Migration
             $table->integer('purchase_type_id')->unsigned();
             $table->foreign('purchase_type_id')->references('id')->on('item_purchase_types');
 
+            $table->integer('tax_office_id')->unsigned();
+            $table->foreign('tax_office_id')->references('id')->on('item_tax_offices');
+
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
-            $table->integer('tax_office');
             $table->integer('year');
             $table->string('mode');
             $table->decimal('price', 15, 2)->nullable();
