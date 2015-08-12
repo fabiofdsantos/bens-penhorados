@@ -21,7 +21,7 @@ class CreateItemTaxOfficesTable extends Migration
     {
         Schema::create('item_tax_offices', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->integer('number')->null();
             $table->string('code');
 
             $table->integer('municipality_id')->unsigned();
