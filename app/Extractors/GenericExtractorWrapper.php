@@ -24,6 +24,7 @@ namespace App\Extractors;
  * @method float|null          price(string $str)
  * @method array               startEndDatetime(string $str)
  * @method int|null            status(string $str)
+ * @method int|null            taxOffice(string $str)
  * @method int|null            vat(string $str)
  */
 class GenericExtractorWrapper extends AbstractExtractorWrapper
@@ -37,6 +38,7 @@ class GenericExtractorWrapper extends AbstractExtractorWrapper
         'price'             => '\App\Extractors\Generic\PriceExtractor',
         'startEndDatetime'  => '\App\Extractors\Generic\StartEndDateTimeExtractor',
         'status'            => '\App\Extractors\Generic\StatusExtractor',
+        'taxOffice'         => '\App\Extractors\Generic\TaxOfficeExtractor',
         'vat'               => '\App\Extractors\Generic\VatExtractor',
     ];
 }
