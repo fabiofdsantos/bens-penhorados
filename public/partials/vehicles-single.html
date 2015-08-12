@@ -19,7 +19,7 @@
                             <strong>Preço base de venda:</strong>
                         </div>
                         <div class="item-price row">
-                            <span ng-bind="vehicle.price ? (vehicle.price | currency:'€':0) : 'À melhor oferta'"></span>
+                            <span ng-bind="vehicle.price ? (vehicle.price | currency:'€') : 'À melhor oferta'"></span>
                             <span ng-show="vehicle.vat" ng-bind="' - Incl. ' + vehicle.vat + '% (IVA)'"></span>
                         </div>
                     </div>
