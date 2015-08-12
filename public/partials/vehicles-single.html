@@ -32,8 +32,8 @@
                                 <span ng-bind="vehicle.status" ng-style="vehicle.status == 'Em curso' ? {'color':'green'} : {'color':'red'}"></span>
                             </p>
                             <p class="small">
-                                <strong>Serviço de finanças: </strong>
-                                <span ng-bind="vehicle.taxOffice"></span>
+                                <strong>Localização: </strong>
+                                <span ng-bind=""></span>
                             </p>
                             <p class="small">
                                 <strong>Modalidade: </strong>
@@ -44,8 +44,8 @@
                                 <span ng-bind="vehicle.code"></span>
                             </p>
                             <p class="small">
-                                <strong>Localização: </strong>
-                                <span ng-bind=""></span>
+                                <strong>Serviço de finanças: </strong>
+                                <span ng-bind="vehicle.taxOffice"></span>
                             </p>
                             <br />
                             <small ng-bind="'Apresentação de propostas até ' + vehicle.acceptanceDt"></small>
