@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call('PtDistrictsTableSeeder');
         $this->call('PtMunicipalitiesTableSeeder');
+        $this->call('ItemTaxOfficesTableSeeder');
         $this->call('ItemCategoriesTableSeeder');
         $this->call('ItemStatusesTableSeeder');
         $this->call('ItemPurchaseTypesSeeder');
