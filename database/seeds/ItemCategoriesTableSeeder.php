@@ -11,6 +11,11 @@
 
 use Illuminate\Database\Seeder;
 
+/**
+ * This is the item's categories table seeder class.
+ *
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ */
 class ItemCategoriesTableSeeder extends Seeder
 {
     public function run()

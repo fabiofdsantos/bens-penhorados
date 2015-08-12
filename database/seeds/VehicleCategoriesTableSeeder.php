@@ -11,6 +11,11 @@
 
 use Illuminate\Database\Seeder;
 
+/**
+ * This is the vehicle's categories table seeder class.
+ *
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ */
 class VehicleCategoriesTableSeeder extends Seeder
 {
     public function run()

@@ -11,6 +11,11 @@
 
 use Illuminate\Database\Seeder;
 
+/**
+ * This is the item's purchase types table seeder class.
+ *
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ */
 class ItemPurchaseTypesSeeder extends Seeder
 {
     public function run()

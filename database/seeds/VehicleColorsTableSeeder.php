@@ -11,6 +11,11 @@
 
 use Illuminate\Database\Seeder;
 
+/**
+ * This is the vehicle's colors table seeder class.
+ *
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ */
 class VehicleColorsTableSeeder extends Seeder
 {
     public function run()

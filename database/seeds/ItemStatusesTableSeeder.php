@@ -11,6 +11,11 @@
 
 use Illuminate\Database\Seeder;
 
+/**
+ * This is the item's statuses table seeder class.
+ *
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ */
 class ItemStatusesTableSeeder extends Seeder
 {
     public function run()

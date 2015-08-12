@@ -20,27 +20,9 @@ class PtMunicipalitiesTableSeeder extends Seeder
 {
     public function run()
     {
-        $this->call('Municipalities\AngraDoHeroismo');
-        $this->call('Municipalities\Aveiro');
-        $this->call('Municipalities\Beja');
-        $this->call('Municipalities\Braga');
-        $this->call('Municipalities\Braganca');
-        $this->call('Municipalities\CasteloBranco');
-        $this->call('Municipalities\Coimbra');
-        $this->call('Municipalities\Evora');
-        $this->call('Municipalities\Faro');
-        $this->call('Municipalities\Funchal');
-        $this->call('Municipalities\Guarda');
-        $this->call('Municipalities\Horta');
-        $this->call('Municipalities\Leiria');
-        $this->call('Municipalities\Lisboa');
-        $this->call('Municipalities\PontaDelgada');
-        $this->call('Municipalities\Portalegre');
-        $this->call('Municipalities\Porto');
-        $this->call('Municipalities\Santarem');
-        $this->call('Municipalities\Setubal');
-        $this->call('Municipalities\VianaDoCastelo');
-        $this->call('Municipalities\VilaReal');
-        $this->call('Municipalities\Viseu');
+        foreach (glob(getcwd().'/database/seeds/Municipalities/*.php') as $file) {
+            $filename = basename($file, '.php');
+            $this->call('Municipalities\\'.$filename);
+        }
     }
 }
