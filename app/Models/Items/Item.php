@@ -14,6 +14,7 @@ namespace App\Models\Items;
 use App\Models\Attributes\Generic\ItemCategory;
 use App\Models\Attributes\Generic\ItemPurchaseType;
 use App\Models\Attributes\Generic\ItemStatus;
+use App\Models\Attributes\Generic\ItemTaxOffice;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -28,9 +29,9 @@ use Illuminate\Support\Str;
  * @property ItemCategory     $category
  * @property ItemStatus       $status
  * @property ItemPurchaseType $purchaseType
+ * @property ItemTaxOffice    $taxOffice
  * @property string           $title
  * @property string           $slug
- * @property int              $tax_office
  * @property int              $year
  * @property float            $price
  * @property int|null         $vat
@@ -133,6 +134,16 @@ class Item extends Model
     public function purchaseType()
     {
         return $this->hasOne(ItemPurchaseType::class, 'id', 'status_id');
+    }
+
+    /**
+     * An item must be associated with a tax office.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function taxOffice()
+    {
+        return $this->hasOne(ItemTaxOffice::class, 'id', 'tax_office_id');
     }
 
     /**
