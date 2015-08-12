@@ -21,6 +21,7 @@ class VianaDoCastelo extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '16')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Arcos de Valdevez', 'regex' => '/arcos[\pP\s]?de[\pP\s]?valdevez/i', 'district_id' => $districtId],
             ['name' => 'Caminha', 'regex' => '/caminha/i', 'district_id' => $districtId],
             ['name' => 'Melgaço', 'regex' => '/melgac[\pP\s]?o/i', 'district_id' => $districtId],
             ['name' => 'Monção', 'regex' => '/monc[\pP\s]?ao/i', 'district_id' => $districtId],

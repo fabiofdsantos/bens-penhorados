@@ -21,6 +21,7 @@ class Leiria extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '10')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Alcobaça', 'regex' => '/alcobac[\pP\s]?a/i', 'district_id' => $districtId],
             ['name' => 'Alvaiazere', 'regex' => '/alvaiazere/i', 'district_id' => $districtId],
             ['name' => 'Ansião', 'regex' => '/ansiao/i', 'district_id' => $districtId],
             ['name' => 'Batalha', 'regex' => '/batalha/i', 'district_id' => $districtId],

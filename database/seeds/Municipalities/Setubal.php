@@ -21,6 +21,7 @@ class Setubal extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '15')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Alcacer do Sal', 'regex' => '/alcacer[\pP\s]?do[\pP\s]?sal/i', 'district_id' => $districtId],
             ['name' => 'Alcochete', 'regex' => '/alcochete/i', 'district_id' => $districtId],
             ['name' => 'Almada', 'regex' => '/almada/i', 'district_id' => $districtId],
             ['name' => 'Barreiro', 'regex' => '/barreiro/i', 'district_id' => $districtId],

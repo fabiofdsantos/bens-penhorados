@@ -21,6 +21,7 @@ class Aveiro extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '01')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Agueda', 'regex' => '/agueda/i', 'district_id' => $districtId],
             ['name' => 'Albergaria-a-Velha', 'regex' => '/albergaria[\pP\s]?a[\pP\s]?velha/i', 'district_id' => $districtId],
             ['name' => 'Anadia', 'regex' => '/anadia/i', 'district_id' => $districtId],
             ['name' => 'Arouca', 'regex' => '/arouca/i', 'district_id' => $districtId],

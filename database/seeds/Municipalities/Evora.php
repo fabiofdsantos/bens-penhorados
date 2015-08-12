@@ -21,6 +21,7 @@ class Evora extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '07')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Alandroal', 'regex' => '/alandroal/i', 'district_id' => $districtId],
             ['name' => 'Arraiolos', 'regex' => '/arraiolos/i', 'district_id' => $districtId],
             ['name' => 'Borba', 'regex' => '/borba/i', 'district_id' => $districtId],
             ['name' => 'Estremoz', 'regex' => '/estremoz/i', 'district_id' => $districtId],

@@ -21,6 +21,7 @@ class Porto extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '13')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Amarante', 'regex' => '/amarante/i', 'district_id' => $districtId],
             ['name' => 'Baião', 'regex' => '/baiao/i', 'district_id' => $districtId],
             ['name' => 'Felgueiras', 'regex' => '/felgueiras/i', 'district_id' => $districtId],
             ['name' => 'Gondomar', 'regex' => '/gondomar/i', 'district_id' => $districtId],

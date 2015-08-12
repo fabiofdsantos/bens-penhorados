@@ -21,6 +21,7 @@ class Braga extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '03')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Amares', 'regex' => '/amares/i', 'district_id' => $districtId],
             ['name' => 'Barcelos', 'regex' => '/barcelos/i', 'district_id' => $districtId],
             ['name' => 'Braga', 'regex' => '/braga/i', 'district_id' => $districtId],
             ['name' => 'Cabeceiras de Basto', 'regex' => '/cabeceiras[\pP\s]?de[\pP\s]?basto/i', 'district_id' => $districtId],

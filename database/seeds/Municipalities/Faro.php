@@ -21,6 +21,7 @@ class Faro extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '08')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Albufeira', 'regex' => '/albufeira/i', 'district_id' => $districtId],
             ['name' => 'Alcoutim', 'regex' => '/alcoutim/i', 'district_id' => $districtId],
             ['name' => 'Aljezur', 'regex' => '/aljezur/i', 'district_id' => $districtId],
             ['name' => 'Castro Marim', 'regex' => '/castro[\pP\s]?marim/i', 'district_id' => $districtId],

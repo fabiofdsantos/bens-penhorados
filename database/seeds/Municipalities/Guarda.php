@@ -21,6 +21,7 @@ class Guarda extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '09')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Aguiar da Beira', 'regex' => '/aguiar[\pP\s]?da[\pP\s]?beira/i', 'district_id' => $districtId],
             ['name' => 'Almeida', 'regex' => '/almeida/i', 'district_id' => $districtId],
             ['name' => 'Celorico da Beira', 'regex' => '/celorico[\pP\s]?da[\pP\s]?beira/i', 'district_id' => $districtId],
             ['name' => 'Figueira de Castelo Rodrigo', 'regex' => '/figueira[\pP\s]?de[\pP\s]?castelo[\pP\s]?rodrigo/i', 'district_id' => $districtId],

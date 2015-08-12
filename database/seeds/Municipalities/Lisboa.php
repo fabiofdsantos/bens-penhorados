@@ -21,6 +21,7 @@ class Lisboa extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '11')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Alenquer', 'regex' => '/alenquer/i', 'district_id' => $districtId],
             ['name' => 'Arruda dos Vinhos', 'regex' => '/arruda[\pP\s]?dos[\pP\s]?vinhos/i', 'district_id' => $districtId],
             ['name' => 'Azambuja', 'regex' => '/azambuja/i', 'district_id' => $districtId],
             ['name' => 'Cadaval', 'regex' => '/cadaval/i', 'district_id' => $districtId],

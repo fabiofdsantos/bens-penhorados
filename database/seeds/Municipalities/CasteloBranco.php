@@ -21,6 +21,7 @@ class CasteloBranco extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '05')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Belmonte', 'regex' => '/belmonte/i', 'district_id' => $districtId],
             ['name' => 'Castelo Branco', 'regex' => '/castelo[\pP\s]?branco/i', 'district_id' => $districtId],
             ['name' => 'Covilhã', 'regex' => '/covilha/i', 'district_id' => $districtId],
             ['name' => 'Fundão', 'regex' => '/fundao/i', 'district_id' => $districtId],

@@ -21,6 +21,7 @@ class Santarem extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '14')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Abrantes', 'regex' => '/abrantes/i', 'district_id' => $districtId],
             ['name' => 'Alcanena', 'regex' => '/alcanena/i', 'district_id' => $districtId],
             ['name' => 'Almeirim', 'regex' => '/almeirim/i', 'district_id' => $districtId],
             ['name' => 'Alpiarça', 'regex' => '/alpiarc[\pP\s]?a/i', 'district_id' => $districtId],

@@ -21,6 +21,7 @@ class Viseu extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '18')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Armamar', 'regex' => '/armamar/i', 'district_id' => $districtId],
             ['name' => 'Carregal do Sal', 'regex' => '/carregal[\pP\s]?do[\pP\s]?sal/i', 'district_id' => $districtId],
             ['name' => 'Castro Daire', 'regex' => '/castro[\pP\s]?daire/i', 'district_id' => $districtId],
             ['name' => 'Cinfães', 'regex' => '/cinfaes/i', 'district_id' => $districtId],

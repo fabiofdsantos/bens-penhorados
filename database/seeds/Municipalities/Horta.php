@@ -21,6 +21,7 @@ class Horta extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '20')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Corvo', 'regex' => '/corvo/i', 'district_id' => $districtId],
             ['name' => 'Horta', 'regex' => '/horta/i', 'district_id' => $districtId],
             ['name' => 'Lajes das Flores', 'regex' => '/lajes[\pP\s]?das[\pP\s]?flores/i', 'district_id' => $districtId],
             ['name' => 'Lajes do Pico', 'regex' => '/lajes[\pP\s]?do[\pP\s]?pico/i', 'district_id' => $districtId],

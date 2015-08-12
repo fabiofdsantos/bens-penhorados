@@ -21,6 +21,7 @@ class Braganca extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '04')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Alfandega da Fe', 'regex' => '/alfandega[\pP\s]?da[\pP\s]?fe/i', 'district_id' => $districtId],
             ['name' => 'Bragança', 'regex' => '/braganc[\pP\s]?a/i', 'district_id' => $districtId],
             ['name' => 'Carrazeda de Ansiães', 'regex' => '/carrazeda[\pP\s]?de[\pP\s]?ansiaes/i', 'district_id' => $districtId],
             ['name' => 'Freixo de Espada a Cinta', 'regex' => '/freixo[\pP\s]?de[\pP\s]?espada[\pP\s]?a[\pP\s]?cinta/i', 'district_id' => $districtId],

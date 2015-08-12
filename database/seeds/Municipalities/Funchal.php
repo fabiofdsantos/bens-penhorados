@@ -21,6 +21,7 @@ class Funchal extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '22')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Calheta (Madeira)', 'regex' => '/calheta[\pP\s]?[\pP\s]?madeira[\pP\s]?/i', 'district_id' => $districtId],
             ['name' => 'Camara de Lobos', 'regex' => '/camara[\pP\s]?de[\pP\s]?lobos/i', 'district_id' => $districtId],
             ['name' => 'Funchal', 'regex' => '/funchal/i', 'district_id' => $districtId],
             ['name' => 'Machico', 'regex' => '/machico/i', 'district_id' => $districtId],

@@ -21,6 +21,7 @@ class Portalegre extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '12')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Alter do Chão', 'regex' => '/alter[\pP\s]?do[\pP\s]?chao/i', 'district_id' => $districtId],
             ['name' => 'Arronches', 'regex' => '/arronches/i', 'district_id' => $districtId],
             ['name' => 'Avis', 'regex' => '/avis/i', 'district_id' => $districtId],
             ['name' => 'Campo Maior', 'regex' => '/campo[\pP\s]?maior/i', 'district_id' => $districtId],

@@ -21,6 +21,7 @@ class VilaReal extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '17')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Alijo', 'regex' => '/alijo/i', 'district_id' => $districtId],
             ['name' => 'Boticas', 'regex' => '/boticas/i', 'district_id' => $districtId],
             ['name' => 'Chaves', 'regex' => '/chaves/i', 'district_id' => $districtId],
             ['name' => 'Mesão Frio', 'regex' => '/mesao[\pP\s]?frio/i', 'district_id' => $districtId],

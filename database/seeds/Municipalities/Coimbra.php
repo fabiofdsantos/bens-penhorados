@@ -21,6 +21,7 @@ class Coimbra extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '06')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Arganil', 'regex' => '/arganil/i', 'district_id' => $districtId],
             ['name' => 'Cantanhede', 'regex' => '/cantanhede/i', 'district_id' => $districtId],
             ['name' => 'Coimbra', 'regex' => '/coimbra/i', 'district_id' => $districtId],
             ['name' => 'Condeixa-a-Nova', 'regex' => '/condeixa[\pP\s]?a[\pP\s]?nova/i', 'district_id' => $districtId],

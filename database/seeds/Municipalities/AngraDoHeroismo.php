@@ -21,6 +21,7 @@ class AngraDoHeroismo extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '19')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Angra do Heroismo', 'regex' => '/angra[\pP\s]?do[\pP\s]?heroismo/i', 'district_id' => $districtId],
             ['name' => 'Calheta (açores)', 'regex' => '/calheta[\pP\s]?[\pP\s]?ac[\pP\s]?ores[\pP\s]?/i', 'district_id' => $districtId],
             ['name' => 'Santa Cruz da Graciosa', 'regex' => '/santa[\pP\s]?cruz[\pP\s]?da[\pP\s]?graciosa/i', 'district_id' => $districtId],
             ['name' => 'Velas', 'regex' => '/velas/i', 'district_id' => $districtId],

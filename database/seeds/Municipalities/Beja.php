@@ -21,6 +21,7 @@ class Beja extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '02')->pluck('id');
 
         $municipalities = [
+            ['name' => 'Aljustrel', 'regex' => '/aljustrel/i', 'district_id' => $districtId],
             ['name' => 'Almodovar', 'regex' => '/almodovar/i', 'district_id' => $districtId],
             ['name' => 'Alvito', 'regex' => '/alvito/i', 'district_id' => $districtId],
             ['name' => 'Barrancos', 'regex' => '/barrancos/i', 'district_id' => $districtId],
