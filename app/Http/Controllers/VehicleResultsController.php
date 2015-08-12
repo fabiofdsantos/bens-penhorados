@@ -11,7 +11,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Items\Item;
 use App\Models\Items\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
