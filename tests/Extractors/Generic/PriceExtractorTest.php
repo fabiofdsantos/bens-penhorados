@@ -19,13 +19,13 @@ class PriceExtractorTest extends AbstractGenericExtractorTest
     public function testExtractPrice()
     {
         $text = [
-            '€ 1,00 (23,00% IVA incluído)'     => 1,
+            '€ 1,00 (23,00% IVA incluído)'     => 1.00,
             '€ 3.542,90 (23,00% IVA incluído)' => 3542.90,
-            '€ 4.200,00'                       => 4200,
+            '€ 4.200,00'                       => 4200.00,
         ];
 
         foreach ($text as $input => $expected) {
-            $this->assertEquals($expected, $this->extractor->price($input));
+            $this->assertSame($expected, $this->extractor->price($input));
         }
     }
 }
