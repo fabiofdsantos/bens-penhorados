@@ -225,6 +225,19 @@ class Item extends Model
     }
 
     /**
+     * Scope a query to only include active items.
+     *
+     * @param Builder $query
+     * @param string  $slug
+     *
+     * @return Builder
+     */
+    public function scopeActive(Builder $query)
+    {
+        return $query->where('acceptance_dt', '>', Carbon::now());
+    }
+
+    /**
      * Set the item's title and slug.
      *
      * @param string $value
