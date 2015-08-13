@@ -78,6 +78,16 @@ class Vehicle extends Model
     }
 
     /**
+     * Get the vehicle's generic data.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
+    public function items()
+    {
+        return $this->morphMany(Item::class, 'itemable');
+    }
+
+    /**
      * A vehicle can have one make.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
