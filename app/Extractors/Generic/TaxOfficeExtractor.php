@@ -30,7 +30,7 @@ class TaxOfficeExtractor extends AbstractExtractor
     protected $taxOffices;
 
     /**
-     * Create a new status extractor instance.
+     * Create a new tax office extractor instance.
      *
      * @param array $params
      */
@@ -41,7 +41,7 @@ class TaxOfficeExtractor extends AbstractExtractor
     }
 
     /**
-     * Extract the status.
+     * Extract the tax office.
      *
      * @return int|null
      */
