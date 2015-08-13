@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use App\Extractors\VehicleExtractorWrapper;
+use App\Extractors\Wrappers\VehicleExtractorWrapper;
 
 /**
  * This is the abstract vehicle extractor test class.

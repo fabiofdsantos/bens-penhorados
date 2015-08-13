@@ -11,7 +11,7 @@
 
 namespace App\Jobs\Extract;
 
-use App\Extractors\CorporateShareExtractorWrapper;
+use App\Extractors\Wrappers\CorporateShareExtractorWrapper;
 use App\Jobs\Job;
 use App\Models\Attributes\CorporateShare\Corporate;
 use App\Models\Items\CorporateShare;

@@ -11,7 +11,7 @@
 
 namespace App\Jobs\Extract;
 
-use App\Extractors\GenericExtractorWrapper;
+use App\Extractors\Wrappers\GenericExtractorWrapper;
 use App\Helpers\Text;
 use App\Jobs\Job;
 use App\Models\Attributes\Generic\ItemCategory;

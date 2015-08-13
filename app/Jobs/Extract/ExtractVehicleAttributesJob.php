@@ -11,7 +11,7 @@
 
 namespace App\Jobs\Extract;
 
-use App\Extractors\VehicleExtractorWrapper;
+use App\Extractors\Wrappers\VehicleExtractorWrapper;
 use App\Jobs\Job;
 use App\Models\Items\Item;
 use App\Models\Items\Vehicle;

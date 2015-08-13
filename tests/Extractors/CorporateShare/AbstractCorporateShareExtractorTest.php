@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use App\Extractors\CorporateShareExtractorWrapper;
+use App\Extractors\Wrappers\CorporateShareExtractorWrapper;
 
 /**
  * This is the abstract corporate share extractor test class.

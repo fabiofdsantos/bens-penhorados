@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use App\Extractors\GenericExtractorWrapper;
+use App\Extractors\Wrappers\GenericExtractorWrapper;
 
 /**
  * This is the abstract generic extractor test class.
