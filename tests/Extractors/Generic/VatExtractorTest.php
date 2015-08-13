@@ -25,7 +25,7 @@ class VatExtractorTest extends AbstractGenericExtractorTest
         ];
 
         foreach ($text as $input => $expected) {
-            $this->assertEquals($expected, $this->extractor->vat($input));
+            $this->assertSame($expected, $this->extractor->vat($input));
         }
     }
 }
