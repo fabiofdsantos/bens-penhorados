@@ -2,35 +2,54 @@
 
 var app = angular.module('bens-penhorados');
 
-app.controller('VehicleListCtrl', ['$scope', '$http', 'Vehicle', 'VehicleFilters', function($scope, $http, Vehicle, VehicleFilters) {
+app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFilters', function($scope, $location, Vehicle, VehicleFilters) {
     $scope.items = [];
     $scope.totalItems = 0;
     $scope.itemsFrom = 0;
     $scope.itemsTo = 0;
     $scope.itemsPerPageValues = [5, 15, 25, 50, 100];
-    $scope.itemsPerPage = 5;
 
-    getResultsPage(1);
-
-    $scope.pagination = {
-        current: 1
-    };
-
-    getFilteringAttributes();
+    init();
 
     var $toWatch = [
         'filterMake',
         'filterModel',
         'filterCategory',
         'filterType',
+        'itemsPerPage'
     ];
 
     $scope.$watchGroup($toWatch, function(newValues, oldValues, scope) {
         if (!angular.equals(newValues, oldValues)) {
-            getFilteringAttributes();
-            getResultsPage(1);
+            setSearchVars(1);
         }
     });
+
+    function init() {
+        var search = $location.search();
+        $scope.pagination = {
+            current: search.page === undefined ? 1 : search.page,
+        };
+        $scope.itemsPerPage = search.limit === undefined ? 5 : parseInt(search.limit);
+        $scope.filterMake = search.make;
+        $scope.filterModel = search.model;
+        $scope.filterCategory = search.category;
+        $scope.filterType = search.type;
+
+        getResultsPage($scope.pagination.current);
+        getFilteringAttributes();
+    }
+
+    function setSearchVars(pageNumber) {
+        $location.search({
+            page: pageNumber,
+            limit: $scope.itemsPerPage,
+            make: $scope.filterMake,
+            model: $scope.filterModel,
+            category: $scope.filterCategory,
+            type: $scope.filterType,
+        });
+    }
 
     function getResultsPage(pageNumber) {
         Vehicle.query({
@@ -55,7 +74,7 @@ app.controller('VehicleListCtrl', ['$scope', '$http', 'Vehicle', 'VehicleFilters
     }
 
     $scope.pageChangeHandler = function(newPage) {
-        getResultsPage(newPage);
+        setSearchVars(newPage);
     };
 }]);
 

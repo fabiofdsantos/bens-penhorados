@@ -7,9 +7,6 @@ body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
-.center {
-    text-align: center;
-}
 .as-table {
     display: table !important;
 }
@@ -36,14 +33,23 @@ body {
     font-size: 18px;
     color: #777;
 }
-.results-per-page {
-    padding: 5px 5px 5px 15px;
-}
-.results-per-page select {
-    margin-left: 10px;
-}
-.results-title {
+.filter-row {
     margin-bottom: 15px;
+}
+.results-image {
+    padding: 0px;
+    margin: 0px;
+}
+.results-title h2 {
+    font-size: 20px;
+    padding: 0px;
+    margin: 5px 0 15px;
+}
+.results-head {
+    padding: 0px 0px 15px 0px;
+}
+.results-head select {
+    margin-left: 10px;
 }
 .results-price {
     text-align: center;
