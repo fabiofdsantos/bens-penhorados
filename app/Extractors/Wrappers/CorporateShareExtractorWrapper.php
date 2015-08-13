@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Extractors;
+namespace App\Extractors\Wrappers;
 
 /**
  * This is the corporate share extractor wrapper.
