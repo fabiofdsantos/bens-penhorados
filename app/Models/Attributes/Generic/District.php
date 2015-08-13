@@ -11,6 +11,7 @@
 
 namespace App\Models\Attributes\Generic;
 
+use App\Models\Items\CorporateShare;
 use App\Models\Items\Item;
 use App\Models\Items\Vehicle;
 use Illuminate\Database\Eloquent\Builder;
@@ -52,6 +53,21 @@ class District extends Model
     public function scopeAssignedToVehicles(Builder $query)
     {
         $districts = Item::ofType(Vehicle::class)->active()->lists('district_id');
+
+        return $query->whereIn('id', $districts)->orderBy('name');
+    }
+
+    /**
+     * Scope a query to only include districts assigned at least to
+     * one corporate share.
+     *
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeAssignedToCorporateShares(Builder $query)
+    {
+        $districts = Item::ofType(CorporateShare::class)->active()->lists('district_id');
 
         return $query->whereIn('id', $districts)->orderBy('name');
     }
