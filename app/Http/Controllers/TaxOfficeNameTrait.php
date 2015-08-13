@@ -27,10 +27,11 @@ trait TaxOfficeNameTrait
      *
      * @return string
      */
-    public function getTaxOfficeName($office)
+    public static function getTaxOfficeName($office)
     {
         $name = $office->code.' - ';
-        $name .= Municipality::find($office->municipality_id)->pluck('name');
+        $name .= $office->municipality->name;
+
         if ($office->number) {
             $name .= ' ('.$office->number.')';
         }
