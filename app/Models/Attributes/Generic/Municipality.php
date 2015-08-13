@@ -62,4 +62,19 @@ class Municipality extends Model
     {
         return $query->where('district_id', $districtId);
     }
+
+    /**
+     * Scope a query to only include municipalities assigned at least
+     * to one vehicle.
+     *
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeAssignedToVehicles(Builder $query)
+    {
+        $municipalities = Item::ofType(Vehicle::class)->active()->lists('municipality_id');
+
+        return $query->whereIn('id', $municipalities)->orderBy('name');
+    }
 }
