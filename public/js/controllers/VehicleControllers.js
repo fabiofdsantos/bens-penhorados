@@ -16,6 +16,8 @@ app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFil
         'filterModel',
         'filterCategory',
         'filterType',
+        'filterDistrict',
+        'filterMunicipality',
         'itemsPerPage'
     ];
 
@@ -31,6 +33,8 @@ app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFil
             current: search.page === undefined ? 1 : search.page,
         };
         $scope.itemsPerPage = search.limit === undefined ? 5 : parseInt(search.limit);
+        $scope.filterDistrict = search.district;
+        $scope.filterMunicipality = search.municipality;
         $scope.filterMake = search.make;
         $scope.filterModel = search.model;
         $scope.filterCategory = search.category;
@@ -44,6 +48,8 @@ app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFil
         $location.search({
             page: pageNumber,
             limit: $scope.itemsPerPage,
+            district: $scope.filterDistrict,
+            municipality: $scope.filterMunicipality,
             make: $scope.filterMake,
             model: $scope.filterModel,
             category: $scope.filterCategory,
@@ -55,6 +61,8 @@ app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFil
         Vehicle.query({
             page: pageNumber,
             limit: $scope.itemsPerPage,
+            district: $scope.filterDistrict,
+            municipality: $scope.filterMunicipality,
             make: $scope.filterMake,
             model: $scope.filterModel,
             category: $scope.filterCategory,
