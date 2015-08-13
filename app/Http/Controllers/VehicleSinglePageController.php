@@ -21,7 +21,7 @@ use App\Models\Items\Vehicle;
  */
 class VehicleSinglePageController extends Controller
 {
-    use TaxOfficeNameTrait;
+    use TaxOfficeNameTrait, LocationTrait;
 
     /**
      * Show a vehicle.
@@ -59,7 +59,8 @@ class VehicleSinglePageController extends Controller
         $vehicle = Vehicle::find($generic->itemable_id);
         $item = [
             'code'           => $generic->code,
-            'taxOffice'      => $this->getTaxOfficeName($generic->taxOffice),
+            'taxOffice'      => self::getTaxOfficeName($generic->taxOffice),
+            'location'       => self::getLocation($generic),
             'title'          => $generic->title,
             'slug'           => $generic->slug,
             'price'          => $generic->price,
