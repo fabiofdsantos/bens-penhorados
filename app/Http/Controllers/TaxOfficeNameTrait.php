@@ -21,7 +21,7 @@ trait TaxOfficeNameTrait
     /**
      * Get the tax office name.
      *
-     * @param \Illuminate\Database\Eloquent\Collection $office
+     * @param \App\Models\Attributes\Generic\ItemTaxOffice $office
      *
      * @return string
      */
