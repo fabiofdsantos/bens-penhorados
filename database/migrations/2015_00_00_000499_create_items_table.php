@@ -43,7 +43,6 @@ class CreateItemsTable extends Migration
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
             $table->integer('year');
-            $table->string('mode');
             $table->decimal('price', 15, 2)->nullable();
             $table->integer('vat')->nullable();
             $table->double('lat')->nullable();
