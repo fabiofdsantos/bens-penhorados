@@ -78,16 +78,6 @@ class Vehicle extends Model
     }
 
     /**
-     * Get the vehicle's generic data.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
-     */
-    public function items()
-    {
-        return $this->morphMany(Item::class, 'itemable');
-    }
-
-    /**
      * A vehicle can have one make.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -227,6 +217,7 @@ class Vehicle extends Model
     {
         return $query->where('category_id', $categoryId);
     }
+
     /**
      * Scope a query to only include items of a specific type.
      *
@@ -238,5 +229,22 @@ class Vehicle extends Model
     public function scopeWhereTypeIs(Builder $query, $typeId)
     {
         return $query->where('type_id', $typeId);
+    }
+
+    /**
+     * Scope a query to only include items of a specific district.
+     *
+     * @param Builder $query
+     * @param int     $districtId
+     *
+     * @return Builder
+     */
+    public function scopeOfDistrict(Builder $query, $districtId)
+    {
+        $ids = Item::where('itemable_type', self::class)
+                ->where('district_id', '=', $districtId)
+                ->lists('itemable_id');
+
+        return $query->whereIn('id', $ids);
     }
 }
