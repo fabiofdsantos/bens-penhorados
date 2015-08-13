@@ -34,6 +34,12 @@ class CreateItemsTable extends Migration
             $table->integer('tax_office_id')->unsigned();
             $table->foreign('tax_office_id')->references('id')->on('item_tax_offices');
 
+            $table->integer('district_id')->unsigned()->nullable();
+            $table->foreign('district_id')->references('id')->on('pt_districts');
+
+            $table->integer('municipality_id')->unsigned()->nullable();
+            $table->foreign('municipality_id')->references('id')->on('pt_municipalities');
+
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
             $table->integer('year');
