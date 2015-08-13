@@ -27,8 +27,8 @@ trait LocationTrait
      */
     public static function getLocation($generic)
     {
-        $location = $generic->district()->pluck('name');
-        $location .= ', '.$generic->municipality()->pluck('name');
+        $location = $generic->municipality()->pluck('name');
+        $location .= ', '.$generic->district()->pluck('name');
 
         return $location;
     }
