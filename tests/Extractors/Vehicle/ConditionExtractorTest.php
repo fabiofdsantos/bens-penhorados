@@ -44,6 +44,7 @@ class ConditionExtractorTest extends AbstractVehicleExtractorTest
             'avaria mecânica',
             'viatura acidentada',
             'veículo acidentado',
+            'não circula',
         ];
 
         foreach ($text as $input) {
