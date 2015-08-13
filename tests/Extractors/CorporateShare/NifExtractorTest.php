@@ -28,7 +28,7 @@ class NifExtractorTest extends AbstractCorporateShareExtractorTest
         ];
 
         foreach ($text as $input => $expected) {
-            $this->assertEquals($expected, $this->extractor->nif($input));
+            $this->assertSame($expected, $this->extractor->nif($input));
         }
     }
 }

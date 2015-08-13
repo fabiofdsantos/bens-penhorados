@@ -26,7 +26,7 @@ class EngineDisplacementExtractorTest extends AbstractVehicleExtractorTest
         ];
 
         foreach ($text as $input => $expected) {
-            $this->assertEquals($expected, $this->extractor->engDispl($input));
+            $this->assertSame($expected, $this->extractor->engDispl($input));
         }
     }
 }

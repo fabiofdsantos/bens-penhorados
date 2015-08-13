@@ -28,7 +28,7 @@ class YearExtractorTest extends AbstractVehicleExtractorTest
         ];
 
         foreach ($text as $input => $expected) {
-            $this->assertEquals($expected, $this->extractor->year($input));
+            $this->assertSame($expected, $this->extractor->year($input));
         }
     }
 
