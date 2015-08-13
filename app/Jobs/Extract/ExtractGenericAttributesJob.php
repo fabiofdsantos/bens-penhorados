@@ -15,6 +15,8 @@ use App\Extractors\GenericExtractorWrapper;
 use App\Helpers\Text;
 use App\Jobs\Job;
 use App\Models\Attributes\Generic\ItemCategory;
+use App\Models\Attributes\Generic\ItemTaxOffice;
+use App\Models\Attributes\Generic\Municipality;
 use App\Models\Items\Item;
 use Bus;
 use Intervention\Image\ImageManager;
@@ -48,6 +50,8 @@ class ExtractGenericAttributesJob extends Job
         'tax_office_id'    => null,
         'year'             => null,
         'purchase_type_id' => null,
+        'district_id'      => null,
+        'municipality_id'  => null,
         'price'            => null,
         'vat'              => null,
         'lat'              => null,
@@ -134,6 +138,7 @@ class ExtractGenericAttributesJob extends Job
             }
 
             // Create a new generic item
+            $this->setLocationByTaxOffice();
             Item::create($this->attributes);
 
             // Split the description
@@ -291,6 +296,19 @@ class ExtractGenericAttributesJob extends Job
 
             return json_encode($images);
         }
+    }
+
+    /**
+     * Set the location of the current item by the tax office location.
+     *
+     * @return void
+     */
+    private function setLocationByTaxOffice()
+    {
+        $office = ItemTaxOffice::find($this->attributes['tax_office_id']);
+
+        $this->attributes['municipality_id'] = $office->municipality->id;
+        $this->attributes['district_id'] = $office->municipality->district->id;
     }
 
     /**
