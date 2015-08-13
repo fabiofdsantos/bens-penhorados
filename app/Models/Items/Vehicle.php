@@ -247,4 +247,21 @@ class Vehicle extends Model
 
         return $query->whereIn('id', $ids);
     }
+
+    /**
+     * Scope a query to only include items of a specific municipality.
+     *
+     * @param Builder $query
+     * @param int     $municipalityId
+     *
+     * @return Builder
+     */
+    public function scopeOfMunicipality(Builder $query, $municipalityId)
+    {
+        $ids = Item::where('itemable_type', self::class)
+                ->where('municipality_id', '=', $municipalityId)
+                ->lists('itemable_id');
+
+        return $query->whereIn('id', $ids);
+    }
 }
