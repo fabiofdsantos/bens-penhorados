@@ -21,7 +21,7 @@ use App\Helpers\Text;
  */
 class EmailExtractor extends AbstractExtractor
 {
-    const REGEX_EMAIL = '/\w+@\w+\.\w{1,}/i';
+    const REGEX_EMAIL = '/.+@.+\.\w{1,}/i';
 
     /**
      * Create a new email extractor instance.
