@@ -32,11 +32,13 @@ class VehicleResultsController extends Controller
     public function index(Request $request)
     {
         $input = [
-            'per_page'    => (int) $request->input('limit') ?: 15,
-            'make_id'     => (int) $request->input('make') ?: null,
-            'model_id'    => (int) $request->input('model') ?: null,
-            'category_id' => (int) $request->input('category') ?: null,
-            'type_id'     => (int) $request->input('type') ?: null,
+            'per_page'        => (int) $request->input('limit') ?: 5,
+            'district_id'     => $request->input('district'),
+            'municipality_id' => $request->input('municipality'),
+            'make_id'         => $request->input('make'),
+            'model_id'        => $request->input('model'),
+            'category_id'     => $request->input('category'),
+            'type_id'         => $request->input('type'),
         ];
 
         $vehicles = $this->getVehicles($input);
@@ -91,6 +93,14 @@ class VehicleResultsController extends Controller
     public function getVehicles($input)
     {
         $query = Vehicle::active();
+
+        if (isset($input['district_id'])) {
+            $query->ofDistrict($input['district_id']);
+        }
+
+        if (isset($input['municipality_id'])) {
+            $query->ofMunicipality($input['municipality_id']);
+        }
 
         if (isset($input['make_id'])) {
             $query->whereMakeId($input['make_id']);
