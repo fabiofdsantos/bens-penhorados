@@ -11,8 +11,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Attributes\Generic\Municipality;
-
 /**
  * This is the tax office name trait.
  *
@@ -23,7 +21,7 @@ trait TaxOfficeNameTrait
     /**
      * Get the tax office name.
      *
-     * @param \Illuminate\Database\Eloquent\Collection $generic
+     * @param \Illuminate\Database\Eloquent\Collection $office
      *
      * @return string
      */
