@@ -41,7 +41,8 @@ class VehicleCategory extends Model
     protected $primaryKey = 'id';
 
     /**
-     * Scope a query to only include categories assigned at least to one vehicle.
+     * Scope a query to only include categories assigned at least
+     * to one active vehicle.
      *
      * @param Builder $query
      *
@@ -49,8 +50,8 @@ class VehicleCategory extends Model
      */
     public function scopeAssigned(Builder $query)
     {
-        $categories = Vehicle::active()->distinct()->lists('category_id');
+        $ids = Vehicle::active()->distinct()->lists('category_id');
 
-        return $query->whereIn('id', $categories)->orderBy('name');
+        return $query->whereIn('id', $ids)->orderBy('name');
     }
 }

@@ -41,7 +41,8 @@ class VehicleFuel extends Model
     protected $primaryKey = 'id';
 
     /**
-     * Scope a query to only include fuels assigned at least to one vehicle.
+     * Scope a query to only include fuels assigned at least
+     * to one active vehicle.
      *
      * @param Builder $query
      *
@@ -49,8 +50,8 @@ class VehicleFuel extends Model
      */
     public function scopeAssigned(Builder $query)
     {
-        $fuels = Vehicle::active()->distinct()->lists('fuel_id');
+        $ids = Vehicle::active()->distinct()->lists('fuel_id');
 
-        return $query->whereIn('id', $fuels)->orderBy('name');
+        return $query->whereIn('id', $ids)->orderBy('name');
     }
 }

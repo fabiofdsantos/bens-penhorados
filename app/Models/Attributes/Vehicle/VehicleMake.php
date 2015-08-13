@@ -51,7 +51,8 @@ class VehicleMake extends Model
     }
 
     /**
-     * Scope a query to only include makes assigned at least to one vehicle.
+     * Scope a query to only include makes assigned at least
+     * to one active vehicle.
      *
      * @param Builder $query
      *
@@ -59,8 +60,8 @@ class VehicleMake extends Model
      */
     public function scopeAssigned(Builder $query)
     {
-        $makes = Vehicle::active()->distinct()->lists('make_id');
+        $ids = Vehicle::active()->distinct()->lists('make_id');
 
-        return $query->whereIn('id', $makes)->orderBy('name');
+        return $query->whereIn('id', $ids)->orderBy('name');
     }
 }

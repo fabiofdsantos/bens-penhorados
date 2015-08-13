@@ -65,7 +65,8 @@ class VehicleModel extends Model
     }
 
     /**
-     * Scope a query to only include models assigned at least to one vehicle.
+     * Scope a query to only include models assigned at least
+     * to one active vehicle.
      *
      * @param Builder $query
      *
@@ -73,8 +74,8 @@ class VehicleModel extends Model
      */
     public function scopeAssigned(Builder $query)
     {
-        $models = Vehicle::active()->distinct()->lists('model_id');
+        $ids = Vehicle::active()->distinct()->lists('model_id');
 
-        return $query->whereIn('id', $models)->orderBy('name');
+        return $query->whereIn('id', $ids)->orderBy('name');
     }
 }

@@ -16,9 +16,17 @@ app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFil
         'filterModel',
         'filterCategory',
         'filterType',
+        'filterColor',
+        'filterFuel',
         'filterDistrict',
         'filterMunicipality',
-        'itemsPerPage'
+        'filterStartYear',
+        'filterEndYear',
+        'filterIsGoodCondition',
+        'filterPurchaseType',
+        'filterWithImages',
+        'filterIgnoreSuspended',
+        'itemsPerPage',
     ];
 
     $scope.$watchGroup($toWatch, function(newValues, oldValues, scope) {
@@ -30,44 +38,34 @@ app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFil
     function init() {
         var search = $location.search();
         $scope.pagination = {
-            current: search.page === undefined ? 1 : search.page,
+            current: search.page || 1,
         };
-        $scope.itemsPerPage = search.limit === undefined ? 5 : parseInt(search.limit);
+        $scope.itemsPerPage = parseInt(search.limit) || 5;
         $scope.filterDistrict = search.district;
         $scope.filterMunicipality = search.municipality;
         $scope.filterMake = search.make;
         $scope.filterModel = search.model;
+        $scope.filterColor = search.color;
         $scope.filterCategory = search.category;
         $scope.filterType = search.type;
+        $scope.filterFuel = search.fuel;
+        $scope.filterStartYear = parseInt(search.start) || undefined;
+        $scope.filterEndYear = parseInt(search.end) || undefined;
+        $scope.filterIsGoodCondition = search.goodcondition || undefined;
+        $scope.filterPurchaseType = search.purchasetype;
+        $scope.filterWithImages = parseInt(search.withimages) || undefined;
+        $scope.filterIgnoreSuspended = parseInt(search.nosuspended) || undefined;
 
         getResultsPage($scope.pagination.current);
         getFilteringAttributes();
     }
 
     function setSearchVars(pageNumber) {
-        $location.search({
-            page: pageNumber,
-            limit: $scope.itemsPerPage,
-            district: $scope.filterDistrict,
-            municipality: $scope.filterMunicipality,
-            make: $scope.filterMake,
-            model: $scope.filterModel,
-            category: $scope.filterCategory,
-            type: $scope.filterType,
-        });
+        $location.search(getSearchObject(pageNumber));
     }
 
     function getResultsPage(pageNumber) {
-        Vehicle.query({
-            page: pageNumber,
-            limit: $scope.itemsPerPage,
-            district: $scope.filterDistrict,
-            municipality: $scope.filterMunicipality,
-            make: $scope.filterMake,
-            model: $scope.filterModel,
-            category: $scope.filterCategory,
-            type: $scope.filterType,
-        }, function(data) {
+        Vehicle.query(getSearchObject(pageNumber), function(data) {
             $scope.result = data;
             $scope.noResults = ((data.items.length) ? false : true);
         }, function(error) {});
@@ -76,9 +74,31 @@ app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFil
     function getFilteringAttributes() {
         VehicleFilters.query({
             make: $scope.filterMake,
+            district: $scope.filterDistrict,
         }, function(data) {
             $scope.filteringAttr = data;
         }, function(error) {});
+    }
+
+    function getSearchObject(pageNumber) {
+        return {
+            page: pageNumber,
+            limit: $scope.itemsPerPage,
+            district: $scope.filterDistrict,
+            municipality: $scope.filterMunicipality,
+            make: $scope.filterMake,
+            model: $scope.filterModel,
+            category: $scope.filterCategory,
+            type: $scope.filterType,
+            color: $scope.filterColor,
+            fuel: $scope.filterFuel,
+            start: $scope.filterStartYear,
+            end: $scope.filterEndYear,
+            goodcondition: $scope.filterIsGoodCondition,
+            purchasetype: $scope.filterPurchaseType,
+            withimages: $scope.filterWithImages,
+            nosuspended: $scope.filterIgnoreSuspended,
+        };
     }
 
     $scope.pageChangeHandler = function(newPage) {

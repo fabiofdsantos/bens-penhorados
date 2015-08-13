@@ -138,7 +138,7 @@ class Vehicle extends Model
     }
 
     /**
-     * Scope a query to only include active items (vehicles).
+     * Scope a query to only include active vehicles.
      *
      * @param Builder $query
      *
@@ -154,114 +154,118 @@ class Vehicle extends Model
     }
 
     /**
-     * Scope a query to only include items of a specific make.
+     * Scope a query to only include vehicles of a given make.
      *
      * @param Builder $query
      * @param int     $makeId
      *
      * @return Builder
      */
-    public function scopeWhereMakeIs(Builder $query, $makeId)
+    public function scopeOfMake(Builder $query, $makeId)
     {
         return $query->where('make_id', $makeId);
     }
 
     /**
-     * Scope a query to only include items of a specific model.
+     * Scope a query to only include vehicles of a given model.
      *
      * @param Builder $query
      * @param int     $modelId
      *
      * @return Builder
      */
-    public function scopeWhereModelIs(Builder $query, $modelId)
+    public function scopeOfModel(Builder $query, $modelId)
     {
         return $query->where('model_id', $modelId);
     }
 
     /**
-     * Scope a query to only include items of a specific color.
+     * Scope a query to only include vehicles of a given color.
      *
      * @param Builder $query
      * @param int     $colorId
      *
      * @return Builder
      */
-    public function scopeWhereColorIs(Builder $query, $colorId)
+    public function scopeOfColor(Builder $query, $colorId)
     {
         return $query->where('color_id', $colorId);
     }
 
     /**
-     * Scope a query to only include items of a specific fuel type.
+     * Scope a query to only include vehicles of a given fuel type.
      *
      * @param Builder $query
      * @param int     $fuelId
      *
      * @return Builder
      */
-    public function scopeWhereFuelIs(Builder $query, $fuelId)
+    public function scopeOfFuel(Builder $query, $fuelId)
     {
         return $query->where('fuel_id', $fuelId);
     }
 
     /**
-     * Scope a query to only include items of a specific category.
+     * Scope a query to only include vehicles of a given category.
      *
      * @param Builder $query
      * @param int     $categoryId
      *
      * @return Builder
      */
-    public function scopeWhereCategoryIs(Builder $query, $categoryId)
+    public function scopeOfCategory(Builder $query, $categoryId)
     {
         return $query->where('category_id', $categoryId);
     }
 
     /**
-     * Scope a query to only include items of a specific type.
+     * Scope a query to only include vehicles of a given type.
      *
      * @param Builder $query
      * @param int     $typeId
      *
      * @return Builder
      */
-    public function scopeWhereTypeIs(Builder $query, $typeId)
+    public function scopeOfType(Builder $query, $typeId)
     {
         return $query->where('type_id', $typeId);
     }
 
     /**
-     * Scope a query to only include items of a specific district.
+     * Scope a query to only include vehiles of a given year range.
      *
-     * @param Builder $query
-     * @param int     $districtId
+     * @param Builder  $query
+     * @param int|null $startYear
+     * @param int|null $endYear
      *
      * @return Builder
      */
-    public function scopeOfDistrict(Builder $query, $districtId)
+    public function scopeBetweenYears(Builder $query, $startYear, $endYear)
     {
-        $ids = Item::where('itemable_type', self::class)
-                ->where('district_id', '=', $districtId)
-                ->lists('itemable_id');
+        // Get vehicles between a year range
+        if (isset($startYear) && isset($endYear)) {
+            return $query->where('year', '>=', $startYear)->where('year', '<=', $endYear);
+        }
 
-        return $query->whereIn('id', $ids);
+        // Get vehicles older than
+        if (isset($startYear)) {
+            return $query->where('year', '>=', $startYear);
+        }
+
+        // Get vehicles younger than
+        return $query->where('year', '<=', $endYear);
     }
 
     /**
-     * Scope a query to only include items of a specific municipality.
+     * Scope a query to only include vehicles in good or bad condition.
      *
      * @param Builder $query
-     * @param int     $municipalityId
+     * @param bool    $isGoodCondition
      *
      * @return Builder
      */
-    public function scopeOfMunicipality(Builder $query, $municipalityId)
+    public function scopeIsGoodCondition(BUilder $query, $isGoodCondition)
     {
-        $ids = Item::where('itemable_type', self::class)
-                ->where('municipality_id', '=', $municipalityId)
-                ->lists('itemable_id');
-
-        return $query->whereIn('id', $ids);
+        return $query->where('is_good_condition', $isGoodCondition);
     }
 }

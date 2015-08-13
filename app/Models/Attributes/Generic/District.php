@@ -44,7 +44,8 @@ class District extends Model
     protected $primaryKey = 'id';
 
     /**
-     * Scope a query to only include districts assigned at least to one vehicle.
+     * Scope a query to only include districts assigned at least to
+     * one active vehicle.
      *
      * @param Builder $query
      *
@@ -59,7 +60,7 @@ class District extends Model
 
     /**
      * Scope a query to only include districts assigned at least to
-     * one corporate share.
+     * one active corporate share.
      *
      * @param Builder $query
      *

@@ -9,11 +9,20 @@ angular.module('bens-penhorados-filters', []).filter('vehicleCondition', functio
     }
 }).filter('generateLink', function() {
     var base_url = 'http://www.e-financas.gov.pt/vendas/detalheVenda.action';
-
     return function(code) {
         if (code) {
             var values = code.split('.');
             return base_url + '?sf=' + values[0] + '&ano=' + values[1] + '&idVenda=' + values[2];
         }
     }
+}).filter('range', function() {
+    return function([], min, max) {
+        var range = [];
+        min = parseInt(min);
+        max = parseInt(max);
+        for (var i = max; i >= min; i--) {
+            range.push(i);
+        }
+        return range;
+    };
 });

@@ -12,6 +12,7 @@
 namespace App\Models\Attributes\Generic;
 
 use App\Models\Items\Item;
+use App\Models\Items\Vehicle;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -66,7 +67,7 @@ class Municipality extends Model
 
     /**
      * Scope a query to only include municipalities assigned at least
-     * to one vehicle.
+     * to one active vehicle.
      *
      * @param Builder $query
      *
@@ -74,8 +75,8 @@ class Municipality extends Model
      */
     public function scopeAssignedToVehicles(Builder $query)
     {
-        $municipalities = Item::ofType(Vehicle::class)->active()->lists('municipality_id');
+        $ids = Item::ofType(Vehicle::class)->active()->lists('municipality_id');
 
-        return $query->whereIn('id', $municipalities)->orderBy('name');
+        return $query->whereIn('id', $ids)->orderBy('name');
     }
 }

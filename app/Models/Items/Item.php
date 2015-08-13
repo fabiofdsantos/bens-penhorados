@@ -250,6 +250,72 @@ class Item extends Model
     }
 
     /**
+     * Scope a query to only include items of a given district.
+     *
+     * @param Builder $query
+     * @param int     $districtId
+     *
+     * @return Builder
+     */
+    public function scopeOfDistrict(Builder $query, $districtId)
+    {
+        return $query->where('district_id', $districtId);
+    }
+
+    /**
+     * Scope a query to only include items of a given municipality.
+     *
+     * @param Builder $query
+     * @param int     $municipalityId
+     *
+     * @return Builder
+     */
+    public function scopeOfMunicipality(Builder $query, $municipalityId)
+    {
+        return $query->where('municipality_id', $municipalityId);
+    }
+
+    /**
+     * Scope a query to only include items of a given purchase type.
+     *
+     * @param Builder $query
+     * @param int     $purchaseTypeId
+     *
+     * @return Builder
+     */
+    public function scopeOfPurchaseType(Builder $query, $purchaseTypeId)
+    {
+        return $query->where('purchase_type_id', $purchaseTypeId);
+    }
+
+    /**
+     * Scope a query to only include items with images.
+     *
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeOnlyWithImages(Builder $query)
+    {
+        return $query->whereNotNull('images');
+    }
+
+    /**
+     * Scope a query to only include active items that are not suspended.
+     *
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeIgnoreSuspended(Builder $query)
+    {
+        // Get the id of the suspended status
+        $id = ItemStatus::where('name', 'Suspenso')->pluck('id');
+
+        return $query->where('status_id', '!=', $id);
+    }
+
+    /**
      * Set the item's title and slug.
      *
      * @param string $value

@@ -5,12 +5,12 @@
             <div class="col-xs-12 col-md-4">
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Filtragem por localização</div>
+                    <div class="panel-heading">Pesquisa genérica</div>
                     <div class="panel-body form-horizontal">
                         <div class="alert alert-info" role="alert">
                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                             <span class="sr-only">Aviso:</span>
-                            A filtragem por localização é baseada no serviço de finanças adstrito ao veículo penhorado.
+                            <small>A pesquisa por localização é baseada no serviço de finanças adstrito ao veículo penhorado.</small>
                         </div>
 
                         <div class="form-group">
@@ -30,18 +30,59 @@
                                 </select>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="purchaseType" class="col-sm-4 control-label">Modalidade</label>
+                            <div class="col-sm-8">
+                                <select ng-disabled="!filteringAttr.purchaseTypes" class="form-control" ng-model="filterPurchaseType" ng-options="key as value for (key , value) in filteringAttr.purchaseTypes">
+                                    <option value="">-- Todos as modalidades --</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="price" class="col-sm-4 control-label">Preço</label>
+                            <div class="col-sm-8">
+                                <div class="form-inline input-group">
+                                    <input type="text" class="form-control" />
+                                    <span class="input-group-addon">até</span>
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="ignore" class="col-sm-4 control-label">Ignorar anúncios</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <div class="checkbox">
+                                      <label>
+                                        <input type="checkbox" name="suspended" ng-checked="filterIgnoreSuspended" ng-model="filterIgnoreSuspended" ng-true-value="1" ng-false-value="undefined">
+                                        Suspensos
+                                      </label>
+                                    </div>
+                                    <div class="checkbox">
+                                      <label>
+                                        <input type="checkbox" name="withimages" ng-checked="filterWithImages" ng-model="filterWithImages" ng-true-value="1" ng-false-value="undefined">
+                                        Sem imagens
+                                      </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </Div>
+                </div>
 
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Filtragem avançada</div>
+                    <div class="panel-heading">Pesquisa avançada</div>
                     <div class="panel-body form-horizontal">
 
                         <div class="alert alert-info" role="alert">
                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                             <span class="sr-only">Aviso:</span>
-                            Existem veículos que não se encontram catalogados por determinados atributos (ex. categoria). Para uma pesquisa mais ampla opte sempre que possível por selecionar a opção: <small><strong>Todos(as)</strong></small>.
+                            <small>Existem veículos que não se encontram catalogados por determinados atributos (ex. categoria). Para uma pesquisa mais ampla opte sempre que possível por selecionar a opção: <strong>Todos(as)</strong>.</small>
                         </div>
 
                         <div class="form-group">
@@ -63,6 +104,15 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="fuel" class="col-sm-4 control-label">Combustível</label>
+                            <div class="col-sm-8">
+                                <select ng-disabled="!filteringAttr.fuels" class="form-control" ng-model="filterFuel" ng-options="key as value for (key , value) in filteringAttr.fuels">
+                                    <option value="">-- Todos os combustíveis --</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="category" class="col-sm-4 control-label">Categoria</label>
                             <div class="col-sm-8">
                                 <select ng-disabled="!filteringAttr.categories" class="form-control" ng-model="filterCategory" ng-options="key as value for (key , value) in filteringAttr.categories">
@@ -77,6 +127,56 @@
                                 <select ng-disabled="!filteringAttr.types" class="form-control" ng-model="filterType" ng-options="key as value for (key , value) in filteringAttr.types">
                                     <option value="">-- Todos os tipos --</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="color" class="col-sm-4 control-label">Cor</label>
+                            <div class="col-sm-8">
+                                <select ng-disabled="!filteringAttr.colors" class="form-control" ng-model="filterColor" ng-options="key as value for (key , value) in filteringAttr.colors">
+                                    <option value="">-- Todas as cores --</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="year" class="col-sm-4 control-label">Ano</label>
+                            <div class="col-sm-8">
+                                <div class="form-inline input-group">
+                                    <select class="form-control" ng-model="filterStartYear" ng-options="n for n in [] | range:1950:2015">
+                                        <option value=""></option>
+                                    </select>
+                                    <span class="input-group-addon">até</span>
+                                    <select class="form-control" ng-model="filterEndYear" ng-options="n for n in [] | range:1950:2015">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="condition" class="col-sm-4 control-label">Estado</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <div class="radio">
+                                      <label>
+                                        <input type="radio" ng-model="filterIsGoodCondition" ng-value="undefined">
+                                        Ambos / Não definido
+                                      </label>
+                                    </div>
+                                    <div class="radio">
+                                      <label>
+                                        <input type="radio" ng-model="filterIsGoodCondition" value="1">
+                                        Bom / Razoável
+                                      </label>
+                                    </div>
+                                    <div class="radio">
+                                      <label>
+                                        <input type="radio" ng-model="filterIsGoodCondition" value="0">
+                                        Mau
+                                      </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

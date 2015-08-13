@@ -11,6 +11,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attributes\Generic\District;
+use App\Models\Attributes\Generic\ItemPurchaseType;
+use App\Models\Attributes\Generic\Municipality;
 use App\Models\Attributes\Vehicle\VehicleCategory;
 use App\Models\Attributes\Vehicle\VehicleColor;
 use App\Models\Attributes\Vehicle\VehicleFuel;
@@ -36,7 +39,9 @@ class VehicleFilteringAttributesController extends Controller
     public function index(Request $request)
     {
         $makeId = (int) $request->input('make') ?: null;
-        $data = $this->getAttributes($makeId);
+        $districtId = (int) $request->input('district') ?: null;
+
+        $data = $this->getAttributes($makeId, $districtId);
 
         return response()->json($data, 200);
     }
@@ -44,19 +49,28 @@ class VehicleFilteringAttributesController extends Controller
     /**
      * Get filtering attributes.
      *
+     * There are attributes related to each other. For example, municipalities
+     * are shown if the district was also set.
+     *
      * @param int|null $makeId
+     * @param int|null $districtId
      *
      * @return array
      */
-    public function getAttributes($makeId)
+    public function getAttributes($makeId, $districtId)
     {
         $attributes = [
-            'categories' => VehicleCategory::assigned()->lists('name', 'id'),
-            'colors'     => VehicleColor::assigned()->lists('name', 'id'),
-            'fuels'      => VehicleFuel::assigned()->lists('name', 'id'),
-            'makes'      => VehicleMake::assigned()->lists('name', 'id'),
-            'models'     => VehicleModel::assigned()->whereMakeId($makeId)->lists('name', 'id') ?: null,
-            'types'      => VehicleType::assigned()->lists('name', 'id'),
+            'districts'      => District::assignedToVehicles()->lists('name', 'id') ?: null,
+            'municipalities' => Municipality::assignedToVehicles()->ofDistrict($districtId)->lists('name', 'id') ?: null,
+            'purchaseTypes'  => ItemPurchaseType::assignedToVehicles()->lists('name', 'id') ?: null,
+            'categories'     => VehicleCategory::assigned()->lists('name', 'id') ?: null,
+            'colors'         => VehicleColor::assigned()->lists('name', 'id') ?: null,
+            'fuels'          => VehicleFuel::assigned()->lists('name', 'id') ?: null,
+            'makes'          => VehicleMake::assigned()->lists('name', 'id') ?: null,
+            'models'         => VehicleModel::assigned()->ofMake($makeId)->lists('name', 'id') ?: null,
+            'types'          => VehicleType::assigned()->lists('name', 'id') ?: null,
+            'colors'         => VehicleColor::assigned()->lists('name', 'id') ?: null,
+            'fuels'          => VehicleFuel::assigned()->lists('name', 'id') ?: null,
         ];
 
         return $attributes;
