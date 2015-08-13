@@ -228,13 +228,25 @@ class Item extends Model
      * Scope a query to only include active items.
      *
      * @param Builder $query
-     * @param string  $slug
      *
      * @return Builder
      */
     public function scopeActive(Builder $query)
     {
         return $query->where('acceptance_dt', '>', Carbon::now());
+    }
+
+    /**
+     * Scope a query to only include items of a given type.
+     *
+     * @param Builder $query
+     * @param string  $type
+     *
+     * @return Builder
+     */
+    public function scopeOfType(Builder $query, $type)
+    {
+        return $query->where('itemable_type', $type);
     }
 
     /**
