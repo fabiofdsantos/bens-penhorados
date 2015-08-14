@@ -1,6 +1,6 @@
 <div class="section">
     <div data-ng-show="vehicle" class="container">
-        <h1 class="page-header" data-ng-bind="vehicle.title"></h1>
+        <h1 class="page-header" data-ng-bind="vehicle.generic.title"></h1>
         <div class="row" style="margin-bottom: 15px">
             <div class="col-md-6 show-grid">
                 <div style="max-width: 100%">
@@ -20,7 +20,7 @@
                         </div>
                         <div class="item-price row">
                             <span data-ng-bind="vehicle.generic.price.value ? (vehicle.generic.price.value  | currency:'€') : 'À melhor oferta'"></span>
-                            <span data-ng-show="vehicle.generic.vat" data-ng-bind="' - Incl. ' + vehicle.generic.vat + '% (IVA)'"></span>
+                            <span data-ng-show="vehicle.generic.price.vat" data-ng-bind="' - Incl. ' + vehicle.generic.price.vat + '% (IVA)'"></span>
                         </div>
                     </div>
                 </div>
@@ -146,17 +146,17 @@
                             </tr>
                         </thead>
                         <tbody style="font-size: 12px;">
-                            <tr data-ng-show="vehicle.generic.depositary.phone || vehicle.generic.depositary.email">
+                            <tr data-ng-show="vehicle.generic.depositary.name">
                                 <th scope="row">Fiel depositário</th>
                                 <td data-ng-bind="vehicle.generic.depositary.name"></td>
                                 <td data-ng-bind="vehicle.generic.depositary.phone | phonenumber:351"></td>
                                 <td data-ng-show="vehicle.generic.depositary.email"><a data-ng-href="mailto:{{ vehicle.generic.depositary.email }}" target="_blank">Enviar email</a></td>
                             </tr>
-                            <tr data-ng-show="vehicle.generic.mediator.name || vehicle.generic.mediator.email">
+                            <tr data-ng-show="vehicle.generic.mediator.name">
                                 <th scope="row">Mediador</th>
                                 <td data-ng-bind="vehicle.generic.mediator.name"></td>
                                 <td data-ng-bind="vehicle.generic.mediator.phone | phonenumber:351"></td>
-                                <td data-ng-show="vehicle.generic.depositary.email"><a data-ng-href="mailto:{{ vehicle.generic.depositary.email }}" target="_blank">Enviar email</a></td>
+                                <td data-ng-show="vehicle.generic.mediator.email"><a data-ng-href="mailto:{{ vehicle.generic.mediator.email }}" target="_blank">Enviar email</a></td>
                             </tr>
                         </tbody>
                     </table>

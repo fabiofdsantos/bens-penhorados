@@ -237,13 +237,25 @@
                             <div class="results-image col-xs-12 col-sm-3">
                                 <img class="img-responsive img-thumbnail" alt="" data-ng-src="../images/{{ item.image != null ? item.image : 'empty.jpg' }}">
                             </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="results-title">
-                                    <h2 data-ng-bind="item.title"></h2>
-                                </div>
+                            <div class="col-xs-12 col-sm-6 results-description">
+                                <h2 data-ng-bind="item.title | resultTitle"></h2>
+                                <p class="small">
+                                    <i class="glyphicon glyphicon-asterisk"></i>
+                                    <span data-ng-bind="item.status" data-ng-style="item.status == 'Em curso' ? {'color':'green'} : {'color':'red'}"></span>
+                                </p>
+                                <p class="small">
+                                    <i class="glyphicon glyphicon-map-marker"></i>
+                                    <span data-ng-bind="item.location"></span>
+                                </p>
+                                <p class="small">
+                                    <i class="glyphicon glyphicon-credit-card"></i>
+                                    <span data-ng-bind="item.purchaseType"></span>
+                                </p>
                             </div>
                             <div class="results-price col-xs-12 col-sm-3">
-                                <span data-ng-bind="item.price ? (item.price | currency:'€':0) : 'À melhor oferta'"></span>
+                                <div class="row">
+                                    <span data-ng-bind="item.price ? (item.price | currency:'€':0) : 'À melhor oferta'"></span>
+                                </div>
                             </div>
                         </a>
                     </div>

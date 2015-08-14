@@ -40,10 +40,16 @@ body {
     padding: 0px;
     margin: 0px;
 }
-.results-title h2 {
-    font-size: 20px;
+.results-description h2 {
+    font-size: 25px;
     padding: 0px;
-    margin: 5px 0 15px;
+    margin: 5px 0px 25px;
+}
+.results-description p {
+    margin: 0px 0px 5px;
+}
+.results-description p > strong {
+    letter-spacing: 0.5px;
 }
 .results-head {
     padding: 0px 0px 15px 0px;

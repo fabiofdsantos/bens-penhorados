@@ -32,4 +32,10 @@ angular.module('bens-penhorados-filters', []).filter('vehicleCondition', functio
             return '(+' + prefix + ') ' + number;
         }
     };
+}).filter('resultTitle', function() {
+    return function(title) {
+        if (title) {
+            return title.replace(/(\d+\.\d+\.\d+\s-\s)/, '');
+        }
+    };
 });

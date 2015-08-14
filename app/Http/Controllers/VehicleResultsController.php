@@ -24,6 +24,8 @@ use Illuminate\Pagination\LengthAwarePaginator;
  */
 class VehicleResultsController extends Controller
 {
+    use LocationTrait;
+
     /**
      * Show a list of vehicles.
      *
@@ -83,12 +85,15 @@ class VehicleResultsController extends Controller
         $data['items'] = [];
         foreach ($vehicles as $vehicle) {
             $item = [
-                    'title' => $vehicle->item->title,
-                    'slug'  => $vehicle->item->slug,
-                    'price' => $vehicle->item->price,
-                    'image' => json_decode($vehicle->item->images) ? json_decode($vehicle->item->images)[0] : null,
-                    'year'  => $vehicle->year,
-                    'fuel'  => $vehicle->fuel()->pluck('name'),
+                    'title'        => $vehicle->item->title,
+                    'slug'         => $vehicle->item->slug,
+                    'price'        => $vehicle->item->price,
+                    'image'        => json_decode($vehicle->item->images) ? json_decode($vehicle->item->images)[0] : null,
+                    'year'         => $vehicle->year,
+                    'fuel'         => $vehicle->fuel()->pluck('name'),
+                    'status'       => $vehicle->item->status()->pluck('name'),
+                    'purchaseType' => $vehicle->item->purchaseType()->pluck('name'),
+                    'location'     => self::getLocation($vehicle->item),
                 ];
 
             $data['items'][] = $item;
