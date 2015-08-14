@@ -172,8 +172,10 @@ class VehicleResultsController extends Controller
         $query->isGoodCondition($filters['is_good_condition']);
 
         # http://dba.stackexchange.com/questions/109120/how-does-order-by-field-in-mysql-work-internally
-        $ids = implode(',', $ids);
-        $query->orderByRaw(DB::raw("FIELD(id, $ids)"));
+        if (!empty($ids)) {
+            $ids = implode(',', $ids);
+            $query->orderByRaw(DB::raw("FIELD(id, $ids)"));
+        }
 
         return $query;
     }
