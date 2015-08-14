@@ -12,20 +12,20 @@ app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFil
     init();
 
     var $toWatch = [
-        'filterMake',
-        'filterModel',
-        'filterCategory',
-        'filterType',
-        'filterColor',
-        'filterFuel',
-        'filterDistrict',
-        'filterMunicipality',
-        'filterStartYear',
-        'filterEndYear',
-        'filterIsGoodCondition',
-        'filterPurchaseType',
-        'filterWithImages',
-        'filterIgnoreSuspended',
+        'filters.make',
+        'filters.model',
+        'filters.category',
+        'filters.type',
+        'filters.color',
+        'filters.fuel',
+        'filters.district',
+        'filters.unicipality',
+        'filters.startYear',
+        'filters.endYear',
+        'filter.isGoodCondition',
+        'filters.purchaseType',
+        'filters.withImages',
+        'filters.ignoreSuspended',
         'itemsPerPage',
     ];
 
@@ -41,21 +41,22 @@ app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFil
             current: search.page || 1,
         };
         $scope.itemsPerPage = parseInt(search.limit) || 5;
-        $scope.filterDistrict = search.district;
-        $scope.filterMunicipality = search.municipality;
-        $scope.filterMake = search.make;
-        $scope.filterModel = search.model;
-        $scope.filterColor = search.color;
-        $scope.filterCategory = search.category;
-        $scope.filterType = search.type;
-        $scope.filterFuel = search.fuel;
-        $scope.filterStartYear = parseInt(search.start) || undefined;
-        $scope.filterEndYear = parseInt(search.end) || undefined;
-        $scope.filterIsGoodCondition = search.goodcondition || undefined;
-        $scope.filterPurchaseType = search.purchasetype;
-        $scope.filterWithImages = parseInt(search.withimages) || undefined;
-        $scope.filterIgnoreSuspended = parseInt(search.nosuspended) || undefined;
-
+        $scope.filters = {
+            district: search.district,
+            municipality: search.municipality,
+            make: search.make,
+            model: search.model,
+            color: search.color,
+            category: search.category,
+            type: search.type,
+            fuel: search.fuel,
+            startYear: parseInt(search.start) || undefined,
+            endYear: parseInt(search.end) || undefined,
+            isGoodCondition: search.goodcondition || undefined,
+            purchaseType: search.purchasetype,
+            withImages: parseInt(search.withimages) || undefined,
+            ignoreSuspended: parseInt(search.nosuspended) || undefined,
+        };
         getResultsPage($scope.pagination.current);
         getFilteringAttributes();
     }
@@ -73,8 +74,8 @@ app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFil
 
     function getFilteringAttributes() {
         VehicleFilters.query({
-            make: $scope.filterMake,
-            district: $scope.filterDistrict,
+            make: $scope.filters.make,
+            district: $scope.filters.district,
         }, function(data) {
             $scope.filteringAttr = data;
         }, function(error) {});
@@ -84,20 +85,20 @@ app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFil
         return {
             page: pageNumber,
             limit: $scope.itemsPerPage,
-            district: $scope.filterDistrict,
-            municipality: $scope.filterMunicipality,
-            make: $scope.filterMake,
-            model: $scope.filterModel,
-            category: $scope.filterCategory,
-            type: $scope.filterType,
-            color: $scope.filterColor,
-            fuel: $scope.filterFuel,
-            start: $scope.filterStartYear,
-            end: $scope.filterEndYear,
-            goodcondition: $scope.filterIsGoodCondition,
-            purchasetype: $scope.filterPurchaseType,
-            withimages: $scope.filterWithImages,
-            nosuspended: $scope.filterIgnoreSuspended,
+            district: $scope.filters.district,
+            municipality: $scope.filters.municipality,
+            make: $scope.filters.make,
+            model: $scope.filters.model,
+            category: $scope.filters.mategory,
+            type: $scope.filters.type,
+            color: $scope.filters.color,
+            fuel: $scope.filters.fuel,
+            start: $scope.filters.startYear,
+            end: $scope.filters.endYear,
+            goodcondition: $scope.filters.isGoodCondition,
+            purchasetype: $scope.filters.purchaseType,
+            withimages: $scope.filters.withImages,
+            nosuspended: $scope.filters.ignoreSuspended,
         };
     }
 

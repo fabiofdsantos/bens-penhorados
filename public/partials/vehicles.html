@@ -16,7 +16,7 @@
                         <div class="form-group">
                             <label for="district" class="col-sm-4 control-label">Distrito</label>
                             <div class="col-sm-8">
-                                <select ng-disabled="!filteringAttr.districts" class="form-control" ng-model="filterDistrict" ng-options="key as value for (key , value) in filteringAttr.districts">
+                                <select ng-disabled="!filteringAttr.districts" class="form-control" ng-model="filters.district" ng-options="key as value for (key , value) in filteringAttr.districts">
                                     <option value="">-- Todos os distritos --</option>
                                 </select>
                             </div>
@@ -25,7 +25,7 @@
                         <div class="form-group">
                             <label for="municipality" class="col-sm-4 control-label">Concelho</label>
                             <div class="col-sm-8">
-                                <select ng-disabled="!filteringAttr.municipalities" class="form-control" ng-model="filterMunicipality" ng-options="key as value for (key , value) in filteringAttr.municipalities">
+                                <select ng-disabled="!filteringAttr.municipalities" class="form-control" ng-model="filters.municipality" ng-options="key as value for (key , value) in filteringAttr.municipalities">
                                     <option value="">-- Todos os concelhos --</option>
                                 </select>
                             </div>
@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <label for="purchaseType" class="col-sm-4 control-label">Modalidade</label>
                             <div class="col-sm-8">
-                                <select ng-disabled="!filteringAttr.purchaseTypes" class="form-control" ng-model="filterPurchaseType" ng-options="key as value for (key , value) in filteringAttr.purchaseTypes">
+                                <select ng-disabled="!filteringAttr.purchaseTypes" class="form-control" ng-model="filters.purchaseType" ng-options="key as value for (key , value) in filteringAttr.purchaseTypes">
                                     <option value="">-- Todos as modalidades --</option>
                                 </select>
                             </div>
@@ -58,13 +58,13 @@
                                 <div class="input-group">
                                     <div class="checkbox">
                                       <label>
-                                        <input type="checkbox" name="suspended" ng-checked="filterIgnoreSuspended" ng-model="filterIgnoreSuspended" ng-true-value="1" ng-false-value="undefined">
+                                        <input type="checkbox" name="nosuspended" ng-checked="filters.ignoreSuspended" ng-model="filters.ignoreSuspended" ng-true-value="1" ng-false-value="undefined">
                                         Suspensos
                                       </label>
                                     </div>
                                     <div class="checkbox">
                                       <label>
-                                        <input type="checkbox" name="withimages" ng-checked="filterWithImages" ng-model="filterWithImages" ng-true-value="1" ng-false-value="undefined">
+                                        <input type="checkbox" name="withimages" ng-checked="filters.withImages" ng-model="filters.withImages" ng-true-value="1" ng-false-value="undefined">
                                         Sem imagens
                                       </label>
                                     </div>
@@ -88,7 +88,7 @@
                         <div class="form-group">
                             <label for="make" class="col-sm-4 control-label">Marca</label>
                             <div class="col-sm-8">
-                                <select ng-disabled="!filteringAttr.makes" class="form-control" ng-model="filterMake" ng-options="key as value for (key , value) in filteringAttr.makes">
+                                <select ng-disabled="!filteringAttr.makes" class="form-control" ng-model="filters.make" ng-options="key as value for (key , value) in filteringAttr.makes">
                                     <option value="">-- Todas as marcas --</option>
                                 </select>
                             </div>
@@ -97,7 +97,7 @@
                         <div class="form-group">
                             <label for="model" class="col-sm-4 control-label">Modelo</label>
                             <div class="col-sm-8">
-                                <select ng-disabled="!filteringAttr.models" class="form-control" ng-model="filterModel" ng-options="key as value for (key , value) in filteringAttr.models">
+                                <select ng-disabled="!filteringAttr.models" class="form-control" ng-model="filters.model" ng-options="key as value for (key , value) in filteringAttr.models">
                                     <option value="">-- Todos os modelos --</option>
                                 </select>
                             </div>
@@ -106,7 +106,7 @@
                         <div class="form-group">
                             <label for="fuel" class="col-sm-4 control-label">Combustível</label>
                             <div class="col-sm-8">
-                                <select ng-disabled="!filteringAttr.fuels" class="form-control" ng-model="filterFuel" ng-options="key as value for (key , value) in filteringAttr.fuels">
+                                <select ng-disabled="!filteringAttr.fuels" class="form-control" ng-model="filters.fuel" ng-options="key as value for (key , value) in filteringAttr.fuels">
                                     <option value="">-- Todos os combustíveis --</option>
                                 </select>
                             </div>
@@ -115,7 +115,7 @@
                         <div class="form-group">
                             <label for="category" class="col-sm-4 control-label">Categoria</label>
                             <div class="col-sm-8">
-                                <select ng-disabled="!filteringAttr.categories" class="form-control" ng-model="filterCategory" ng-options="key as value for (key , value) in filteringAttr.categories">
+                                <select ng-disabled="!filteringAttr.categories" class="form-control" ng-model="filters.category" ng-options="key as value for (key , value) in filteringAttr.categories">
                                     <option value="">-- Todas as categorias --</option>
                                 </select>
                             </div>
@@ -124,7 +124,7 @@
                         <div class="form-group">
                             <label for="type" class="col-sm-4 control-label">Tipo</label>
                             <div class="col-sm-8">
-                                <select ng-disabled="!filteringAttr.types" class="form-control" ng-model="filterType" ng-options="key as value for (key , value) in filteringAttr.types">
+                                <select ng-disabled="!filteringAttr.types" class="form-control" ng-model="filters.type" ng-options="key as value for (key , value) in filteringAttr.types">
                                     <option value="">-- Todos os tipos --</option>
                                 </select>
                             </div>
@@ -133,7 +133,7 @@
                         <div class="form-group">
                             <label for="color" class="col-sm-4 control-label">Cor</label>
                             <div class="col-sm-8">
-                                <select ng-disabled="!filteringAttr.colors" class="form-control" ng-model="filterColor" ng-options="key as value for (key , value) in filteringAttr.colors">
+                                <select ng-disabled="!filteringAttr.colors" class="form-control" ng-model="filters.color" ng-options="key as value for (key , value) in filteringAttr.colors">
                                     <option value="">-- Todas as cores --</option>
                                 </select>
                             </div>
@@ -143,11 +143,11 @@
                             <label for="year" class="col-sm-4 control-label">Ano</label>
                             <div class="col-sm-8">
                                 <div class="form-inline input-group">
-                                    <select class="form-control" ng-model="filterStartYear" ng-options="n for n in [] | range:1950:2015">
+                                    <select class="form-control" ng-model="filters.startYear" ng-options="n for n in [] | range:1950:2015">
                                         <option value=""></option>
                                     </select>
                                     <span class="input-group-addon">até</span>
-                                    <select class="form-control" ng-model="filterEndYear" ng-options="n for n in [] | range:1950:2015">
+                                    <select class="form-control" ng-model="filters.endYear" ng-options="n for n in [] | range:1950:2015">
                                         <option value=""></option>
                                     </select>
                                 </div>
@@ -160,19 +160,19 @@
                                 <div class="input-group">
                                     <div class="radio">
                                       <label>
-                                        <input type="radio" ng-model="filterIsGoodCondition" ng-value="undefined">
+                                        <input type="radio" ng-model="filters.isGoodCondition" ng-value="undefined">
                                         Ambos / Não definido
                                       </label>
                                     </div>
                                     <div class="radio">
                                       <label>
-                                        <input type="radio" ng-model="filterIsGoodCondition" value="1">
+                                        <input type="radio" ng-model="filters.isGoodCondition" value="1">
                                         Bom / Razoável
                                       </label>
                                     </div>
                                     <div class="radio">
                                       <label>
-                                        <input type="radio" ng-model="filterIsGoodCondition" value="0">
+                                        <input type="radio" ng-model="filters.isGoodCondition" value="0">
                                         Mau
                                       </label>
                                     </div>
