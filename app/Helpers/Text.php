@@ -64,4 +64,25 @@ class Text
 
         return $str;
     }
+
+    /**
+     * Prettify a given name.
+     *
+     * An example:
+     * 	- Input: FABIO DOS SANTOS
+     *  - Output: Fabio dos Santos
+     *
+     * @param str $str
+     *
+     * @return string
+     */
+    public static function prettifyName($str)
+    {
+        $str = strtolower($str);
+        $str = preg_replace_callback('/\b(\w)(?!([oa]s|[aeo])?\b)/u', function ($matches) {
+                return strtoupper($matches[0]);
+            }, $str);
+
+        return $str;
+    }
 }
