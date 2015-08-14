@@ -41,7 +41,7 @@ class FullNameExtractor extends AbstractExtractor
     public function extract()
     {
         if (preg_match(self::REGEX_FULLNAME, $this->str, $match)) {
-            return $match[0];
+            return Text::prettifyName($match[0]);
         }
     }
 }
