@@ -46,8 +46,6 @@ class ExtractCommand extends Command
      */
     public function handle()
     {
-        $this->info('Creating queue jobs to extract data from imported items...');
-
         $categories = $this->option('only');
         $total = $this->option('take');
         $ignoreImages = (boolean) $this->option('ignore-images');
@@ -64,6 +62,12 @@ class ExtractCommand extends Command
         } else {
             $items = isset($total) ? RawData::take((integer) $total)->get() : RawData::all();
         }
+
+        if ($items->isEmpty()) {
+            return $this->error('There aren\'t any items to be extracted. Run jobs:import command first!');
+        }
+
+        $this->info('Creating queue jobs to extract data from imported items...');
 
         foreach ($items as $item) {
             Bus::dispatch(new ExtractGenericAttributesJob($item->code, $item->category_id, $item->lat, $item->lng, $ignoreImages));
