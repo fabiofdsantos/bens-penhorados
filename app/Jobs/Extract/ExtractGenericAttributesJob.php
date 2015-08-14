@@ -232,7 +232,7 @@ class ExtractGenericAttributesJob extends Job
                     $this->attributes['depositary_phone'] = $this->extractor->phoneNumber($text);
 
                     if (preg_match('/email/i', $text)) {
-                        $text = $crawler->filter('span.info-element-text')->eq($i)->attr('href');
+                        $text = $crawler->filter('span.info-element-text')->eq($i)->filter('a')->attr('href');
                         $this->attributes['depositary_email'] = $this->extractor->email($text);
                     }
                 }
@@ -243,7 +243,7 @@ class ExtractGenericAttributesJob extends Job
                     $this->attributes['mediator_phone'] = $this->extractor->phoneNumber($text);
 
                     if (preg_match('/email/i', $text)) {
-                        $text = $crawler->filter('span.info-element-text')->eq($i)->attr('href');
+                        $text = $crawler->filter('span.info-element-text')->eq($i)->filter('a')->attr('href');
                         $this->attributes['mediator_email'] = $this->extractor->email($text);
                     }
                 }
