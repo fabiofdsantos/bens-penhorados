@@ -31,6 +31,7 @@ class FullNameExtractor extends AbstractExtractor
     public function __construct($params)
     {
         $this->str = Text::clean($params[0]);
+        $this->str = Text::removeAccents($params[0]);
     }
 
     /**

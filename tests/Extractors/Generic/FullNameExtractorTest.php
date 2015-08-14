@@ -19,8 +19,8 @@ class FullNameExtractorTest extends AbstractGenericExtractorTest
     public function testExtractFullName()
     {
         $text = [
-            'CARLA SOFIA LEITÃO DA SILVA (Telf: 912345678)' => 'CARLA SOFIA LEITÃO DA SILVA',
-            'PINGO DA UVA UNIPESSOAL LDA'                   => 'PINGO DA UVA UNIPESSOAL LDA',
+            'CARLA SOFIA LEITÃO DA SILVA (Telf: 912345678)' => 'Carla Sofia Leitao da Silva',
+            'PINGO DA UVA UNIPESSOAL LDA'                   => 'Pingo da Uva Unipessoal Lda',
         ];
 
         foreach ($text as $input => $expected) {
