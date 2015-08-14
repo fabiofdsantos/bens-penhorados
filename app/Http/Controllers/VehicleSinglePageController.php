@@ -66,7 +66,7 @@ class VehicleSinglePageController extends Controller
             'price'          => $generic->price,
             'vat'            => $generic->vat,
             'status'         => $generic->status()->pluck('name'),
-            'mode'           => $generic->purchaseType()->pluck('name'),
+            'purchaseType'   => $generic->purchaseType()->pluck('name'),
             'description'    => $generic->full_description,
             'images'         => json_decode($generic->images),
             'previewDtStart' => $generic->preview_dt_start->format(self::DATETIME_FORMAT),
