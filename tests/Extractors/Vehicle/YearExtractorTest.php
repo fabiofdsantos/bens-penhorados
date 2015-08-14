@@ -19,13 +19,14 @@ class YearExtractorTest extends AbstractVehicleExtractorTest
     public function testExtractValidYear()
     {
         $text = [
-            'ano: 2009'                      => 2009,
-            'ano 2010'                       => 2010,
-            'de: 2011'                       => 2011,
-            'de 2012'                        => 2012,
-            'de 01-02-2013'                  => 2013,
-            'de 01/02/2014'                  => 2014,
-            'ano da primeira matricula 1992' => 1992,
+            'ano: 2009'                       => 2009,
+            'ano 2010'                        => 2010,
+            'de: 2011'                        => 2011,
+            'de 2012'                         => 2012,
+            'de 01-02-2013'                   => 2013,
+            'de 01/02/2014'                   => 2014,
+            'ano da primeira matricula 1992'  => 1992,
+            'ano da primeira matricula: 1992' => 1992,
         ];
 
         foreach ($text as $input => $expected) {
