@@ -8,6 +8,7 @@ app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFil
     $scope.itemsFrom = 0;
     $scope.itemsTo = 0;
     $scope.itemsPerPageValues = [5, 15, 25, 50, 100];
+    $scope.priceRange = getPriceRange();
 
     init();
 
@@ -19,13 +20,16 @@ app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFil
         'filters.color',
         'filters.fuel',
         'filters.district',
-        'filters.unicipality',
-        'filters.startYear',
-        'filters.endYear',
+        'filters.municipality',
+        'filters.minYear',
+        'filters.maxYear',
         'filters.isGoodCondition',
         'filters.purchaseType',
         'filters.withImages',
         'filters.ignoreSuspended',
+        'filters.minPrice',
+        'filters.maxPrice',
+        'filters.noPrice',
         'itemsPerPage',
     ];
 
@@ -50,12 +54,15 @@ app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFil
             category: search.category,
             type: search.type,
             fuel: search.fuel,
-            startYear: parseInt(search.start) || undefined,
-            endYear: parseInt(search.end) || undefined,
+            minYear: parseInt(search.minyear) || undefined,
+            maxYear: parseInt(search.maxyear) || undefined,
             isGoodCondition: search.goodcondition || undefined,
             purchaseType: search.purchasetype,
             withImages: parseInt(search.withimages) || undefined,
             ignoreSuspended: parseInt(search.nosuspended) || undefined,
+            minPrice: parseInt(search.minprice) || undefined,
+            maxPrice: parseInt(search.maxprice) || undefined,
+            noPrice: parseInt(search.noprice) || undefined,
         };
         getResultsPage($scope.pagination.current);
         getFilteringAttributes();
@@ -93,18 +100,108 @@ app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFil
             type: $scope.filters.type,
             color: $scope.filters.color,
             fuel: $scope.filters.fuel,
-            start: $scope.filters.startYear,
-            end: $scope.filters.endYear,
+            minyear: getMinYear(),
+            maxyear: getMaxYear(),
             goodcondition: $scope.filters.isGoodCondition,
             purchasetype: $scope.filters.purchaseType,
             withimages: $scope.filters.withImages,
             nosuspended: $scope.filters.ignoreSuspended,
+            minprice: getMinPrice(),
+            maxprice: getMaxPrice(),
+            noprice: $scope.filters.noPrice,
         };
+    }
+
+    function getMinYear() {
+        if ($scope.filters.minYear === undefined) {
+            return;
+        }
+
+        if ($scope.filters.maxYear === undefined) {
+            return $scope.filters.minYear;
+        }
+
+        if ($scope.filters.minYear <= $scope.filters.maxYear) {
+            return $scope.filters.minYear;
+        }
+
+        return $scope.filters.maxYear;
+    }
+
+    function getMaxYear() {
+        if ($scope.filters.maxYear === undefined) {
+            return;
+        }
+
+        if ($scope.filters.minYear === undefined) {
+            return $scope.filters.maxYear;
+        }
+
+        if ($scope.filters.maxYear >= $scope.filters.minYear) {
+            return $scope.filters.maxYear;
+        }
+
+        return $scope.filters.minYear;
+    }
+
+    function getMinPrice() {
+        if ($scope.filters.noPrice !== undefined || $scope.filters.minPrice === undefined) {
+            return;
+        }
+
+        if ($scope.filters.maxPrice === undefined) {
+            return $scope.filters.minPrice;
+        }
+
+        if ($scope.filters.minPrice <= $scope.filters.maxPrice) {
+            return $scope.filters.minPrice;
+        }
+
+        return $scope.filters.maxPrice;
+    }
+
+    function getMaxPrice() {
+        if ($scope.filters.noPrice !== undefined || $scope.filters.maxPrice === undefined) {
+            return;
+        }
+
+        if ($scope.filters.minPrice === undefined) {
+            return $scope.filters.maxPrice;
+        }
+
+        if ($scope.filters.maxPrice >= $scope.filters.minPrice) {
+            return $scope.filters.maxPrice;
+        }
+
+        return $scope.filters.minPrice;
+    }
+
+    function getPriceRange() {
+        var prices = [];
+        var i = 1;
+        while (i <= 150000) {
+            prices.push(i);
+            if (i === 1) {
+                i += 99;
+            } else if (i < 1000) {
+                i += 100;
+            } else if (i < 5000) {
+                i += 500;
+            } else if (i < 10000) {
+                i += 1000;
+            } else if (i < 50000) {
+                i += 10000;
+            } else {
+                i += 50000;
+            }
+        }
+
+        return prices;
     }
 
     $scope.resetGenericFilters = function() {
         var filtersToReset = ['district', 'municipality', 'ignoreSuspended',
-            'withImages', 'purchaseType',
+            'withImages', 'purchaseType', 'noPrice', 'minPrice', 'maxPrice',
         ];
 
         angular.forEach(filtersToReset, function(value, key) {
@@ -113,8 +210,8 @@ app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFil
     }
 
     $scope.resetVehicleFilters = function() {
-        var filtersToReset = ['make', 'model', 'category', 'type', 'color', 'fuel',
-            'startYear', 'endYear', 'isGoodCondition',
+        var filtersToReset = ['make', 'model', 'category', 'type', 'color',
+            'fuel', 'minYear', 'maxYear', 'isGoodCondition',
         ];
 
         angular.forEach(filtersToReset, function(value, key) {

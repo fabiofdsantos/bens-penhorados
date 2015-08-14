@@ -44,25 +44,34 @@
                             <label for="price" class="col-sm-4 control-label">Preço</label>
                             <div class="col-sm-8">
                                 <div class="form-inline input-group">
-                                    <input type="text" class="form-control" />
+                                    <select class="form-control" ng-disabled="filters.noPrice" ng-model="filters.minPrice" ng-options="n as (n|currency:'€':0) for n in priceRange">
+                                        <option value="">Min.</option>
+                                    </select>
                                     <span class="input-group-addon">até</span>
-                                    <input type="text" class="form-control" />
+                                    <select class="form-control" ng-disabled="filters.noPrice" ng-model="filters.maxPrice" ng-options="n as (n|currency:'€':0) for n in priceRange">
+                                        <option value="">Máx.</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="ignore" class="col-sm-4 control-label">Ignorar anúncios</label>
+                            <label for="ignore" class="col-sm-4 control-label">Ver apenas</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="nosuspended" ng-checked="filters.ignoreSuspended" ng-model="filters.ignoreSuspended" ng-true-value="1" ng-false-value="undefined"> Suspensos
+                                            <input type="checkbox" name="nosuspended" ng-checked="filters.ignoreSuspended" ng-model="filters.ignoreSuspended" ng-true-value="1" ng-false-value="undefined"> Vendas em curso
                                         </label>
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="withimages" ng-checked="filters.withImages" ng-model="filters.withImages" ng-true-value="1" ng-false-value="undefined"> Sem imagens
+                                            <input type="checkbox" name="withimages" ng-checked="filters.withImages" ng-model="filters.withImages" ng-true-value="1" ng-false-value="undefined"> Anúncios com imagens
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="noprice" ng-checked="filters.noPrice" ng-model="filters.noPrice" ng-true-value="1" ng-false-value="undefined"> Sem preço base
                                         </label>
                                     </div>
                                 </div>
@@ -147,12 +156,12 @@
                             <label for="year" class="col-sm-4 control-label">Ano</label>
                             <div class="col-sm-8">
                                 <div class="form-inline input-group">
-                                    <select class="form-control" ng-model="filters.startYear" ng-options="n for n in [] | range:1950:2015">
-                                        <option value=""></option>
+                                    <select class="form-control" ng-model="filters.minYear" ng-options="n for n in [] | range:1950:2015">
+                                        <option value="">Min.</option>
                                     </select>
                                     <span class="input-group-addon">até</span>
-                                    <select class="form-control" ng-model="filters.endYear" ng-options="n for n in [] | range:1950:2015">
-                                        <option value=""></option>
+                                    <select class="form-control" ng-model="filters.maxYear" ng-options="n for n in [] | range:1950:2015">
+                                        <option value="">Máx.</option>
                                     </select>
                                 </div>
                             </div>

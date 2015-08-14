@@ -39,6 +39,9 @@ class VehicleResultsController extends Controller
             'purchase_type_id'   => $request->input('purchasetype'),
             'with_images'        => $request->input('withimages'),
             'ignore_suspended'   => $request->input('nosuspended'),
+            'min_price'          => $request->input('minprice'),
+            'max_price'          => $request->input('maxprice'),
+            'no_price'           => $request->input('noprice'),
         ];
 
         $vehicleFilters = [
@@ -48,8 +51,8 @@ class VehicleResultsController extends Controller
             'type_id'           => $request->input('type'),
             'color_id'          => $request->input('color'),
             'fuel_id'           => $request->input('fuel'),
-            'start_year'        => $request->input('start'),
-            'end_year'          => $request->input('end'),
+            'min_year'          => $request->input('minyear'),
+            'max_year'          => $request->input('maxyear'),
             'is_good_condition' => is_null($request->input('goodcondition')) ? null : (bool) $request->input('goodcondition'),
         ];
 
@@ -120,20 +123,19 @@ class VehicleResultsController extends Controller
     {
         $query = Item::active()->ofType(Vehicle::class);
 
-        if (isset($filters['district_id'])) {
-            $query->ofDistrict($filters['district_id']);
-        }
-        if (isset($filters['municipality_id'])) {
-            $query->ofMunicipality($filters['municipality_id']);
-        }
-        if (isset($filters['purchase_type_id'])) {
-            $query->ofPurchaseType($filters['purchase_type_id']);
-        }
+        $query->ofDistrict($filters['district_id']);
+        $query->ofMunicipality($filters['municipality_id']);
+        $query->ofPurchaseType($filters['purchase_type_id']);
+        $query->betweenPrices($filters['min_price'], $filters['max_price']);
+
         if (isset($filters['with_images'])) {
             $query->onlyWithImages();
         }
         if (isset($filters['ignore_suspended'])) {
             $query->ignoreSuspended();
+        }
+        if (isset($filters['no_price'])) {
+            $query->whereNull('price');
         }
 
         return $query->lists('itemable_id');
@@ -151,30 +153,14 @@ class VehicleResultsController extends Controller
     {
         $query = Vehicle::whereIn('id', $ids);
 
-        if (isset($filters['make_id'])) {
-            $query->ofMake($filters['make_id']);
-        }
-        if (isset($filters['model_id'])) {
-            $query->ofModel($filters['model_id']);
-        }
-        if (isset($filters['category_id'])) {
-            $query->ofCategory($filters['category_id']);
-        }
-        if (isset($filters['type_id'])) {
-            $query->ofType($filters['type_id']);
-        }
-        if (isset($filters['color_id'])) {
-            $query->ofColor($filters['color_id']);
-        }
-        if (isset($filters['fuel_id'])) {
-            $query->ofFuel($filters['fuel_id']);
-        }
-        if (isset($filters['start_year']) || isset($filters['end_year'])) {
-            $query->betweenYears($filters['start_year'], $filters['end_year']);
-        }
-        if (isset($filters['is_good_condition'])) {
-            $query->isGoodCondition($filters['is_good_condition']);
-        }
+        $query->ofMake($filters['make_id']);
+        $query->ofModel($filters['model_id']);
+        $query->ofCategory($filters['category_id']);
+        $query->ofType($filters['type_id']);
+        $query->ofColor($filters['color_id']);
+        $query->ofFuel($filters['fuel_id']);
+        $query->betweenYears($filters['min_year'], $filters['max_year']);
+        $query->isGoodCondition($filters['is_good_condition']);
 
         return $query;
     }

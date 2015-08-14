@@ -246,7 +246,9 @@ class Item extends Model
      */
     public function scopeOfType(Builder $query, $type)
     {
-        return $query->where('itemable_type', $type);
+        if (isset($type)) {
+            return $query->where('itemable_type', $type);
+        }
     }
 
     /**
@@ -259,7 +261,9 @@ class Item extends Model
      */
     public function scopeOfDistrict(Builder $query, $districtId)
     {
-        return $query->where('district_id', $districtId);
+        if (isset($districtId)) {
+            return $query->where('district_id', $districtId);
+        }
     }
 
     /**
@@ -272,7 +276,9 @@ class Item extends Model
      */
     public function scopeOfMunicipality(Builder $query, $municipalityId)
     {
-        return $query->where('municipality_id', $municipalityId);
+        if (isset($municipalityId)) {
+            return $query->where('municipality_id', $municipalityId);
+        }
     }
 
     /**
@@ -285,7 +291,9 @@ class Item extends Model
      */
     public function scopeOfPurchaseType(Builder $query, $purchaseTypeId)
     {
-        return $query->where('purchase_type_id', $purchaseTypeId);
+        if (isset($purchaseTypeId)) {
+            return $query->where('purchase_type_id', $purchaseTypeId);
+        }
     }
 
     /**
@@ -313,6 +321,33 @@ class Item extends Model
         $id = ItemStatus::where('name', 'Suspenso')->pluck('id');
 
         return $query->where('status_id', '!=', $id);
+    }
+
+    /**
+     * Scope a query to only include items of a given price range.
+     *
+     * @param Builder  $query
+     * @param int|null $minPrice
+     * @param int|null $maxPrice
+     *
+     * @return Builder
+     */
+    public function scopeBetweenPrices(Builder $query, $minPrice, $maxPrice)
+    {
+        // Get items between a price range
+        if (isset($minPrice) && isset($maxPrice)) {
+            return $query->where('price', '>=', $minPrice)->where('price', '<=', $maxPrice);
+        }
+
+        // Get items more expensive than
+        if (isset($minPrice)) {
+            return $query->where('price', '>=', $minPrice);
+        }
+
+        // Get items more cheap than
+        if (isset($maxPrice)) {
+            return $query->where('price', '<=', $maxPrice);
+        }
     }
 
     /**

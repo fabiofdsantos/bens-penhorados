@@ -163,7 +163,9 @@ class Vehicle extends Model
      */
     public function scopeOfMake(Builder $query, $makeId)
     {
-        return $query->where('make_id', $makeId);
+        if (isset($makeId)) {
+            return $query->where('make_id', $makeId);
+        }
     }
 
     /**
@@ -176,7 +178,9 @@ class Vehicle extends Model
      */
     public function scopeOfModel(Builder $query, $modelId)
     {
-        return $query->where('model_id', $modelId);
+        if (isset($modelId)) {
+            return $query->where('model_id', $modelId);
+        }
     }
 
     /**
@@ -189,7 +193,9 @@ class Vehicle extends Model
      */
     public function scopeOfColor(Builder $query, $colorId)
     {
-        return $query->where('color_id', $colorId);
+        if (isset($colorId)) {
+            return $query->where('color_id', $colorId);
+        }
     }
 
     /**
@@ -202,7 +208,9 @@ class Vehicle extends Model
      */
     public function scopeOfFuel(Builder $query, $fuelId)
     {
-        return $query->where('fuel_id', $fuelId);
+        if (isset($fuelId)) {
+            return $query->where('fuel_id', $fuelId);
+        }
     }
 
     /**
@@ -215,7 +223,9 @@ class Vehicle extends Model
      */
     public function scopeOfCategory(Builder $query, $categoryId)
     {
-        return $query->where('category_id', $categoryId);
+        if (isset($categoryId)) {
+            return $query->where('category_id', $categoryId);
+        }
     }
 
     /**
@@ -228,32 +238,36 @@ class Vehicle extends Model
      */
     public function scopeOfType(Builder $query, $typeId)
     {
-        return $query->where('type_id', $typeId);
+        if (isset($typeId)) {
+            return $query->where('type_id', $typeId);
+        }
     }
 
     /**
      * Scope a query to only include vehiles of a given year range.
      *
      * @param Builder  $query
-     * @param int|null $startYear
-     * @param int|null $endYear
+     * @param int|null $minYear
+     * @param int|null $maxYear
      *
      * @return Builder
      */
-    public function scopeBetweenYears(Builder $query, $startYear, $endYear)
+    public function scopeBetweenYears(Builder $query, $minYear, $maxYear)
     {
         // Get vehicles between a year range
-        if (isset($startYear) && isset($endYear)) {
-            return $query->where('year', '>=', $startYear)->where('year', '<=', $endYear);
+        if (isset($minYear) && isset($maxYear)) {
+            return $query->where('year', '>=', $minYear)->where('year', '<=', $maxYear);
         }
 
         // Get vehicles older than
-        if (isset($startYear)) {
-            return $query->where('year', '>=', $startYear);
+        if (isset($minYear)) {
+            return $query->where('year', '>=', $minYear);
         }
 
         // Get vehicles younger than
-        return $query->where('year', '<=', $endYear);
+        if (isset($maxYear)) {
+            return $query->where('year', '<=', $maxYear);
+        }
     }
 
     /**
@@ -266,6 +280,8 @@ class Vehicle extends Model
      */
     public function scopeIsGoodCondition(BUilder $query, $isGoodCondition)
     {
-        return $query->where('is_good_condition', $isGoodCondition);
+        if (isset($isGoodCondition)) {
+            return $query->where('is_good_condition', $isGoodCondition);
+        }
     }
 }
