@@ -46,4 +46,19 @@ class TextHelperTest extends AbstractTestCase
 
         $this->assertSame($expected, Text::clean($text));
     }
+
+    public function testPrettifyName()
+    {
+        $text = [
+            'LUIS FILIPE NUNES RENDEIRO'    => 'Luis Filipe Nunes Rendeiro',
+            'LUIS FILIPE NUNES DE RENDEIRO' => 'Luis Filipe Nunes de Rendeiro',
+            'JOANA MARIA DA SILVA'          => 'Joana Maria da Silva',
+            'JOANA MARIA DOS SANTOS'        => 'Joana Maria dos Santos',
+            'ANTONIO DE ALBUQUERQUE'        => 'Antonio de Albuquerque',
+        ];
+
+        foreach ($text as $input => $expected) {
+            $this->assertSame($expected, Text::prettifyName($input));
+        }
+    }
 }
