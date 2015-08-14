@@ -21,7 +21,7 @@ use App\Helpers\Text;
  */
 class YearExtractor extends AbstractExtractor
 {
-    const REGEX_YEAR = '/(\bano\b|\bde\b)[\pP\s]*?(\d+\pP\d+\pP)?(\d{4})/i';
+    const REGEX_YEAR = '/(\bano\b|\bde\b)[\pP\s]*?.*?[matricula]?[\pP\s]*?(\d+\pP\d+\pP)?(\d{4})/i';
 
     /**
      * Create a new year extractor instance.
@@ -41,7 +41,7 @@ class YearExtractor extends AbstractExtractor
     public function extract()
     {
         if (preg_match(self::REGEX_YEAR, $this->str, $match)) {
-            return (integer) $this->isValidYear($match[3]) ? (integer) $match[3] : null;
+            return $this->isValidYear($match[3]) ? (integer) $match[3] : null;
         }
     }
     /**
