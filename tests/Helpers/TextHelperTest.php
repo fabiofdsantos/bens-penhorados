@@ -23,7 +23,7 @@ class TextHelperTest extends AbstractTestCase
         $text = 'àáâãäÀÁÂÃÄèéêẽëÈÉÊẼËìíîĩïÌÍÎĨÏòóôõöÒÓÔÕÖùúûũüÙÚÛŨÜçÇ';
         $expected = 'aaaaaAAAAAeeeeeEEEEEiiiiiIIIIIoooooOOOOOuuuuuUUUUUcC';
 
-        $this->assertEquals($expected, Text::removeAccents($text));
+        $this->assertSame($expected, Text::removeAccents($text));
     }
 
     public function testSplitText()
@@ -36,7 +36,7 @@ class TextHelperTest extends AbstractTestCase
             'consectetur',
         ];
 
-        $this->assertEquals($expected, Text::splitter($text));
+        $this->assertSame($expected, Text::splitter($text));
     }
 
     public function testCleanText()
@@ -44,6 +44,6 @@ class TextHelperTest extends AbstractTestCase
         $text = "Lorem  \nipsum  \tdolor sit amet,  consectetur adipiscing.";
         $expected = 'Lorem ipsum dolor sit amet, consectetur adipiscing.';
 
-        $this->assertEquals($expected, Text::clean($text));
+        $this->assertSame($expected, Text::clean($text));
     }
 }
