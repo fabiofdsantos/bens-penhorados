@@ -60,19 +60,115 @@ class VehicleFilteringAttributesController extends Controller
     public function getAttributes($makeId, $districtId)
     {
         $attributes = [
-            'districts'      => District::assignedToVehicles()->lists('name', 'id') ?: null,
-            'municipalities' => Municipality::assignedToVehicles()->ofDistrict($districtId)->lists('name', 'id') ?: null,
-            'purchaseTypes'  => ItemPurchaseType::assignedToVehicles()->lists('name', 'id') ?: null,
-            'categories'     => VehicleCategory::assigned()->lists('name', 'id') ?: null,
-            'colors'         => VehicleColor::assigned()->lists('name', 'id') ?: null,
-            'fuels'          => VehicleFuel::assigned()->lists('name', 'id') ?: null,
-            'makes'          => VehicleMake::assigned()->lists('name', 'id') ?: null,
-            'models'         => VehicleModel::assigned()->ofMake($makeId)->lists('name', 'id') ?: null,
-            'types'          => VehicleType::assigned()->lists('name', 'id') ?: null,
-            'colors'         => VehicleColor::assigned()->lists('name', 'id') ?: null,
-            'fuels'          => VehicleFuel::assigned()->lists('name', 'id') ?: null,
+            'districts'      => $this->getDistricts(),
+            'municipalities' => $this->getMunicipalities($districtId),
+            'purchaseTypes'  => $this->getPurchaseTypes(),
+            'categories'     => $this->getCategories(),
+            'colors'         => $this->getColors(),
+            'fuels'          => $this->getFuels(),
+            'makes'          => $this->getMakes(),
+            'models'         => $this->getModels($makeId),
+            'types'          => $this->getTypes(),
         ];
 
         return $attributes;
+    }
+
+    /**
+     * Get districts.
+     *
+     * @return array|null
+     */
+    public function getDistricts()
+    {
+        return District::assignedToVehicles()->lists('name', 'id') ?: null;
+    }
+
+    /**
+     * Get municipalities.
+     *
+     * @param int|null $districtId
+     *
+     * @return array|null
+     */
+    private function getMunicipalities($districtId)
+    {
+        if (isset($districtId)) {
+            return Municipality::assignedToVehicles()->ofDistrict($districtId)->lists('name', 'id') ?: null;
+        }
+    }
+
+    /**
+     * Get purchase types.
+     *
+     * @return array|null
+     */
+    private function getPurchaseTypes()
+    {
+        return ItemPurchaseType::assignedToVehicles()->lists('name', 'id') ?: null;
+    }
+
+    /**
+     * Get categories.
+     *
+     * @return array|null
+     */
+    private function getCategories()
+    {
+        return VehicleCategory::assigned()->lists('name', 'id') ?: null;
+    }
+
+    /**
+     * Get colors.
+     *
+     * @return array|null
+     */
+    private function getColors()
+    {
+        return VehicleColor::assigned()->lists('name', 'id') ?: null;
+    }
+
+    /**
+     * Get fuels.
+     *
+     * @return array|null
+     */
+    private function getFuels()
+    {
+        return VehicleFuel::assigned()->lists('name', 'id') ?: null;
+    }
+
+    /**
+     * Get makes.
+     *
+     * @return array|null
+     */
+    private function getMakes()
+    {
+        return VehicleMake::assigned()->lists('name', 'id') ?: null;
+    }
+
+    /**
+     * Get models of a given make.
+     *
+     * @param int|null $makeId [description]
+     *
+     * @return array|null
+     */
+    private function getModels($makeId)
+    {
+        if (isset($makeId)) {
+            return VehicleModel::assigned()->ofMake($makeId)->lists('name', 'id') ?: null;
+        }
+    }
+
+    /**
+     * Get types.
+     *
+     * @return array|null
+     */
+    private function getTypes()
+    {
+        return VehicleType::assigned()->lists('name', 'id') ?: null;
     }
 }
