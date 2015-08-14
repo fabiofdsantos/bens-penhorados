@@ -3,7 +3,7 @@
 
 <head>
     <base href="/" />
-    <title ng-bind="pageTitle ? pageTitle + ' - Bens Penhorados' : 'Bens Penhorados'"></title>
+    <title ng-bind="pageTitle"></title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="">

@@ -21,20 +21,25 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
     });
     $routeProvider
         .when('/', {
+            title: 'Bens Penhorados pelas Finanças',
             templateUrl: 'partials/home.html',
             controller: 'HomeCtrl'
         })
         .when('/404', {
+            title: 'Oops. Página não encontrada!',
             templateUrl: 'partials/404.html'
         })
         .when('/login', {
+            title: 'Iniciar sessão',
             templateUrl: 'partials/login.html',
             controller: 'LoginCtrl'
         })
         .when('/register', {
+            title: 'Criar conta de utilizador',
             templateUrl: 'partials/register.html'
         })
         .when('/veiculos', {
+            title: 'Veículos Penhorados pelas Finanças',
             templateUrl: 'partials/vehicles.html',
             controller: 'VehicleListCtrl'
         })
@@ -45,6 +50,12 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
         .otherwise({
             redirectTo: '/404'
         });
+}]);
+
+app.run(['$rootScope', function($rootScope) {
+    $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
+        $rootScope.pageTitle = current.$$route.title;
+    });
 }]);
 
 app.controller('HomeCtrl', function($scope, $http) {
