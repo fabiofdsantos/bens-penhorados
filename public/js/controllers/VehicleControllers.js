@@ -22,7 +22,7 @@ app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFil
         'filters.unicipality',
         'filters.startYear',
         'filters.endYear',
-        'filter.isGoodCondition',
+        'filters.isGoodCondition',
         'filters.purchaseType',
         'filters.withImages',
         'filters.ignoreSuspended',
@@ -89,7 +89,7 @@ app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFil
             municipality: $scope.filters.municipality,
             make: $scope.filters.make,
             model: $scope.filters.model,
-            category: $scope.filters.mategory,
+            category: $scope.filters.category,
             type: $scope.filters.type,
             color: $scope.filters.color,
             fuel: $scope.filters.fuel,
@@ -100,6 +100,26 @@ app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFil
             withimages: $scope.filters.withImages,
             nosuspended: $scope.filters.ignoreSuspended,
         };
+    }
+
+    $scope.resetGenericFilters = function() {
+        var filtersToReset = ['district', 'municipality', 'ignoreSuspended',
+            'withImages', 'purchaseType',
+        ];
+
+        angular.forEach(filtersToReset, function(value, key) {
+            $scope.filters[value] = undefined;
+        });
+    }
+
+    $scope.resetVehicleFilters = function() {
+        var filtersToReset = ['make', 'model', 'category', 'type', 'color', 'fuel',
+            'startYear', 'endYear', 'isGoodCondition',
+        ];
+
+        angular.forEach(filtersToReset, function(value, key) {
+            $scope.filters[value] = undefined;
+        });
     }
 
     $scope.pageChangeHandler = function(newPage) {

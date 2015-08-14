@@ -51,24 +51,27 @@
                             </div>
                         </div>
 
-
                         <div class="form-group">
                             <label for="ignore" class="col-sm-4 control-label">Ignorar anúncios</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <div class="checkbox">
-                                      <label>
-                                        <input type="checkbox" name="nosuspended" ng-checked="filters.ignoreSuspended" ng-model="filters.ignoreSuspended" ng-true-value="1" ng-false-value="undefined">
-                                        Suspensos
-                                      </label>
+                                        <label>
+                                            <input type="checkbox" name="nosuspended" ng-checked="filters.ignoreSuspended" ng-model="filters.ignoreSuspended" ng-true-value="1" ng-false-value="undefined"> Suspensos
+                                        </label>
                                     </div>
                                     <div class="checkbox">
-                                      <label>
-                                        <input type="checkbox" name="withimages" ng-checked="filters.withImages" ng-model="filters.withImages" ng-true-value="1" ng-false-value="undefined">
-                                        Sem imagens
-                                      </label>
+                                        <label>
+                                            <input type="checkbox" name="withimages" ng-checked="filters.withImages" ng-model="filters.withImages" ng-true-value="1" ng-false-value="undefined"> Sem imagens
+                                        </label>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-12 text-right">
+                                <button type="button" class="btn btn-default" ng-click="resetGenericFilters()">Limpar filtros</button>
                             </div>
                         </div>
                     </div>
@@ -82,7 +85,8 @@
                         <div class="alert alert-info" role="alert">
                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                             <span class="sr-only">Aviso:</span>
-                            <small>Existem veículos que não se encontram catalogados por determinados atributos (ex. categoria). Para uma pesquisa mais ampla opte sempre que possível por selecionar a opção: <strong>Todos(as)</strong>.</small>
+                            <small>Existem veículos que não se encontram catalogados por determinados atributos (ex. categoria). Para uma pesquisa mais ampla opte sempre que possível por selecionar a opção:
+                                <strong>Todos(as)</strong>.</small>
                         </div>
 
                         <div class="form-group">
@@ -159,24 +163,26 @@
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <div class="radio">
-                                      <label>
-                                        <input type="radio" ng-model="filters.isGoodCondition" ng-value="undefined">
-                                        Ambos / Não definido
-                                      </label>
+                                        <label>
+                                            <input type="radio" ng-model="filters.isGoodCondition" ng-value="undefined"> Ambos / Não definido
+                                        </label>
                                     </div>
                                     <div class="radio">
-                                      <label>
-                                        <input type="radio" ng-model="filters.isGoodCondition" value="1">
-                                        Bom / Razoável
-                                      </label>
+                                        <label>
+                                            <input type="radio" ng-model="filters.isGoodCondition" value="1"> Bom / Razoável
+                                        </label>
                                     </div>
                                     <div class="radio">
-                                      <label>
-                                        <input type="radio" ng-model="filters.isGoodCondition" value="0">
-                                        Mau
-                                      </label>
+                                        <label>
+                                            <input type="radio" ng-model="filters.isGoodCondition" value="0"> Mau
+                                        </label>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12 text-right">
+                                <button type="button" class="btn btn-default" ng-click="resetVehicleFilters()">Limpar filtros</button>
                             </div>
                         </div>
 
