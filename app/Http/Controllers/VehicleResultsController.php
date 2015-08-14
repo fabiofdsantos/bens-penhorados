@@ -13,6 +13,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Items\Item;
 use App\Models\Items\Vehicle;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -138,6 +139,9 @@ class VehicleResultsController extends Controller
             $query->whereNull('price');
         }
 
+        // Order by price
+        $query->orderBy('price');
+
         return $query->lists('itemable_id');
     }
 
@@ -161,6 +165,10 @@ class VehicleResultsController extends Controller
         $query->ofFuel($filters['fuel_id']);
         $query->betweenYears($filters['min_year'], $filters['max_year']);
         $query->isGoodCondition($filters['is_good_condition']);
+
+        # http://dba.stackexchange.com/questions/109120/how-does-order-by-field-in-mysql-work-internally
+        $ids = implode(',', $ids);
+        $query->orderByRaw(DB::raw("FIELD(id, $ids)"));
 
         return $query;
     }
