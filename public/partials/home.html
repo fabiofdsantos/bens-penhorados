@@ -6,7 +6,7 @@
                     <h2>Encontrar bens penhorados ficou mais fácil!</h2>
                 </div>
                 <div style="margin: 0 auto;" class="input-group col-lg-4 col-lg-offset-4">
-                    <input type="text" class="form-control" placeholder="ex: Apartamento T3 em Leiria" name="search-term" ng-model="searchTerm" ng-model-options="{ debounce: 1000 }">
+                    <input type="text" class="form-control" placeholder="ex: Apartamento T3 em Leiria" name="search-term" data-ng-model="searchTerm" data-ng-model-options="{ debounce: 1000 }">
                 </div>
             </div>
         </div>
@@ -20,13 +20,13 @@
                 <h2>Últimas Inserções</h2>
                 <hr>
             </div>
-            <div class="list-group col-lg-3" ng-repeat="newItem in latest">
-                <a class="list-group-item" ng-href="../{{ newItem.categorySlug }}/{{ newItem.itemSlug }}">
-                    <img class="img-responsive" ng-src="../images/{{ newItem.image != null ? newItem.image : 'empty.jpg'}}">
+            <div class="list-group col-lg-3" data-ng-repeat="newItem in latest">
+                <a class="list-group-item" data-ng-href="../{{ newItem.categorySlug }}/{{ newItem.itemSlug }}">
+                    <img class="img-responsive" alt="{{ newItem.title }}" data-ng-src="../images/{{ newItem.image != null ? newItem.image : 'empty.jpg'}}">
                     <div class="caption text-center">
-                        <h3 ng-bind="newItem.title"></h3>
+                        <h3 data-ng-bind="newItem.title"></h3>
                         <p>
-                            <strong ng-bind="newItem.price ? (newItem.price | currency:'€':0) : 'À melhor oferta'"></strong>
+                            <strong data-ng-bind="newItem.price ? (newItem.price | currency:'€':0) : 'À melhor oferta'"></strong>
                         </p>
                     </div>
                 </a>
@@ -42,13 +42,13 @@
                 <h2>A terminar o limite para propostas</h2>
                 <hr>
             </div>
-            <div class="list-group col-lg-3" ng-repeat="endingItem in endingSoon">
-                <a class="list-group-item" ng-href="../{{ endingItem.categorySlug }}/{{ endingItem.itemSlug }}">
-                    <img class="img-responsive" ng-src="../images/{{ endingItem.image != null ? endingItem.image : 'empty.jpg'}}">
+            <div class="list-group col-lg-3" data-ng-repeat="endingItem in endingSoon">
+                <a class="list-group-item" data-ng-href="../{{ endingItem.categorySlug }}/{{ endingItem.itemSlug }}">
+                    <img class="img-responsive" alt="{{ endingItem.title }}" data-ng-src="../images/{{ endingItem.image != null ? endingItem.image : 'empty.jpg'}}">
                     <div class="caption text-center">
-                        <h3 ng-bind="endingItem.title"></h3>
+                        <h3 data-ng-bind="endingItem.title"></h3>
                         <p>
-                            <strong ng-bind="endingItem.price ? (endingItem.price | currency:'€':0) : 'À melhor oferta'"></strong>
+                            <strong data-ng-bind="endingItem.price ? (endingItem.price | currency:'€':0) : 'À melhor oferta'"></strong>
                         </p>
                     </div>
                 </a>

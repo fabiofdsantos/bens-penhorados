@@ -16,7 +16,7 @@
                         <div class="form-group">
                             <label for="district" class="col-sm-4 control-label">Distrito</label>
                             <div class="col-sm-8">
-                                <select ng-disabled="!filteringAttr.districts" class="form-control" ng-model="filters.district" ng-options="key as value for (key , value) in filteringAttr.districts">
+                                <select data-ng-disabled="!filteringAttr.districts" class="form-control" data-ng-model="filters.district" data-ng-options="key as value for (key , value) in filteringAttr.districts">
                                     <option value="">-- Todos os distritos --</option>
                                 </select>
                             </div>
@@ -25,7 +25,7 @@
                         <div class="form-group">
                             <label for="municipality" class="col-sm-4 control-label">Concelho</label>
                             <div class="col-sm-8">
-                                <select ng-disabled="!filteringAttr.municipalities" class="form-control" ng-model="filters.municipality" ng-options="key as value for (key , value) in filteringAttr.municipalities">
+                                <select data-ng-disabled="!filteringAttr.municipalities" class="form-control" data-ng-model="filters.municipality" data-ng-options="key as value for (key , value) in filteringAttr.municipalities">
                                     <option value="">-- Todos os concelhos --</option>
                                 </select>
                             </div>
@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <label for="purchaseType" class="col-sm-4 control-label">Modalidade</label>
                             <div class="col-sm-8">
-                                <select ng-disabled="!filteringAttr.purchaseTypes" class="form-control" ng-model="filters.purchaseType" ng-options="key as value for (key , value) in filteringAttr.purchaseTypes">
+                                <select data-ng-disabled="!filteringAttr.purchaseTypes" class="form-control" data-ng-model="filters.purchaseType" data-ng-options="key as value for (key , value) in filteringAttr.purchaseTypes">
                                     <option value="">-- Todos as modalidades --</option>
                                 </select>
                             </div>
@@ -44,11 +44,11 @@
                             <label for="price" class="col-sm-4 control-label">Preço</label>
                             <div class="col-sm-8">
                                 <div class="form-inline input-group">
-                                    <select class="form-control" ng-disabled="filters.noPrice" ng-model="filters.minPrice" ng-options="n as (n|currency:'€':0) for n in priceRange">
+                                    <select class="form-control" data-ng-disabled="filters.noPrice" data-ng-model="filters.minPrice" data-ng-options="n as (n|currency:'€':0) for n in priceRange">
                                         <option value="">Min.</option>
                                     </select>
                                     <span class="input-group-addon">até</span>
-                                    <select class="form-control" ng-disabled="filters.noPrice" ng-model="filters.maxPrice" ng-options="n as (n|currency:'€':0) for n in priceRange">
+                                    <select class="form-control" data-ng-disabled="filters.noPrice" data-ng-model="filters.maxPrice" data-ng-options="n as (n|currency:'€':0) for n in priceRange">
                                         <option value="">Máx.</option>
                                     </select>
                                 </div>
@@ -61,17 +61,17 @@
                                 <div class="input-group">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="nosuspended" ng-checked="filters.ignoreSuspended" ng-model="filters.ignoreSuspended" ng-true-value="1" ng-false-value="undefined"> Vendas em curso
+                                            <input type="checkbox" name="nosuspended" data-ng-checked="filters.ignoreSuspended" data-ng-model="filters.ignoreSuspended" data-ng-true-value="1" data-ng-false-value="undefined"> Vendas em curso
                                         </label>
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="withimages" ng-checked="filters.withImages" ng-model="filters.withImages" ng-true-value="1" ng-false-value="undefined"> Anúncios com imagens
+                                            <input type="checkbox" name="withimages" data-ng-checked="filters.withImages" data-ng-model="filters.withImages" data-ng-true-value="1" data-ng-false-value="undefined"> Anúncios com imagens
                                         </label>
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="noprice" ng-checked="filters.noPrice" ng-model="filters.noPrice" ng-true-value="1" ng-false-value="undefined"> Sem preço base
+                                            <input type="checkbox" name="noprice" data-ng-checked="filters.noPrice" data-ng-model="filters.noPrice" data-ng-true-value="1" data-ng-false-value="undefined"> Sem preço base
                                         </label>
                                     </div>
                                 </div>
@@ -80,7 +80,7 @@
 
                         <div class="form-group">
                             <div class="col-sm-12 text-right">
-                                <button type="button" class="btn btn-default" ng-click="resetGenericFilters()">Limpar filtros</button>
+                                <button type="button" class="btn btn-default" data-ng-click="resetGenericFilters()">Limpar filtros</button>
                             </div>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                         <div class="form-group">
                             <label for="make" class="col-sm-4 control-label">Marca</label>
                             <div class="col-sm-8">
-                                <select ng-disabled="!filteringAttr.makes" class="form-control" ng-model="filters.make" ng-options="key as value for (key , value) in filteringAttr.makes">
+                                <select data-ng-disabled="!filteringAttr.makes" class="form-control" data-ng-model="filters.make" data-ng-options="key as value for (key , value) in filteringAttr.makes">
                                     <option value="">-- Todas as marcas --</option>
                                 </select>
                             </div>
@@ -110,7 +110,7 @@
                         <div class="form-group">
                             <label for="model" class="col-sm-4 control-label">Modelo</label>
                             <div class="col-sm-8">
-                                <select ng-disabled="!filteringAttr.models" class="form-control" ng-model="filters.model" ng-options="key as value for (key , value) in filteringAttr.models">
+                                <select data-ng-disabled="!filteringAttr.models" class="form-control" data-ng-model="filters.model" data-ng-options="key as value for (key , value) in filteringAttr.models">
                                     <option value="">-- Todos os modelos --</option>
                                 </select>
                             </div>
@@ -119,7 +119,7 @@
                         <div class="form-group">
                             <label for="fuel" class="col-sm-4 control-label">Combustível</label>
                             <div class="col-sm-8">
-                                <select ng-disabled="!filteringAttr.fuels" class="form-control" ng-model="filters.fuel" ng-options="key as value for (key , value) in filteringAttr.fuels">
+                                <select data-ng-disabled="!filteringAttr.fuels" class="form-control" data-ng-model="filters.fuel" data-ng-options="key as value for (key , value) in filteringAttr.fuels">
                                     <option value="">-- Todos os combustíveis --</option>
                                 </select>
                             </div>
@@ -128,7 +128,7 @@
                         <div class="form-group">
                             <label for="category" class="col-sm-4 control-label">Categoria</label>
                             <div class="col-sm-8">
-                                <select ng-disabled="!filteringAttr.categories" class="form-control" ng-model="filters.category" ng-options="key as value for (key , value) in filteringAttr.categories">
+                                <select data-ng-disabled="!filteringAttr.categories" class="form-control" data-ng-model="filters.category" data-ng-options="key as value for (key , value) in filteringAttr.categories">
                                     <option value="">-- Todas as categorias --</option>
                                 </select>
                             </div>
@@ -137,7 +137,7 @@
                         <div class="form-group">
                             <label for="type" class="col-sm-4 control-label">Tipo</label>
                             <div class="col-sm-8">
-                                <select ng-disabled="!filteringAttr.types" class="form-control" ng-model="filters.type" ng-options="key as value for (key , value) in filteringAttr.types">
+                                <select data-ng-disabled="!filteringAttr.types" class="form-control" data-ng-model="filters.type" data-ng-options="key as value for (key , value) in filteringAttr.types">
                                     <option value="">-- Todos os tipos --</option>
                                 </select>
                             </div>
@@ -146,7 +146,7 @@
                         <div class="form-group">
                             <label for="color" class="col-sm-4 control-label">Cor</label>
                             <div class="col-sm-8">
-                                <select ng-disabled="!filteringAttr.colors" class="form-control" ng-model="filters.color" ng-options="key as value for (key , value) in filteringAttr.colors">
+                                <select data-ng-disabled="!filteringAttr.colors" class="form-control" data-ng-model="filters.color" data-ng-options="key as value for (key , value) in filteringAttr.colors">
                                     <option value="">-- Todas as cores --</option>
                                 </select>
                             </div>
@@ -156,11 +156,11 @@
                             <label for="year" class="col-sm-4 control-label">Ano</label>
                             <div class="col-sm-8">
                                 <div class="form-inline input-group">
-                                    <select class="form-control" ng-model="filters.minYear" ng-options="n for n in [] | range:1950:2015">
+                                    <select class="form-control" data-ng-model="filters.minYear" data-ng-options="n for n in [] | range:1950:2015">
                                         <option value="">Min.</option>
                                     </select>
                                     <span class="input-group-addon">até</span>
-                                    <select class="form-control" ng-model="filters.maxYear" ng-options="n for n in [] | range:1950:2015">
+                                    <select class="form-control" data-ng-model="filters.maxYear" data-ng-options="n for n in [] | range:1950:2015">
                                         <option value="">Máx.</option>
                                     </select>
                                 </div>
@@ -173,17 +173,17 @@
                                 <div class="input-group">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" ng-model="filters.isGoodCondition" ng-value="undefined"> Ambos / Não definido
+                                            <input type="radio" data-ng-model="filters.isGoodCondition" data-ng-value="undefined"> Ambos / Não definido
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" ng-model="filters.isGoodCondition" value="1"> Bom / Razoável
+                                            <input type="radio" data-ng-model="filters.isGoodCondition" value="1"> Bom / Razoável
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" ng-model="filters.isGoodCondition" value="0"> Mau
+                                            <input type="radio" data-ng-model="filters.isGoodCondition" value="0"> Mau
                                         </label>
                                     </div>
                                 </div>
@@ -191,7 +191,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-12 text-right">
-                                <button type="button" class="btn btn-default" ng-click="resetVehicleFilters()">Limpar filtros</button>
+                                <button type="button" class="btn btn-default" data-ng-click="resetVehicleFilters()">Limpar filtros</button>
                             </div>
                         </div>
 
@@ -202,18 +202,18 @@
             <div class="col-xs-12 col-md-8">
                 <div class="col-xs-12 col-sm-12 as-table results-head">
                     <div>
-                        <span ng-bind="result.from || 0"></span>
+                        <span data-ng-bind="result.from || 0"></span>
                         <span>-</span>
-                        <span ng-bind="result.to || 0"></span> de
-                        <span ng-bind="result.total || 0"></span> veículos encontrados
+                        <span data-ng-bind="result.to || 0"></span> de
+                        <span data-ng-bind="result.total || 0"></span> veículos encontrados
                     </div>
                     <div class="text-right" style="width:100%;">Ver p/página:</div>
                     <div>
-                        <select class="form-control" ng-options="number for number in itemsPerPageValues" ng-model="itemsPerPage"></select>
+                        <select class="form-control" data-ng-options="number for number in itemsPerPageValues" data-ng-model="itemsPerPage"></select>
                     </div>
                 </div>
 
-                <div class="row" ng-hide="noResults || result.items.length">
+                <div class="row" data-ng-hide="noResults || result.items.length">
                     <div class="col-xs-12 col-sm-12">
                         <div class="bs-callout bs-callout-info" id="callout-inline-form-width">
                             <h4>Aguarde um pouco...</h4>
@@ -222,7 +222,7 @@
                     </div>
                 </div>
 
-                <div class="row" ng-show="noResults">
+                <div class="row" data-ng-show="noResults">
                     <div class="col-xs-12 col-sm-12">
                         <div class="bs-callout bs-callout-warning" id="callout-inline-form-width">
                             <h4>Ooops...</h4>
@@ -231,19 +231,19 @@
                     </div>
                 </div>
 
-                <div class="row list-group" ng-show="result.items.length" dir-paginate="item in result.items | itemsPerPage : itemsPerPage" total-items="result.total" current-page="pagination.current">
+                <div class="row list-group" data-ng-show="result.items.length" dir-paginate="item in result.items | itemsPerPage : itemsPerPage" total-items="result.total" current-page="pagination.current">
                     <div class="col-xs-12 col-sm-12">
-                        <a class="list-group-item col-xs-12 col-sm-12" ng-href="../veiculos/{{ item.slug }}">
+                        <a class="list-group-item col-xs-12 col-sm-12" data-ng-href="../veiculos/{{ item.slug }}">
                             <div class="results-image col-xs-12 col-sm-3">
-                                <img class="img-responsive img-thumbnail" alt="" ng-src="../images/{{ item.image != null ? item.image : 'empty.jpg' }}">
+                                <img class="img-responsive img-thumbnail" alt="" data-ng-src="../images/{{ item.image != null ? item.image : 'empty.jpg' }}">
                             </div>
                             <div class="col-xs-12 col-sm-6">
                                 <div class="results-title">
-                                    <h2 ng-bind="item.title"></h2>
+                                    <h2 data-ng-bind="item.title"></h2>
                                 </div>
                             </div>
                             <div class="results-price col-xs-12 col-sm-3">
-                                <span ng-bind="item.price ? (item.price | currency:'€':0) : 'À melhor oferta'"></span>
+                                <span data-ng-bind="item.price ? (item.price | currency:'€':0) : 'À melhor oferta'"></span>
                             </div>
                         </a>
                     </div>

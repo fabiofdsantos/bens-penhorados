@@ -1,15 +1,15 @@
 <div class="section">
-    <div ng-show="vehicle" class="container">
-        <h1 class="page-header" ng-bind="vehicle.title"></h1>
+    <div data-ng-show="vehicle" class="container">
+        <h1 class="page-header" data-ng-bind="vehicle.title"></h1>
         <div class="row" style="margin-bottom: 15px">
             <div class="col-md-6 show-grid">
                 <div style="max-width: 100%">
                     <carousel interval="2000">
-                        <slide ng-repeat="image in vehicle.generic.images">
-                            <img ng-src="../images/{{ image }}" style="margin:auto;">
+                        <slide data-ng-repeat="image in vehicle.generic.images">
+                            <img data-ng-src="../images/{{ image }}" style="margin:auto;">
                         </slide>
                     </carousel>
-                    <img ng-hide="vehicle.generic.images" ng-src="../images/empty.jpg" style="margin:auto; max-width: 100%">
+                    <img data-ng-hide="vehicle.generic.images" data-ng-src="../images/empty.jpg" style="margin:auto; max-width: 100%">
                 </div>
             </div>
             <div class="col-md-6">
@@ -19,8 +19,8 @@
                             <strong>Preço base de venda:</strong>
                         </div>
                         <div class="item-price row">
-                            <span ng-bind="vehicle.generic.price.value ? (vehicle.generic.price.value  | currency:'€') : 'À melhor oferta'"></span>
-                            <span ng-show="vehicle.generic.vat" ng-bind="' - Incl. ' + vehicle.generic.vat + '% (IVA)'"></span>
+                            <span data-ng-bind="vehicle.generic.price.value ? (vehicle.generic.price.value  | currency:'€') : 'À melhor oferta'"></span>
+                            <span data-ng-show="vehicle.generic.vat" data-ng-bind="' - Incl. ' + vehicle.generic.vat + '% (IVA)'"></span>
                         </div>
                     </div>
                 </div>
@@ -29,38 +29,38 @@
                         <div class="col-sm-12 text-center">
                             <p class="small">
                                 <strong>Estado da venda: </strong>
-                                <span ng-bind="vehicle.generic.status" ng-style="vehicle.generic.status == 'Em curso' ? {'color':'green'} : {'color':'red'}"></span>
+                                <span data-ng-bind="vehicle.generic.status" data-ng-style="vehicle.generic.status == 'Em curso' ? {'color':'green'} : {'color':'red'}"></span>
                             </p>
                             <p class="small">
                                 <strong>Localização: </strong>
-                                <span ng-bind="vehicle.generic.location"></span>
+                                <span data-ng-bind="vehicle.generic.location"></span>
                             </p>
                             <p class="small">
                                 <strong>Modalidade: </strong>
-                                <span ng-bind="vehicle.generic.purchaseType"></span>
+                                <span data-ng-bind="vehicle.generic.purchaseType"></span>
                             </p>
                             <p class="small">
                                 <strong>Código da venda: </strong>
-                                <span ng-bind="vehicle.generic.code"></span>
+                                <span data-ng-bind="vehicle.generic.code"></span>
                             </p>
                             <p class="small">
                                 <strong>Serviço de finanças: </strong>
-                                <span ng-bind="vehicle.generic.taxOffice"></span>
+                                <span data-ng-bind="vehicle.generic.taxOffice"></span>
                             </p>
                             <br />
-                            <small ng-bind="'Apresentação de propostas até ' + vehicle.generic.dates.acceptanceDt"></small>
+                            <small data-ng-bind="'Apresentação de propostas até ' + vehicle.generic.dates.acceptanceDt"></small>
                             <br />
-                            <small ng-bind="'Examinação do bem de ' + vehicle.generic.dates.previewDtStart"></small>
-                            <small ng-bind="' até ' + vehicle.generic.dates.previewDtEnd"></small>
+                            <small data-ng-bind="'Examinação do bem de ' + vehicle.generic.dates.previewDtStart"></small>
+                            <small data-ng-bind="' até ' + vehicle.generic.dates.previewDtEnd"></small>
                             <br />
-                            <small ng-bind="'Abertura de propostas em ' + vehicle.generic.dates.openingDt"></small>
+                            <small data-ng-bind="'Abertura de propostas em ' + vehicle.generic.dates.openingDt"></small>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="item-buttons col-md-6 text-center">
                 <div class="col-xs-12 col-sm-6">
-                    <a class="btn btn-primary" target="_blank" ng-href="{{ (vehicle.generic.code | generateLink) }}" role="button"><i class="glyphicon glyphicon-new-window"></i> Ver anúncio original</a>
+                    <a class="btn btn-primary" target="_blank" data-ng-href="{{ (vehicle.generic.code | generateLink) }}" role="button"><i class="glyphicon glyphicon-new-window"></i> Ver anúncio original</a>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <a class="btn btn-warning" href="#" role="button"><i class="glyphicon glyphicon-pushpin"></i> Marcar como favorito</a>
@@ -78,45 +78,45 @@
                         </tr>
                     </thead>
                     <tbody style="font-size: 12px;">
-                        <tr ng-show="vehicle.make">
+                        <tr data-ng-show="vehicle.make">
                             <th scope="row">Marca</th>
-                            <td ng-bind="vehicle.make"></td>
+                            <td data-ng-bind="vehicle.make"></td>
                         </tr>
-                        <tr ng-show="vehicle.model">
+                        <tr data-ng-show="vehicle.model">
                             <th scope="row">Modelo</th>
-                            <td ng-bind="vehicle.model"></td>
+                            <td data-ng-bind="vehicle.model"></td>
                         </tr>
-                        <tr ng-show="vehicle.year">
+                        <tr data-ng-show="vehicle.year">
                             <th scope="row">Ano</th>
-                            <td ng-bind="vehicle.year"></td>
+                            <td data-ng-bind="vehicle.year"></td>
                         </tr>
-                        <tr ng-show="vehicle.engDispl">
+                        <tr data-ng-show="vehicle.engDispl">
                             <th scope="row">Cilindrada</th>
-                            <td ng-bind="(vehicle.engDispl | number : 0) + ' cc'"></td>
+                            <td data-ng-bind="(vehicle.engDispl | number : 0) + ' cc'"></td>
                         </tr>
-                        <tr ng-show="vehicle.fuel">
+                        <tr data-ng-show="vehicle.fuel">
                             <th scope="row">Combustível</th>
-                            <td ng-bind="vehicle.fuel"></td>
+                            <td data-ng-bind="vehicle.fuel"></td>
                         </tr>
-                        <tr ng-show="vehicle.color">
+                        <tr data-ng-show="vehicle.color">
                             <th scope="row">Cor</th>
-                            <td ng-bind="vehicle.color"></td>
+                            <td data-ng-bind="vehicle.color"></td>
                         </tr>
-                        <tr ng-show="vehicle.category">
+                        <tr data-ng-show="vehicle.category">
                             <th scope="row">Categoria</th>
-                            <td ng-bind="vehicle.category"></td>
+                            <td data-ng-bind="vehicle.category"></td>
                         </tr>
-                        <tr ng-show="vehicle.type">
+                        <tr data-ng-show="vehicle.type">
                             <th scope="row">Tipo</th>
-                            <td ng-bind="vehicle.type"></td>
+                            <td data-ng-bind="vehicle.type"></td>
                         </tr>
-                        <tr ng-show="vehicle.regPlateCode">
+                        <tr data-ng-show="vehicle.regPlateCode">
                             <th scope="row">Matrícula</th>
-                            <td ng-bind="vehicle.regPlateCode"></td>
+                            <td data-ng-bind="vehicle.regPlateCode"></td>
                         </tr>
-                        <tr ng-show="vehicle.goodCondition != null">
+                        <tr data-ng-show="vehicle.goodCondition != null">
                             <th scope="row">Estado</th>
-                            <td ng-bind="vehicle.goodCondition | vehicleCondition"></td>
+                            <td data-ng-bind="vehicle.goodCondition | vehicleCondition"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -131,12 +131,12 @@
                         </tr>
                     </thead>
                     <tbody style="font-size: 12px;">
-                        <tr ng-show="vehicle.generic.description">
-                            <td ng-bind="vehicle.generic.description"></td>
+                        <tr data-ng-show="vehicle.generic.description">
+                            <td data-ng-bind="vehicle.generic.description"></td>
                         </tr>
                     </tbody>
                 </table>
-                <div class="table-responsive" ng-show="vehicle.generic.depositary.phone || vehicle.generic.depositary.email || vehicle.generic.mediator.name || vehicle.generic.mediator.email">
+                <div class="table-responsive" data-ng-show="vehicle.generic.depositary.phone || vehicle.generic.depositary.email || vehicle.generic.mediator.name || vehicle.generic.mediator.email">
                     <table class="table table-condensed">
                         <thead>
                             <tr>
@@ -146,17 +146,17 @@
                             </tr>
                         </thead>
                         <tbody style="font-size: 12px;">
-                            <tr ng-show="vehicle.generic.depositary.phone || vehicle.generic.depositary.email">
+                            <tr data-ng-show="vehicle.generic.depositary.phone || vehicle.generic.depositary.email">
                                 <th scope="row">Fiel depositário</th>
-                                <td ng-bind="vehicle.generic.depositary.name"></td>
-                                <td ng-bind="vehicle.generic.depositary.phone | phonenumber:351"></td>
-                                <td ng-show="vehicle.generic.depositary.email"><a ng-href="mailto:{{ vehicle.generic.depositary.email }}" target="_blank">Enviar email</a></td>
+                                <td data-ng-bind="vehicle.generic.depositary.name"></td>
+                                <td data-ng-bind="vehicle.generic.depositary.phone | phonenumber:351"></td>
+                                <td data-ng-show="vehicle.generic.depositary.email"><a data-ng-href="mailto:{{ vehicle.generic.depositary.email }}" target="_blank">Enviar email</a></td>
                             </tr>
-                            <tr ng-show="vehicle.generic.mediator.name || vehicle.generic.mediator.email">
+                            <tr data-ng-show="vehicle.generic.mediator.name || vehicle.generic.mediator.email">
                                 <th scope="row">Mediador</th>
-                                <td ng-bind="vehicle.generic.mediator.name"></td>
-                                <td ng-bind="vehicle.generic.mediator.phone | phonenumber:351"></td>
-                                <td ng-show="vehicle.generic.depositary.email"><a ng-href="mailto:{{ vehicle.generic.depositary.email }}" target="_blank">Enviar email</a></td>
+                                <td data-ng-bind="vehicle.generic.mediator.name"></td>
+                                <td data-ng-bind="vehicle.generic.mediator.phone | phonenumber:351"></td>
+                                <td data-ng-show="vehicle.generic.depositary.email"><a data-ng-href="mailto:{{ vehicle.generic.depositary.email }}" target="_blank">Enviar email</a></td>
                             </tr>
                         </tbody>
                     </table>
