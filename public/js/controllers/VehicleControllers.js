@@ -229,7 +229,7 @@ app.controller('VehicleCtrl', ['$rootScope', '$scope', '$routeParams', '$locatio
         slug: $routeParams.slug
     }, function(data) {
         $scope.vehicle = data;
-        $rootScope.pageTitle = data.title;
+        $rootScope.pageTitle = data.generic.title;
     }, function(error) {
         if (error.status === 404) {
             $location.path("/404");
