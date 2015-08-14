@@ -29,7 +29,7 @@ class ConditionExtractor extends AbstractExtractor
     const REGEX_BAD = [
         '/\bmau\s*estado\b/i',
         '/\bsucata\b/i',
-        '/\bavariado\b/i',
+        '/\bavariad[oa]\b/i',
         '/\bmal\s*tratado\b/i',
         '/\bpintura\s*riscada\b/i',
         '/\b(amolgad)(o|elas?)\b/i',
