@@ -20,7 +20,7 @@ use App\Extractors\AbstractExtractor;
  */
 class NifExtractor extends AbstractExtractor
 {
-    const REGEX_NIF = '/\b[125689][0-9]{8}\b/';
+    const REGEX_NIF = '/\b([125689][0-9]{2})\s?\pP?([0-9]{3})\s?\pP?([0-9]{3})\b/';
 
     /**
      * Create a new nif extractor instance.
@@ -40,7 +40,7 @@ class NifExtractor extends AbstractExtractor
     public function extract()
     {
         if (preg_match(self::REGEX_NIF, $this->str, $match)) {
-            return (integer) $match[0];
+            return ($match[0] ? (integer) ($match[1].$match[2].$match[3]) : null);
         }
     }
 }
