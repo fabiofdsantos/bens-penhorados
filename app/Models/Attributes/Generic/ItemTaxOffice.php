@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int          $id
  * @property string       $code
- * @property string       $name
+ * @property int          $number
  * @property Municipality $municipality
  */
 class ItemTaxOffice extends Model
