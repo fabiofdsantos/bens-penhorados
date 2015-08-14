@@ -140,7 +140,7 @@ class VehicleResultsController extends Controller
         }
 
         // Order by price
-        $query->orderBy('price');
+        $query->orderBy(DB::raw('ISNULL(price), price'), 'asc');
 
         return $query->lists('itemable_id');
     }
