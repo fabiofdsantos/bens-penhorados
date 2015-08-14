@@ -5,11 +5,11 @@
             <div class="col-md-6 show-grid">
                 <div style="max-width: 100%">
                     <carousel interval="2000">
-                        <slide ng-repeat="image in vehicle.images">
+                        <slide ng-repeat="image in vehicle.generic.images">
                             <img ng-src="../images/{{ image }}" style="margin:auto;">
                         </slide>
                     </carousel>
-                    <img ng-hide="vehicle.images" ng-src="../images/empty.jpg" style="margin:auto; max-width: 100%">
+                    <img ng-hide="vehicle.generic.images" ng-src="../images/empty.jpg" style="margin:auto; max-width: 100%">
                 </div>
             </div>
             <div class="col-md-6">
@@ -19,8 +19,8 @@
                             <strong>Preço base de venda:</strong>
                         </div>
                         <div class="item-price row">
-                            <span ng-bind="vehicle.price ? (vehicle.price | currency:'€') : 'À melhor oferta'"></span>
-                            <span ng-show="vehicle.vat" ng-bind="' - Incl. ' + vehicle.vat + '% (IVA)'"></span>
+                            <span ng-bind="vehicle.generic.price.value ? (vehicle.generic.price.value  | currency:'€') : 'À melhor oferta'"></span>
+                            <span ng-show="vehicle.generic.vat" ng-bind="' - Incl. ' + vehicle.generic.vat + '% (IVA)'"></span>
                         </div>
                     </div>
                 </div>
@@ -29,38 +29,38 @@
                         <div class="col-sm-12 text-center">
                             <p class="small">
                                 <strong>Estado da venda: </strong>
-                                <span ng-bind="vehicle.status" ng-style="vehicle.status == 'Em curso' ? {'color':'green'} : {'color':'red'}"></span>
+                                <span ng-bind="vehicle.generic.status" ng-style="vehicle.generic.status == 'Em curso' ? {'color':'green'} : {'color':'red'}"></span>
                             </p>
                             <p class="small">
                                 <strong>Localização: </strong>
-                                <span ng-bind="vehicle.location"></span>
+                                <span ng-bind="vehicle.generic.location"></span>
                             </p>
                             <p class="small">
                                 <strong>Modalidade: </strong>
-                                <span ng-bind="vehicle.purchaseType"></span>
+                                <span ng-bind="vehicle.generic.purchaseType"></span>
                             </p>
                             <p class="small">
                                 <strong>Código da venda: </strong>
-                                <span ng-bind="vehicle.code"></span>
+                                <span ng-bind="vehicle.generic.code"></span>
                             </p>
                             <p class="small">
                                 <strong>Serviço de finanças: </strong>
-                                <span ng-bind="vehicle.taxOffice"></span>
+                                <span ng-bind="vehicle.generic.taxOffice"></span>
                             </p>
                             <br />
-                            <small ng-bind="'Apresentação de propostas até ' + vehicle.acceptanceDt"></small>
+                            <small ng-bind="'Apresentação de propostas até ' + vehicle.generic.dates.acceptanceDt"></small>
                             <br />
-                            <small ng-bind="'Examinação do bem de ' + vehicle.previewDtStart"></small>
-                            <small ng-bind="' até ' + vehicle.previewDtEnd"></small>
+                            <small ng-bind="'Examinação do bem de ' + vehicle.generic.dates.previewDtStart"></small>
+                            <small ng-bind="' até ' + vehicle.generic.dates.previewDtEnd"></small>
                             <br />
-                            <small ng-bind="'Abertura de propostas em ' + vehicle.openingDt"></small>
+                            <small ng-bind="'Abertura de propostas em ' + vehicle.generic.dates.openingDt"></small>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="item-buttons col-md-6 text-center">
                 <div class="col-xs-12 col-sm-6">
-                    <a class="btn btn-primary" target="_blank" ng-href="{{ (vehicle.code | generateLink) }}" role="button"><i class="glyphicon glyphicon-new-window"></i> Ver anúncio original</a>
+                    <a class="btn btn-primary" target="_blank" ng-href="{{ (vehicle.generic.code | generateLink) }}" role="button"><i class="glyphicon glyphicon-new-window"></i> Ver anúncio original</a>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <a class="btn btn-warning" href="#" role="button"><i class="glyphicon glyphicon-pushpin"></i> Marcar como favorito</a>
@@ -131,11 +131,36 @@
                         </tr>
                     </thead>
                     <tbody style="font-size: 12px;">
-                        <tr ng-show="vehicle.description">
-                            <td ng-bind="vehicle.description"></td>
+                        <tr ng-show="vehicle.generic.description">
+                            <td ng-bind="vehicle.generic.description"></td>
                         </tr>
                     </tbody>
                 </table>
+                <div class="table-responsive" ng-show="vehicle.generic.depositary.phone || vehicle.generic.depositary.email || vehicle.generic.mediator.name || vehicle.generic.mediator.email">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th colspan="4">
+                                    <h4>Contactos</h4>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody style="font-size: 12px;">
+                            <tr ng-show="vehicle.generic.depositary.phone || vehicle.generic.depositary.email">
+                                <th scope="row">Fiel depositário</th>
+                                <td ng-bind="vehicle.generic.depositary.name"></td>
+                                <td ng-bind="vehicle.generic.depositary.phone | phonenumber:351"></td>
+                                <td ng-show="vehicle.generic.depositary.email"><a ng-href="mailto:{{ vehicle.generic.depositary.email }}" target="_blank">Enviar email</a></td>
+                            </tr>
+                            <tr ng-show="vehicle.generic.mediator.name || vehicle.generic.mediator.email">
+                                <th scope="row">Mediador</th>
+                                <td ng-bind="vehicle.generic.mediator.name"></td>
+                                <td ng-bind="vehicle.generic.mediator.phone | phonenumber:351"></td>
+                                <td ng-show="vehicle.generic.depositary.email"><a ng-href="mailto:{{ vehicle.generic.depositary.email }}" target="_blank">Enviar email</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

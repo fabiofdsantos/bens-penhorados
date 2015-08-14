@@ -58,21 +58,6 @@ class VehicleSinglePageController extends Controller
 
         $vehicle = Vehicle::find($generic->itemable_id);
         $item = [
-            'code'           => $generic->code,
-            'taxOffice'      => self::getTaxOfficeName($generic->taxOffice),
-            'location'       => self::getLocation($generic),
-            'title'          => $generic->title,
-            'slug'           => $generic->slug,
-            'price'          => $generic->price,
-            'vat'            => $generic->vat,
-            'status'         => $generic->status()->pluck('name'),
-            'purchaseType'   => $generic->purchaseType()->pluck('name'),
-            'description'    => $generic->full_description,
-            'images'         => json_decode($generic->images),
-            'previewDtStart' => $generic->preview_dt_start->format(self::DATETIME_FORMAT),
-            'previewDtEnd'   => $generic->preview_dt_end->format(self::DATETIME_FORMAT),
-            'openingDt'      => $generic->opening_dt->format(self::DATETIME_FORMAT),
-            'acceptanceDt'   => $generic->acceptance_dt->format(self::DATETIME_FORMAT),
             'year'           => $vehicle->year,
             'make'           => $vehicle->make()->pluck('name'),
             'model'          => $vehicle->model()->pluck('name'),
@@ -83,6 +68,37 @@ class VehicleSinglePageController extends Controller
             'goodCondition'  => is_null($vehicle->is_good_condition) ? null : (bool) $vehicle->is_good_condition,
             'engDispl'       => $vehicle->engine_displacement,
             'regPlateCode'   => $vehicle->reg_plate_code,
+            'generic'        => [
+                'code'           => $generic->code,
+                'taxOffice'      => self::getTaxOfficeName($generic->taxOffice),
+                'location'       => self::getLocation($generic),
+                'title'          => $generic->title,
+                'slug'           => $generic->slug,
+                'price'          => [
+                    'value' => $generic->price,
+                    'vat'   => $generic->vat,
+                ],
+                'status'         => $generic->status()->pluck('name'),
+                'purchaseType'   => $generic->purchaseType()->pluck('name'),
+                'description'    => $generic->full_description,
+                'images'         => json_decode($generic->images),
+                'dates'          => [
+                    'previewDtStart' => $generic->preview_dt_start->format(self::DATETIME_FORMAT),
+                    'previewDtEnd'   => $generic->preview_dt_end->format(self::DATETIME_FORMAT),
+                    'openingDt'      => $generic->opening_dt->format(self::DATETIME_FORMAT),
+                    'acceptanceDt'   => $generic->acceptance_dt->format(self::DATETIME_FORMAT),
+                ],
+                'depositary'     => [
+                    'name'  => $generic->depositary_name,
+                    'phone' => $generic->depositary_phone,
+                    'email' => $generic->depositary_email,
+                ],
+                'mediator'       => [
+                    'name'  => $generic->mediator_name,
+                    'phone' => $generic->mediator_phone,
+                    'email' => $generic->mediator_email,
+                ],
+            ],
         ];
 
         return $item;

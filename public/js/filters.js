@@ -25,4 +25,11 @@ angular.module('bens-penhorados-filters', []).filter('vehicleCondition', functio
         }
         return range;
     };
+}).filter('phonenumber', function() {
+    return function(number, prefix) {
+        if (number) {
+            number = number.toString().split(/(\d{3})/).join(' ').trim();
+            return '(+' + prefix + ') ' + number;
+        }
+    };
 });
