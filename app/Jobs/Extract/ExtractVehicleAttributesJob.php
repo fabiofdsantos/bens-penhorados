@@ -125,7 +125,7 @@ class ExtractVehicleAttributesJob extends Job
             }
 
             if (is_null($this->attributes['reg_plate_code'])) {
-                if (preg_match('/matricula/i', $value)) {
+                if (preg_match('/matr\wcula/iu', $value)) {
                     $this->attributes['reg_plate_code'] = $this->extractor->regPlateCode($value);
                 }
             }
@@ -149,19 +149,19 @@ class ExtractVehicleAttributesJob extends Job
             }
 
             if (is_null($this->attributes['color_id'])) {
-                if (preg_match('/\bcor\b/i', $value)) {
+                if (preg_match('/\bc\wr\b/iu', $value)) {
                     $this->attributes['color_id'] = $this->extractor->color($value);
                 }
             }
 
             if (is_null($this->attributes['fuel_id'])) {
-                if (preg_match('/combustivel/i', $value)) {
+                if (preg_match('/combust\wvel/iu', $value)) {
                     $this->attributes['fuel_id'] = $this->extractor->fuel($value);
                 }
             }
 
             if (is_null($this->attributes['category_id'])) {
-                if (preg_match('/veiculo|categoria/i', $value)) {
+                if (preg_match('/ve\wculo|categor\wa/iu', $value)) {
                     $this->attributes['category_id'] = $this->extractor->category($value);
                 }
             }
