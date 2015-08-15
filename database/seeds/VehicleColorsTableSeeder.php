@@ -24,17 +24,17 @@ class VehicleColorsTableSeeder extends Seeder
 
         $colors = [
             ['name' => 'Preto', 'regex' => '/\bpret[o|a]\b/i'],
-            ['name' => 'Branco', 'regex' => '/\bbranc[o|a]\b/i'],
-            ['name' => 'Cinzento', 'regex' => '/\bcinzent[oa]\b/i'],
-            ['name' => 'Azul', 'regex' => '/\bazul\b/i'],
-            ['name' => 'Vermelho', 'regex' => '/\bvermelh[oa]\b/i'],
-            ['name' => 'Verde', 'regex' => '/\bverde\b/i'],
-            ['name' => 'Amarelo', 'regex' => '/\bamarel[oa]\b/i'],
-            ['name' => 'Castanho', 'regex' => '/\bcastanh[oa]\b/i'],
+            ['name' => 'Branco', 'regex' => '/\bbranc[o|a]|esbranquicad[oa]\b/i'],
+            ['name' => 'Cinzento', 'regex' => '/\bcinzent[oa]|cinza|acinzentad[oa]\b/i'],
+            ['name' => 'Azul', 'regex' => '/\bazul|azulad[oa]\b/i'],
+            ['name' => 'Vermelho', 'regex' => '/\bvermelh[oa]|avermelhad[oa]|encarnad[oa]\b/i'],
+            ['name' => 'Verde', 'regex' => '/\bverde|esverdead[oa]\b/i'],
+            ['name' => 'Amarelo', 'regex' => '/\bamarel[oa]|amarelad[oa]\b/i'],
+            ['name' => 'Castanho', 'regex' => '/\bcastanh[oa]|acastanhad[oa]\b/i'],
             ['name' => 'Prateado', 'regex' => '/\bpratead[oa]\b/i'],
             ['name' => 'Dourado', 'regex' => '/\bdourad[oa]\b/i'],
             ['name' => 'Rosa', 'regex' => '/\brosa\b/i'],
-            ['name' => 'Roxo', 'regex' => '/\broxo\b/i'],
+            ['name' => 'Roxo', 'regex' => '/\brox[oa]\b/i'],
             ['name' => 'Bege', 'regex' => '/\bbege\b/i'],
         ];
 
