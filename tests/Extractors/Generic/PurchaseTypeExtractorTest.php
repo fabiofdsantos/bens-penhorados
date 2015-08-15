@@ -29,9 +29,8 @@ class PurchaseTypeExtractorTest extends AbstractGenericExtractorTest
         foreach ($text as $input => $expected) {
             $purchaseTypeId = $this->extractor->purchaseType($input);
 
-            if ($this->assertNotNull($purchaseTypeId)) {
-                $this->assertSame($expected, ItemPurchaseType::find($municipalityId)->name);
-            }
+            $this->assertNotNull($purchaseTypeId);
+            $this->assertSame($expected, ItemPurchaseType::find($purchaseTypeId)->name);
         }
     }
 }
