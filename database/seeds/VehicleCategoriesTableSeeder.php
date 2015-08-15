@@ -34,7 +34,7 @@ class VehicleCategoriesTableSeeder extends Seeder
             ['name' => 'Motocultivador', 'regex' => '/moto\pP?cultivador/i'],
             ['name' => 'Tractocarro', 'regex' => '/trac?tocarro/i'],
             ['name' => 'Reboque', 'regex' => '/reboque/i'],
-            ['name' => 'Máquina industrial', 'regex' => '/empihador/i'],
+            ['name' => 'Máquina industrial', 'regex' => '/empilhador/i'],
         ];
 
         DB::table('vehicle_categories')->insert($types);
