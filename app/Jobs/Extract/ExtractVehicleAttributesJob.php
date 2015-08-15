@@ -140,14 +140,14 @@ class ExtractVehicleAttributesJob extends Job
                     if ($flag_forceMode || preg_match($this->getRegexFlagPattern($attrKey), $str)) {
 
                         // Note: some extractors requires more than one input param
-                        if (strcmp($attrKey, 'model_id')) {
-                            if ($this->attributes['make_id']) {
-                                $attrVal = $this->extractor->model($str, $this->attributes['make_id']);
+                        if ($attrKey == 'model_id') {
+                            if (isset($this->attributes['make_id'])) {
+                                $this->attributes[$attrKey] = $this->extractor->model($str, $this->attributes['make_id']);
                             }
-                        } elseif (strcmp($attrKey, 'type_id')) {
-                            $attrVal = $this->extractor->type($str, $flag_forceMode);
+                        } elseif ($attrKey == 'type_id') {
+                            $this->attributes[$attrKey] = $this->extractor->type($str, $flag_forceMode);
                         } else {
-                            $attrVal = $this->extractor->{$this->getExtractorFuncName($attrKey)}($str);
+                            $this->attributes[$attrKey] = $this->extractor->{$this->getExtractorFuncName($attrKey)}($str);
                         }
                     }
                 }
