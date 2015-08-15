@@ -12,7 +12,6 @@
 namespace App\Extractors\Vehicle;
 
 use App\Extractors\AbstractExtractor;
-use App\Helpers\Text;
 use App\Models\Attributes\Vehicle\VehicleModel;
 
 /**
@@ -48,7 +47,7 @@ class ModelExtractor extends AbstractExtractor
     public function extract()
     {
         foreach ($this->models as $model) {
-            if (preg_match("/$model->name/ui", $this->str)) {
+            if (preg_match($model->regex, $this->str)) {
                 return $model->id;
             }
         }
