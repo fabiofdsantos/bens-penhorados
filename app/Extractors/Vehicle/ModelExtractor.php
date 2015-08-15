@@ -12,6 +12,7 @@
 namespace App\Extractors\Vehicle;
 
 use App\Extractors\AbstractExtractor;
+use App\Helpers\Text;
 use App\Models\Attributes\Vehicle\VehicleModel;
 
 /**
