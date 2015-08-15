@@ -10,6 +10,7 @@
  */
 
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Facade;
 use Laravel\Lumen\Testing\TestCase;
 
 /**
@@ -34,6 +35,9 @@ abstract class AbstractTestCase extends TestCase
     public function setUp()
     {
         parent::setUp();
+
+        # It was fixed on v5.1
+        Facade::clearResolvedInstances();
 
         $this->createApplication();
         $this->artisanMigrateRefresh();
