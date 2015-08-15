@@ -7,7 +7,7 @@ php:
 sudo: false
 
 before_script:
-    - cp .env.example .env
+    - cp .env.travis .env
 
 install: travis_retry composer install --no-interaction --prefer-source
 
