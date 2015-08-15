@@ -21,14 +21,14 @@ class Mazda extends Seeder
         $makeId = DB::table('vehicle_makes')->where('name', 'Mazda')->pluck('id');
 
         $models = [
-            ['name' => '121', 'regex' => '/121/', 'make_id' => $makeId],
-            ['name' => '2', 'regex' => '/2/', 'make_id' => $makeId],
-            ['name' => '3', 'regex' => '/3/', 'make_id' => $makeId],
-            ['name' => '323', 'regex' => '/323/', 'make_id' => $makeId],
+            ['name' => '121', 'regex' => '/\b121\b/', 'make_id' => $makeId],
+            ['name' => '2', 'regex' => '/\b2\b/', 'make_id' => $makeId],
+            ['name' => '3', 'regex' => '/\b3\b/', 'make_id' => $makeId],
+            ['name' => '323', 'regex' => '/\b323\b/', 'make_id' => $makeId],
             ['name' => '323F', 'regex' => '/323f/i', 'make_id' => $makeId],
-            ['name' => '5', 'regex' => '/5/', 'make_id' => $makeId],
-            ['name' => '6', 'regex' => '/6/', 'make_id' => $makeId],
-            ['name' => '626', 'regex' => '/626/', 'make_id' => $makeId],
+            ['name' => '5', 'regex' => '/\b5\b/', 'make_id' => $makeId],
+            ['name' => '6', 'regex' => '/\b6\b/', 'make_id' => $makeId],
+            ['name' => '626', 'regex' => '/\b626\b/', 'make_id' => $makeId],
             ['name' => 'BT-50', 'regex' => '/bt[\pP\s]?50/i', 'make_id' => $makeId],
             ['name' => 'CX-3', 'regex' => '/cx[\pP\s]?3/i', 'make_id' => $makeId],
             ['name' => 'CX-5', 'regex' => '/cx[\pP\s]?5/i', 'make_id' => $makeId],

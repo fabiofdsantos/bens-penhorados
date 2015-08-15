@@ -21,7 +21,7 @@ class Lada extends Seeder
         $makeId = DB::table('vehicle_makes')->where('name', 'Lada')->pluck('id');
 
         $models = [
-            ['name' => '110', 'regex' => '/110/', 'make_id' => $makeId],
+            ['name' => '110', 'regex' => '/\b110\b/', 'make_id' => $makeId],
             ['name' => 'Niva', 'regex' => '/niva/i', 'make_id' => $makeId],
         ];
 

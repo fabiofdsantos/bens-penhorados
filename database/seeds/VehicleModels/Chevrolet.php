@@ -21,8 +21,8 @@ class Chevrolet extends Seeder
         $makeId = DB::table('vehicle_makes')->where('name', 'Chevrolet')->pluck('id');
 
         $models = [
-            ['name' => '150', 'regex' => '/150/', 'make_id' => $makeId],
-            ['name' => '2500', 'regex' => '/2500/', 'make_id' => $makeId],
+            ['name' => '150', 'regex' => '/\b150\b/', 'make_id' => $makeId],
+            ['name' => '2500', 'regex' => '/\b2500\b/', 'make_id' => $makeId],
             ['name' => 'Aveo', 'regex' => '/aveo/i', 'make_id' => $makeId],
             ['name' => 'Camaro', 'regex' => '/camaro/i', 'make_id' => $makeId],
             ['name' => 'Captiva', 'regex' => '/captiva/i', 'make_id' => $makeId],

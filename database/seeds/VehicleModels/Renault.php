@@ -49,7 +49,7 @@ class Renault extends Seeder
             ['name' => 'Mégane III', 'regex' => '/megane[\pP\s]?iii/i', 'make_id' => $makeId],
             ['name' => 'R4', 'regex' => '/r4/i', 'make_id' => $makeId],
             ['name' => 'R5', 'regex' => '/r5/i', 'make_id' => $makeId],
-            ['name' => '19', 'regex' => '/19/', 'make_id' => $makeId],
+            ['name' => '19', 'regex' => '/\b19\b/', 'make_id' => $makeId],
             ['name' => 'Avantime', 'regex' => '/avantime/i', 'make_id' => $makeId],
             ['name' => 'Captur', 'regex' => '/captur/i', 'make_id' => $makeId],
             ['name' => 'Express', 'regex' => '/express/i', 'make_id' => $makeId],

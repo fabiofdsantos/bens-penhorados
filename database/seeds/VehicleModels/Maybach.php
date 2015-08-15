@@ -21,7 +21,7 @@ class Maybach extends Seeder
         $makeId = DB::table('vehicle_makes')->where('name', 'Maybach')->pluck('id');
 
         $models = [
-            ['name' => '57', 'regex' => '/57/', 'make_id' => $makeId],
+            ['name' => '57', 'regex' => '/\b57\b/', 'make_id' => $makeId],
         ];
 
         DB::table('vehicle_models')->insert($models);

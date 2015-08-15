@@ -21,11 +21,11 @@ class Ferrari extends Seeder
         $makeId = DB::table('vehicle_makes')->where('name', 'Ferrari')->pluck('id');
 
         $models = [
-            ['name' => '348', 'regex' => '/348/', 'make_id' => $makeId],
-            ['name' => '360', 'regex' => '/360/', 'make_id' => $makeId],
-            ['name' => '458', 'regex' => '/458/', 'make_id' => $makeId],
-            ['name' => '575', 'regex' => '/575/', 'make_id' => $makeId],
-            ['name' => '612', 'regex' => '/612/', 'make_id' => $makeId],
+            ['name' => '348', 'regex' => '/\b348\b/', 'make_id' => $makeId],
+            ['name' => '360', 'regex' => '/\b360\b/', 'make_id' => $makeId],
+            ['name' => '458', 'regex' => '/\b458\b/', 'make_id' => $makeId],
+            ['name' => '575', 'regex' => '/\b575\b/', 'make_id' => $makeId],
+            ['name' => '612', 'regex' => '/\b612\b/', 'make_id' => $makeId],
             ['name' => 'California', 'regex' => '/california/i', 'make_id' => $makeId],
             ['name' => 'F355', 'regex' => '/f355/i', 'make_id' => $makeId],
             ['name' => 'F430', 'regex' => '/f430/i', 'make_id' => $makeId],

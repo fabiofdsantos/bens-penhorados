@@ -21,7 +21,7 @@ class Austin extends Seeder
         $makeId = DB::table('vehicle_makes')->where('name', 'Austin')->pluck('id');
 
         $models = [
-            ['name' => '1300', 'regex' => '/1300/', 'make_id' => $makeId],
+            ['name' => '1300', 'regex' => '/\b1300\b/', 'make_id' => $makeId],
             ['name' => 'Metro', 'regex' => '/metro/i', 'make_id' => $makeId],
             ['name' => 'Mini', 'regex' => '/mini/i', 'make_id' => $makeId],
         ];

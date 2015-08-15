@@ -21,10 +21,10 @@ class Audi extends Seeder
         $makeId = DB::table('vehicle_makes')->where('name', 'Audi')->pluck('id');
 
         $models = [
-            ['name' => '100', 'regex' => '/100/', 'make_id' => $makeId],
-            ['name' => '50', 'regex' => '/50/', 'make_id' => $makeId],
-            ['name' => '80', 'regex' => '/80/', 'make_id' => $makeId],
-            ['name' => '90', 'regex' => '/90/', 'make_id' => $makeId],
+            ['name' => '100', 'regex' => '/\b100\b/', 'make_id' => $makeId],
+            ['name' => '50', 'regex' => '/\b50\b/', 'make_id' => $makeId],
+            ['name' => '80', 'regex' => '/\b80\b/', 'make_id' => $makeId],
+            ['name' => '90', 'regex' => '/\b90\b/', 'make_id' => $makeId],
             ['name' => 'A1', 'regex' => '/a1/i', 'make_id' => $makeId],
             ['name' => 'A1 Cabriolet', 'regex' => '/a1[\pP\s]?cabriolet/i', 'make_id' => $makeId],
             ['name' => 'A1 Sportback', 'regex' => '/a1[\pP\s]?sportback/i', 'make_id' => $makeId],

@@ -21,8 +21,8 @@ class Maserati extends Seeder
         $makeId = DB::table('vehicle_makes')->where('name', 'Maserati')->pluck('id');
 
         $models = [
-            ['name' => '3200', 'regex' => '/3200/', 'make_id' => $makeId],
-            ['name' => '422', 'regex' => '/422/', 'make_id' => $makeId],
+            ['name' => '3200', 'regex' => '/\b3200\b/', 'make_id' => $makeId],
+            ['name' => '422', 'regex' => '/\b422\b/', 'make_id' => $makeId],
             ['name' => 'Coupé', 'regex' => '/coupe/i', 'make_id' => $makeId],
             ['name' => 'Ghibli', 'regex' => '/ghibli/i', 'make_id' => $makeId],
             ['name' => 'GranCabrio', 'regex' => '/grancabrio/i', 'make_id' => $makeId],

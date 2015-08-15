@@ -21,7 +21,7 @@ class Skoda extends Seeder
         $makeId = DB::table('vehicle_makes')->where('name', 'Skoda')->pluck('id');
 
         $models = [
-            ['name' => '105', 'regex' => '/105/', 'make_id' => $makeId],
+            ['name' => '105', 'regex' => '/\b105\b/', 'make_id' => $makeId],
             ['name' => 'Fabia', 'regex' => '/fabia/i', 'make_id' => $makeId],
             ['name' => 'Favorit', 'regex' => '/favorit/i', 'make_id' => $makeId],
             ['name' => 'Felicia', 'regex' => '/felicia/i', 'make_id' => $makeId],

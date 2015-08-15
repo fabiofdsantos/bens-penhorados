@@ -21,8 +21,8 @@ class Saab extends Seeder
         $makeId = DB::table('vehicle_makes')->where('name', 'Saab')->pluck('id');
 
         $models = [
-            ['name' => '900', 'regex' => '/900/', 'make_id' => $makeId],
-            ['name' => '9000', 'regex' => '/9000/', 'make_id' => $makeId],
+            ['name' => '900', 'regex' => '/\b900\b/', 'make_id' => $makeId],
+            ['name' => '9000', 'regex' => '/\b9000\b/', 'make_id' => $makeId],
             ['name' => '900 Cabriolet', 'regex' => '/900[\pP\s]?cabriolet/i', 'make_id' => $makeId],
             ['name' => '9-3', 'regex' => '/9[\pP\s]?3/i', 'make_id' => $makeId],
             ['name' => '9-3 Cabriolet', 'regex' => '/9[\pP\s]?3[\pP\s]?cabriolet/i', 'make_id' => $makeId],

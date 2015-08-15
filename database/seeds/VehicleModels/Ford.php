@@ -21,7 +21,7 @@ class Ford extends Seeder
         $makeId = DB::table('vehicle_makes')->where('name', 'Ford')->pluck('id');
 
         $models = [
-            ['name' => '300', 'regex' => '/300/', 'make_id' => $makeId],
+            ['name' => '300', 'regex' => '/\b300\b/', 'make_id' => $makeId],
             ['name' => 'B-MAX', 'regex' => '/b[\pP\s]?max/i', 'make_id' => $makeId],
             ['name' => 'Capri', 'regex' => '/capri/i', 'make_id' => $makeId],
             ['name' => 'C-MAX', 'regex' => '/c[\pP\s]?max/i', 'make_id' => $makeId],
