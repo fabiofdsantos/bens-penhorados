@@ -30,14 +30,14 @@ class MunicipalityExtractor extends AbstractExtractor
     protected $municipalities;
 
     /**
-     * Create a new district extractor instance.
+     * Create a new municipality extractor instance.
      *
      * @param array $params
      */
     public function __construct($params)
     {
         $this->str = Text::removeAccents($params[0]);
-        $this->municipalities = isset($param[1]) ? Municipality::ofDistrict($param[1])->get() : Municipality::all();
+        $this->municipalities = isset($params[1]) ? Municipality::ofDistrict($params[1])->get() : Municipality::all();
     }
 
     /**
