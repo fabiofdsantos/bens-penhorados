@@ -15,8 +15,14 @@ namespace App\Extractors\Wrappers;
  * This is the property extractor wrapper.
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
+ *
+ * @method int|null district(string $str)
+ * @method int|null municipality(string $str, int $int)
  */
 class PropertyExtractorWrapper extends AbstractExtractorWrapper
 {
-    const EXTRACTORS = [];
+    const EXTRACTORS = [
+        'district'     => '\App\Extractors\Property\DistrictExtractor',
+        'municipality' => '\App\Extractors\Property\MunicipalityExtractor',
+    ];
 }
