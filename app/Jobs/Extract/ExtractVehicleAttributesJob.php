@@ -23,6 +23,17 @@ use App\Models\Items\Vehicle;
  */
 class ExtractVehicleAttributesJob extends Job
 {
+    const REGEX_FLAG_YEAR = '/\bano\b|\bde\b/i';
+    const REGEX_FLAG_ENGDISPL = '/[^\-]cc|cm[³3]\b/iu';
+    const REGEX_FLAG_REGPLATECODE = '/matr\wcula/iu';
+    const REGEX_FLAG_CONDITION = '/\bestado\b/i';
+    const REGEX_FLAG_MAKE = '/\bmarca\b/i';
+    const REGEX_FLAG_MODEL = '/\bmodelo\b/i';
+    const REGEX_FLAG_COLOR = '/\bc\wr\b/iu';
+    const REGEX_FLAG_FUEL = '/combust\wvel/iu';
+    const REGEX_FLAG_CATEGORY = '/ve\wculo|categor\wa/iu';
+    const REGEX_FLAG_TYPE = '/\btipo\b/i';
+
     /**
      * The vehicle extractor.
      *
@@ -46,6 +57,16 @@ class ExtractVehicleAttributesJob extends Job
         'fuel_id'             => null,
         'category_id'         => null,
         'type_id'             => null,
+    ];
+
+    /**
+     * The attributes that should be used on force extraction mode.
+     *
+     * @var string[]
+     */
+    protected $attrToForce = [
+        'make_id', 'model_id', 'reg_plate_code', 'is_good_condition',
+        'color_id', 'fuel_id', 'category_id', 'type_id',
     ];
 
     /**
@@ -87,9 +108,9 @@ class ExtractVehicleAttributesJob extends Job
         // Start the normal extraction of attributes
         $this->extractAttributes();
 
-        // Check if there are still empty attributes
+        // Force extraction, if there are empty attributes
         if ($this->hasEmptyAttributes()) {
-            $this->forceExtraction();
+            $this->extractAttributes(true);
         }
 
         // Create a new vehicle
@@ -109,107 +130,79 @@ class ExtractVehicleAttributesJob extends Job
      *
      * @return void
      */
-    private function extractAttributes()
+    private function extractAttributes($flag_forceMode = false)
     {
-        foreach ($this->description as $value) {
-            if (is_null($this->attributes['year'])) {
-                if (preg_match('/\bano\b|\bde\b/i', $value)) {
-                    $this->attributes['year'] = $this->extractor->year($value);
-                }
-            }
+        foreach ($this->description as $str) {
+            foreach ($this->attributes as $attrKey => $attrVal) {
 
-            if (is_null($this->attributes['engine_displacement'])) {
-                if (preg_match('/[^\-]cc|cm[³3]\b/iu', $value)) {
-                    $this->attributes['engine_displacement'] = $this->extractor->engDispl($value);
-                }
-            }
+                // Check if the attribute value is null
+                if (is_null($attrVal)) {
+                    if ($flag_forceMode || preg_match($this->getRegexFlagPattern($attrKey), $str)) {
 
-            if (is_null($this->attributes['reg_plate_code'])) {
-                if (preg_match('/matr\wcula/iu', $value)) {
-                    $this->attributes['reg_plate_code'] = $this->extractor->regPlateCode($value);
-                }
-            }
-
-            if (is_null($this->attributes['is_good_condition'])) {
-                if (preg_match('/\bestado\b/i', $value)) {
-                    $this->attributes['is_good_condition'] = $this->extractor->condition($value);
-                }
-            }
-
-            if (is_null($this->attributes['make_id'])) {
-                if (preg_match('/\bmarca\b/i', $value)) {
-                    $this->attributes['make_id'] = $this->extractor->make($value);
-                }
-            }
-
-            if (is_null($this->attributes['model_id'])) {
-                if (preg_match('/\bmodelo\b/i', $value) && isset($this->attributes['make_id'])) {
-                    $this->attributes['model_id'] = $this->extractor->model($value, $this->attributes['make_id']);
-                }
-            }
-
-            if (is_null($this->attributes['color_id'])) {
-                if (preg_match('/\bc\wr\b/iu', $value)) {
-                    $this->attributes['color_id'] = $this->extractor->color($value);
-                }
-            }
-
-            if (is_null($this->attributes['fuel_id'])) {
-                if (preg_match('/combust\wvel/iu', $value)) {
-                    $this->attributes['fuel_id'] = $this->extractor->fuel($value);
-                }
-            }
-
-            if (is_null($this->attributes['category_id'])) {
-                if (preg_match('/ve\wculo|categor\wa/iu', $value)) {
-                    $this->attributes['category_id'] = $this->extractor->category($value);
-                }
-            }
-
-            if (is_null($this->attributes['type_id'])) {
-                if (preg_match('/\btipo\b/i', $value)) {
-                    $this->attributes['type_id'] = $this->extractor->type($value, false);
+                        // Note: some extractors requires more than one input param
+                        if (strcmp($attrKey, 'model_id')) {
+                            if ($this->attributes['make_id']) {
+                                $attrVal = $this->extractor->model($str, $this->attributes['make_id']);
+                            }
+                        } elseif (strcmp($attrKey, 'type_id')) {
+                            $attrVal = $this->extractor->type($str, $flag_forceMode);
+                        } else {
+                            $attrVal = $this->extractor->{$this->getExtractorFuncName($attrKey)}($str);
+                        }
+                    }
                 }
             }
         }
     }
 
     /**
-     * Force the extraction of some attributes.
+     * Get the name of the extractor function for a given attribute.
      *
-     * @return void
+     * @param string $attribute
+     *
+     * @return string
      */
-    private function forceExtraction()
+    private function getExtractorFuncName($attribute)
     {
-        foreach ($this->description as $value) {
-            if (is_null($this->attributes['make_id'])) {
-                $this->attributes['make_id'] = $this->extractor->make($value);
-            }
+        $mapAttrFunc = [
+            'year'                => 'year',
+            'engine_displacement' => 'engDispl',
+            'reg_plate_code'      => 'regPlateCode',
+            'is_good_condition'   => 'condition',
+            'make_id'             => 'make',
+            'model_id'            => 'model',
+            'color_id'            => 'color',
+            'fuel_id'             => 'fuel',
+            'category_id'         => 'category',
+            'type_id'             => 'type',
+        ];
 
-            if (is_null($this->attributes['model_id']) && isset($this->attributes['make_id'])) {
-                $this->attributes['model_id'] = $this->extractor->model($value, $this->attributes['make_id']);
-            }
+        return $mapAttrFunc[$attribute];
+    }
 
-            if (is_null($this->attributes['reg_plate_code'])) {
-                $this->attributes['reg_plate_code'] = $this->extractor->regPlateCode($value);
-            }
+    /**
+     * Get the regex flag pattern for a given attribute.
+     *
+     * @param string $attribute
+     *
+     * @return string
+     */
+    private function getRegexFlagPattern($attribute)
+    {
+        $mapAttrFlagPattern = [
+            'year'                => self::REGEX_FLAG_YEAR,
+            'engine_displacement' => self::REGEX_FLAG_ENGDISPL,
+            'reg_plate_code'      => self::REGEX_FLAG_REGPLATECODE,
+            'is_good_condition'   => self::REGEX_FLAG_CONDITION,
+            'make_id'             => self::REGEX_FLAG_MAKE,
+            'model_id'            => self::REGEX_FLAG_MODEL,
+            'color_id'            => self::REGEX_FLAG_COLOR,
+            'fuel_id'             => self::REGEX_FLAG_FUEL,
+            'category_id'         => self::REGEX_FLAG_CATEGORY,
+            'type_id'             => self::REGEX_FLAG_TYPE,
+        ];
 
-            if (is_null($this->attributes['is_good_condition'])) {
-                $this->attributes['is_good_condition'] = $this->extractor->condition($value);
-            }
-
-            if (is_null($this->attributes['fuel_id'])) {
-                $this->attributes['fuel_id'] = $this->extractor->fuel($value);
-            }
-
-            if (is_null($this->attributes['category_id'])) {
-                $this->attributes['category_id'] = $this->extractor->category($value);
-            }
-
-            if (is_null($this->attributes['type_id'])) {
-                $this->attributes['type_id'] = $this->extractor->type($value, true);
-            }
-        }
+        return $mapAttrFlagPattern[$attribute];
     }
 
     /**
