@@ -151,7 +151,7 @@ class ExtractGenericAttributesJob extends Job
             } elseif ($category->name === 'Veículos') {
                 Bus::dispatch(new ExtractVehicleAttributesJob($this->attributes['code'], $description));
             } elseif ($category->name === 'Participações sociais') {
-                Bus::dispatch(new ExtractCorporateShareAttributesJob($this->attributes['code'], $description));
+                Bus::dispatch(new ExtractCorporateShareAttributesJob($this->attributes['code'], $this->attributes['full_description']));
             } elseif ($category->name === 'Estabelecimentos comerciais') {
                 Bus::dispatch(new ExtractBusinessEstablishmentAttributesJob($this->attributes['code'], $description));
             }

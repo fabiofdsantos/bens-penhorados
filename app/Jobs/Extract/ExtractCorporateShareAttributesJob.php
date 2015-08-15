@@ -77,34 +77,30 @@ class ExtractCorporateShareAttributesJob extends Job
     {
         print "\n > Extracting corporate share attributes of $this->code ... \n";
 
-        foreach ($this->description as $value) {
+        // Try to extract the nif
+        $this->attributes['corporate_nif'] = $this->extractor->nif($this->description);
 
-            // Try to extract the nif
-            $this->attributes['corporate_nif'] = $this->extractor->nif($value);
+        // Check if the nif was extracted
+        if (isset($this->attributes['corporate_nif'])) {
 
-            // Check if the nif was extracted
-            if (isset($this->attributes['corporate_nif'])) {
+            // Get a corporate with the extracted nif. Otherwise, create
+            // a new corporate record on the database
+            $corporateInfo = $this->getCorporateInfo($this->attributes['corporate_nif']);
 
-                // Create a new corporate share
-                $corporateShare = CorporateShare::create($this->attributes);
-
-                // Set the polymorphic relationship
-                Item::setPolymorphicRelation($this->code, $corporateShare);
-
-                // Get a corporate with the extracted nif. Otherwise, create
-                // a new corporate record on the database
-                $corporateInfo = $this->getCorporateInfo();
-                if (isset($corporateInfo)) {
-                    $corporate = Corporate::firstOrCreate($corporateInfo);
-
-                    // Update the item's title
-                    $corporateShare->item->update([
-                        'title' => $this->generateTitle($corporate),
-                    ]);
-                }
-
-                break;
+            if (isset($corporateInfo)) {
+                $corporate = Corporate::firstOrCreate($corporateInfo);
             }
+
+            // Create a new corporate share
+            $corporateShare = CorporateShare::create($this->attributes);
+
+            // Set the polymorphic relationship
+            Item::setPolymorphicRelation($this->code, $corporateShare);
+
+            // Update the item's title
+            //$corporateShare->item->update([
+            //    'title' => $this->generateTitle($corporate),
+            //]);
         }
     }
 
@@ -123,14 +119,16 @@ class ExtractCorporateShareAttributesJob extends Job
     /**
      * Get the corporate's attributes via nif.pt API.
      *
+     * @param int $nif
+     *
      * @return array|null
      */
-    private function getCorporateInfo()
+    private function getCorporateInfo($nif)
     {
         $client = new GuzzleHttp\Client();
         $params = [
             'json' => '1',
-            'q'    => $this->attributes['corporate_nif'],
+            'q'    => $nif,
             'key'  => env('NIF_PT_API_KEY', null),
         ];
 
@@ -140,10 +138,10 @@ class ExtractCorporateShareAttributesJob extends Job
             $data = json_decode($response->getBody());
 
             if ($data->result === 'success') {
-                $attr = $data->records->{$this->attributes['corporate_nif']};
+                $attr = $data->records->{$nif};
 
                 return [
-                    'nif'         => $this->attributes['corporate_nif'],
+                    'nif'         => $nif,
                     'name'        => $attr->title,
                     'address'     => $attr->address,
                     'postal_code' => "$attr->pc4-$attr->pc3",
