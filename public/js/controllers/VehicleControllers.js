@@ -2,13 +2,17 @@
 
 var app = angular.module('bens-penhorados');
 
-app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFilters', function($scope, $location, Vehicle, VehicleFilters) {
+app.controller('VehicleListCtrl', ['$scope', '$location', '$cookies', 'Vehicle', 'VehicleFilters', function($scope, $location, $cookies, Vehicle, VehicleFilters) {
     $scope.items = [];
     $scope.totalItems = 0;
     $scope.itemsFrom = 0;
     $scope.itemsTo = 0;
     $scope.itemsPerPageValues = [5, 15, 25, 50, 100];
     $scope.priceRange = getPriceRange();
+    $scope.alerts = {
+        hideGenericFilterAlert: $cookies.get('hide_generic_filter_alert'),
+        hideVehicleFilterAlert: $cookies.get('hide_vehicle_filter_alert'),
+    };
 
     init();
 
@@ -222,6 +226,17 @@ app.controller('VehicleListCtrl', ['$scope', '$location', 'Vehicle', 'VehicleFil
     $scope.pageChangeHandler = function(newPage) {
         setSearchVars(newPage);
     };
+
+    $scope.closeAlert = function(name) {
+        if (name == 'generic') {
+            $cookies.put('hide_generic_filter_alert', true);
+            $scope.alerts.hideGenericFilterAlert = true;
+        }
+        if (name == 'vehicles') {
+            $cookies.put('hide_vehicle_filter_alert', true);
+            $scope.alerts.hideVehicleFilterAlert = true;
+        }
+    }
 }]);
 
 app.controller('VehicleCtrl', ['$rootScope', '$scope', '$routeParams', '$location', 'Vehicle', function($rootScope, $scope, $routeParams, $location, Vehicle) {

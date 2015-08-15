@@ -1,6 +1,7 @@
 var app = angular.module('bens-penhorados', [
     'ngRoute',
     'ngResource',
+    'ngCookies',
     'angularUtils.directives.dirPagination',
     'angular-loading-bar',
     'ui.bootstrap',

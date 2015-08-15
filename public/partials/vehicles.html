@@ -7,10 +7,17 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Pesquisa genérica</div>
                     <div class="panel-body form-horizontal">
-                        <div class="alert alert-info" role="alert">
-                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                            <span class="sr-only">Aviso:</span>
-                            <small>A pesquisa por localização é baseada no serviço de finanças adstrito ao veículo penhorado.</small>
+                        <div type="info" data-ng-hide="alerts.hideGenericFilterAlert" class="alert ng-isolate-scope alert-info alert-dismissable" role="alert">
+                            <button type="button" class="close" ng-click="closeAlert('generic')">
+                                <span aria-hidden="true">×</span>
+                                <span class="sr-only">Fechar</span>
+                            </button>
+                            <div>
+                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Aviso</span>
+                                <small>Existem veículos que não se encontram catalogados por determinados atributos (ex. categoria). Para uma pesquisa mais ampla opte sempre que possível por selecionar a opção:
+                                    <strong>Todos(as)</strong>.</small>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -91,11 +98,17 @@
                     <div class="panel-heading">Pesquisa avançada</div>
                     <div class="panel-body form-horizontal">
 
-                        <div class="alert alert-info" role="alert">
-                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                            <span class="sr-only">Aviso:</span>
-                            <small>Existem veículos que não se encontram catalogados por determinados atributos (ex. categoria). Para uma pesquisa mais ampla opte sempre que possível por selecionar a opção:
-                                <strong>Todos(as)</strong>.</small>
+                        <div type="info" data-ng-hide="alerts.hideVehicleFilterAlert" class="alert ng-isolate-scope alert-info alert-dismissable" role="alert">
+                            <button type="button" class="close" ng-click="closeAlert('vehicles')">
+                                <span aria-hidden="true">×</span>
+                                <span class="sr-only">Fechar</span>
+                            </button>
+                            <div>
+                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Aviso</span>
+                                <small>Existem veículos que não se encontram catalogados por determinados atributos (ex. categoria). Para uma pesquisa mais ampla opte sempre que possível por selecionar a opção:
+                                    <strong>Todos(as)</strong>.</small>
+                            </div>
                         </div>
 
                         <div class="form-group">
