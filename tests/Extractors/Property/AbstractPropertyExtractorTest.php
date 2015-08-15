@@ -16,7 +16,7 @@ use App\Extractors\Wrappers\PropertyExtractorWrapper;
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
-abstract class AbstractVehicleExtractorTest extends AbstractTestCase
+abstract class AbstractPropertyExtractorTest extends AbstractTestCase
 {
     protected $extractor;
 
