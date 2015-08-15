@@ -37,7 +37,7 @@ class MunicipalityExtractor extends AbstractExtractor
     public function __construct($params)
     {
         $this->str = Text::removeAccents($params[0]);
-        $this->municipalities = self::getMunicipalities($params[1]);
+        $this->municipalities = isset($param[1]) ? Municipality::ofDistrict($param[1])->get() : Municipality::all();
     }
 
     /**
@@ -52,17 +52,5 @@ class MunicipalityExtractor extends AbstractExtractor
                 return $municipality->id;
             }
         }
-    }
-
-    /**
-     * Get municipalities.
-     *
-     * @param int|null $districtId
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    private static function getMunicipalities($districtId)
-    {
-        return isset($districtId) ? Municipality::ofDistrict($districtId)->get() : Municipality::all();
     }
 }
