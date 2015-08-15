@@ -18,7 +18,7 @@ use App\Models\Attributes\Generic\Municipality;
  */
 class MunicipalityExtractorTest extends AbstractPropertyExtractorTest
 {
-    public function testExtractMunicipality()
+    public function testExtractMunicipalityName()
     {
         $text = [
             'e descrito na Conservatória do Registo Predial de Seixal' => 'Seixal',
