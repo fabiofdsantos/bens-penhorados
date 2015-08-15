@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Attributes\Vehicle\VehicleCategory;
-
 /*
  * This file is part of Bens Penhorados, an undergraduate capstone project.
  *
@@ -10,6 +8,8 @@ use App\Models\Attributes\Vehicle\VehicleCategory;
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+use App\Models\Attributes\Vehicle\VehicleCategory;
 
 /**
  * This is the vehicle category extractor test class.
