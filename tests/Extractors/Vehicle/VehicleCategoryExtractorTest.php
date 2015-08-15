@@ -39,7 +39,7 @@ class VehicleCategoryExtractorTest extends AbstractVehicleExtractorTest
         foreach ($text as $input => $expected) {
             $categoryId = $this->extractor->category($input);
 
-            $this->assertNotNull($categoryId);
+            $this->assertNotNull($categoryId, "Input: $input");
             $this->assertSame($expected, VehicleCategory::find($categoryId)->name);
         }
     }

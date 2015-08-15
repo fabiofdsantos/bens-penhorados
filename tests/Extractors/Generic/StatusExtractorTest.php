@@ -28,7 +28,7 @@ class StatusExtractorTest extends AbstractGenericExtractorTest
         foreach ($text as $input => $expected) {
             $statusId = $this->extractor->status($input);
 
-            $this->assertNotNull($statusId);
+            $this->assertNotNull($statusId, "Input: $input");
             $this->assertSame($expected, ItemStatus::find($statusId)->name);
         }
     }

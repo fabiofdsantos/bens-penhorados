@@ -30,7 +30,7 @@ class TaxOfficeExtractorTest extends AbstractGenericExtractorTest
         foreach ($text as $input => $expected) {
             $taxOfficeId = $this->extractor->taxOffice($input);
 
-            $this->assertNotNull($taxOfficeId);
+            $this->assertNotNull($taxOfficeId, "Input: $input");
             $this->assertEquals($expected, ItemTaxOffice::find($taxOfficeId)->number);
         }
     }
@@ -45,10 +45,10 @@ class TaxOfficeExtractorTest extends AbstractGenericExtractorTest
 
         foreach ($text as $input => $expected) {
             $taxOfficeId = $this->extractor->taxOffice($input);
-            $this->assertNotNull($taxOfficeId);
+            $this->assertNotNull($taxOfficeId, "Input: $input");
 
             $municipalityId = ItemTaxOffice::find($taxOfficeId)->municipality_id;
-            $this->assertNotNull($municipalityId);
+            $this->assertNotNull($municipalityId, "Input: $input");
 
             $this->assertEquals($expected, Municipality::find($municipalityId)->name);
         }

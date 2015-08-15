@@ -27,7 +27,7 @@ class DistrictExtractorTest extends AbstractPropertyExtractorTest
         foreach ($text as $input => $expected) {
             $districtId = $this->extractor->district($input, null);
 
-            $this->assertNotNull($districtId);
+            $this->assertNotNull($districtId, "Input: $input");
             $this->assertSame($expected, District::find($districtId)->name);
         }
     }

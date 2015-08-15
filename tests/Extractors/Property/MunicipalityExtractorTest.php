@@ -28,7 +28,7 @@ class MunicipalityExtractorTest extends AbstractPropertyExtractorTest
         foreach ($text as $input => $expected) {
             $municipalityId = $this->extractor->municipality($input, null);
 
-            $this->assertNotNull($municipalityId);
+            $this->assertNotNull($municipalityId, "Input: $input");
             $this->assertSame($expected, Municipality::find($municipalityId)->name);
         }
     }
