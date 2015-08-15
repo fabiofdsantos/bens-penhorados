@@ -309,7 +309,7 @@ class ItemTaxOfficesTableSeeder extends Seeder
         ];
         DB::table('item_tax_offices')->insert($taxOffices);
 
-        $municipalityId = DB::table('pt_municipalities')->where('name', 'Alfandega da fe')->pluck('id');
+        $municipalityId = DB::table('pt_municipalities')->where('name', 'Alfandega da Fe')->pluck('id');
         $taxOffices = [
             ['code' => '0477', 'municipality_id' => $municipalityId],
         ];

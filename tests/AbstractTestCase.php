@@ -9,6 +9,7 @@
  * file that was distributed with this source code.
  */
 
+use Illuminate\Support\Facades\Artisan;
 use Laravel\Lumen\Testing\TestCase;
 
 /**
@@ -28,5 +29,19 @@ abstract class AbstractTestCase extends TestCase
         $app = require __DIR__.'/../bootstrap/app.php';
 
         return $app;
+    }
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->createApplication();
+        $this->artisanMigrateRefresh();
+    }
+
+    protected function artisanMigrateRefresh()
+    {
+        Artisan::call('migrate');
+        Artisan::call('db:seed');
     }
 }

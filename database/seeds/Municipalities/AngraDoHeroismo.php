@@ -22,7 +22,7 @@ class AngraDoHeroismo extends Seeder
 
         $municipalities = [
             ['name' => 'Angra do Heroismo', 'regex' => '/angra[\pP\s]?do[\pP\s]?heroismo/i', 'district_id' => $districtId],
-            ['name' => 'Calheta (açores)', 'regex' => '/calheta[\pP\s]?[\pP\s]?ac[\pP\s]?ores[\pP\s]?/i', 'district_id' => $districtId],
+            ['name' => 'Calheta (Açores)', 'regex' => '/calheta[\pP\s]?[\pP\s]?ac[\pP\s]?ores[\pP\s]?/i', 'district_id' => $districtId],
             ['name' => 'Santa Cruz da Graciosa', 'regex' => '/santa[\pP\s]?cruz[\pP\s]?da[\pP\s]?graciosa/i', 'district_id' => $districtId],
             ['name' => 'Velas', 'regex' => '/velas/i', 'district_id' => $districtId],
             ['name' => 'Vila Praia da Vitoria', 'regex' => '/vila[\pP\s]?praia[\pP\s]?da[\pP\s]?vitoria/i', 'district_id' => $districtId],

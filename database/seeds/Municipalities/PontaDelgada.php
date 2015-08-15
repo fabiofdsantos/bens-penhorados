@@ -21,7 +21,7 @@ class PontaDelgada extends Seeder
         $districtId = DB::table('pt_districts')->where('code', '21')->pluck('id');
 
         $municipalities = [
-            ['name' => 'Lagoa (açores)', 'regex' => '/lagoa[\pP\s]?[\pP\s]?ac[\pP\s]?ores[\pP\s]?/i', 'district_id' => $districtId],
+            ['name' => 'Lagoa (Açores)', 'regex' => '/lagoa[\pP\s]?[\pP\s]?ac[\pP\s]?ores[\pP\s]?/i', 'district_id' => $districtId],
             ['name' => 'Nordeste', 'regex' => '/nordeste/i', 'district_id' => $districtId],
             ['name' => 'Ponta Delgada', 'regex' => '/ponta[\pP\s]?delgada/i', 'district_id' => $districtId],
             ['name' => 'Povoação', 'regex' => '/povoac[\pP\s]?ao/i', 'district_id' => $districtId],
