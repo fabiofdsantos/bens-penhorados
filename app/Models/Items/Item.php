@@ -351,6 +351,18 @@ class Item extends Model
     }
 
     /**
+     * Scope a query to only include uncatalogued items.
+     *
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeOnlyUncatalogued(Builder $query)
+    {
+        $query->whereNull('itemable_id');
+    }
+
+    /**
      * Set the item's title and slug.
      *
      * @param string $value
