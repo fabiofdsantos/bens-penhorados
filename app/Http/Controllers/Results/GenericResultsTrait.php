@@ -34,7 +34,7 @@ trait GenericResultsTrait
     /**
      * Get vehicle filters from the input.
      *
-     * @param Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return array
      */

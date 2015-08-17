@@ -31,7 +31,7 @@ class ItemController extends Controller
      *
      * @param strind $slug
      *
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function vehicleType($slug)
     {
@@ -45,7 +45,7 @@ class ItemController extends Controller
      *
      * @param string $slug
      *
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function otherType($slug)
     {
