@@ -73,13 +73,11 @@ class VehicleResultsController extends Controller
      */
     private static function paginateVehicles(LengthAwarePaginator $vehicles)
     {
-        $noResults = $vehicles->isEmpty() ? true : false;
-
         $data = [];
-        $data['from'] = $noResults ? 0 : $vehicles->firstItem();
-        $data['to'] = $noResults ? 0 : $vehicles->lastItem();
-        $data['total'] = $noResults ? 0 : $vehicles->total();
-        $data['limit'] = $noResults ? 0 : $vehicles->perPage();
+        $data['from'] = $vehicles->isEmpty() ? 0 : $vehicles->firstItem();
+        $data['to'] = $vehicles->isEmpty() ? 0 : $vehicles->lastItem();
+        $data['total'] = $vehicles->isEmpty() ? 0 : $vehicles->total();
+        $data['limit'] = $vehicles->isEmpty() ? 0 : $vehicles->perPage();
 
         $data['items'] = [];
         foreach ($vehicles as $vehicle) {
