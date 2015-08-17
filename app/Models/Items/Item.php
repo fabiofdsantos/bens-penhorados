@@ -240,14 +240,16 @@ class Item extends Model
      * Scope a query to only include items of a given type.
      *
      * @param Builder $query
-     * @param string  $type
+     * @param string  $itemType
      *
      * @return Builder
      */
-    public function scopeOfType(Builder $query, $type)
+    public function scopeOfType(Builder $query, $itemType)
     {
-        if (isset($type)) {
-            return $query->where('itemable_type', $type);
+        if (isset($itemType)) {
+            return $query->where('itemable_type', $itemType);
+        } else {
+            $query->whereNull('itemable_id');
         }
     }
 
@@ -348,18 +350,6 @@ class Item extends Model
         if (isset($maxPrice)) {
             return $query->where('price', '<=', $maxPrice);
         }
-    }
-
-    /**
-     * Scope a query to only include uncatalogued items.
-     *
-     * @param Builder $query
-     *
-     * @return Builder
-     */
-    public function scopeOnlyUncatalogued(Builder $query)
-    {
-        $query->whereNull('itemable_id');
     }
 
     /**

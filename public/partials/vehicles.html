@@ -22,7 +22,7 @@
                         <div class="form-group">
                             <label for="district" class="col-sm-4 control-label">Distrito</label>
                             <div class="col-sm-8">
-                                <select data-ng-disabled="!filteringAttr.districts" class="form-control" data-ng-model="filters.district" data-ng-options="key as value for (key , value) in filteringAttr.districts">
+                                <select data-ng-disabled="!filteringAttr.generic.districts" class="form-control" data-ng-model="filters.district" data-ng-options="key as value for (key , value) in filteringAttr.generic.districts">
                                     <option value="">-- Todos os distritos --</option>
                                 </select>
                             </div>
@@ -31,7 +31,7 @@
                         <div class="form-group">
                             <label for="municipality" class="col-sm-4 control-label">Concelho</label>
                             <div class="col-sm-8">
-                                <select data-ng-disabled="!filteringAttr.municipalities" class="form-control" data-ng-model="filters.municipality" data-ng-options="key as value for (key , value) in filteringAttr.municipalities">
+                                <select data-ng-disabled="!filteringAttr.generic.municipalities" class="form-control" data-ng-model="filters.municipality" data-ng-options="key as value for (key , value) in filteringAttr.generic.municipalities">
                                     <option value="">-- Todos os concelhos --</option>
                                 </select>
                             </div>
@@ -40,7 +40,7 @@
                         <div class="form-group">
                             <label for="purchaseType" class="col-sm-4 control-label">Modalidade</label>
                             <div class="col-sm-8">
-                                <select data-ng-disabled="!filteringAttr.purchaseTypes" class="form-control" data-ng-model="filters.purchaseType" data-ng-options="key as value for (key , value) in filteringAttr.purchaseTypes">
+                                <select data-ng-disabled="!filteringAttr.generic.purchaseTypes" class="form-control" data-ng-model="filters.purchaseType" data-ng-options="key as value for (key , value) in filteringAttr.generic.purchaseTypes">
                                     <option value="">-- Todos as modalidades --</option>
                                 </select>
                             </div>
@@ -113,7 +113,7 @@
                         <div class="form-group">
                             <label for="make" class="col-sm-4 control-label">Marca</label>
                             <div class="col-sm-8">
-                                <select data-ng-disabled="!filteringAttr.makes" class="form-control" data-ng-model="filters.make" data-ng-options="key as value for (key , value) in filteringAttr.makes">
+                                <select data-ng-disabled="!filteringAttr.vehicle.makes" class="form-control" data-ng-model="filters.make" data-ng-options="key as value for (key , value) in filteringAttr.vehicle.makes">
                                     <option value="">-- Todas as marcas --</option>
                                 </select>
                             </div>
@@ -122,7 +122,7 @@
                         <div class="form-group">
                             <label for="model" class="col-sm-4 control-label">Modelo</label>
                             <div class="col-sm-8">
-                                <select data-ng-disabled="!filteringAttr.models" class="form-control" data-ng-model="filters.model" data-ng-options="key as value for (key , value) in filteringAttr.models">
+                                <select data-ng-disabled="!filteringAttr.vehicle.models" class="form-control" data-ng-model="filters.model" data-ng-options="key as value for (key , value) in filteringAttr.vehicle.models">
                                     <option value="">-- Todos os modelos --</option>
                                 </select>
                             </div>
@@ -131,7 +131,7 @@
                         <div class="form-group">
                             <label for="fuel" class="col-sm-4 control-label">Combustível</label>
                             <div class="col-sm-8">
-                                <select data-ng-disabled="!filteringAttr.fuels" class="form-control" data-ng-model="filters.fuel" data-ng-options="key as value for (key , value) in filteringAttr.fuels">
+                                <select data-ng-disabled="!filteringAttr.vehicle.fuels" class="form-control" data-ng-model="filters.fuel" data-ng-options="key as value for (key , value) in filteringAttr.vehicle.fuels">
                                     <option value="">-- Todos os combustíveis --</option>
                                 </select>
                             </div>
@@ -140,7 +140,7 @@
                         <div class="form-group">
                             <label for="category" class="col-sm-4 control-label">Categoria</label>
                             <div class="col-sm-8">
-                                <select data-ng-disabled="!filteringAttr.categories" class="form-control" data-ng-model="filters.category" data-ng-options="key as value for (key , value) in filteringAttr.categories">
+                                <select data-ng-disabled="!filteringAttr.vehicle.categories" class="form-control" data-ng-model="filters.category" data-ng-options="key as value for (key , value) in filteringAttr.vehicle.categories">
                                     <option value="">-- Todas as categorias --</option>
                                 </select>
                             </div>
@@ -149,7 +149,7 @@
                         <div class="form-group">
                             <label for="type" class="col-sm-4 control-label">Tipo</label>
                             <div class="col-sm-8">
-                                <select data-ng-disabled="!filteringAttr.types" class="form-control" data-ng-model="filters.type" data-ng-options="key as value for (key , value) in filteringAttr.types">
+                                <select data-ng-disabled="!filteringAttr.vehicle.types" class="form-control" data-ng-model="filters.type" data-ng-options="key as value for (key , value) in filteringAttr.vehicle.types">
                                     <option value="">-- Todos os tipos --</option>
                                 </select>
                             </div>
@@ -158,7 +158,7 @@
                         <div class="form-group">
                             <label for="color" class="col-sm-4 control-label">Cor</label>
                             <div class="col-sm-8">
-                                <select data-ng-disabled="!filteringAttr.colors" class="form-control" data-ng-model="filters.color" data-ng-options="key as value for (key , value) in filteringAttr.colors">
+                                <select data-ng-disabled="!filteringAttr.vehicle.colors" class="form-control" data-ng-model="filters.color" data-ng-options="key as value for (key , value) in filteringAttr.vehicle.colors">
                                     <option value="">-- Todas as cores --</option>
                                 </select>
                             </div>

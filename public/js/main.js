@@ -48,6 +48,15 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
             templateUrl: 'partials/vehicle-view.html',
             controller: 'VehicleCtrl'
         })
+        .when('/outros', {
+            title: 'Outros Bens Penhorados pelas Finanças',
+            templateUrl: 'partials/others.html',
+            controller: 'OtherListCtrl'
+        })
+        .when('/outros/:slug', {
+            templateUrl: 'partials/other-view.html',
+            controller: 'OtherCtrl'
+        })
         .otherwise({
             redirectTo: '/404'
         });

@@ -9,11 +9,8 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\FilteringAttributes;
 
-use App\Models\Attributes\Generic\District;
-use App\Models\Attributes\Generic\ItemPurchaseType;
-use App\Models\Attributes\Generic\Municipality;
 use App\Models\Attributes\Vehicle\VehicleCategory;
 use App\Models\Attributes\Vehicle\VehicleColor;
 use App\Models\Attributes\Vehicle\VehicleFuel;
@@ -21,16 +18,24 @@ use App\Models\Attributes\Vehicle\VehicleMake;
 use App\Models\Attributes\Vehicle\VehicleModel;
 use App\Models\Attributes\Vehicle\VehicleType;
 use Illuminate\Http\Request;
+use Laravel\Lumen\Routing\Controller;
 
 /**
  * This is the vehicle filtering attributes controller class.
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
-class VehicleFilteringAttributesController extends Controller
+class VehicleFilteringAttrController extends Controller
 {
+    use GenericFilteringAttributesTrait;
+
+    public function __construct()
+    {
+        self::$itemType = \App\Models\Items\Vehicle::class;
+    }
+
     /**
-     * Show a list of filtering attributes.
+     * Show a list of filtering attributes for vehicles.
      *
      * @param Request $request
      *
@@ -41,71 +46,36 @@ class VehicleFilteringAttributesController extends Controller
         $makeId = (int) $request->input('make') ?: null;
         $districtId = (int) $request->input('district') ?: null;
 
-        $data = $this->getAttributes($makeId, $districtId);
+        $data = [
+            'generic' => self::getGenericFilteringAttr($districtId),
+            'vehicle' => self::getVehicleFilteringAttr($makeId),
+        ];
 
         return response()->json($data, 200);
     }
 
     /**
-     * Get filtering attributes.
+     * Get vehicle filtering attributes.
      *
-     * There are attributes related to each other. For example, municipalities
-     * are shown if the district was also set.
+     * There are attributes related to each other. For example, models
+     * are shown if the make was also set.
      *
      * @param int|null $makeId
-     * @param int|null $districtId
      *
      * @return array
      */
-    public function getAttributes($makeId, $districtId)
+    private static function getVehicleFilteringAttr($makeId)
     {
-        $attributes = [
-            'districts'      => $this->getDistricts(),
-            'municipalities' => $this->getMunicipalities($districtId),
-            'purchaseTypes'  => $this->getPurchaseTypes(),
-            'categories'     => $this->getCategories(),
-            'colors'         => $this->getColors(),
-            'fuels'          => $this->getFuels(),
-            'makes'          => $this->getMakes(),
-            'models'         => $this->getModels($makeId),
-            'types'          => $this->getTypes(),
+        $vehicleAttr = [
+            'categories'     => self::getCategories(),
+            'colors'         => self::getColors(),
+            'fuels'          => self::getFuels(),
+            'makes'          => self::getMakes(),
+            'models'         => self::getModels($makeId),
+            'types'          => self::getTypes(),
         ];
 
-        return $attributes;
-    }
-
-    /**
-     * Get districts.
-     *
-     * @return array|null
-     */
-    public function getDistricts()
-    {
-        return District::assignedToVehicles()->lists('name', 'id') ?: null;
-    }
-
-    /**
-     * Get municipalities.
-     *
-     * @param int|null $districtId
-     *
-     * @return array|null
-     */
-    private function getMunicipalities($districtId)
-    {
-        if (isset($districtId)) {
-            return Municipality::assignedToVehicles()->ofDistrict($districtId)->lists('name', 'id') ?: null;
-        }
-    }
-
-    /**
-     * Get purchase types.
-     *
-     * @return array|null
-     */
-    private function getPurchaseTypes()
-    {
-        return ItemPurchaseType::assignedToVehicles()->lists('name', 'id') ?: null;
+        return $vehicleAttr;
     }
 
     /**
@@ -113,7 +83,7 @@ class VehicleFilteringAttributesController extends Controller
      *
      * @return array|null
      */
-    private function getCategories()
+    private static function getCategories()
     {
         return VehicleCategory::assigned()->lists('name', 'id') ?: null;
     }
@@ -123,7 +93,7 @@ class VehicleFilteringAttributesController extends Controller
      *
      * @return array|null
      */
-    private function getColors()
+    private static function getColors()
     {
         return VehicleColor::assigned()->lists('name', 'id') ?: null;
     }
@@ -133,7 +103,7 @@ class VehicleFilteringAttributesController extends Controller
      *
      * @return array|null
      */
-    private function getFuels()
+    private static function getFuels()
     {
         return VehicleFuel::assigned()->lists('name', 'id') ?: null;
     }
@@ -143,7 +113,7 @@ class VehicleFilteringAttributesController extends Controller
      *
      * @return array|null
      */
-    private function getMakes()
+    private static function getMakes()
     {
         return VehicleMake::assigned()->lists('name', 'id') ?: null;
     }
@@ -155,7 +125,7 @@ class VehicleFilteringAttributesController extends Controller
      *
      * @return array|null
      */
-    private function getModels($makeId)
+    private static function getModels($makeId)
     {
         if (isset($makeId)) {
             return VehicleModel::assigned()->ofMake($makeId)->lists('name', 'id') ?: null;
@@ -167,7 +137,7 @@ class VehicleFilteringAttributesController extends Controller
      *
      * @return array|null
      */
-    private function getTypes()
+    private static function getTypes()
     {
         return VehicleType::assigned()->lists('name', 'id') ?: null;
     }

@@ -13,6 +13,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Items\Item;
 use Carbon\Carbon;
+use Laravel\Lumen\Routing\Controller;
 
 /**
  * This is the home controller class.

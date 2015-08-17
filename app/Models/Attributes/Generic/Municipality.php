@@ -12,7 +12,6 @@
 namespace App\Models\Attributes\Generic;
 
 use App\Models\Items\Item;
-use App\Models\Items\Vehicle;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -67,15 +66,31 @@ class Municipality extends Model
 
     /**
      * Scope a query to only include municipalities assigned at least
-     * to one active vehicle.
+     * to one active item of a given type.
+     *
+     * @param Builder $query
+     * @param string  $itemType
+     *
+     * @return Builder
+     */
+    public function scopeAssignedTo(Builder $query, $itemType)
+    {
+        $ids = Item::ofType($itemType)->active()->lists('municipality_id');
+
+        return $query->whereIn('id', $ids)->orderBy('name');
+    }
+
+    /**
+     * Scope a query to only include municipalities assigned at least
+     * to one active uncatalogued item.
      *
      * @param Builder $query
      *
      * @return Builder
      */
-    public function scopeAssignedToVehicles(Builder $query)
+    public function scopeAssignedToUncataloguedItems(Builder $query)
     {
-        $ids = Item::ofType(Vehicle::class)->active()->lists('municipality_id');
+        $ids = Item::onlyUncatalogued()->active()->lists('municipality_id');
 
         return $query->whereIn('id', $ids)->orderBy('name');
     }

@@ -47,10 +47,13 @@
 
     <!-- Controllers -->
     <script src="js/controllers/VehicleControllers.js"></script>
+    <script src="js/controllers/OtherControllers.js"></script>
 
     <!-- Services -->
     <script src="js/services/VehicleService.js"></script>
     <script src="js/services/VehicleFiltersService.js"></script>
+    <script src="js/services/OtherService.js"></script>
+    <script src="js/services/OtherFiltersService.js"></script>
 
 </body>
 

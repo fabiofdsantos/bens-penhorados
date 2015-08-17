@@ -12,7 +12,6 @@
 namespace App\Models\Attributes\Generic;
 
 use App\Models\Items\Item;
-use App\Models\Items\Vehicle;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -43,15 +42,16 @@ class ItemPurchaseType extends Model
 
     /**
      * Scope a query to only include purchase types assigned at least
-     * to one active vehicle.
+     * to one active item of a given type.
      *
      * @param Builder $query
+     * @param string  $itemType
      *
      * @return Builder
      */
-    public function scopeAssignedToVehicles(Builder $query)
+    public function scopeAssignedTo(Builder $query, $itemType)
     {
-        $ids = Item::ofType(Vehicle::class)->active()->lists('purchase_type_id');
+        $ids = Item::ofType($itemType)->active()->lists('purchase_type_id');
 
         return $query->whereIn('id', $ids)->orderBy('name');
     }

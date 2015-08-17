@@ -17,9 +17,42 @@ $app->group(['prefix' => 'api/v1/', 'namespace' => 'App\Http\Controllers'], func
     $app->get('home', ['uses' => 'HomeController@index']);
 
     /* Vehicles */
-    $app->get('vehicles', ['uses' => 'VehicleResultsController@index']);
-    $app->get('vehicles/{slug}', ['uses' => 'VehicleSinglePageController@show']);
+    $app->get('vehicles/{slug}', ['uses' => 'ItemController@vehicleType']);
 
-    /* Filtering attributes */
-    $app->get('attributes/vehicle', ['uses' => 'VehicleFilteringAttributesController@index']);
+    /* Others */
+    $app->get('others/{slug}', ['uses' => 'ItemController@otherType']);
+});
+
+/*
+ * Results
+ */
+ $app->group([
+     'prefix'    => 'api/v1/',
+     'namespace' => 'App\Http\Controllers\Results',
+ ], function () use ($app) {
+
+    /* Vehicles */
+    $app->get('vehicles', ['uses' => 'VehicleResultsController@index']);
+
+    /* Others */
+    $app->get('others', ['uses' => 'OtherResultsController@index']);
+});
+
+/*
+ * Filtering attributes
+ */
+$app->group([
+    'prefix'    => 'api/v1/',
+    'namespace' => 'App\Http\Controllers\FilteringAttributes',
+], function () use ($app) {
+
+    /* Vehicles */
+    $app->get('attributes/vehicle', [
+        'uses' => 'VehicleFilteringAttrController@index',
+    ]);
+
+    /* Others */
+    $app->get('attributes/other', [
+        'uses' => 'OtherFilteringAttrController@index',
+    ]);
 });
