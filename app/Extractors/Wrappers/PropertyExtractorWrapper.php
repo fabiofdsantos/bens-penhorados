@@ -18,11 +18,13 @@ namespace App\Extractors\Wrappers;
  *
  * @method int|null district(string $str)
  * @method int|null municipality(string $str, int $int)
+ * @method int|null landRegistry(string $str)
  */
 class PropertyExtractorWrapper extends AbstractExtractorWrapper
 {
     const EXTRACTORS = [
         'district'     => '\App\Extractors\Property\DistrictExtractor',
         'municipality' => '\App\Extractors\Property\MunicipalityExtractor',
+        'landRegistry' => '\App\Extractors\Property\LandRegistryExtractor',
     ];
 }

@@ -38,5 +38,6 @@ class DatabaseSeeder extends Seeder
         $this->call('VehicleFuelsTableSeeder');
         $this->call('VehicleCategoriesTableSeeder');
         $this->call('VehicleTypesTableSeeder');
+        $this->call('PropertyLandRegistryTableSeeder');
     }
 }
