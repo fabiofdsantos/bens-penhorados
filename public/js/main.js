@@ -45,7 +45,7 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
             controller: 'VehicleListCtrl'
         })
         .when('/veiculos/:slug', {
-            templateUrl: 'partials/vehicles-single.html',
+            templateUrl: 'partials/vehicle-view.html',
             controller: 'VehicleCtrl'
         })
         .otherwise({
