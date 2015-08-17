@@ -58,7 +58,7 @@ class OtherResultsController extends Controller
     /**
      * Paginate other items.
      *
-     * @param LengthAwarePaginator $vehicles
+     * @param LengthAwarePaginator $otherItems
      *
      * @return array
      */
