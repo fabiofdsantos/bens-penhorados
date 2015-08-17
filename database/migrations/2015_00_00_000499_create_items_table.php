@@ -60,8 +60,8 @@ class CreateItemsTable extends Migration
             $table->dateTime('acceptance_dt');
             $table->dateTime('opening_dt')->nullable();
 
-            $table->integer('itemable_id')->unsigned();
-            $table->string('itemable_type');
+            $table->integer('itemable_id')->unsigned()->nullable();
+            $table->string('itemable_type')->nullable();
             $table->timestamps();
         });
     }
