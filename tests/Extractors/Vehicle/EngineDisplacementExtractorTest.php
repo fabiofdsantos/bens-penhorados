@@ -23,6 +23,7 @@ class EngineDisplacementExtractorTest extends AbstractVehicleExtractorTest
             '121cc'     => 121,
             '122 cm3'   => 122,
             '123 cm³'   => 123,
+            '1686 c.c.' => 1686,
         ];
 
         foreach ($text as $input => $expected) {

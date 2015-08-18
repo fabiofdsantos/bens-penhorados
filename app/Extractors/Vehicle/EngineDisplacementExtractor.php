@@ -20,7 +20,7 @@ use App\Extractors\AbstractExtractor;
  */
 class EngineDisplacementExtractor extends AbstractExtractor
 {
-    const REGEX_ENGDISPL = '/(\d+)\s*(cc|cm[³3])/iu';
+    const REGEX_ENGDISPL = '/(\d+)\s*(c\pP?c\pP?|cm[³3])/iu';
 
     /**
      * Create a new engine displacement extractor instance.
