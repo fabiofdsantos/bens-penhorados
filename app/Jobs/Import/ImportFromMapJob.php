@@ -30,22 +30,13 @@ class ImportFromMapJob extends Job
     protected $locations;
 
     /**
-     * The list of items on the database.
-     *
-     * @var array
-     */
-    protected $existingItems;
-
-    /**
      * Create a new job instance.
      *
      * @param array $locations
-     * @param array $existingItems
      */
-    public function __construct($locations, $existingItems)
+    public function __construct($locations)
     {
         $this->locations = $locations;
-        $this->existingItems = $existingItems;
     }
     /**
      * Execute the job.
@@ -83,15 +74,16 @@ class ImportFromMapJob extends Job
             foreach ($result->features as $item) {
                 $itemCode = $item->attributes->EREPFIN.'.'.$item->attributes->DANO.'.'.$item->attributes->XNRORDEM;
 
-                if (!in_array($itemCode, $this->existingItems)) {
+                $rawItem = Item::find($itemCode);
+
+                if (!isset($rawItem)) {
                     $rawItem = new RawData();
                     $rawItem->code = $itemCode;
-                } else {
-                    $rawItem = RawData::findOrFail($itemCode);
                 }
 
                 $rawItem->lat = $item->attributes->XLAT;
                 $rawItem->lng = $item->attributes->XLON;
+                $rawItem->extracted = true;
                 $rawItem->save();
 
                 $i++;

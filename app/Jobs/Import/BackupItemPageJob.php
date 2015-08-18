@@ -88,20 +88,6 @@ class BackupItemPageJob extends Job
     protected $hash;
 
     /**
-     * The item latitude.
-     *
-     * @var string
-     */
-    protected $lat;
-
-    /**
-     * The item longitude.
-     *
-     * @var string
-     */
-    protected $lng;
-
-    /**
      * Define the job mode.
      *
      * @var bool
@@ -116,11 +102,9 @@ class BackupItemPageJob extends Job
      * @param int    $year
      * @param int    $itemId
      * @param string $hash
-     * @param string $lat
-     * @param string $lng
      * @param bool   $isUpdate
      */
-    public function __construct($categoryId, $taxOffice, $year, $itemId, $hash, $lat, $lng, $isUpdate)
+    public function __construct($categoryId, $taxOffice, $year, $itemId, $hash, $isUpdate)
     {
         $this->folder = env('BP_RAW_FOLDER', 'rawdata/');
         $this->oldFolder = env('BP_RAW_OLD_FOLDER', 'rawdata/old/');
@@ -131,8 +115,6 @@ class BackupItemPageJob extends Job
         $this->year = $year;
         $this->itemId = $itemId;
         $this->hash = $hash;
-        $this->lat = $lat;
-        $this->lng = $lng;
         $this->isUpdate = $isUpdate;
     }
 
@@ -181,11 +163,10 @@ class BackupItemPageJob extends Job
         } else {
             $item = new RawData();
             $item->code = $this->itemCode;
+            $item->extracted = false;
         }
 
         $item->hash = $this->hash;
-        $item->lat = $this->lat;
-        $item->lng = $this->lng;
         $item->category_id = $this->categoryId;
         $item->save();
     }

@@ -11,7 +11,9 @@
 
 namespace App\Jobs\Import;
 
+use App\Helpers\Text;
 use App\Jobs\Job;
+use App\Models\RawData;
 use Bus;
 use GuzzleHttp;
 use Hash;
@@ -20,13 +22,6 @@ use Symfony\Component\DomCrawler\Crawler;
 class WebsiteExtended extends Job
 {
     protected $category;
-
-    /**
-     * The list of existing items on database.
-     *
-     * @var array
-     */
-    protected $existingItems;
 
     /**
      * The number of the current page.
@@ -41,10 +36,9 @@ class WebsiteExtended extends Job
      * @param array $existingItems
      * @param int   $currentPage
      */
-    public function __construct($category, $existingItems, $currentPage)
+    public function __construct($category, $currentPage)
     {
         $this->category = $category;
-        $this->existingItems = $existingItems;
         $this->currentPage = $currentPage;
     }
 
@@ -85,38 +79,37 @@ class WebsiteExtended extends Job
         }
 
         for ($i = 7; $i <= ($totalCurrentPage + 7); $i++) {
-            $item = $crawler->filter('table.w100 > tr:nth-child('.$i.') > td:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tr:nth-child(2) > td:nth-child(1)');
+            $itemCrawler = $crawler->filter('table.w100 > tr:nth-child('.$i.') > td:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tr:nth-child(2) > td:nth-child(1)');
             $dataToBeHashed = $crawler->filter('table.w100 > tr:nth-child('.$i.') > td:nth-child(1) > div:nth-child(1) > table:nth-child(1)')->html();
             $hash = Hash::make($dataToBeHashed);
 
-            $spans_total = $item->filter('span')->count();
-            for ($x = 1; $x <= $spans_total; $x++) {
-                $currentSpan = $item->filter('span:nth-child('.$x.')')->text();
+            foreach ($itemCrawler->filter('span.info-element-title') as $x => $node) {
+                $title = $node->nodeValue;
+                $text = $itemCrawler->filter('span.info-element-text')->eq($x)->text();
 
-                if (preg_match('/Nº Venda:/i', $currentSpan, $match)) {
-                    $nextSpan = $item->filter('span:nth-child('.($x + 1).')')->text();
+                if (preg_match('/Nº Venda/i', $title)) {
+                    preg_match_all('/\d{1,}/', $text, $match);
 
-                    preg_match_all('/\d{1,}/', $nextSpan, $nextSpanOutput);
+                    if (count($match[0]) === 3) {
+                        $taxOffice = $match[0][0];
+                        $year = $match[0][1];
+                        $itemId = $match[0][2];
 
-                    if (count($nextSpanOutput[0]) == 3) {
-                        $taxOffice = $nextSpanOutput[0][0];
-                        $year = $nextSpanOutput[0][1];
-                        $itemId = $nextSpanOutput[0][2];
+                        $rawItem = RawData::find($taxOffice.'.'.$year.'.'.$itemId);
 
-                        $itemCode = $taxOffice.'.'.$year.'.'.$itemId;
-
-                        if (array_key_exists($itemCode, $this->existingItems)) {
-                            if (!Hash::check($dataToBeHashed, $this->existingItems[$itemCode])) {
-                                Bus::dispatch(new BackupItemPageJob($this->category->id, $taxOffice, $year, $itemId, $hash, null, null, true));
+                        if (isset($rawItem)) {
+                            if (!Hash::check($dataToBeHashed, $rawItem->hash)) {
+                                Bus::dispatch(new BackupItemPageJob($this->category->id, $taxOffice, $year, $itemId, $hash, true));
 
                                 print "\n *** Item needs to be updated: $itemCode *** \n";
                             }
                         } else {
-                            Bus::dispatch(new BackupItemPageJob($this->category->id, $taxOffice, $year, $itemId, $hash, null, null, false));
+                            Bus::dispatch(new BackupItemPageJob($this->category->id, $taxOffice, $year, $itemId, $hash, false));
 
-                            print "\n *** New item found: $itemCode *** \n";
+                            print "\n *** New item found: $taxOffice.$year.$itemId *** \n";
                         }
-                        break;
+
+                        break 1;
                     }
                 }
             }

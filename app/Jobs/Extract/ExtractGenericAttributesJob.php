@@ -18,6 +18,7 @@ use App\Models\Attributes\Generic\ItemCategory;
 use App\Models\Attributes\Generic\ItemTaxOffice;
 use App\Models\Attributes\Generic\Municipality;
 use App\Models\Items\Item;
+use App\Models\RawData;
 use Bus;
 use Intervention\Image\ImageManager;
 use Storage;
@@ -158,6 +159,9 @@ class ExtractGenericAttributesJob extends Job
         } else {
             print "\n > The item {$this->attributes[code]} is unavailable! \n";
         }
+
+        // Update raw data
+        RawData::find($this->attributes['code'])->update(['extracted' => true]);
     }
 
     /**

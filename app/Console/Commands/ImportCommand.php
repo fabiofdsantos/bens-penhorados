@@ -15,7 +15,6 @@ use App\Jobs\Import\ImportFromMapJob;
 use App\Jobs\Import\ImportFromWebsiteJob;
 use App\Models\Attributes\Generic\District;
 use App\Models\Attributes\Generic\ItemCategory;
-use App\Models\RawData;
 use Bus;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -69,9 +68,8 @@ class ImportCommand extends Command
     public function importFromMap()
     {
         $locations = District::lists('code');
-        $existingItems = RawData::lists('code');
 
-        Bus::dispatch(new ImportFromMapJob($locations, $existingItems));
+        Bus::dispatch(new ImportFromMapJob($locations));
     }
 
     /**

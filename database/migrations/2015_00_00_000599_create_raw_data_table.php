@@ -28,6 +28,8 @@ class CreateRawDataTable extends Migration
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('item_categories');
 
+            $table->boolean('extracted');
+
             $table->timestamps();
         });
     }

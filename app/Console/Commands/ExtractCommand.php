@@ -50,18 +50,20 @@ class ExtractCommand extends Command
         $total = $this->option('take');
         $ignoreImages = (boolean) $this->option('ignore-images');
 
+        $query = RawData::unextracted();
+
         if (isset($categories)) {
             $categories = explode(',', $categories);
             $catIds = ItemCategory::whereCodeIn($categories)->lists('id');
 
-            if (isset($total)) {
-                $items = RawData::whereCategoryIn($catIds)->take((integer) $total)->get();
-            } else {
-                $items = RawData::whereCategoryIn($catIds)->get();
-            }
-        } else {
-            $items = isset($total) ? RawData::take((integer) $total)->get() : RawData::all();
+            $query->whereCategoryIn($catsIds);
         }
+
+        if (isset($total)) {
+            $query->take((int) $total);
+        }
+
+        $items = $query->get();
 
         if ($items->isEmpty()) {
             return $this->error('There aren\'t any items to be extracted. Run jobs:import command first!');
