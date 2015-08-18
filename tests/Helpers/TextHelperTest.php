@@ -31,9 +31,8 @@ class TextHelperTest extends AbstractTestCase
         $text = 'Lorem 2,4.4 ipsum dolor, 4.1,2 sit. Amet, consectetur.';
         $expected = [
             'Lorem 244 ipsum dolor',
-            '412 sit',
-            'Amet',
-            'consectetur',
+            '412 sit. Amet',
+            'consectetur.',
         ];
 
         $this->assertSame($expected, Text::splitter($text));

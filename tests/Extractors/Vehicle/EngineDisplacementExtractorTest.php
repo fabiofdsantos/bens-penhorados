@@ -24,10 +24,23 @@ class EngineDisplacementExtractorTest extends AbstractVehicleExtractorTest
             '122 cm3'   => 122,
             '123 cm³'   => 123,
             '1686 c.c.' => 1686,
+            '1897c.c.'  => 1897,
+            '1980cc'    => 1980,
         ];
 
         foreach ($text as $input => $expected) {
             $this->assertSame($expected, $this->extractor->engDispl($input));
+        }
+    }
+
+    public function testExtractInvalidEngineDisplacement()
+    {
+        $text = [
+            '12-CC',
+        ];
+
+        foreach ($text as $input) {
+            $this->assertNull($this->extractor->engDispl($input));
         }
     }
 }

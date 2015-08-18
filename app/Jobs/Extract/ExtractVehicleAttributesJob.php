@@ -24,7 +24,7 @@ use App\Models\Items\Vehicle;
 class ExtractVehicleAttributesJob extends Job
 {
     const REGEX_FLAG_YEAR = '/\bano\b|\bde\b/i';
-    const REGEX_FLAG_ENGDISPL = '/[^\-]cc|cm[³3]\b/iu';
+    const REGEX_FLAG_ENGDISPL = '/cilindrada/iu';
     const REGEX_FLAG_REGPLATECODE = '/matr\wcula/iu';
     const REGEX_FLAG_CONDITION = '/\bestado\b/i';
     const REGEX_FLAG_MAKE = '/\bmarca\b/i';
@@ -66,7 +66,7 @@ class ExtractVehicleAttributesJob extends Job
      */
     protected $attrToForce = [
         'make_id', 'model_id', 'reg_plate_code', 'is_good_condition',
-        'color_id', 'fuel_id', 'category_id', 'type_id',
+        'engine_displacement', 'color_id', 'fuel_id', 'category_id', 'type_id',
     ];
 
     /**
