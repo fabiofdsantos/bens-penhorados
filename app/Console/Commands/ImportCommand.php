@@ -55,7 +55,9 @@ class ImportCommand extends Command
 
         if ($mode === 'Map' || $mode === 'All') {
             $this->importFromMap();
-        } elseif ($mode === 'Website' || $mode === 'All') {
+        }
+
+        if ($mode === 'Website' || $mode === 'All') {
             $this->importFromWebsite($categories, $lastPage);
         }
 
