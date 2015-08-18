@@ -35,7 +35,7 @@ class Text
     /**
      * Split a given string into an array of substrings:
      *  1. Remove dots/commas between numbers;
-     *  2. Break on dots/commas.
+     *  2. Break on commas.
      *
      * @param string $str
      *
