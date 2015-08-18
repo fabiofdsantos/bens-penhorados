@@ -25,7 +25,7 @@ class PropertyLandRegistryTableSeeder extends Seeder
         $types = [
             ['name' => 'Rústico', 'regex' => '/\brustic[oa]\b/i'],
             ['name' => 'Urbano', 'regex' => '/\burban[oa]\b/i'],
-            ['name' => 'Misto', 'regex' => '/\bmist[oa]\b/'],
+            ['name' => 'Misto', 'regex' => '/\bmist[oa]\b/i'],
         ];
 
         DB::table('property_land_registry')->insert($types);
