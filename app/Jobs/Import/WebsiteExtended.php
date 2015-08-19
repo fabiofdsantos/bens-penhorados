@@ -33,8 +33,7 @@ class WebsiteExtended extends Job
     /**
      * Create a new job instance.
      *
-     * @param array $existingItems
-     * @param int   $currentPage
+     * @param int $currentPage
      */
     public function __construct($category, $currentPage)
     {
@@ -101,7 +100,7 @@ class WebsiteExtended extends Job
                             if (!Hash::check($dataToBeHashed, $rawItem->hash)) {
                                 Bus::dispatch(new BackupItemPageJob($this->category->id, $taxOffice, $year, $itemId, $hash, true));
 
-                                print "\n *** Item needs to be updated: $itemCode *** \n";
+                                print "\n *** Item $taxOffice.$year.$itemId needs to be updated *** \n";
                             }
                         } else {
                             Bus::dispatch(new BackupItemPageJob($this->category->id, $taxOffice, $year, $itemId, $hash, false));
