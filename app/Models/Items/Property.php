@@ -54,7 +54,7 @@ class Property extends Model
     protected $guarded = ['created_at', 'updated_at'];
 
     /**
-     * Get the corporate share's generic data.
+     * Get the property's generic data.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */
