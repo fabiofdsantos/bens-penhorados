@@ -56,7 +56,7 @@ class ExtractCommand extends Command
             $categories = explode(',', $categories);
             $catIds = ItemCategory::whereCodeIn($categories)->lists('id');
 
-            $query->whereCategoryIn($catsIds);
+            $query->whereCategoryIn($catIds);
         }
 
         if (isset($total)) {
