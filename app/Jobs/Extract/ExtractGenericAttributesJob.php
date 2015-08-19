@@ -156,12 +156,12 @@ class ExtractGenericAttributesJob extends Job
             } elseif ($category->name === 'Estabelecimentos comerciais') {
                 Bus::dispatch(new ExtractBusinessEstablishmentAttributesJob($this->attributes['code'], $description));
             }
+
+            // Update raw data
+            RawData::find($this->attributes['code'])->update(['extracted' => true]);
         } else {
             print "\n > The item {$this->attributes[code]} is unavailable! \n";
         }
-
-        // Update raw data
-        RawData::find($this->attributes['code'])->update(['extracted' => true]);
     }
 
     /**

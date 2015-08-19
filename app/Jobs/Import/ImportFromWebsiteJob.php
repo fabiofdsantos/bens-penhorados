@@ -57,7 +57,7 @@ class ImportFromWebsiteJob extends Job
     public function handle()
     {
         foreach ($this->categories as $category) {
-            $limitPage = $this->lastPage ?: self::getLastPage();
+            $limitPage = $this->lastPage ?: self::getLastPage($category);
 
             for ($currentPage = 1; $currentPage <= $limitPage; $currentPage++) {
                 Bus::dispatch(new WebsiteExtended($category, $currentPage));
@@ -70,7 +70,7 @@ class ImportFromWebsiteJob extends Job
      *
      * @return string
      */
-    private static function getLastPage()
+    private static function getLastPage($category)
     {
         $guzzle = new GuzzleHttp\Client();
         $request = $guzzle->createRequest('GET', 'www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta='.$category->code, [
