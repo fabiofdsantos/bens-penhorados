@@ -12,6 +12,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Items\Item;
+use App\Models\Items\Property;
 use App\Models\Items\Vehicle;
 use Laravel\Lumen\Routing\Controller;
 
@@ -25,6 +26,20 @@ class ItemController extends Controller
     use LocationTrait;
 
     const DATETIME_FORMAT = 'd-m-Y \à\s H:i';
+
+    /**
+     * Show a property item.
+     *
+     * @param strind $slug
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function propertyType($slug)
+    {
+        $data = self::getPropertyItemBySlug($slug);
+
+        return self::buildResponse($data);
+    }
 
     /**
      * Show a vehicle item.
@@ -68,6 +83,30 @@ class ItemController extends Controller
         }
 
         return response()->json($data, 200);
+    }
+
+    /**
+     * Get a property with a given slug.
+     *
+     * @param string $slug
+     *
+     * @return array
+     */
+    private static function getPropertyItemBySlug($slug)
+    {
+        $generic = Item::withSlug($slug)->first();
+
+        if (empty($generic)) {
+            return [];
+        }
+
+        $property = Property::find($generic->itemable_id);
+        $item = [
+            'landRegistry' => $property->landRegistry()->pluck('name'),
+            'generic'      => self::getGenericAttributes($generic),
+        ];
+
+        return $item;
     }
 
     /**
