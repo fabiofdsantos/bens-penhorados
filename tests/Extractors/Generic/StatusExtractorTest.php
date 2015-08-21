@@ -21,8 +21,9 @@ class StatusExtractorTest extends AbstractGenericExtractorTest
     public function testExtractStatus()
     {
         $text = [
-            'Em curso' => 'Em curso',
-            'Suspenso' => 'Suspenso',
+            'Em curso'  => 'Em curso',
+            'Suspenso'  => 'Suspenso',
+            'Por abrir' => 'Inicia em breve',
         ];
 
         foreach ($text as $input => $expected) {

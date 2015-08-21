@@ -23,6 +23,7 @@ class ItemStatusesTableSeeder extends Seeder
         DB::table('item_statuses')->delete();
 
         $types = [
+            ['name' => 'Inicia em breve', 'regex' => '/por abrir/i'],
             ['name' => 'Em curso', 'regex' => '/em curso/i'],
             ['name' => 'Suspenso', 'regex' => '/suspenso/i'],
             ['name' => 'Finalizado', 'regex' => null],
