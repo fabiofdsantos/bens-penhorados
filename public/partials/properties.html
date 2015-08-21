@@ -109,7 +109,7 @@
                         <div class="form-group">
                             <label for="typology" class="col-sm-4 control-label">Tipologia</label>
                             <div class="col-sm-8">
-                                <select data-ng-disabled="!filteringAttr.property.typologies" class="form-control" data-ng-model="filters.typology" data-ng-options="key as value for (key , value) in filteringAttr.property.typologies">
+                                <select data-ng-disabled="!filteringAttr.property.typologies || filters.landRegistry == 1" class="form-control" data-ng-model="filters.typology" data-ng-options="key as value for (key , value) in filteringAttr.property.typologies">
                                     <option value="">-- Todas as tipologias --</option>
                                 </select>
                             </div>
