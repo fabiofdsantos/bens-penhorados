@@ -17,6 +17,7 @@ use App\Models\Attributes\Vehicle\VehicleFuel;
 use App\Models\Attributes\Vehicle\VehicleMake;
 use App\Models\Attributes\Vehicle\VehicleModel;
 use App\Models\Attributes\Vehicle\VehicleType;
+use App\Models\Items\Vehicle;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller;
 
@@ -31,7 +32,7 @@ class VehicleFilteringAttrController extends Controller
 
     public function __construct()
     {
-        self::$itemType = \App\Models\Items\Vehicle::class;
+        self::$itemType = Vehicle::class;
     }
 
     /**
