@@ -137,7 +137,7 @@ class Item extends Model
      */
     public function purchaseType()
     {
-        return $this->hasOne(ItemPurchaseType::class, 'id', 'status_id');
+        return $this->hasOne(ItemPurchaseType::class, 'id', 'purchase_type_id');
     }
 
     /**
