@@ -107,6 +107,7 @@ class PropertyResultsController extends Controller
     private static function getPropertyFilters(Request $request)
     {
         $filters = [
+            'typology'         => $request->input('typology'),
             'land_registry_id' => $request->input('landregistry'),
         ];
 
@@ -125,6 +126,7 @@ class PropertyResultsController extends Controller
     {
         $query = Property::whereIn('id', $ids);
 
+        $query->where('typology', $filters['typology']);
         $query->ofLandRegistry($filters['land_registry_id']);
 
         # http://dba.stackexchange.com/questions/109120/how-does-order-by-field-in-mysql-work-internally

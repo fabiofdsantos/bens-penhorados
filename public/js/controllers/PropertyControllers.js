@@ -25,6 +25,7 @@ app.controller('PropertyListCtrl', ['$scope', '$location', '$cookies', 'Property
         'filters.maxPrice',
         'filters.noPrice',
         'filters.landRegistry',
+        'filters.typology',
         'itemsPerPage',
     ];
 
@@ -50,6 +51,7 @@ app.controller('PropertyListCtrl', ['$scope', '$location', '$cookies', 'Property
             maxPrice: parseInt(search.maxprice) || undefined,
             noPrice: parseInt(search.noprice) || undefined,
             landRegistry: search.landregistry,
+            typology: search.typology,
         };
         getResultsPage($scope.pagination.current);
         getFilteringAttributes();
@@ -87,6 +89,7 @@ app.controller('PropertyListCtrl', ['$scope', '$location', '$cookies', 'Property
             maxprice: getMaxPrice(),
             noprice: $scope.filters.noPrice,
             landregistry: $scope.filters.landRegistry,
+            typology: $scope.filters.typology,
         };
     }
 
@@ -156,7 +159,7 @@ app.controller('PropertyListCtrl', ['$scope', '$location', '$cookies', 'Property
     }
 
     $scope.resetPropertyFilters = function() {
-        var filtersToReset = ['landRegistry'];
+        var filtersToReset = ['landRegistry', 'typology'];
 
         angular.forEach(filtersToReset, function(value, key) {
             $scope.filters[value] = undefined;

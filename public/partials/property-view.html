@@ -82,6 +82,11 @@
                             <th scope="row">Tipo de prédio</th>
                             <td data-ng-bind="property.landRegistry"></td>
                         </tr>
+
+                        <tr data-ng-show="property.typology">
+                            <th scope="row">Tipologia</th>
+                            <td data-ng-bind="property.typology"></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
