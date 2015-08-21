@@ -16,6 +16,7 @@ use App\Jobs\Job;
 use App\Models\Attributes\Generic\Municipality;
 use App\Models\Items\Item;
 use App\Models\Items\Property;
+use App\Models\RawData;
 
 /**
  * This is the extract property attributes job.
@@ -26,7 +27,7 @@ class ExtractPropertyAttributesJob extends Job
 {
     const REGEX_FLAG_DISTRICT = '/\bdistrito\b/i';
     const REGEX_FLAG_MUNICIPALITY = '/\bregisto[\s\pP]*predial|concelho\b/i';
-    const REGEX_FLAG_LANDREGISTRY = '/\bpr\wdio|matriz|destinado|terreno\b/iu';
+    const REGEX_FLAG_LANDREGISTRY = '/\bpr\wdio|matriz|destinad[oa]|terreno\b/iu';
     const REGEX_FLAG_TYPOLOGY = '/tipologia/i';
 
     /**
@@ -94,11 +95,8 @@ class ExtractPropertyAttributesJob extends Job
         // Start the normal extraction of attributes
         $this->extractAttributes();
 
-        // Create a new property
-        $property = Property::create([
-            'typology'         => $this->attributes['typology'],
-            'land_registry_id' => $this->attributes['land_registry_id'],
-        ]);
+        // Update or reate a new property
+        $property = $this->updateOrCreateProperty();
 
         // Set the polymorphic relationship
         Item::setPolymorphicRelation($this->code, $property);
@@ -124,6 +122,9 @@ class ExtractPropertyAttributesJob extends Job
                 'location_on_desc' => true,
             ]);
         }
+
+        // Update raw data
+        RawData::find($this->code)->update(['extracted' => true]);
     }
 
     /**
@@ -188,6 +189,30 @@ class ExtractPropertyAttributesJob extends Job
         ];
 
         return $mapAttrFlagPattern[$attribute];
+    }
+
+    /**
+     * Update or create a new property.
+     *
+     * @return void
+     */
+    private function updateOrCreateProperty()
+    {
+        $property = Property::find($this->code);
+
+        if (isset($item)) {
+            $property->update([
+                'typology'         => $this->attributes['typology'],
+                'land_registry_id' => $this->attributes['land_registry_id'],
+            ]);
+        } else {
+            $property = Property::create([
+                'typology'         => $this->attributes['typology'],
+                'land_registry_id' => $this->attributes['land_registry_id'],
+            ]);
+        }
+
+        return $property;
     }
 
     /**

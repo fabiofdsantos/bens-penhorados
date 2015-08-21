@@ -15,6 +15,7 @@ use App\Extractors\Wrappers\VehicleExtractorWrapper;
 use App\Jobs\Job;
 use App\Models\Items\Item;
 use App\Models\Items\Vehicle;
+use App\Models\RawData;
 
 /**
  * This is the extract vehicle attributes job.
@@ -113,8 +114,8 @@ class ExtractVehicleAttributesJob extends Job
             $this->extractAttributes(true);
         }
 
-        // Create a new vehicle
-        $vehicle = Vehicle::create($this->attributes);
+        // Update or create a new vehicle
+        $vehicle = $this->updateOrCreateVehicle();
 
         // Set the polymorphic relationship
         Item::setPolymorphicRelation($this->code, $vehicle);
@@ -123,6 +124,9 @@ class ExtractVehicleAttributesJob extends Job
         $vehicle->item->update([
             'title' => $this->generateTitle($vehicle),
         ]);
+
+        // Update raw data
+        RawData::find($this->code)->update(['extracted' => true]);
     }
 
     /**
@@ -203,6 +207,24 @@ class ExtractVehicleAttributesJob extends Job
         ];
 
         return $mapAttrFlagPattern[$attribute];
+    }
+
+    /**
+     * Update or create a new vehicle.
+     *
+     * @return void
+     */
+    private function updateOrCreateVehicle()
+    {
+        $vehicle = Vehicle::find($this->code);
+
+        if (isset($item)) {
+            $vehicle->update($this->attributes);
+        } else {
+            $vehicle = Vehicle::create($this->attributes);
+        }
+
+        return $vehicle;
     }
 
     /**

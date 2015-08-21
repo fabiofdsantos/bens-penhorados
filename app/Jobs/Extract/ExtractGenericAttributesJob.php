@@ -46,7 +46,6 @@ class ExtractGenericAttributesJob extends Job
         'code'             => null,
         'category_id'      => null,
         'status_id'        => null,
-        'title'            => null,
         'tax_office_id'    => null,
         'year'             => null,
         'purchase_type_id' => null,
@@ -118,6 +117,9 @@ class ExtractGenericAttributesJob extends Job
         if ($this->itemExists($crawler)) {
             print "\n > Extracting generic attributes of {$this->attributes['code']} ... \n";
 
+            // Set default title
+            $this->attributes['title'] = $this->attributes['code'];
+
             // Extract the tax office number and the year of publication
             preg_match_all('/\d{1,}/', $this->attributes['code'], $match);
             $this->attributes['tax_office_id'] = $this->extractor->taxOffice($match[0][0]);
@@ -137,9 +139,9 @@ class ExtractGenericAttributesJob extends Job
                 $this->attributes['images'] = $this->extractImages($mediaCrawler);
             }
 
-            // Create a new generic item
+            // Create or update a generic item
             $this->setLocationByTaxOffice();
-            Item::create($this->attributes);
+            $this->updateOrCreateGenericItem();
 
             // Split the description
             $description = Text::splitter($this->attributes['full_description']);
@@ -154,10 +156,10 @@ class ExtractGenericAttributesJob extends Job
                 Bus::dispatch(new ExtractCorporateShareAttributesJob($this->attributes['code'], $this->attributes['full_description']));
             } elseif ($category->name === 'Estabelecimentos comerciais') {
                 Bus::dispatch(new ExtractBusinessEstablishmentAttributesJob($this->attributes['code'], $description));
+            } else {
+                // Update raw data
+                RawData::find($this->attributes['code'])->update(['extracted' => true]);
             }
-
-            // Update raw data
-            RawData::find($this->attributes['code'])->update(['extracted' => true]);
         } else {
             print "\n > The item {$this->attributes[code]} is unavailable! \n";
         }
@@ -312,6 +314,22 @@ class ExtractGenericAttributesJob extends Job
 
         $this->attributes['municipality_id'] = $office->municipality->id;
         $this->attributes['district_id'] = $office->municipality->district->id;
+    }
+
+    /**
+     * Update or create a new generic item.
+     *
+     * @return void
+     */
+    private function updateOrCreateGenericItem()
+    {
+        $item = Item::find($this->attributes['code']);
+
+        if (isset($item)) {
+            $item->update($this->attributes);
+        } else {
+            Item::create($this->attributes);
+        }
     }
 
     /**
