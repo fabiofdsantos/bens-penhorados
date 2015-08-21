@@ -87,7 +87,13 @@
                             <th scope="row">Tipologia</th>
                             <td data-ng-bind="property.typology"></td>
                         </tr>
+
+                        <tr data-ng-show="!property.landRegistry && !property.typology">
+                            <td>Detalhes indisponíveis</td>
+                        </tr>
+
                     </tbody>
+
                 </table>
             </div>
             <div class="col-md-9">
