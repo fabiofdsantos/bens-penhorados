@@ -208,6 +208,9 @@ class Item extends Model
      */
     public function scopeEndingSoon(Builder $query, $howMany)
     {
+        // Get active items first
+        $query->where('acceptance_dt', '>=', Carbon::now());
+
         return $query->orderBy('acceptance_dt', 'asc')->take($howMany);
     }
 
