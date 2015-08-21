@@ -21,11 +21,16 @@ class LandRegistryExtractorTest extends AbstractPropertyExtractorTest
     public function testExtractLandRegistry()
     {
         $text = [
-            'matriz urbana'  => 'Urbano',
-            'prédio urbano'  => 'Urbano',
-            'prédio rústico' => 'Rústico',
-            'matriz rústica' => 'Rústico',
-            'Misto'          => 'Misto',
+            'matriz urbana'           => 'Urbano',
+            'prédio urbano'           => 'Urbano',
+            'prédio rústico'          => 'Rústico',
+            'matriz rústica'          => 'Rústico',
+            'Misto'                   => 'Misto',
+            'Terreno para construção' => 'Urbano',
+            'destinado a habitação'   => 'Urbano',
+            'destinado a comércio'    => 'Urbano',
+            'destinado a serviços'    => 'Urbano',
+            'afectação: habitação'    => 'Urbano',
         ];
 
         foreach ($text as $input => $expected) {

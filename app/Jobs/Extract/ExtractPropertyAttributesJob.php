@@ -26,7 +26,7 @@ class ExtractPropertyAttributesJob extends Job
 {
     const REGEX_FLAG_DISTRICT = '/\bdistrito\b/i';
     const REGEX_FLAG_MUNICIPALITY = '/\bregisto[\s\pP]*predial|concelho\b/i';
-    const REGEX_FLAG_LANDREGISTRY = '/\bpr\wdio|matriz\b/iu';
+    const REGEX_FLAG_LANDREGISTRY = '/\bpr\wdio|matriz|destinado|terreno\b/iu';
 
     /**
      * The property extractor.

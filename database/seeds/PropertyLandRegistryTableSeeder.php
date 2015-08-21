@@ -24,7 +24,7 @@ class PropertyLandRegistryTableSeeder extends Seeder
 
         $types = [
             ['name' => 'Rústico', 'regex' => '/\brustic[oa]\b/i'],
-            ['name' => 'Urbano', 'regex' => '/\burban[oa]\b/i'],
+            ['name' => 'Urbano', 'regex' => '/\burban[oa]|habitacao|comercio|servicos|construcao\b/i'],
             ['name' => 'Misto', 'regex' => '/\bmist[oa]\b/i'],
         ];
 
