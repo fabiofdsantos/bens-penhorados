@@ -12,6 +12,8 @@
 namespace App\Models\Items;
 
 use App\Models\Attributes\Property\LandRegistry;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -72,5 +74,36 @@ class Property extends Model
     public function landRegistry()
     {
         return $this->hasOne(LandRegistry::class, 'id', 'land_registry_id');
+    }
+
+    /**
+     * Scope a query to only include active properties.
+     *
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeActive(Builder $query)
+    {
+        $ids = Item::where('itemable_type', self::class)
+                ->where('acceptance_dt', '>', Carbon::now())
+                ->lists('itemable_id');
+
+        return $query->whereIn('id', $ids);
+    }
+
+    /**
+     * Scope a query to only include items of a given land registry type.
+     *
+     * @param Builder $query
+     * @param int     $landRegistryId
+     *
+     * @return Builder
+     */
+    public function scopeOfLandRegistry(Builder $query, $landRegistryId)
+    {
+        if (isset($landRegistryId)) {
+            return $query->where('land_registry_id', $landRegistryId);
+        }
     }
 }
