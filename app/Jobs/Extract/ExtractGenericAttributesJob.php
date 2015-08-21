@@ -141,7 +141,7 @@ class ExtractGenericAttributesJob extends Job
 
             // Create or update a generic item
             $this->setLocationByTaxOffice();
-            $this->updateOrCreateGenericItem();
+            Item::updateOrCreate($this->attributes);
 
             // Split the description
             $description = Text::splitter($this->attributes['full_description']);
@@ -154,9 +154,10 @@ class ExtractGenericAttributesJob extends Job
                 Bus::dispatch(new ExtractVehicleAttributesJob($this->attributes['code'], $description));
             } elseif ($category->name === 'Participações sociais') {
                 Bus::dispatch(new ExtractCorporateShareAttributesJob($this->attributes['code'], $this->attributes['full_description']));
-            } elseif ($category->name === 'Estabelecimentos comerciais') {
-                Bus::dispatch(new ExtractBusinessEstablishmentAttributesJob($this->attributes['code'], $description));
             } else {
+                // Set is_other_type as true
+                Item::find($this->attributes['code'])->update(['is_other_type' => true]);
+
                 // Update raw data
                 RawData::find($this->attributes['code'])->update(['extracted' => true]);
             }
@@ -314,22 +315,6 @@ class ExtractGenericAttributesJob extends Job
 
         $this->attributes['municipality_id'] = $office->municipality->id;
         $this->attributes['district_id'] = $office->municipality->district->id;
-    }
-
-    /**
-     * Update or create a new generic item.
-     *
-     * @return void
-     */
-    private function updateOrCreateGenericItem()
-    {
-        $item = Item::find($this->attributes['code']);
-
-        if (isset($item)) {
-            $item->update($this->attributes);
-        } else {
-            Item::create($this->attributes);
-        }
     }
 
     /**

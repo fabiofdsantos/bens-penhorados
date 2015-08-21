@@ -62,6 +62,8 @@ class CreateItemsTable extends Migration
 
             $table->integer('itemable_id')->unsigned()->nullable();
             $table->string('itemable_type')->nullable();
+            $table->boolean('is_other_type')->default(false);
+
             $table->timestamps();
         });
     }

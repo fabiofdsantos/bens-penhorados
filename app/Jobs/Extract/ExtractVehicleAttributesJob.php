@@ -212,13 +212,14 @@ class ExtractVehicleAttributesJob extends Job
     /**
      * Update or create a new vehicle.
      *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Model
      */
     private function updateOrCreateVehicle()
     {
-        $vehicle = Vehicle::find($this->code);
+        $item = Item::find($this->code);
+        $vehicle = ($item ? Vehicle::find($item->itemable_id) : null);
 
-        if (isset($item)) {
+        if (isset($vehicle)) {
             $vehicle->update($this->attributes);
         } else {
             $vehicle = Vehicle::create($this->attributes);

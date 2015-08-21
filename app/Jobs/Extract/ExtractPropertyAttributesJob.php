@@ -194,13 +194,14 @@ class ExtractPropertyAttributesJob extends Job
     /**
      * Update or create a new property.
      *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Model
      */
     private function updateOrCreateProperty()
     {
-        $property = Property::find($this->code);
+        $item = Item::find($this->code);
+        $property = ($item ? Property::find($item->itemable_id) : null);
 
-        if (isset($item)) {
+        if (isset($property)) {
             $property->update([
                 'typology'         => $this->attributes['typology'],
                 'land_registry_id' => $this->attributes['land_registry_id'],

@@ -51,6 +51,7 @@ class OtherResultsController extends Controller
     public static function getOtherItems($genericFilters)
     {
         $query = self::getIdsOrQueryByGenericFilters($genericFilters);
+        $query->where('is_other_type', true);
 
         return $query->paginate($genericFilters['per_page']);
     }
