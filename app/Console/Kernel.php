@@ -25,6 +25,7 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\ImportCommand',
         'App\Console\Commands\ExtractCommand',
         'App\Console\Commands\ResetPreviousExtractionCommand',
+        'App\Console\Commands\CleanRawDataCommand',
     ];
 
     /**
