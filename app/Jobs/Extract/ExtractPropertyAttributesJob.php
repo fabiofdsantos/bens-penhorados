@@ -108,7 +108,7 @@ class ExtractPropertyAttributesJob extends Job
         // Update the item's location
         if (isset($this->attributes['municipality_id'])) {
             if (is_null($this->attributes['district_id'])) {
-                $this->attributes['district_id'] = Municipality::find($this->attributes['municipality_id'])->pluck('district_id');
+                $this->attributes['district_id'] = Municipality::find($this->attributes['municipality_id'])->getAttribute('district_id');
             }
 
             $property->item->update([
@@ -194,7 +194,7 @@ class ExtractPropertyAttributesJob extends Job
     private function generateTitle(Property $property)
     {
         if (isset($this->attributes['land_registry_id'])) {
-            return $property->landRegistry()->pluck('name');
+            return 'Prédio '.$property->landRegistry()->pluck('name');
         }
 
         return $this->code;
