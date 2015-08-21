@@ -11,6 +11,8 @@
 
 namespace App\Models\Attributes\Property;
 
+use App\Models\Items\Property;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -37,4 +39,19 @@ class LandRegistry extends Model
      * @var string
      */
     protected $primaryKey = 'id';
+
+    /**
+     * Scope a query to only include land registry types assigned at least
+     * to one active property.
+     *
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeAssigned(Builder $query)
+    {
+        $ids = Property::active()->distinct()->lists('land_registry_id');
+
+        return $query->whereIn('id', $ids)->orderBy('name');
+    }
 }
