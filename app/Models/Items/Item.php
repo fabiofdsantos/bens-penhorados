@@ -368,6 +368,22 @@ class Item extends Model
     }
 
     /**
+     * Scope a query to only include items that match with a given search query.
+     *
+     * @param Builder     $query
+     * @param string|null $searchQuery
+     *
+     * @return Builder
+     */
+    public function scopeSearchQuery(Builder $query, $searchQuery)
+    {
+        if (isset($searchQuery)) {
+            $query->where('full_description', 'LIKE', '%'.$searchQuery.'%');
+            $query->orWhere('code', $searchQuery);
+        }
+    }
+
+    /**
      * Set the item's title and slug.
      *
      * @param string $value

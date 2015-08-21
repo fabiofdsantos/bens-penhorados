@@ -50,6 +50,7 @@ trait GenericResultsTrait
             'min_price'          => $request->input('minprice'),
             'max_price'          => $request->input('maxprice'),
             'no_price'           => $request->input('noprice'),
+            'search_query'       => $request->input('q'),
         ];
 
         return $filters;
@@ -70,6 +71,7 @@ trait GenericResultsTrait
         $query->ofMunicipality($filters['municipality_id']);
         $query->ofPurchaseType($filters['purchase_type_id']);
         $query->betweenPrices($filters['min_price'], $filters['max_price']);
+        $query->searchQuery($filters['search_query']);
 
         if (isset($filters['with_images'])) {
             $query->onlyWithImages();

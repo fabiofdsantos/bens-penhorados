@@ -21,6 +21,7 @@ app.controller('OtherListCtrl', ['$scope', '$location', 'Other', 'OtherFilters',
         'filters.minPrice',
         'filters.maxPrice',
         'filters.noPrice',
+        'filters.searchQuery',
         'itemsPerPage',
     ];
 
@@ -45,6 +46,7 @@ app.controller('OtherListCtrl', ['$scope', '$location', 'Other', 'OtherFilters',
             minPrice: parseInt(search.minprice) || undefined,
             maxPrice: parseInt(search.maxprice) || undefined,
             noPrice: parseInt(search.noprice) || undefined,
+            searchQuery: search.q,
         };
         getResultsPage($scope.pagination.current);
         getFilteringAttributes();
@@ -81,6 +83,7 @@ app.controller('OtherListCtrl', ['$scope', '$location', 'Other', 'OtherFilters',
             minprice: getMinPrice(),
             maxprice: getMaxPrice(),
             noprice: $scope.filters.noPrice,
+            q: $scope.filters.searchQuery,
         };
     }
 
@@ -142,6 +145,7 @@ app.controller('OtherListCtrl', ['$scope', '$location', 'Other', 'OtherFilters',
     $scope.resetGenericFilters = function() {
         var filtersToReset = ['district', 'municipality', 'ignoreSuspended',
             'withImages', 'purchaseType', 'noPrice', 'minPrice', 'maxPrice',
+            'searchQuery',
         ];
 
         angular.forEach(filtersToReset, function(value, key) {
