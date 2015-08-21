@@ -102,9 +102,10 @@ class ItemController extends Controller
 
         $property = Property::find($generic->itemable_id);
         $item = [
-            'landRegistry' => $property->landRegistry()->pluck('name'),
-            'typology'     => $property->typology,
-            'generic'      => self::getGenericAttributes($generic),
+            'locationOnDesc' => $property->location_on_desc,
+            'landRegistry'   => $property->landRegistry()->pluck('name'),
+            'typology'       => $property->typology,
+            'generic'        => self::getGenericAttributes($generic),
         ];
 
         return $item;

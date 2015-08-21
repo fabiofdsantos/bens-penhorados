@@ -34,6 +34,7 @@
                             <p class="small">
                                 <strong>Localização: </strong>
                                 <span data-ng-bind="property.generic.location"></span>
+                                <span data-ng-style="{'color' : '#00008B'}" data-ng-show="!property.locationOnDesc"> (c/ base no serv. de finanças)</span>
                             </p>
                             <p class="small">
                                 <strong>Modalidade: </strong>
@@ -101,7 +102,7 @@
                     <thead>
                         <tr>
                             <th colspan="2">
-                                <h4>Descrição do veículo</h4>
+                                <h4>Descrição do imóvel</h4>
                             </th>
                         </tr>
                     </thead>
