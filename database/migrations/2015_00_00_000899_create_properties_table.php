@@ -22,6 +22,7 @@ class CreatePropertiesTable extends Migration
         Schema::create('properties', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('location_on_desc')->default(false);
+            $table->integer('typology')->nullable();
 
             $table->integer('land_registry_id')->unsigned()->nullable();
             $table->foreign('land_registry_id')->references('id')->on('property_land_registry');

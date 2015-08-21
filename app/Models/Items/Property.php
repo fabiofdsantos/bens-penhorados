@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int          $id
  * @property bool         $location_on_desc
+ * @property int          $typology
  * @property Item         $item
  * @property LandRegistry $landRegistry
  */

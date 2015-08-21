@@ -27,6 +27,7 @@ class ExtractPropertyAttributesJob extends Job
     const REGEX_FLAG_DISTRICT = '/\bdistrito\b/i';
     const REGEX_FLAG_MUNICIPALITY = '/\bregisto[\s\pP]*predial|concelho\b/i';
     const REGEX_FLAG_LANDREGISTRY = '/\bpr\wdio|matriz|destinado|terreno\b/iu';
+    const REGEX_FLAG_TYPOLOGY = '/tipologia/i';
 
     /**
      * The property extractor.
@@ -43,6 +44,7 @@ class ExtractPropertyAttributesJob extends Job
     protected $attributes = [
         'district_id'      => null,
         'municipality_id'  => null,
+        'typology'         => null,
         'land_registry_id' => null,
     ];
 
@@ -94,6 +96,7 @@ class ExtractPropertyAttributesJob extends Job
 
         // Create a new property
         $property = Property::create([
+            'typology'         => $this->attributes['typology'],
             'land_registry_id' => $this->attributes['land_registry_id'],
         ]);
 
@@ -108,7 +111,8 @@ class ExtractPropertyAttributesJob extends Job
         // Update the item's location
         if (isset($this->attributes['municipality_id'])) {
             if (is_null($this->attributes['district_id'])) {
-                $this->attributes['district_id'] = Municipality::find($this->attributes['municipality_id'])->getAttribute('district_id');
+                $municipality = Municipality::find($this->attributes['municipality_id']);
+                $this->attributes['district_id'] = $municipality->getAttribute('district_id');
             }
 
             $property->item->update([
@@ -160,6 +164,7 @@ class ExtractPropertyAttributesJob extends Job
         $mapAttrFunc = [
             'district_id'      => 'district',
             'municipality_id'  => 'municipality',
+            'typology'         => 'typology',
             'land_registry_id' => 'landRegistry',
         ];
 
@@ -178,6 +183,7 @@ class ExtractPropertyAttributesJob extends Job
         $mapAttrFlagPattern = [
             'district_id'      => self::REGEX_FLAG_DISTRICT,
             'municipality_id'  => self::REGEX_FLAG_MUNICIPALITY,
+            'typology'         => self::REGEX_FLAG_TYPOLOGY,
             'land_registry_id' => self::REGEX_FLAG_LANDREGISTRY,
         ];
 
@@ -194,7 +200,13 @@ class ExtractPropertyAttributesJob extends Job
     private function generateTitle(Property $property)
     {
         if (isset($this->attributes['land_registry_id'])) {
-            return 'Prédio '.$property->landRegistry()->pluck('name');
+            $name = 'Prédio '.$property->landRegistry()->pluck('name');
+
+            if (isset($this->attributes['typology'])) {
+                $name .= ' - T'.$this->attributes['typology'];
+            }
+
+            return $name;
         }
 
         return $this->code;
