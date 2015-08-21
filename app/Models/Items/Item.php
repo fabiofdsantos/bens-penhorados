@@ -237,6 +237,18 @@ class Item extends Model
     }
 
     /**
+     * Scope a query to only include inactive items.
+     *
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeInactive(Builder $query)
+    {
+        return $query->where('acceptance_dt', '<', Carbon::now());
+    }
+
+    /**
      * Scope a query to only include items of a given type.
      *
      * @param Builder $query
