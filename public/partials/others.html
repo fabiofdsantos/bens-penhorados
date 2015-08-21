@@ -124,7 +124,7 @@
                                 <h2 data-ng-bind="item.title"></h2>
                                 <p class="small">
                                     <i class="glyphicon glyphicon-asterisk"></i>
-                                    <span data-ng-bind="item.status" data-ng-style="item.status == 'Em curso' ? {'color':'green'} : {'color':'red'}"></span>
+                                    <span data-ng-bind="item.status" data-ng-style="item.status == 'Em curso' ? {'color':'green'} : (item.status == 'Suspenso' ? {'color':'red'} : {'color':'blue'})"></span>
                                 </p>
                                 <p class="small">
                                     <i class="glyphicon glyphicon-map-marker"></i>
