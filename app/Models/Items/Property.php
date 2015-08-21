@@ -107,4 +107,19 @@ class Property extends Model
             return $query->where('land_registry_id', $landRegistryId);
         }
     }
+
+    /**
+     * Scope a query to only include items of a given typology.
+     *
+     * @param Builder $query
+     * @param int     $typology
+     *
+     * @return Builder
+     */
+    public function scopeOfTypology(Builder $query, $typology)
+    {
+        if (isset($typology)) {
+            return $query->where('typology', $typology);
+        }
+    }
 }
