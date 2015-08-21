@@ -27,7 +27,7 @@ class VehicleResultsController extends Controller
 
     public function __construct()
     {
-        self::$itemType = \App\Models\Items\Vehicle::class;
+        self::$itemType = Vehicle::class;
     }
 
     /**

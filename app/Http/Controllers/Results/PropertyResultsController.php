@@ -27,7 +27,7 @@ class PropertyResultsController extends Controller
 
     public function __construct()
     {
-        self::$itemType = \App\Models\Items\Property::class;
+        self::$itemType = Property::class;
     }
 
     /**
@@ -126,7 +126,7 @@ class PropertyResultsController extends Controller
     {
         $query = Property::whereIn('id', $ids);
 
-        $query->where('typology', $filters['typology']);
+        $query->ofTypology($filters['typology']);
         $query->ofLandRegistry($filters['land_registry_id']);
 
         # http://dba.stackexchange.com/questions/109120/how-does-order-by-field-in-mysql-work-internally
