@@ -24,6 +24,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         'App\Console\Commands\ImportCommand',
         'App\Console\Commands\ExtractCommand',
+        'App\Console\Commands\ResetPreviousExtractionCommand',
     ];
 
     /**
