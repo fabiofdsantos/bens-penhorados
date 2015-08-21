@@ -39,6 +39,15 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
             title: 'Criar conta de utilizador',
             templateUrl: 'partials/register.html'
         })
+        .when('/imoveis', {
+            title: 'Imóveis Penhorados pelas Finanças',
+            templateUrl: 'partials/properties.html',
+            controller: 'PropertyListCtrl'
+        })
+        .when('/imoveis/:slug', {
+            templateUrl: 'partials/property-view.html',
+            controller: 'PropertyCtrl'
+        })
         .when('/veiculos', {
             title: 'Veículos Penhorados pelas Finanças',
             templateUrl: 'partials/vehicles.html',

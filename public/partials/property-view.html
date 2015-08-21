@@ -1,0 +1,151 @@
+<div class="section">
+    <div data-ng-show="property" class="container">
+        <h1 class="page-header" data-ng-bind="property.generic.title"></h1>
+        <div class="row" style="margin-bottom: 15px">
+            <div class="col-md-6 show-grid">
+                <div style="max-width: 100%">
+                    <carousel interval="2000">
+                        <slide data-ng-repeat="image in property.generic.images">
+                            <img data-ng-src="../images/{{ image }}" style="margin:auto;">
+                        </slide>
+                    </carousel>
+                    <img data-ng-hide="property.generic.images" data-ng-src="../images/empty.jpg" style="margin:auto; max-width: 100%">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="row">
+                            <strong>Preço base de venda:</strong>
+                        </div>
+                        <div class="item-price row">
+                            <span data-ng-bind="property.generic.price.value ? (property.generic.price.value  | currency:'€') : 'À melhor oferta'"></span>
+                            <span data-ng-show="property.generic.price.vat" data-ng-bind="' - Incl. ' + property.generic.price.vat + '% (IVA)'"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-general-details well">
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <p class="small">
+                                <strong>Estado da venda: </strong>
+                                <span data-ng-bind="property.generic.status" data-ng-style="property.generic.status == 'Em curso' ? {'color':'green'} : {'color':'red'}"></span>
+                            </p>
+                            <p class="small">
+                                <strong>Localização: </strong>
+                                <span data-ng-bind="property.generic.location"></span>
+                            </p>
+                            <p class="small">
+                                <strong>Modalidade: </strong>
+                                <span data-ng-bind="property.generic.purchaseType"></span>
+                            </p>
+                            <p class="small">
+                                <strong>Código da venda: </strong>
+                                <span data-ng-bind="property.generic.code"></span>
+                            </p>
+                            <p class="small">
+                                <strong>Serviço de finanças: </strong>
+                                <span data-ng-bind="property.generic.taxOffice"></span>
+                            </p>
+                            <br />
+                            <small data-ng-bind="'Apresentação de propostas até ' + property.generic.dates.acceptanceDt"></small>
+                            <br />
+                            <small data-ng-bind="'Examinação do bem de ' + property.generic.dates.previewDtStart"></small>
+                            <small data-ng-bind="' até ' + property.generic.dates.previewDtEnd"></small>
+                            <br />
+                            <small data-ng-bind="'Abertura de propostas em ' + property.generic.dates.openingDt"></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item-buttons col-md-6 text-center">
+                <div class="col-xs-12 col-sm-6">
+                    <a class="btn btn-primary" target="_blank" data-ng-href="{{ (property.generic.code | generateLink) }}" role="button"><i class="glyphicon glyphicon-new-window"></i> Ver anúncio original</a>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <a class="btn btn-warning" href="#" role="button"><i class="glyphicon glyphicon-pushpin"></i> Marcar como favorito</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                <h4>Detalhes</h4>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size: 12px;">
+                        <tr data-ng-show="property.landRegistry">
+                            <th scope="row">Tipo de prédio</th>
+                            <td data-ng-bind="property.landRegistry"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-9">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                <h4>Descrição do veículo</h4>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size: 12px;">
+                        <tr data-ng-show="property.generic.description">
+                            <td data-ng-bind="property.generic.description"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="table-responsive" data-ng-show="property.generic.depositary.phone || property.generic.depositary.email || property.generic.mediator.name || property.generic.mediator.email">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th colspan="4">
+                                    <h4>Contactos</h4>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody style="font-size: 12px;">
+                            <tr data-ng-show="property.generic.depositary.name">
+                                <th scope="row">Fiel depositário</th>
+                                <td>
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    <span data-ng-bind="property.generic.depositary.name"></span>
+                                </td>
+                                <td>
+                                    <i class="glyphicon glyphicon-phone"></i>
+                                    <span data-ng-bind="(property.generic.depositary.phone | phonenumber:351) || 'Telefone indisponível'"></span>
+                                </td>
+                                <td>
+                                    <i class="glyphicon glyphicon-envelope"></i>
+                                    <a ng-show="property.generic.depositary.email" data-ng-href="{{ property.generic.depositary.email }}" target="_blank">Enviar email</a>
+                                    <span ng-hide="property.generic.depositary.email">Email indisponível</span>
+                                </td>
+                            </tr>
+                            <tr data-ng-show="property.generic.mediator.name">
+                                <th scope="row">Mediador</th>
+                                <td>
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    <span data-ng-bind="property.generic.mediator.name"></span>
+                                </td>
+                                <td>
+                                    <i class="glyphicon glyphicon-phone"></i>
+                                    <span data-ng-bind="(property.generic.mediator.phone | phonenumber:351) || 'Telefone indisponível'"></span>
+                                </td>
+                                <td>
+                                    <i class="glyphicon glyphicon-envelope"></i>
+                                    <a ng-show="property.generic.mediator.email" data-ng-href="{{ property.generic.mediator.email }}" target="_blank">Enviar email</a>
+                                    <span ng-hide="property.generic.mediator.email">Email indisponível</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
