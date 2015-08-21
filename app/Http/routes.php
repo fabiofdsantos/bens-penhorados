@@ -16,6 +16,9 @@ $app->get('/', function () {
 $app->group(['prefix' => 'api/v1/', 'namespace' => 'App\Http\Controllers'], function () use ($app) {
     $app->get('home', ['uses' => 'HomeController@index']);
 
+    /* Properties */
+    $app->get('properties/{slug}', ['uses' => 'ItemController@propertyType']);
+
     /* Vehicles */
     $app->get('vehicles/{slug}', ['uses' => 'ItemController@vehicleType']);
 
@@ -31,6 +34,9 @@ $app->group(['prefix' => 'api/v1/', 'namespace' => 'App\Http\Controllers'], func
      'namespace' => 'App\Http\Controllers\Results',
  ], function () use ($app) {
 
+    /* Properties */
+    $app->get('properties', ['uses' => 'PropertyResultsController@index']);
+
     /* Vehicles */
     $app->get('vehicles', ['uses' => 'VehicleResultsController@index']);
 
@@ -45,6 +51,11 @@ $app->group([
     'prefix'    => 'api/v1/',
     'namespace' => 'App\Http\Controllers\FilteringAttributes',
 ], function () use ($app) {
+
+    /* Properties */
+    $app->get('attributes/property', [
+        'uses' => 'PropertyFilteringAttrController@index',
+    ]);
 
     /* Vehicles */
     $app->get('attributes/vehicle', [
