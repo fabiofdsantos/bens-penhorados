@@ -14,7 +14,7 @@ $app->get('/', function () {
 });
 
 /*
- * API - Homepage & item's page
+ * API - Homepage & single pages
  */
 $app->group([
     'prefix'     => 'api/v1/',
@@ -22,23 +22,21 @@ $app->group([
     'namespace'  => 'App\Http\Controllers',
 ], function () use ($app) {
 
-    /*
-     * Homepage
-     */
+    # Homepage
     $app->get('home', ['uses' => 'HomeController@index']);
 
-    /* Properties */
+    # Get a single property
     $app->get('properties/{slug}', ['uses' => 'ItemController@propertyType']);
 
-    /* Vehicles */
+    # Get a single vehicle
     $app->get('vehicles/{slug}', ['uses' => 'ItemController@vehicleType']);
 
-    /* Others */
+    # Get a single other item
     $app->get('others/{slug}', ['uses' => 'ItemController@otherType']);
 });
 
 /*
- * API - Results
+ * API - Search results
  */
  $app->group([
      'prefix'     => 'api/v1/',
@@ -46,13 +44,13 @@ $app->group([
      'namespace'  => 'App\Http\Controllers\Results',
  ], function () use ($app) {
 
-    /* Properties */
+    # Get properties
     $app->get('properties', ['uses' => 'PropertyResultsController@index']);
 
-    /* Vehicles */
+    # Get vehicles
     $app->get('vehicles', ['uses' => 'VehicleResultsController@index']);
 
-    /* Others */
+    # Get other items
     $app->get('others', ['uses' => 'OtherResultsController@index']);
 });
 
@@ -60,43 +58,83 @@ $app->group([
  * API - Filtering attributes
  */
 $app->group([
-    'prefix'     => 'api/v1/',
+    'prefix'     => 'api/v1/attributes/',
     'middleware' => 'wantsJson',
     'namespace'  => 'App\Http\Controllers\FilteringAttributes',
 ], function () use ($app) {
 
-    /* Properties */
-    $app->get('attributes/property', [
+    # Get filtering attributes for properties
+    $app->get('property', [
         'uses' => 'PropertyFilteringAttrController@index',
     ]);
 
-    /* Vehicles */
-    $app->get('attributes/vehicle', [
+    # Get filtering attributes for vehicles
+    $app->get('vehicle', [
         'uses' => 'VehicleFilteringAttrController@index',
     ]);
 
-    /* Others */
-    $app->get('attributes/other', [
+    # Get filtering attributes for other items
+    $app->get('other', [
         'uses' => 'OtherFilteringAttrController@index',
     ]);
 });
 
 /*
- * API - Auth, user & favorites
+ * API - Auth
  */
 $app->group([
-    'prefix'     => 'api/v1/',
+    'prefix'     => 'api/v1/auth/',
     'middleware' => 'wantsJson',
-    'namespace'  => 'App\Http\Controllers',
+    'namespace'  => 'App\Http\Controllers\User',
 ], function () use ($app) {
 
-    /* Create a new user */
-    $app->post('auth/register', [
+    # Post a new user
+    $app->post('register', [
         'uses' => 'AuthController@createUser',
     ]);
 
-    /* Login */
-    $app->post('auth/login', [
+    # Post login credentials
+    $app->post('login', [
         'uses' => 'AuthController@login',
+    ]);
+});
+
+/*
+ * API - User & favorites
+ */
+$app->group([
+    'prefix'     => 'api/v1/user/',
+    'middleware' => ['wantsJson', 'auth'],
+    'namespace'  => 'App\Http\Controllers\User',
+], function () use ($app) {
+
+    # Get user details
+    $app->get('account', [
+        'uses' => 'UserController@show',
+    ]);
+
+    # Post updated user details
+    $app->post('account/edit', [
+        'uses' => 'UserController@edit',
+    ]);
+
+    # Get favorites
+    $app->get('favorites', [
+        'uses' => 'FavoriteController@index',
+    ]);
+
+    # Add a new favorite
+    $app->post('favorites/add', [
+        'uses' => 'FavoriteController@add',
+    ]);
+
+    # Remove a favorite
+    $app->post('favorites/remove', [
+        'uses' => 'FavoriteController@remove',
+    ]);
+
+    # Remove all favorites
+    $app->post('', [
+        'uses' => 'FavoriteController@removeAll',
     ]);
 });
