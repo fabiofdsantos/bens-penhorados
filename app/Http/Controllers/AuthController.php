@@ -18,7 +18,7 @@ use Illuminate\Http\Response;
 use Laravel\Lumen\Routing\Controller;
 
 /**
- * This is the user controller class.
+ * This is the auth controller class.
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
