@@ -69,8 +69,9 @@ $app->middleware([
     'Laravel\Lumen\Http\Middleware\VerifyCsrfToken',
 ]);
 
-//$app->routeMiddleware([
-//]);
+$app->routeMiddleware([
+ 'wantsJson' => 'App\Http\Middlewares\WantsJsonMiddleware',
+]);
 
 /*
 |--------------------------------------------------------------------------
