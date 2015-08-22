@@ -71,7 +71,7 @@ $app->middleware([
 
 $app->routeMiddleware([
     'wantsJson' => 'App\Http\Middleware\CheckIfWantsJson',
-    'isAuth'    => 'App\Http\Middleware\CheckIfAuthenticated',
+    'auth'      => 'App\Http\Middleware\CheckIfAuthenticated',
 ]);
 
 /*
