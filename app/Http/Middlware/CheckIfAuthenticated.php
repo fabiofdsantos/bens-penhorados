@@ -36,6 +36,6 @@ class CheckIfAuthenticated
             return $next($request);
         }
 
-        return redirect()->guest('auth/login');
+        return redirect('/iniciar-sessao'); // should be edited
     }
 }
