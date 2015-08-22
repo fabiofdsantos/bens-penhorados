@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\Models\User;
 use Auth;
