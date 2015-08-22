@@ -70,7 +70,7 @@ $app->middleware([
 ]);
 
 $app->routeMiddleware([
- 'wantsJson' => 'App\Http\Middlewares\WantsJsonMiddleware',
+ 'wantsJson' => 'App\Http\Middleware\CheckIfWantsJson',
 ]);
 
 /*

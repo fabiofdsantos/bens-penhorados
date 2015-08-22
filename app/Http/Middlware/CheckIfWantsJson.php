@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Http\Middlewares;
+namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
