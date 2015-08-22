@@ -80,3 +80,23 @@ $app->group([
         'uses' => 'OtherFilteringAttrController@index',
     ]);
 });
+
+/*
+ * API - Auth, user & favorites
+ */
+$app->group([
+    'prefix'     => 'api/v1/',
+    'middleware' => 'wantsJson',
+    'namespace'  => 'App\Http\Controllers',
+], function () use ($app) {
+
+    /* Create a new user */
+    $app->post('auth/register', [
+        'uses' => 'AuthController@createUser',
+    ]);
+
+    /* Login */
+    $app->post('auth/login', [
+        'uses' => 'AuthController@login',
+    ]);
+});

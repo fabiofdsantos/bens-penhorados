@@ -30,14 +30,15 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
             title: 'Oops. Página não encontrada!',
             templateUrl: 'partials/404.html'
         })
-        .when('/login', {
+        .when('/iniciar-sessao', {
             title: 'Iniciar sessão',
             templateUrl: 'partials/login.html',
-            controller: 'LoginCtrl'
+            controller: 'UserCtrl'
         })
-        .when('/register', {
+        .when('/registar-conta', {
             title: 'Criar conta de utilizador',
-            templateUrl: 'partials/register.html'
+            templateUrl: 'partials/register.html',
+            controller: 'UserCtrl'
         })
         .when('/imoveis', {
             title: 'Imóveis Penhorados pelas Finanças',
