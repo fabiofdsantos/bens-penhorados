@@ -15,14 +15,14 @@ use Closure;
 use Illuminate\Http\Request;
 
 /**
- * This is the wants json middleware.
+ * This is the check if wants json middleware class.
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
-class WantsJsonMiddleware
+class CheckIfWantsJson
 {
     /**
-     * Run the request filter.
+     * Handle an incoming request.
      *
      * @param Request $request
      * @param Closure $next
@@ -35,6 +35,6 @@ class WantsJsonMiddleware
             return $next($request);
         }
 
-        return view('index');
+        return redirect('/');
     }
 }
