@@ -13,12 +13,18 @@ $app->get('/', function () {
     return view('index');
 });
 
+/*
+ * API - Homepage & item's page
+ */
 $app->group([
     'prefix'     => 'api/v1/',
     'middleware' => 'wantsJson',
     'namespace'  => 'App\Http\Controllers',
 ], function () use ($app) {
 
+    /*
+     * Homepage
+     */
     $app->get('home', ['uses' => 'HomeController@index']);
 
     /* Properties */
@@ -32,7 +38,7 @@ $app->group([
 });
 
 /*
- * Results
+ * API - Results
  */
  $app->group([
      'prefix'     => 'api/v1/',
@@ -51,7 +57,7 @@ $app->group([
 });
 
 /*
- * Filtering attributes
+ * API - Filtering attributes
  */
 $app->group([
     'prefix'     => 'api/v1/',
