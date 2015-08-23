@@ -46,7 +46,7 @@
     <script src="js/filters.js"></script>
 
     <!-- Controllers -->
-    <script src="js/controllers/UserController.js"></script>
+    <script src="js/controllers/UserControllers.js"></script>
     <script src="js/controllers/PropertyControllers.js"></script>
     <script src="js/controllers/VehicleControllers.js"></script>
     <script src="js/controllers/OtherControllers.js"></script>
