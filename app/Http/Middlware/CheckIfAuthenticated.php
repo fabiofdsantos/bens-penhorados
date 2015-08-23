@@ -36,6 +36,6 @@ class CheckIfAuthenticated
             return $next($request);
         }
 
-        return redirect('/iniciar-sessao'); // should be edited
+        return response('You are not authenticated!', 401);
     }
 }
