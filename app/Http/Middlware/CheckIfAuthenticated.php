@@ -36,6 +36,6 @@ class CheckIfAuthenticated
             return $next($request);
         }
 
-        return response('You are not authenticated!', 401);
+        return response(['error' => 'You are not authenticated!'], 401);
     }
 }
