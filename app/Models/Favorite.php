@@ -11,8 +11,17 @@
 
 namespace App\Models;
 
+use App\Models\Items\Item;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * This is the favorite model class.
+ *
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ *
+ * @property User  $user
+ * @property Item  $item
+ */
 class Favorite extends Model
 {
     /**
@@ -20,5 +29,32 @@ class Favorite extends Model
      *
      * @var string
      */
-    protected $table = 'favorites';
+    protected $table = 'user_favorites';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['user_id', 'item_code'];
+
+    /**
+     * A favorite must be associated with an user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    /**
+     * A favorite must be associated with an item.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function item()
+    {
+        return $this->hasOne(Item::class, 'code', 'item_code');
+    }
 }

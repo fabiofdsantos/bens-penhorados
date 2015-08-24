@@ -182,15 +182,51 @@ app.controller('PropertyListCtrl', ['$scope', '$location', '$cookies', 'Property
     }
 }]);
 
-app.controller('PropertyCtrl', ['$rootScope', '$scope', '$routeParams', '$location', 'Property', function($rootScope, $scope, $routeParams, $location, Property) {
+app.controller('PropertyCtrl', ['$rootScope', '$scope', '$routeParams', '$http', '$location', 'Property', function($rootScope, $scope, $routeParams, $http, $location, Property) {
     Property.get({
         slug: $routeParams.slug
     }, function(data) {
         $scope.property = data;
         $rootScope.pageTitle = data.generic.title;
+
+        if ($rootScope.isAuth) {
+            isFavorite();
+        }
     }, function(error) {
         if (error.status === 404) {
             $location.path("/404");
         }
     });
+
+    function isFavorite() {
+        $http.post('../api/v1/user/favorites/check', {
+            code: $scope.property.generic.code,
+        }).then(function(response) {
+            $scope.isFavorite = response.data || undefined;
+        });
+    }
+
+    $scope.addFavorite = function() {
+        $http.post('../api/v1/user/favorites/add', {
+            code: $scope.property.generic.code,
+        }).success(function(response) {
+            $scope.isFavorite = true;
+        }).error(function(response) {
+            if (response.error) {
+                $location.path('/iniciar-sessao');
+            }
+        });
+    };
+
+    $scope.removeFavorite = function() {
+        $http.post('../api/v1/user/favorites/remove', {
+            code: $scope.property.generic.code,
+        }).success(function(response) {
+            $scope.isFavorite = false;
+        }).error(function(response) {
+            if (response.error) {
+                $location.path('/iniciar-sessao');
+            }
+        });
+    };
 }]);

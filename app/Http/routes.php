@@ -97,6 +97,16 @@ $app->group([
     $app->post('login', [
         'uses' => 'AuthController@login',
     ]);
+
+    # Check if a visitor is an authenticated user
+    $app->get('check', [
+        'uses' => 'AuthController@check',
+    ]);
+
+    # Logout an authenticated user
+    $app->get('logout', [
+        'uses' => 'AuthController@logout',
+    ]);
 });
 
 /*
@@ -134,7 +144,12 @@ $app->group([
     ]);
 
     # Remove all favorites
-    $app->post('', [
+    $app->post('favorites/remove-all', [
         'uses' => 'FavoriteController@removeAll',
+    ]);
+
+    # Check if a given item was favorited
+    $app->post('favorites/check', [
+        'uses' => 'FavoriteController@check',
     ]);
 });

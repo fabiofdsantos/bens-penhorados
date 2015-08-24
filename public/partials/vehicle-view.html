@@ -63,7 +63,8 @@
                     <a class="btn btn-primary" target="_blank" data-ng-href="{{ (vehicle.generic.code | generateLink) }}" role="button"><i class="glyphicon glyphicon-new-window"></i> Ver anúncio original</a>
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                    <a class="btn btn-warning" href="#" role="button"><i class="glyphicon glyphicon-pushpin"></i> Marcar como favorito</a>
+                    <a data-ng-hide="isFavorite" data-ng-click="addFavorite()" class="btn btn-success" role="button"><i class="glyphicon glyphicon-pushpin"></i> Marcar como favorito</a>
+                    <a data-ng-show="isFavorite" data-ng-click="removeFavorite()" class="btn btn-danger" role="button"><i class="glyphicon glyphicon-pushpin"></i> Desmarcar como favorito</a>
                 </div>
             </div>
         </div>

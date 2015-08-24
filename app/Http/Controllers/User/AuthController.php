@@ -29,7 +29,7 @@ class AuthController extends Controller
      *
      * @param Request $request
      *
-     * @return Response
+     * @return Response|null
      */
     public function createUser(Request $request)
     {
@@ -46,7 +46,11 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        return response()->json(['msg' => 'Utilizador criado com sucesso!'], 200);
+        if (isset($user)) {
+            return response()->json([
+                    'success' => 'The user was successfully created!',
+                ], 200);
+        }
     }
 
     /**
@@ -54,7 +58,7 @@ class AuthController extends Controller
      *
      * @param Request $request
      *
-     * @return Response
+     * @return Response|null
      */
     public function login(Request $request)
     {
@@ -66,9 +70,33 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials, $request->has('remember'))) {
-            return ['result' => 'success'];
+            return response()->json([
+                'success' => 'The user is logged in!',
+            ], 200);
         }
+    }
 
-        return ['result' => 'fail'];
+    /**
+     * Check if a visitor is logged in as an user.
+     *
+     * @return Response|null
+     */
+    public function check()
+    {
+        return Auth::check() ? response()->json([
+            'success' => 'The user is logged in!',
+        ], 200) : null;
+    }
+
+    /**
+     * Logout an user.
+     *
+     * @return void
+     */
+    public function logout()
+    {
+        if (Auth::check()) {
+            Auth::logout();
+        }
     }
 }

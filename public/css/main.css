@@ -59,7 +59,16 @@ body {
 }
 .results-price {
     text-align: center;
+    line-height: 124px;
+}
+.results-price span {
     font-size: 30px;
+    color: #999;
+}
+.results-price div {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
 }
 .item-general-details p {
     margin: 0px 0px 5px;

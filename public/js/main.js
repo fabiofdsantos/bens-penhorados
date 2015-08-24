@@ -40,6 +40,11 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
             templateUrl: 'partials/register.html',
             controller: 'UserCtrl'
         })
+        .when('/area-pessoal/favoritos', {
+            title: 'Gerir de favoritos',
+            templateUrl: 'partials/account/favorites.html',
+            controller: 'FavoriteListCtrl'
+        })
         .when('/imoveis', {
             title: 'Imóveis Penhorados pelas Finanças',
             templateUrl: 'partials/properties.html',
@@ -72,10 +77,25 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
         });
 }]);
 
-app.run(['$rootScope', function($rootScope) {
+app.run(['$rootScope', '$http', '$location', function($rootScope, $http, $location) {
     $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
         $rootScope.pageTitle = current.$$route.title;
     });
+
+    isAuth();
+
+    $rootScope.logout = function() {
+        $http.get('../api/v1/auth/logout').then(function() {
+            isAuth();
+            $location.path('/');
+        });
+    };
+
+    function isAuth() {
+        $http.get('../api/v1/auth/check').then(function(response) {
+            $rootScope.isAuth = response.data || undefined;
+        });
+    }
 }]);
 
 app.controller('HomeCtrl', function($scope, $http) {

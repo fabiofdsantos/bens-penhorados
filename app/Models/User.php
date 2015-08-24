@@ -17,6 +17,14 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * This is the user model class.
+ *
+ * @author Fábio Santos <ffsantos92@gmail.com>
+ *
+ * @property string $name
+ * @property string $email
+ */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword;
