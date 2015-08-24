@@ -36,6 +36,8 @@ class CheckIfAuthenticated
             return $next($request);
         }
 
-        return response(['error' => 'You are not authenticated!'], 401);
+        return response()->json([
+            'error' => 'You are not authenticated!',
+        ], 401);
     }
 }
