@@ -12,7 +12,6 @@
 namespace App\Extractors\Property;
 
 use App\Extractors\AbstractExtractor;
-use App\Helpers\Text;
 
 /**
  * This is the typology extractor extractor class.
@@ -30,7 +29,7 @@ class TypologyExtractor extends AbstractExtractor
      */
     public function __construct($params)
     {
-        $this->str = Text::removeAccents($params[0]);
+        $this->str = $params[0];
     }
 
     /**

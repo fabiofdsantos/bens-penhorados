@@ -16,7 +16,7 @@
  */
 class TypologyExtractorTest extends AbstractPropertyExtractorTest
 {
-    public function testExtractTypology()
+    public function testExtractValidTypology()
     {
         $text = [
             'Tipologia: T 4' => 4,
@@ -26,6 +26,17 @@ class TypologyExtractorTest extends AbstractPropertyExtractorTest
 
         foreach ($text as $input => $expected) {
             $this->assertSame($expected, $this->extractor->typology($input));
+        }
+    }
+
+    public function testExtractInvalidTypology()
+    {
+        $text = [
+            'artº 17859',
+        ];
+
+        foreach ($text as $input) {
+            $this->assertNull($this->extractor->typology($input));
         }
     }
 }
