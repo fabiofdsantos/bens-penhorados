@@ -93,6 +93,8 @@ class PropertyFilteringAttrController extends Controller
         array_unshift($typologies, 'garbage');
         unset($typologies[0]);
 
-        return (Object) $typologies;
+        if (!empty($typologies)) {
+            return (Object) $typologies;
+        }
     }
 }
