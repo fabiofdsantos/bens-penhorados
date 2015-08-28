@@ -7,34 +7,35 @@ app.controller('UserCtrl', ['$rootScope', '$scope', '$http', '$location', '$cook
     $scope.accountCreated = $cookies.get('account_created');
     $cookies.remove('account_created');
 
+
     $scope.register = function() {
         $http.post('../api/v1/auth/register', {
-            name: $scope.name,
-            email: $scope.email,
-            password: $scope.password,
-            password_again: $scope.passwordAgain,
+            name: $scope.name || "",
+            email: $scope.email || "",
+            password: $scope.password || "",
+            password_again: $scope.passwordAgain || "",
         }).success(function(response) {
             $location.path('/iniciar-sessao');
             $cookies.put('account_created', response.success);
         }).error(function(response) {
-            $scope.errorName = response.name[0] || undefined;
-            $scope.errorEmail = response.email[0] || undefined;
-            $scope.errorPassword = response.password[0] || undefined;
-            $scope.errorPasswordAgain = response.password_again[0] || undefined;
+            $scope.errorName = (response.name === undefined ? undefined : response.name[0]);
+            $scope.errorEmail = (response.email === undefined ? undefined : response.email[0]);
+            $scope.errorPassword = (response.password === undefined ? undefined : response.password[0]);
+            $scope.errorPasswordAgain = (response.password_again === undefined ? undefined : response.password_again[0]);
         });
     }
 
     $scope.login = function() {
         $http.post('../api/v1/auth/login', {
-            email: $scope.email,
-            password: $scope.password,
-            remember: $scope.remember,
+            email: $scope.email || "",
+            password: $scope.password || "",
+            remember: $scope.remember || "",
         }).success(function(response) {
             isAuth();
             $location.path('/');
         }).error(function(response) {
-            $scope.errorEmail = response.email[0] || undefined;
-            $scope.errorPassword = response.password[0] || undefined;
+            $scope.errorEmail = (response.email === undefined ? undefined : response.email[0]);
+            $scope.errorPassword = (response.password === undefined ? undefined : response.password[0]);
         });
     }
 
