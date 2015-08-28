@@ -90,7 +90,7 @@ class PropertyFilteringAttrController extends Controller
         sort($typologies);
 
         // *** Hack: Array must start on [1] instead of [0]
-        array_unshift($typologies, 'garbage');
+        array_unshift($typologies, 'somerandomtext');
         unset($typologies[0]);
 
         if (!empty($typologies)) {
