@@ -76,16 +76,31 @@ class ImportFromMapJob extends Job
 
                 $rawItem = Item::find($itemCode);
 
-                if (!isset($rawItem)) {
+                if (isset($rawItem)) {
+                    $flag_coordChanged = false;
+                    
+                    if ($rawItem->lat != $item->attributes->XLAT) {
+                        $rawItem->lat = $item->attributes->XLAT;
+                        $flag_coordChanged = true;
+                    }
+                    
+                    if ($rawItem->lng != $item->attributes->XLON) {
+                        $rawItem->lng = $item->attributes->XLON;
+                        $flag_coordChanged = true;
+                    }
+                    
+                    if ($flag_coordChanged) {
+                        $rawItem->extracted = false;
+                        $rawItem->save();
+                    }
+                } else {
                     $rawItem = new RawData();
                     $rawItem->code = $itemCode;
+                    $rawItem->lat = $item->attributes->XLAT;
+                    $rawItem->lng = $item->attributes->XLON;
+                    $rawItem->extracted = false;
+                    $rawItem->save();   
                 }
-
-                $rawItem->lat = $item->attributes->XLAT;
-                $rawItem->lng = $item->attributes->XLON;
-                $rawItem->extracted = true;
-                $rawItem->save();
-
                 $i++;
             }
         }
