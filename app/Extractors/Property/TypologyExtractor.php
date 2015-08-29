@@ -20,7 +20,7 @@ use App\Extractors\AbstractExtractor;
  */
 class TypologyExtractor extends AbstractExtractor
 {
-    const REGEX_TYPOLOGY = '/t[\s\pP]*(\d+)/i';
+    const REGEX_TYPOLOGY = '/\bt[\s\pP]*(\d{0,2})\b/i';
 
     /**
      * Create a new typology extractor instance.

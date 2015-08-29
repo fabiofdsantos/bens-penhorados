@@ -22,6 +22,7 @@ class TypologyExtractorTest extends AbstractPropertyExtractorTest
             'Tipologia: T 4' => 4,
             't1'             => 1,
             't-3'            => 3,
+            't10'            => 10,
         ];
 
         foreach ($text as $input => $expected) {
@@ -33,6 +34,9 @@ class TypologyExtractorTest extends AbstractPropertyExtractorTest
     {
         $text = [
             'artº 17859',
+            'art.12',
+            'art: 1',
+            't123',
         ];
 
         foreach ($text as $input) {
