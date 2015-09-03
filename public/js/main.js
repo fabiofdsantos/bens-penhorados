@@ -5,6 +5,7 @@ var app = angular.module('bens-penhorados', [
     'angularUtils.directives.dirPagination',
     'angular-loading-bar',
     'ui.bootstrap',
+    'focus-if',
     'bens-penhorados-filters'
 ]);
 
