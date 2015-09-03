@@ -22,7 +22,7 @@
                         <div class="form-group">
                             <label for="search-query" class="col-sm-4 control-label">Palavras-chave</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" placeholder="ex. BMW" name="search-term" ng-model="filters.searchQuery" ng-model-options="{ debounce: 1000 }">
+                                <input type="text" class="form-control" placeholder="ex. BMW" name="search-term" ng-focus="true" ng-model="filters.searchQuery" ng-model-options="{ debounce: 1000 }" data-focus-if="filters.searchQuery">
                             </div>
                         </div>
 
