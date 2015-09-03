@@ -38,6 +38,7 @@
 
     <script src="js/modules/dirPagination.js"></script>
     <script src="js/modules/loading-bar.min.js"></script>
+    <script src="js/modules/focusIf.js"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
