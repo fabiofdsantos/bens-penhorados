@@ -12,6 +12,7 @@
 namespace App\Jobs\Import;
 
 use App\Jobs\Job;
+use App\Models\Items\Item;
 use App\Models\RawData;
 use GuzzleHttp;
 
