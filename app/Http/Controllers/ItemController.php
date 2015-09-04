@@ -166,6 +166,13 @@ class ItemController extends Controller
         return $item;
     }
 
+    /**
+     * Get generic items.
+     *
+     * @param \Illuminate\Database\Eloquent\Model $generic
+     *
+     * @return array
+     */
     private static function getGenericAttributes($generic)
     {
         return [
