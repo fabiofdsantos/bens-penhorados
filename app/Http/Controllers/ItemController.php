@@ -11,9 +11,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attributes\Generic\ItemStatus;
 use App\Models\Items\Item;
 use App\Models\Items\Property;
 use App\Models\Items\Vehicle;
+use Carbon\Carbon;
 use Laravel\Lumen\Routing\Controller;
 
 /**
@@ -175,6 +177,8 @@ class ItemController extends Controller
      */
     private static function getGenericAttributes($generic)
     {
+        self::checkIfIsInactive($generic);
+
         return [
             'code'           => $generic->code,
             'taxOffice'      => self::getTaxOfficeName($generic->taxOffice),
@@ -225,5 +229,20 @@ class ItemController extends Controller
         }
 
         return $name;
+    }
+
+    /**
+     * Check if a given item is inactive. If true, update it.
+     *
+     * @param \Illuminate\Database\Eloquent\Model $generic
+     *
+     * @return void
+     */
+    private static function checkIfIsInactive($generic)
+    {
+        if ($generic->acceptance_dt < Carbon::now()) {
+            $finishStatus = ItemStatus::where('name', 'Finalizado')->pluck('id');
+            $generic->update(['status_id' => $finishStatus]);
+        }
     }
 }
