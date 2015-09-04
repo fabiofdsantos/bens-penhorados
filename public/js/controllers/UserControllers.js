@@ -86,4 +86,9 @@ app.controller('FavoriteListCtrl', ['$scope', '$http', '$location', function($sc
     function setSearchVars(pageNumber) {
         $location.search(getSearchObject(pageNumber));
     }
+
+    $scope.removeAll = function() {
+        $http.get('../api/v1/user/favorites/remove-all');
+        setSearchVars(1);
+    }
 }]);

@@ -14,6 +14,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\LocationTrait;
 use App\Models\Favorite;
 use Auth;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Laravel\Lumen\Routing\Controller;

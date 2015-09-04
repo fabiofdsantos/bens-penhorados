@@ -144,7 +144,7 @@ $app->group([
     ]);
 
     # Remove all favorites
-    $app->post('favorites/remove-all', [
+    $app->get('favorites/remove-all', [
         'uses' => 'FavoriteController@removeAll',
     ]);
 
