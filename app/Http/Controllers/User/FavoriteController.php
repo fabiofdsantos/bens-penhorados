@@ -28,6 +28,11 @@ class FavoriteController extends Controller
 {
     use LocationTrait;
 
+    /**
+     * Get favorites of the currently logged in user.
+     *
+     * @return Response
+     */
     public function index()
     {
         $favorites = Auth::user()->favorites()->paginate(5);
@@ -57,6 +62,11 @@ class FavoriteController extends Controller
         return response()->json($data, 200);
     }
 
+    /**
+     * Add the given item to user's favorites.
+     *
+     * @return Response|null
+     */
     public function add(Request $request)
     {
         $attributes = [
@@ -71,6 +81,13 @@ class FavoriteController extends Controller
         ], 200);
     }
 
+    /**
+     * Remove the given item from user's favorites.
+     *
+     * @param Request $request
+     *
+     * @return Response|null
+     */
     public function remove(Request $request)
     {
         Auth::user()->favorites()->where('item_code', $request->code)->delete();
@@ -80,11 +97,23 @@ class FavoriteController extends Controller
         ], 200);
     }
 
+    /**
+     * Remove all favorites of the the currently logged in user.
+     *
+     * @return void
+     */
     public function removeAll()
     {
         DB::table('user_favorites')->delete();
     }
 
+    /**
+     * Check if a given item is favorited by the currently logged in user.
+     *
+     * @param Request $request
+     *
+     * @return Response|null
+     */
     public function check(Request $request)
     {
         if (Auth::check()) {
