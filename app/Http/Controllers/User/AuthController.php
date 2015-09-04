@@ -58,7 +58,7 @@ class AuthController extends Controller
      *
      * @param Request $request
      *
-     * @return Response|null
+     * @return Response
      */
     public function login(Request $request)
     {
@@ -73,6 +73,10 @@ class AuthController extends Controller
             return response()->json([
                 'success' => 'The user is logged in!',
             ], 200);
+        } else {
+            return response()->json([
+                'wrongCredentials' => 'Wrong username or password.',
+            ], 401);
         }
     }
 
