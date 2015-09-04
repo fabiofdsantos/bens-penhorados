@@ -79,19 +79,4 @@ class Municipality extends Model
 
         return $query->whereIn('id', $ids)->orderBy('name');
     }
-
-    /**
-     * Scope a query to only include municipalities assigned at least
-     * to one active uncatalogued item.
-     *
-     * @param Builder $query
-     *
-     * @return Builder
-     */
-    public function scopeAssignedToUncataloguedItems(Builder $query)
-    {
-        $ids = Item::onlyUncatalogued()->active()->lists('municipality_id');
-
-        return $query->whereIn('id', $ids)->orderBy('name');
-    }
 }
