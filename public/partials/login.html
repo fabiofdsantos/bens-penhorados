@@ -9,6 +9,7 @@
             <form name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST">
 
                 <div ng-show="accountCreated" class="alert alert-success" role="alert">A sua conta foi criada com sucesso! Agora pode iniciar sessão com o seu email e password.</div>
+                <div data-ng-show="errorWrongCredentials" class="alert alert-danger" role="alert">Não foi possível iniciar sessão! Verifique se o seu email e password estão correctos.</div>
 
                 <div class="input-group" data-ng-class="{'has-error': errorEmail }">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>

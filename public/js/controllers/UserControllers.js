@@ -34,6 +34,7 @@ app.controller('UserCtrl', ['$rootScope', '$scope', '$http', '$location', '$cook
             isAuth();
             $location.path('/');
         }).error(function(response) {
+            $scope.errorWrongCredentials = (response.wrongCredentials === undefined ? undefined : response.wrongCredentials[0]);
             $scope.errorEmail = (response.email === undefined ? undefined : response.email[0]);
             $scope.errorPassword = (response.password === undefined ? undefined : response.password[0]);
         });
