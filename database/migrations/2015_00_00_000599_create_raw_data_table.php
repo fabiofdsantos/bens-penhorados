@@ -25,7 +25,7 @@ class CreateRawDataTable extends Migration
             $table->string('lat')->nullable();
             $table->string('lng')->nullable();
 
-            $table->integer('category_id')->unsigned();
+            $table->integer('category_id')->unsigned()->nullable();
             $table->foreign('category_id')->references('id')->on('item_categories');
 
             $table->boolean('extracted');
