@@ -52,7 +52,7 @@ app.controller('FavoriteListCtrl', ['$scope', '$http', '$location', function($sc
     $scope.totalItems = 0;
     $scope.itemsFrom = 0;
     $scope.itemsTo = 0;
-    $scope.itemsPerPage = 5;
+    $scope.itemsPerPage = 10;
 
     var search = $location.search();
     $scope.pagination = {

@@ -7,7 +7,7 @@ app.controller('OtherListCtrl', ['$scope', '$location', 'Other', 'OtherFilters',
     $scope.totalItems = 0;
     $scope.itemsFrom = 0;
     $scope.itemsTo = 0;
-    $scope.itemsPerPageValues = [5, 15, 25, 50, 100];
+    $scope.itemsPerPageValues = [10, 25, 50, 100];
     $scope.priceRange = getPriceRange();
 
     init();

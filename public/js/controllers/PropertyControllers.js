@@ -7,7 +7,7 @@ app.controller('PropertyListCtrl', ['$scope', '$location', '$cookies', 'Property
     $scope.totalItems = 0;
     $scope.itemsFrom = 0;
     $scope.itemsTo = 0;
-    $scope.itemsPerPageValues = [5, 15, 25, 50, 100];
+    $scope.itemsPerPageValues = [10, 25, 50, 100];
     $scope.priceRange = getPriceRange();
     $scope.alerts = {
         hideGenericFilterAlert: $cookies.get('hide_generic_property_filter_alert'),

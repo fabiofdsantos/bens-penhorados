@@ -41,7 +41,7 @@ trait GenericResultsTrait
     private static function getGenericFilters(Request $request)
     {
         $filters = [
-            'per_page'           => (int) $request->input('limit') ?: 5,
+            'per_page'           => (int) $request->input('limit') ?: 10,
             'district_id'        => $request->input('district'),
             'municipality_id'    => $request->input('municipality'),
             'purchase_type_id'   => $request->input('purchasetype'),
