@@ -378,7 +378,7 @@ class Item extends Model
     public function scopeSearchQuery(Builder $query, $searchQuery)
     {
         if (isset($searchQuery)) {
-            $searchQuery = preg_replace('/\s|\pP/', '%', $str);
+            $searchQuery = preg_replace('/\s|\pP/', '%', $searchQuery);
             
             $query->where('full_description', 'LIKE', '%'.$searchQuery.'%');
             $query->orWhere('code', $searchQuery);
