@@ -39,6 +39,7 @@ class ImportFromMapJob extends Job
     {
         $this->locations = $locations;
     }
+
     /**
      * Execute the job.
      *
