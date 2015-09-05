@@ -44,6 +44,7 @@ class YearExtractor extends AbstractExtractor
             return $this->isValidYear($match[3]) ? (integer) $match[3] : null;
         }
     }
+
     /**
      * Check if a given year is valid.
      *
