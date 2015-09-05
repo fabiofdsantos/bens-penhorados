@@ -103,7 +103,7 @@ class ExtractGenericAttributesJob extends Job
         $this->extractor = new GenericExtractorWrapper();
     }
 
-    /***
+    /**
      * Execute the job.
      *
      * @return mixed
