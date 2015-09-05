@@ -379,7 +379,7 @@ class Item extends Model
     {
         if (isset($searchQuery)) {
             $searchQuery = preg_replace('/\s|\pP/', '%', $searchQuery);
-            
+
             $query->where('full_description', 'LIKE', '%'.$searchQuery.'%');
             $query->orWhere('code', $searchQuery);
         }
