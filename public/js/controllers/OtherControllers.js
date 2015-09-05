@@ -36,7 +36,7 @@ app.controller('OtherListCtrl', ['$scope', '$location', 'Other', 'OtherFilters',
         $scope.pagination = {
             current: search.page || 1,
         };
-        $scope.itemsPerPage = parseInt(search.limit) || 5;
+        $scope.itemsPerPage = parseInt(search.limit) || 10;
         $scope.filters = {
             district: search.district,
             municipality: search.municipality,
