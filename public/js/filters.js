@@ -16,7 +16,7 @@ angular.module('bens-penhorados-filters', []).filter('vehicleCondition', functio
         }
     }
 }).filter('range', function() {
-    return function([], min, max) {
+    return function(min, max) {
         var range = [];
         min = parseInt(min);
         max = parseInt(max);
