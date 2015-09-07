@@ -378,7 +378,7 @@ class Item extends Model
     public function scopeSearchQuery(Builder $query, $searchQuery)
     {
         if (isset($searchQuery)) {
-            $searchQuery = preg_replace('/\pP/', '%', $searchQuery);
+            $searchQuery = preg_replace('/\pP/', '_', $searchQuery);
 
             // Split a single query in multiple queries
             $queries = preg_split('/\s+/', $searchQuery, null);
