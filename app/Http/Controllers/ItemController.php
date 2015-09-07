@@ -104,7 +104,7 @@ class ItemController extends Controller
 
         $property = Property::find($generic->itemable_id);
         $item = [
-            'locationOnDesc' => $property->location_on_desc,
+            'locationOnDesc' => ($property->location_on_desc === false) ? null : true,
             'landRegistry'   => $property->landRegistry()->pluck('name'),
             'typology'       => $property->typology,
             'generic'        => self::getGenericAttributes($generic),
