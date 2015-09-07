@@ -114,4 +114,18 @@ class WebsiteExtended extends Job
             }
         }
     }
+
+    /**
+     * Called when the job is failing.
+     *
+     * @return void
+     */
+    public function failed()
+    {
+        $msg = self::class;
+        $msg .= ' - Categoria '.$this->category;
+        $msg .= ' - Página actual '.$this->currentPage;
+
+        app('LogImport')->error($msg);
+    }
 }

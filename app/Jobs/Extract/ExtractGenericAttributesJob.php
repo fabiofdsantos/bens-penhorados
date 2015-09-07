@@ -167,6 +167,19 @@ class ExtractGenericAttributesJob extends Job
     }
 
     /**
+     * Called when the job is failing.
+     *
+     * @return void
+     */
+    public function failed()
+    {
+        $msg = self::class;
+        $msg .= ' - Código: '.$this->attributes['code'];
+
+        app('LogExtract')->error($msg);
+    }
+
+    /**
      * Check if the item exists.
      *
      * @param Crawler $crawler

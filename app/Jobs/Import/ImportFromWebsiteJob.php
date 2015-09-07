@@ -66,6 +66,18 @@ class ImportFromWebsiteJob extends Job
     }
 
     /**
+     * Called when the job is failing.
+     *
+     * @return void
+     */
+    public function failed()
+    {
+        $msg = self::class;
+
+        app('LogImport')->error($msg);
+    }
+
+    /**
      * Get the last page number.
      *
      * @return string

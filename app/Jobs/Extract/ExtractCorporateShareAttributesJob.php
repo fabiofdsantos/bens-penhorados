@@ -105,6 +105,19 @@ class ExtractCorporateShareAttributesJob extends Job
     }
 
     /**
+     * Called when the job is failing.
+     *
+     * @return void
+     */
+    public function failed()
+    {
+        $msg = self::class;
+        $msg .= ' - Código: '.$this->$code;
+
+        app('LogExtract')->error($msg);
+    }
+
+    /**
      * Generate the corporate share title.
      *
      * @param Corporate $corporate

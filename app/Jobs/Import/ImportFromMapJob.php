@@ -109,4 +109,16 @@ class ImportFromMapJob extends Job
 
         print " \n *** Done. $i items found! *** \n\n";
     }
+
+    /**
+     * Called when the job is failing.
+     *
+     * @return void
+     */
+    public function failed()
+    {
+        $msg = self::class;
+
+        app('LogImport')->error($msg);
+    }
 }

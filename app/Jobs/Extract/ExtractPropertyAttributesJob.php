@@ -128,6 +128,19 @@ class ExtractPropertyAttributesJob extends Job
     }
 
     /**
+     * Called when the job is failing.
+     *
+     * @return void
+     */
+    public function failed()
+    {
+        $msg = self::class;
+        $msg .= ' - Código: '.$this->$code;
+
+        app('LogExtract')->error($msg);
+    }
+
+    /**
      * Extract attributes from the property's description.
      *
      * @return void

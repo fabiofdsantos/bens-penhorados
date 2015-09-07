@@ -170,4 +170,17 @@ class BackupItemPageJob extends Job
         $item->category_id = $this->categoryId;
         $item->save();
     }
+
+    /**
+     * Called when the job is failing.
+     *
+     * @return void
+     */
+    public function failed()
+    {
+        $msg = self::class;
+        $msg .= ' - Código: '.$this->itemCode;
+
+        app('LogImport')->error($msg);
+    }
 }
