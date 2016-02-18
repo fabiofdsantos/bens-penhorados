@@ -40,7 +40,7 @@ class EngineDisplacementExtractor extends AbstractExtractor
     public function extract()
     {
         if (preg_match(self::REGEX_ENGDISPL, $this->str, $match)) {
-            return (integer) $match[1];
+            return (int) $match[1];
         }
     }
 }

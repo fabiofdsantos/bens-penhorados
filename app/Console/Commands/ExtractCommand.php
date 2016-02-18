@@ -48,7 +48,7 @@ class ExtractCommand extends Command
     {
         $categories = $this->option('only');
         $total = $this->option('take');
-        $ignoreImages = (boolean) $this->option('ignore-images');
+        $ignoreImages = (bool) $this->option('ignore-images');
 
         $query = RawData::unextracted();
 

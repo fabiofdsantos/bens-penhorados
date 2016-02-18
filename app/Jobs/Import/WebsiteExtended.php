@@ -50,7 +50,7 @@ class WebsiteExtended extends Job
     {
         $guzzle = new GuzzleHttp\Client();
 
-        print "\n > Getting items from category number ".$this->category->code." (page $this->currentPage) \n";
+        echo "\n > Getting items from category number ".$this->category->code." (page $this->currentPage) \n";
 
         $request = $guzzle->createRequest('GET', 'www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta='.$this->category->code.'&page='.$this->currentPage, [
             'headers' => [
@@ -100,12 +100,12 @@ class WebsiteExtended extends Job
                             if (!Hash::check($dataToBeHashed, $rawItem->hash)) {
                                 Bus::dispatch(new BackupItemPageJob($this->category->id, $taxOffice, $year, $itemId, $hash, true));
 
-                                print "\n *** Item $taxOffice.$year.$itemId needs to be updated *** \n";
+                                echo "\n *** Item $taxOffice.$year.$itemId needs to be updated *** \n";
                             }
                         } else {
                             Bus::dispatch(new BackupItemPageJob($this->category->id, $taxOffice, $year, $itemId, $hash, false));
 
-                            print "\n *** New item found: $taxOffice.$year.$itemId *** \n";
+                            echo "\n *** New item found: $taxOffice.$year.$itemId *** \n";
                         }
 
                         break 1;

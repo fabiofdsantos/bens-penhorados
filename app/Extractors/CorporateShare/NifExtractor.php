@@ -40,7 +40,7 @@ class NifExtractor extends AbstractExtractor
     public function extract()
     {
         if (preg_match(self::REGEX_NIF, $this->str, $match)) {
-            return ($match[0] ? (integer) ($match[1].$match[2].$match[3]) : null);
+            return $match[0] ? (int) ($match[1].$match[2].$match[3]) : null;
         }
     }
 }

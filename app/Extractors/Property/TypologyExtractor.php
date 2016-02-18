@@ -40,7 +40,7 @@ class TypologyExtractor extends AbstractExtractor
     public function extract()
     {
         if (preg_match(self::REGEX_TYPOLOGY, $this->str, $match)) {
-            return $match[1] ? (integer) $match[1] : null;
+            return $match[1] ? (int) $match[1] : null;
         }
     }
 }

@@ -94,7 +94,7 @@ class PropertyFilteringAttrController extends Controller
         unset($typologies[0]);
 
         if (!empty($typologies)) {
-            return (Object) $typologies;
+            return (object) $typologies;
         }
     }
 }

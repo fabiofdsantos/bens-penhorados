@@ -41,7 +41,7 @@ class PhoneNumberExtractor extends AbstractExtractor
     public function extract()
     {
         if (preg_match(self::REGEX_PHONENUMBER, $this->str, $match)) {
-            return (integer) $match[0];
+            return (int) $match[0];
         }
     }
 }

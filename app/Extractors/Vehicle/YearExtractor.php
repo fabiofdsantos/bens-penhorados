@@ -41,7 +41,7 @@ class YearExtractor extends AbstractExtractor
     public function extract()
     {
         if (preg_match(self::REGEX_YEAR, $this->str, $match)) {
-            return $this->isValidYear($match[3]) ? (integer) $match[3] : null;
+            return $this->isValidYear($match[3]) ? (int) $match[3] : null;
         }
     }
 

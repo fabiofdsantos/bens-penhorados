@@ -36,7 +36,7 @@ abstract class AbstractTestCase extends TestCase
     {
         parent::setUp();
 
-        # It was fixed on v5.1
+        // It was fixed on v5.1
         Facade::clearResolvedInstances();
 
         $this->createApplication();

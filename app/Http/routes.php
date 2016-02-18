@@ -22,16 +22,16 @@ $app->group([
     'namespace'  => 'App\Http\Controllers',
 ], function () use ($app) {
 
-    # Homepage
+    // Homepage
     $app->get('home', ['uses' => 'HomeController@index']);
 
-    # Get a single property
+    // Get a single property
     $app->get('properties/{slug}', ['uses' => 'ItemController@propertyType']);
 
-    # Get a single vehicle
+    // Get a single vehicle
     $app->get('vehicles/{slug}', ['uses' => 'ItemController@vehicleType']);
 
-    # Get a single other item
+    // Get a single other item
     $app->get('others/{slug}', ['uses' => 'ItemController@otherType']);
 });
 
@@ -44,13 +44,13 @@ $app->group([
      'namespace'  => 'App\Http\Controllers\Results',
  ], function () use ($app) {
 
-    # Get properties
+    // Get properties
     $app->get('properties', ['uses' => 'PropertyResultsController@index']);
 
-    # Get vehicles
+    // Get vehicles
     $app->get('vehicles', ['uses' => 'VehicleResultsController@index']);
 
-    # Get other items
+    // Get other items
     $app->get('others', ['uses' => 'OtherResultsController@index']);
 });
 
@@ -63,17 +63,17 @@ $app->group([
     'namespace'  => 'App\Http\Controllers\FilteringAttributes',
 ], function () use ($app) {
 
-    # Get filtering attributes for properties
+    // Get filtering attributes for properties
     $app->get('property', [
         'uses' => 'PropertyFilteringAttrController@index',
     ]);
 
-    # Get filtering attributes for vehicles
+    // Get filtering attributes for vehicles
     $app->get('vehicle', [
         'uses' => 'VehicleFilteringAttrController@index',
     ]);
 
-    # Get filtering attributes for other items
+    // Get filtering attributes for other items
     $app->get('other', [
         'uses' => 'OtherFilteringAttrController@index',
     ]);
@@ -88,22 +88,22 @@ $app->group([
     'namespace'  => 'App\Http\Controllers\User',
 ], function () use ($app) {
 
-    # Post a new user
+    // Post a new user
     $app->post('register', [
         'uses' => 'AuthController@createUser',
     ]);
 
-    # Post login credentials
+    // Post login credentials
     $app->post('login', [
         'uses' => 'AuthController@login',
     ]);
 
-    # Check if a visitor is an authenticated user
+    // Check if a visitor is an authenticated user
     $app->get('check', [
         'uses' => 'AuthController@check',
     ]);
 
-    # Logout an authenticated user
+    // Logout an authenticated user
     $app->get('logout', [
         'uses' => 'AuthController@logout',
     ]);
@@ -118,37 +118,37 @@ $app->group([
     'namespace'  => 'App\Http\Controllers\User',
 ], function () use ($app) {
 
-    # Get user details
+    // Get user details
     $app->get('account', [
         'uses' => 'UserController@show',
     ]);
 
-    # Post updated user details
+    // Post updated user details
     $app->post('account/edit', [
         'uses' => 'UserController@edit',
     ]);
 
-    # Get favorites
+    // Get favorites
     $app->get('favorites', [
         'uses' => 'FavoriteController@index',
     ]);
 
-    # Add a new favorite
+    // Add a new favorite
     $app->post('favorites/add', [
         'uses' => 'FavoriteController@add',
     ]);
 
-    # Remove a favorite
+    // Remove a favorite
     $app->post('favorites/remove', [
         'uses' => 'FavoriteController@remove',
     ]);
 
-    # Remove all favorites
+    // Remove all favorites
     $app->get('favorites/remove-all', [
         'uses' => 'FavoriteController@removeAll',
     ]);
 
-    # Check if a given item was favorited
+    // Check if a given item was favorited
     $app->post('favorites/check', [
         'uses' => 'FavoriteController@check',
     ]);

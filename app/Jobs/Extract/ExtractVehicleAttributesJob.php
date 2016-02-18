@@ -104,7 +104,7 @@ class ExtractVehicleAttributesJob extends Job
      */
     public function handle()
     {
-        print "\n > Extracting vehicle attributes of {$this->code} ... \n";
+        echo "\n > Extracting vehicle attributes of {$this->code} ... \n";
 
         // Start the normal extraction of attributes
         $this->extractAttributes();

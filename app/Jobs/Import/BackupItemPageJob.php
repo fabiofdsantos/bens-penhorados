@@ -127,7 +127,7 @@ class BackupItemPageJob extends Job
     {
         $guzzle = new GuzzleHttp\Client();
 
-        print "\n > Saving $this->itemCode html as raw data... \n";
+        echo "\n > Saving $this->itemCode html as raw data... \n";
 
         $request = $guzzle->createRequest('GET', 'http://www.e-financas.gov.pt/vendas/detalheVenda.action?idVenda='.$this->itemId.'&sf='.$this->taxOffice.'&ano='.$this->year, [
             'headers' => [

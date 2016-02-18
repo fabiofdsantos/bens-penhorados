@@ -41,7 +41,7 @@ class VatExtractor extends AbstractExtractor
     public function extract()
     {
         if (preg_match(self::REGEX_VAT, $this->str, $match)) {
-            return (($match[1] == 0 || !$match[1]) ? null : (integer) $match[1]);
+            return ($match[1] == 0 || !$match[1]) ? null : (int) $match[1];
         }
     }
 }
