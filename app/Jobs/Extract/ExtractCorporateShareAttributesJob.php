@@ -75,7 +75,7 @@ class ExtractCorporateShareAttributesJob extends Job
      */
     public function handle()
     {
-        print "\n > Extracting corporate share attributes of $this->code ... \n";
+        echo "\n > Extracting corporate share attributes of $this->code ... \n";
 
         // Try to extract the nif
         $this->attributes['corporate_nif'] = $this->extractor->nif($this->description);

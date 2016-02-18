@@ -142,7 +142,7 @@ class VehicleResultsController extends Controller
         $query->betweenYears($filters['min_year'], $filters['max_year']);
         $query->isGoodCondition($filters['is_good_condition']);
 
-        # http://dba.stackexchange.com/questions/109120/how-does-order-by-field-in-mysql-work-internally
+        // http://dba.stackexchange.com/questions/109120/how-does-order-by-field-in-mysql-work-internally
         if (!empty($ids)) {
             $ids = implode(',', $ids);
             $query->orderByRaw(\DB::raw("FIELD(id, $ids)"));

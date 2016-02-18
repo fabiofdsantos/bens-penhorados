@@ -90,7 +90,7 @@ class ExtractPropertyAttributesJob extends Job
      */
     public function handle()
     {
-        print "\n > Extracting property attributes of {$this->code} ... \n";
+        echo "\n > Extracting property attributes of {$this->code} ... \n";
 
         // Start the normal extraction of attributes
         $this->extractAttributes();

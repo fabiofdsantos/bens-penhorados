@@ -129,7 +129,7 @@ class PropertyResultsController extends Controller
         $query->ofTypology($filters['typology']);
         $query->ofLandRegistry($filters['land_registry_id']);
 
-        # http://dba.stackexchange.com/questions/109120/how-does-order-by-field-in-mysql-work-internally
+        // http://dba.stackexchange.com/questions/109120/how-does-order-by-field-in-mysql-work-internally
         if (!empty($ids)) {
             $ids = implode(',', $ids);
             $query->orderByRaw(\DB::raw("FIELD(id, $ids)"));

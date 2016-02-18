@@ -115,7 +115,7 @@ class ExtractGenericAttributesJob extends Job
 
         // Check if the item exists
         if ($this->itemExists($crawler)) {
-            print "\n > Extracting generic attributes of {$this->attributes['code']} ... \n";
+            echo "\n > Extracting generic attributes of {$this->attributes['code']} ... \n";
 
             // Set default title
             $this->attributes['title'] = $this->attributes['code'];
@@ -162,7 +162,7 @@ class ExtractGenericAttributesJob extends Job
                 RawData::find($this->attributes['code'])->update(['extracted' => true]);
             }
         } else {
-            print "\n > The item {$this->attributes[code]} is unavailable! \n";
+            echo "\n > The item {$this->attributes[code]} is unavailable! \n";
         }
     }
 

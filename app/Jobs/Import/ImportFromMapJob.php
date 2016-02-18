@@ -49,7 +49,7 @@ class ImportFromMapJob extends Job
     {
         $guzzle = new GuzzleHttp\Client();
 
-        print " > Getting items from map ... \n";
+        echo " > Getting items from map ... \n";
 
         $i = 0;
         foreach ($this->locations as $location) {
@@ -107,7 +107,7 @@ class ImportFromMapJob extends Job
             }
         }
 
-        print " \n *** Done. $i items found! *** \n\n";
+        echo " \n *** Done. $i items found! *** \n\n";
     }
 
     /**
