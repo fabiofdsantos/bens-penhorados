@@ -432,7 +432,7 @@ class Item extends Model
     }
 
     /**
-     * Get page title (SEO)
+     * Get page title (SEO).
      *
      * @return string
      */
