@@ -11,7 +11,6 @@
 
 namespace App\Http\Controllers\Results;
 
-use App\Http\Controllers\LocationTrait;
 use App\Models\Items\Item;
 use Illuminate\Http\Request;
 
@@ -22,8 +21,6 @@ use Illuminate\Http\Request;
  */
 trait GenericResultsTrait
 {
-    use LocationTrait;
-
     /**
      * The type of an item.
      *
@@ -41,16 +38,16 @@ trait GenericResultsTrait
     private static function getGenericFilters(Request $request)
     {
         $filters = [
-            'per_page'           => (int) $request->input('limit') ?: 10,
-            'district_id'        => $request->input('district'),
-            'municipality_id'    => $request->input('municipality'),
-            'purchase_type_id'   => $request->input('purchasetype'),
-            'with_images'        => $request->input('withimages'),
-            'ignore_suspended'   => $request->input('nosuspended'),
-            'min_price'          => $request->input('minprice'),
-            'max_price'          => $request->input('maxprice'),
-            'no_price'           => $request->input('noprice'),
-            'search_query'       => $request->input('q'),
+            'per_page'         => (int) $request->input('limit') ?: 10,
+            'district_id'      => $request->input('district'),
+            'municipality_id'  => $request->input('municipality'),
+            'purchase_type_id' => $request->input('purchasetype'),
+            'with_images'      => $request->input('withimages'),
+            'ignore_suspended' => $request->input('nosuspended'),
+            'min_price'        => $request->input('minprice'),
+            'max_price'        => $request->input('maxprice'),
+            'no_price'         => $request->input('noprice'),
+            'search_query'     => $request->input('q'),
         ];
 
         return $filters;

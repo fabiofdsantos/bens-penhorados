@@ -25,8 +25,6 @@ use Laravel\Lumen\Routing\Controller;
  */
 class ItemController extends Controller
 {
-    use LocationTrait;
-
     const DATETIME_FORMAT = 'd-m-Y \à\s H:i';
 
     /**
@@ -130,17 +128,17 @@ class ItemController extends Controller
 
         $vehicle = Vehicle::find($generic->itemable_id);
         $item = [
-            'year'           => $vehicle->year,
-            'make'           => $vehicle->make()->pluck('name'),
-            'model'          => $vehicle->model()->pluck('name'),
-            'category'       => $vehicle->category()->pluck('name'),
-            'type'           => $vehicle->type()->pluck('name'),
-            'color'          => $vehicle->color()->pluck('name'),
-            'fuel'           => $vehicle->fuel()->pluck('name'),
-            'goodCondition'  => is_null($vehicle->is_good_condition) ? null : (bool) $vehicle->is_good_condition,
-            'engDispl'       => $vehicle->engine_displacement,
-            'regPlateCode'   => $vehicle->reg_plate_code,
-            'generic'        => self::getGenericAttributes($generic),
+            'year'          => $vehicle->year,
+            'make'          => $vehicle->make()->pluck('name'),
+            'model'         => $vehicle->model()->pluck('name'),
+            'category'      => $vehicle->category()->pluck('name'),
+            'type'          => $vehicle->type()->pluck('name'),
+            'color'         => $vehicle->color()->pluck('name'),
+            'fuel'          => $vehicle->fuel()->pluck('name'),
+            'goodCondition' => is_null($vehicle->is_good_condition) ? null : (bool) $vehicle->is_good_condition,
+            'engDispl'      => $vehicle->engine_displacement,
+            'regPlateCode'  => $vehicle->reg_plate_code,
+            'generic'       => self::getGenericAttributes($generic),
         ];
 
         return $item;
@@ -180,31 +178,31 @@ class ItemController extends Controller
         self::checkIfIsInactive($generic);
 
         return [
-            'code'           => $generic->code,
-            'taxOffice'      => self::getTaxOfficeName($generic->taxOffice),
-            'location'       => self::getLocation($generic),
-            'title'          => $generic->title,
-            'slug'           => $generic->slug,
-            'price'          => [
+            'code'      => $generic->code,
+            'taxOffice' => self::getTaxOfficeName($generic->taxOffice),
+            'location'  => "$generic->municipality, $generic->district",
+            'title'     => $generic->title,
+            'slug'      => $generic->slug,
+            'price'     => [
                 'value' => $generic->price,
                 'vat'   => $generic->vat,
             ],
-            'status'         => $generic->status()->pluck('name'),
-            'purchaseType'   => $generic->purchaseType()->pluck('name'),
-            'description'    => $generic->full_description,
-            'images'         => json_decode($generic->images),
-            'dates'          => [
+            'status'       => $generic->status()->pluck('name'),
+            'purchaseType' => $generic->purchaseType()->pluck('name'),
+            'description'  => $generic->full_description,
+            'images'       => json_decode($generic->images),
+            'dates'        => [
                 'previewDtStart' => $generic->preview_dt_start->format(self::DATETIME_FORMAT),
                 'previewDtEnd'   => $generic->preview_dt_end->format(self::DATETIME_FORMAT),
                 'openingDt'      => $generic->opening_dt->format(self::DATETIME_FORMAT),
                 'acceptanceDt'   => $generic->acceptance_dt->format(self::DATETIME_FORMAT),
             ],
-            'depositary'     => [
+            'depositary' => [
                 'name'  => $generic->depositary_name,
                 'phone' => $generic->depositary_phone,
                 'email' => $generic->depositary_email,
             ],
-            'mediator'       => [
+            'mediator' => [
                 'name'  => $generic->mediator_name,
                 'phone' => $generic->mediator_phone,
                 'email' => $generic->mediator_email,
@@ -235,8 +233,6 @@ class ItemController extends Controller
      * Check if a given item is inactive. If true, update it.
      *
      * @param \Illuminate\Database\Eloquent\Model $generic
-     *
-     * @return void
      */
     private static function checkIfIsInactive($generic)
     {

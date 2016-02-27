@@ -410,4 +410,24 @@ class Item extends Model
             $this->attributes['slug'] = Str::slug($newValue);
         }
     }
+
+    /**
+     * Get the municipality where item is located.
+     *
+     * @return string
+     */
+    public function getMunicipalityAttribute()
+    {
+        return $this->municipality()->pluck('name');
+    }
+
+    /**
+     * Get the district where item is located.
+     *
+     * @return string
+     */
+    public function getDistrictAttribute()
+    {
+        return $this->district()->pluck('name');
+    }
 }
