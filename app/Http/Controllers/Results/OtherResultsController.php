@@ -82,7 +82,7 @@ class OtherResultsController extends Controller
                     'image'        => json_decode($otherItem->images) ? json_decode($otherItem->images)[0] : null,
                     'status'       => $otherItem->status()->pluck('name'),
                     'purchaseType' => $otherItem->purchaseType()->pluck('name'),
-                    'location'     => self::getLocation($otherItem),
+                    'location'     => "$otherItem->municipality, $otherItem->district",
                 ];
 
             $data['items'][] = $item;

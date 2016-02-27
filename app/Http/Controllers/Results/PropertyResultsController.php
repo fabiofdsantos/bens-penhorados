@@ -88,7 +88,7 @@ class PropertyResultsController extends Controller
                     'image'        => json_decode($property->item->images) ? json_decode($property->item->images)[0] : null,
                     'status'       => $property->item->status()->pluck('name'),
                     'purchaseType' => $property->item->purchaseType()->pluck('name'),
-                    'location'     => self::getLocation($property->item),
+                    'location'     => "{$property->item->municipality}, {$property->item->district}",
                 ];
 
             $data['items'][] = $item;

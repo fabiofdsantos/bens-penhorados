@@ -88,7 +88,7 @@ class VehicleResultsController extends Controller
                     'image'        => json_decode($vehicle->item->images) ? json_decode($vehicle->item->images)[0] : null,
                     'status'       => $vehicle->item->status()->pluck('name'),
                     'purchaseType' => $vehicle->item->purchaseType()->pluck('name'),
-                    'location'     => self::getLocation($vehicle->item),
+                    'location'     => "{$vehicle->item->municipality}, {$vehicle->item->district}",
                 ];
 
             $data['items'][] = $item;
