@@ -9,8 +9,23 @@
  * file that was distributed with this source code.
  */
 
-$app->get('/', function () {
-    return view('index');
+$app->group([
+    'namespace'  => 'App\Http\Controllers',
+], function () use ($app) {
+    // Homepage
+    $app->get('/', ['uses' => 'HomeController@index']);
+
+    // Get a property
+    $app->get('imoveis/{slug}', ['uses' => 'ItemController@propertyType']);
+
+    // Get a vehicle
+    $app->get('veiculos/{slug}', ['uses' => 'ItemController@vehicleType']);
+
+    // Get other item
+    $app->get('outros/{slug}', ['uses' => 'ItemController@otherType']);
+
+    // Get generic page
+    $app->get('/{slug}', ['uses' => 'GenericPageController@load']);
 });
 
 /*

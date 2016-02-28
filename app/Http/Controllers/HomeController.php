@@ -30,10 +30,10 @@ class HomeController extends Controller
     public function index()
     {
         $data = [];
-        $data['latest'] = $this->getLatestItems(8);
-        $data['endingSoon'] = $this->getItemsEndingSoon(8);
+        $data['latest'] = self::getLatestItems(8);
+        $data['endingSoon'] = self::getItemsEndingSoon(8);
 
-        return response()->json($data, 200);
+        return view('home', $data);
     }
 
     /**
@@ -43,7 +43,7 @@ class HomeController extends Controller
      *
      * @return array
      */
-    public function getLatestItems($howMany)
+    public static function getLatestItems($howMany)
     {
         $results = Item::latest($howMany)->get();
 
@@ -70,7 +70,7 @@ class HomeController extends Controller
      *
      * @return array
      */
-    public function getItemsEndingSoon($howMany)
+    public static function getItemsEndingSoon($howMany)
     {
         $results = Item::endingSoon($howMany)->get();
 

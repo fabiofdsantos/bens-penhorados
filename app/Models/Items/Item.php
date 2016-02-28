@@ -21,6 +21,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use App\Helpers\Text;
 
 /**
  * This is the item model class.
@@ -441,7 +442,7 @@ class Item extends Model
         $municipality = $this->municipality()->pluck('name');
         $district = $this->district()->pluck('name');
 
-        if ($municipality == $district) {
+        if (Text::removeAccents($municipality) == Text::removeAccents($district)) {
             return "$this->title - $municipality";
         }
 

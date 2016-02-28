@@ -38,7 +38,11 @@ class ItemController extends Controller
     {
         $data = self::getPropertyItemBySlug($slug);
 
-        return self::buildResponse($data);
+        if (empty($data)) {
+            abort(404);
+        }
+
+        return view('properties.show', $data);
     }
 
     /**
@@ -52,7 +56,11 @@ class ItemController extends Controller
     {
         $data = self::getVehicleItemBySlug($slug);
 
-        return self::buildResponse($data);
+        if (empty($data)) {
+            abort(404);
+        }
+
+        return view('vehicles.show', $data);
     }
 
     /**
@@ -66,23 +74,11 @@ class ItemController extends Controller
     {
         $data = self::getOtherItemBySlug($slug);
 
-        return self::buildResponse($data);
-    }
-
-    /**
-     * Build a json response with the given data.
-     *
-     * @param array $data
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    private static function buildResponse($data)
-    {
         if (empty($data)) {
-            return response()->json($data, 404);
+            abort(404);
         }
 
-        return response()->json($data, 200);
+        return view('others.show', $data);
     }
 
     /**
@@ -106,6 +102,7 @@ class ItemController extends Controller
             'landRegistry'   => $property->landRegistry()->pluck('name'),
             'typology'       => $property->typology,
             'generic'        => self::getGenericAttributes($generic),
+            'seoTitle'       => $generic->seoTitle,
         ];
 
         return $item;
@@ -128,18 +125,25 @@ class ItemController extends Controller
 
         $vehicle = Vehicle::find($generic->itemable_id);
         $item = [
-            'year'          => $vehicle->year,
-            'make'          => $vehicle->make()->pluck('name'),
-            'model'         => $vehicle->model()->pluck('name'),
-            'category'      => $vehicle->category()->pluck('name'),
-            'type'          => $vehicle->type()->pluck('name'),
-            'color'         => $vehicle->color()->pluck('name'),
-            'fuel'          => $vehicle->fuel()->pluck('name'),
-            'goodCondition' => is_null($vehicle->is_good_condition) ? null : (bool) $vehicle->is_good_condition,
-            'engDispl'      => $vehicle->engine_displacement,
-            'regPlateCode'  => $vehicle->reg_plate_code,
-            'generic'       => self::getGenericAttributes($generic),
+            'year'           => $vehicle->year,
+            'make'           => $vehicle->make()->pluck('name'),
+            'model'          => $vehicle->model()->pluck('name'),
+            'category'       => $vehicle->category()->pluck('name'),
+            'type'           => $vehicle->type()->pluck('name'),
+            'color'          => $vehicle->color()->pluck('name'),
+            'fuel'           => $vehicle->fuel()->pluck('name'),
+            'goodCondition'  => is_null($vehicle->is_good_condition) ? null : (bool) $vehicle->is_good_condition,
+            'engDispl'       => $vehicle->engine_displacement,
+            'regPlateCode'   => $vehicle->reg_plate_code,
+            'generic'        => self::getGenericAttributes($generic),
+            'seoTitle'       => $generic->seoTitle,
         ];
+
+        // Generate $seoDescription to prevent more sql queries
+        //$item['seoDescription'] = $item['make'] ? $item['make'] : 'Veículo ';
+        //if ($item['model']) {
+        //    $item['seoDescription'] .= $item['model'].' ,';
+        //}
 
         return $item;
     }
