@@ -11,7 +11,6 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use Laravel\Lumen\Routing\Controller;
 
 /**

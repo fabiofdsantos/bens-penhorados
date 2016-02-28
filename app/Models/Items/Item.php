@@ -11,6 +11,7 @@
 
 namespace App\Models\Items;
 
+use App\Helpers\Text;
 use App\Models\Attributes\Generic\District;
 use App\Models\Attributes\Generic\ItemCategory;
 use App\Models\Attributes\Generic\ItemPurchaseType;
@@ -21,7 +22,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use App\Helpers\Text;
 
 /**
  * This is the item model class.
