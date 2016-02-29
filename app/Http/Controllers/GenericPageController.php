@@ -27,7 +27,13 @@ class GenericPageController extends Controller
      */
     public function load($slug)
     {
-        $data['content'] = '';
+        try {
+            $markdown = file_get_contents(base_path('resources/pages/').$slug.'.md');
+        } catch (\Exception $ex) {
+            abort(404);
+        }
+
+        $data['content'] = app('Parsedown')->text($markdown);
 
         return view('generic', $data);
     }

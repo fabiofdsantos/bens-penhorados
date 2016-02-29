@@ -87,6 +87,7 @@ $app->routeMiddleware([
 
 $app->register('App\Providers\LogExtractServiceProvider');
 $app->register('App\Providers\LogImportServiceProvider');
+$app->register('App\Providers\ParsedownServiceProvider');
 
 /*
 |--------------------------------------------------------------------------
