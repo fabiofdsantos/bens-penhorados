@@ -5,11 +5,11 @@
         <title>{{ $seoTitle or 'Venda de Bens Penhorados em Portugal' }}</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="{{ $seoDescription or 'Encontre ...' }}">
+        <meta name="description" content="{{ $metadescription or 'Encontre ...' }}">
+        <meta name="robots" content="{{ $metaRobots or 'index, follow' }}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link rel="stylesheet" href="/css/main.css">
         <link rel="stylesheet" href="/css/animate.css">
 
@@ -27,8 +27,8 @@
             @include('layouts.partials.footer')
         </footer>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.min.js"></script>

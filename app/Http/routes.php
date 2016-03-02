@@ -24,8 +24,8 @@ $app->group([
     // Get other item
     $app->get('outros/{slug}', ['uses' => 'ItemController@otherType']);
 
-    // Get generic page
-    $app->get('/{slug}', ['uses' => 'GenericPageController@load']);
+    // Get static page
+    $app->get('/{slug}', ['uses' => 'StaticPageController@load']);
 });
 
 /*

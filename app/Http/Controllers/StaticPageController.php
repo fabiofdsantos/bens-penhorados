@@ -14,12 +14,20 @@ namespace App\Http\Controllers;
 use Laravel\Lumen\Routing\Controller;
 
 /**
- * This is the generic page controller class.
+ * This is the static page controller class.
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  */
-class GenericPageController extends Controller
+class StaticPageController extends Controller
 {
+    const PAGES = [
+        'politica-de-privacidade' => [
+            'seoTitle'        => 'Política de Privacidade',
+            'metaDescription' => 'Política de privacidade do website BensPenhorados.pt',
+            'metaRobots'      => 'noindex',
+        ],
+    ];
+
     /**
      * Show both latest and items ending soon.
      *
@@ -33,6 +41,7 @@ class GenericPageController extends Controller
             abort(404);
         }
 
+        $data = self::PAGES[$slug];
         $data['content'] = app('Parsedown')->text($markdown);
 
         return view('generic', $data);
