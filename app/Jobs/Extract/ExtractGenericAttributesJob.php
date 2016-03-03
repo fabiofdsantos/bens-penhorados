@@ -117,7 +117,7 @@ class ExtractGenericAttributesJob extends Job
         if ($this->itemExists($crawler)) {
             echo "\n > Extracting generic attributes of {$this->attributes['code']} ... \n";
 
-            // Set default title
+            // Set default title as item's code
             $this->attributes['title'] = $this->attributes['code'];
 
             // Extract the tax office number and the year of publication
