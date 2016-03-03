@@ -41,6 +41,8 @@ class CreateItemsTable extends Migration
             $table->foreign('municipality_id')->references('id')->on('pt_municipalities');
 
             $table->string('title')->nullable();
+            $table->string('seo_title')->nullable();
+            $table->string('meta_description')->nullable();
             $table->string('slug')->nullable();
             $table->integer('year');
             $table->decimal('price', 15, 2)->nullable();

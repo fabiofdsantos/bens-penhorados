@@ -120,9 +120,11 @@ class ExtractVehicleAttributesJob extends Job
         // Set the polymorphic relationship
         Item::setPolymorphicRelation($this->code, $vehicle);
 
-        // Update the item's title
+        // Update the item's title and meta description
         $vehicle->item->update([
-            'title' => $this->generateTitle($vehicle),
+            'title'            => $this->generateTitle($vehicle),
+            'seo_title'        => $this->generateSeoTitle($vehicle),
+            'meta_description' => $this->generateMetaDescription($vehicle),
         ]);
 
         // Update raw data
@@ -285,5 +287,59 @@ class ExtractVehicleAttributesJob extends Job
         }
 
         return $title;
+    }
+
+    /**
+     * Generate the seo title for the vehicle page.
+     *
+     * @param Vehicle $vehicle
+     *
+     * @return string
+     */
+    private function generateSeoTitle(Vehicle $vehicle)
+    {
+        if (isset($this->attributes['category_id'])) {
+            $seoTitle = "{$vehicle->category()->pluck('name')} ";
+        } else {
+            $seoTitle = 'Veículo Penhorado ';
+        }
+
+        if (isset($this->attributes['make_id'])) {
+            $seoTitle .= $vehicle->make()->pluck('name');
+
+            if (isset($this->attributes['model_id'])) {
+                $title .= " {$vehicle->model()->pluck('name')}";
+            }
+        } else {
+            $seoTitle .= $this->code;
+        }
+
+        if (isset($this->attributes['year'])) {
+            $seoTitle .= " ({$this->attributes['year']})";
+        }
+
+        // Add location
+        $municipality = $vehicle->item->municipality()->pluck('name');
+        $district = $vehicle->item->district()->pluck('name');
+
+        if (Text::removeAccents($municipality) == Text::removeAccents($district)) {
+            $seoTitle .= " - $municipality";
+        } else {
+            $seoTitle .= " - $municipality - $district";
+        }
+
+        return $seoTitle;
+    }
+
+    /**
+     * Generate the vehicle's meta description.
+     *
+     * @param Vehicle $vehicle
+     *
+     * @return string
+     */
+    private function generateMetaDescription(Vehicle $vehicle)
+    {
+        // TO DO
     }
 }
