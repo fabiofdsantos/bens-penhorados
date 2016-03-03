@@ -98,11 +98,12 @@ class ItemController extends Controller
 
         $property = Property::find($generic->itemable_id);
         $item = [
-            'locationOnDesc' => ($property->location_on_desc == false) ? null : true,
-            'landRegistry'   => $property->landRegistry()->pluck('name'),
-            'typology'       => $property->typology,
-            'generic'        => self::getGenericAttributes($generic),
-            'seoTitle'       => $generic->seoTitle,
+            'locationOnDesc'  => ($property->location_on_desc == false) ? null : true,
+            'landRegistry'    => $property->landRegistry()->pluck('name'),
+            'typology'        => $property->typology,
+            'generic'         => self::getGenericAttributes($generic),
+            'seoTitle'        => $generic->seo_title,
+            'metaDescription' => $generic->meta_description,
         ];
 
         return $item;
@@ -125,25 +126,20 @@ class ItemController extends Controller
 
         $vehicle = Vehicle::find($generic->itemable_id);
         $item = [
-            'year'           => $vehicle->year,
-            'make'           => $vehicle->make()->pluck('name'),
-            'model'          => $vehicle->model()->pluck('name'),
-            'category'       => $vehicle->category()->pluck('name'),
-            'type'           => $vehicle->type()->pluck('name'),
-            'color'          => $vehicle->color()->pluck('name'),
-            'fuel'           => $vehicle->fuel()->pluck('name'),
-            'goodCondition'  => is_null($vehicle->is_good_condition) ? null : (bool) $vehicle->is_good_condition,
-            'engDispl'       => $vehicle->engine_displacement,
-            'regPlateCode'   => $vehicle->reg_plate_code,
-            'generic'        => self::getGenericAttributes($generic),
-            'seoTitle'       => $generic->seoTitle,
+            'year'            => $vehicle->year,
+            'make'            => $vehicle->make()->pluck('name'),
+            'model'           => $vehicle->model()->pluck('name'),
+            'category'        => $vehicle->category()->pluck('name'),
+            'type'            => $vehicle->type()->pluck('name'),
+            'color'           => $vehicle->color()->pluck('name'),
+            'fuel'            => $vehicle->fuel()->pluck('name'),
+            'goodCondition'   => is_null($vehicle->is_good_condition) ? null : (bool) $vehicle->is_good_condition,
+            'engDispl'        => $vehicle->engine_displacement,
+            'regPlateCode'    => $vehicle->reg_plate_code,
+            'generic'         => self::getGenericAttributes($generic),
+            'seoTitle'        => $generic->seo_title,
+            'metaDescription' => $generic->meta_description,
         ];
-
-        // Generate $seoDescription to prevent more sql queries
-        //$item['seoDescription'] = $item['make'] ? $item['make'] : 'Veículo ';
-        //if ($item['model']) {
-        //    $item['seoDescription'] .= $item['model'].' ,';
-        //}
 
         return $item;
     }

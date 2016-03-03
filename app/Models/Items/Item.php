@@ -431,21 +431,4 @@ class Item extends Model
     {
         return $this->district()->pluck('name');
     }
-
-    /**
-     * Get page title (SEO).
-     *
-     * @return string
-     */
-    public function getSeoTitleAttribute()
-    {
-        $municipality = $this->municipality()->pluck('name');
-        $district = $this->district()->pluck('name');
-
-        if (Text::removeAccents($municipality) == Text::removeAccents($district)) {
-            return "$this->title - $municipality";
-        }
-
-        return "$this->title - $municipality - $district";
-    }
 }
