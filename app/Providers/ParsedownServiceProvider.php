@@ -12,9 +12,6 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Monolog\Formatter\LineFormatter;
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
 
 /**
  * This is the parsedown service provider class.
