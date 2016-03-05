@@ -5,7 +5,11 @@
         <title>{{ $seoTitle or 'Venda de Bens Penhorados em Portugal' }}</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="{{ $metadescription or 'Encontre ...' }}">
+
+        @if(isset($metaDescription) && !empty($metaDescription))
+        <meta name="description" content="{{ $metaDescription }}">
+        @endif
+
         <meta name="robots" content="{{ $metaRobots or 'index, follow' }}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
