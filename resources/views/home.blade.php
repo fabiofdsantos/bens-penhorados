@@ -27,7 +27,7 @@
                     <div class="caption text-center">
                         <h3>{{ $newItem['title'] }}</h3>
                         <p>
-                            <strong>{{ $newItem['price'] ? $newItem['price'] : 'À melhor oferta' }}</strong>
+                            <strong>{{ $newItem['price'] ? 'Valor base: '.number_format($newItem['price']).'€' : 'À melhor oferta' }}</strong>
                         </p>
                     </div>
                 </a>
@@ -51,7 +51,7 @@
                     <div class="caption text-center">
                         <h3>{{ $endingItem['title'] }}</h3>
                         <p>
-                            <strong>{{ $endingItem['price'] ? $endingItem['price'] : 'À melhor oferta' }}</strong>
+                            <strong>{{ $endingItem['price'] ? 'Valor base: '.number_format($endingItem['price']).'€' : 'À melhor oferta' }}</strong>
                         </p>
                     </div>
                 </a>

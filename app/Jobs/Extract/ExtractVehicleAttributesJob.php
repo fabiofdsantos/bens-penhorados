@@ -291,7 +291,7 @@ class ExtractVehicleAttributesJob extends Job
     }
 
     /**
-     * Generate the seo title for the vehicle page.
+     * Generate the seo title for the vehicle details page.
      *
      * @param Vehicle $vehicle
      *
@@ -299,24 +299,18 @@ class ExtractVehicleAttributesJob extends Job
      */
     private function generateSeoTitle(Vehicle $vehicle)
     {
-        if (isset($this->attributes['category_id'])) {
-            $seoTitle = "{$vehicle->category()->pluck('name')} ";
+        if (isset($this->attributes['make_id'])) {
+            $seoTitle = "{$vehicle->make()->pluck('name')} ";
+
+            if (isset($this->attributes['model_id'])) {
+                $seoTitle .= " {$vehicle->model()->pluck('name')} ";
+            }
         } else {
             $seoTitle = 'Veículo Penhorado ';
         }
 
-        if (isset($this->attributes['make_id'])) {
-            $seoTitle .= $vehicle->make()->pluck('name');
-
-            if (isset($this->attributes['model_id'])) {
-                $seoTitle .= " {$vehicle->model()->pluck('name')}";
-            }
-        } else {
-            $seoTitle .= $this->code;
-        }
-
         if (isset($this->attributes['year'])) {
-            $seoTitle .= " ({$this->attributes['year']})";
+            $seoTitle .= "({$this->attributes['year']})";
         }
 
         // Add location
@@ -326,8 +320,10 @@ class ExtractVehicleAttributesJob extends Job
         if (Text::removeAccents($municipality) == Text::removeAccents($district)) {
             $seoTitle .= " - $municipality";
         } else {
-            $seoTitle .= " - $municipality - $district";
+            $seoTitle .= " - $municipality, $district";
         }
+
+        $seoTitle .= " - Penhora nº $this->code";
 
         return $seoTitle;
     }
@@ -344,14 +340,22 @@ class ExtractVehicleAttributesJob extends Job
         $metaDescription = "Veículo Penhorado nº $this->code. ";
 
         if (isset($this->attributes['category_id'])) {
-            $metaDescription .= "{$vehicle->category()->pluck('name')} ";
+            $metaDescription .= "{$vehicle->category()->pluck('name')}";
+
+            if (isset($this->attributes['type_id'])) {
+                $metaDescription .= ' do tipo '.lcfirst($vehicle->type()->pluck('name'));
+            }
+        } else {
+            if (isset($this->attributes['type_id'])) {
+                $metaDescription .= 'Viatura de '.lcfirst($vehicle->type()->pluck('name'));
+            }
         }
 
         if (isset($this->attributes['make_id'])) {
-            $metaDescription .= $vehicle->make()->pluck('name');
+            $metaDescription .= ", marca {$vehicle->make()->pluck('name')}";
 
             if (isset($this->attributes['model_id'])) {
-                $metaDescription .= " {$vehicle->model()->pluck('name')}";
+                $metaDescription .= ", modelo {$vehicle->model()->pluck('name')}";
             }
         }
 
@@ -365,11 +369,11 @@ class ExtractVehicleAttributesJob extends Job
         }
 
         if (isset($this->attributes['color_id'])) {
-            $metaDescription .= ", {$vehicle->color()->pluck('name')}";
+            $metaDescription .= ', '.lcfirst($vehicle->color()->pluck('name'));
         }
 
         if (isset($this->attributes['fuel_id'])) {
-            $metaDescription .= ", a {$vehicle->fuel()->pluck('name')}";
+            $metaDescription .= ', a '.lcfirst($vehicle->fuel()->pluck('name'));
         }
 
         // Add location

@@ -17,6 +17,7 @@ use App\Models\Attributes\Generic\Municipality;
 use App\Models\Items\Item;
 use App\Models\Items\Property;
 use App\Models\RawData;
+use App\Helpers\Text;
 
 /**
  * This is the extract property attributes job.
@@ -101,11 +102,6 @@ class ExtractPropertyAttributesJob extends Job
         // Set the polymorphic relationship
         Item::setPolymorphicRelation($this->code, $property);
 
-        // Update the item's title
-        $property->item->update([
-            'title' => $this->generateTitle($property),
-        ]);
-
         // Update the item's location
         if (isset($this->attributes['municipality_id'])) {
             if (is_null($this->attributes['district_id'])) {
@@ -122,6 +118,13 @@ class ExtractPropertyAttributesJob extends Job
                 'location_on_desc' => true,
             ]);
         }
+
+        // Update the item's title
+        $property->item->update([
+            'title'            => $this->generateTitle($property),
+            'seo_title'        => $this->generateSeoTitle($property),
+            'meta_description' => $this->generateMetaDescription($property),
+        ]);
 
         // Update raw data
         RawData::find($this->code)->update(['extracted' => true]);
@@ -239,15 +242,81 @@ class ExtractPropertyAttributesJob extends Job
     private function generateTitle(Property $property)
     {
         if (isset($this->attributes['land_registry_id'])) {
-            $name = 'Prédio '.$property->landRegistry()->pluck('name');
+            $title = 'Prédio '.$property->landRegistry()->pluck('name');
 
             if (isset($this->attributes['typology'])) {
-                $name .= ' - T'.$this->attributes['typology'];
+                $title .= ' - T'.$this->attributes['typology'];
             }
 
-            return $name;
+            return $title;
         }
 
         return $this->code;
+    }
+
+    /**
+     * Generate the seo title for the property details page.
+     *
+     * @param Property $property
+     *
+     * @return string
+     */
+    private function generateSeoTitle(Property $property)
+    {
+        if (isset($this->attributes['land_registry_id'])) {
+            $seoTitle = 'Prédio '.$property->landRegistry()->pluck('name');
+
+            if (isset($this->attributes['typology'])) {
+                $seoTitle .= ' - T'.$this->attributes['typology'];
+            }
+        } else {
+            $seoTitle = 'Imóvel Penhorado';
+        }
+
+        // Add location
+        $municipality = $property->item->municipality()->pluck('name');
+        $district = $property->item->district()->pluck('name');
+
+        if (Text::removeAccents($municipality) == Text::removeAccents($district)) {
+            $seoTitle .= " - $municipality";
+        } else {
+            $seoTitle .= " - $municipality, $district";
+        }
+
+        $seoTitle .= " - Penhora nº $this->code";
+
+        return $seoTitle;
+    }
+
+    /**
+     * Generate the property's meta description.
+     *
+     * @param Property $property
+     *
+     * @return string
+     */
+    private function generateMetaDescription(Property $property)
+    {
+        $metaDescription = "Imóvel Penhorado nº $this->code";
+
+        if (isset($this->attributes['land_registry_id'])) {
+            $metaDescription .= ". Prédio {$property->landRegistry()->pluck('name')}";
+
+            if (isset($this->attributes['typology'])) {
+                $metaDescription .= ", tipologia T{$this->attributes['typology']}";
+            }
+        }
+
+        // Add location
+        $municipality = $property->item->municipality()->pluck('name');
+        $district = $property->item->district()->pluck('name');
+
+        if (Text::removeAccents($municipality) == Text::removeAccents($district)) {
+            $metaDescription .= ". Localizado em $municipality.";
+        } else {
+            $metaDescription .= ". Localizado em $municipality, $district.";
+        }
+
+        return $metaDescription;
     }
 }
