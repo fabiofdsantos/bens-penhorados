@@ -12,12 +12,12 @@
 namespace App\Jobs\Extract;
 
 use App\Extractors\Wrappers\PropertyExtractorWrapper;
+use App\Helpers\Text;
 use App\Jobs\Job;
 use App\Models\Attributes\Generic\Municipality;
 use App\Models\Items\Item;
 use App\Models\Items\Property;
 use App\Models\RawData;
-use App\Helpers\Text;
 
 /**
  * This is the extract property attributes job.

@@ -37,7 +37,7 @@ class ConditionExtractor extends AbstractExtractor
         '/\bavaria\b/i',
         '/\bacidentad[oa]\b/i',
         '/\bnao\s*circula\b/i',
-        '/\bdanos\b/i'
+        '/\bdanos\b/i',
     ];
 
     /**

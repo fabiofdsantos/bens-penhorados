@@ -12,11 +12,11 @@
 namespace App\Jobs\Extract;
 
 use App\Extractors\Wrappers\VehicleExtractorWrapper;
+use App\Helpers\Text;
 use App\Jobs\Job;
 use App\Models\Items\Item;
 use App\Models\Items\Vehicle;
 use App\Models\RawData;
-use App\Helpers\Text;
 
 /**
  * This is the extract vehicle attributes job.
