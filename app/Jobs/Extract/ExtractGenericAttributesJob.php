@@ -153,10 +153,14 @@ class ExtractGenericAttributesJob extends Job
             } elseif ($category->name === 'Veículos') {
                 Bus::dispatch(new ExtractVehicleAttributesJob($this->attributes['code'], $description));
             } elseif ($category->name === 'Participações sociais') {
-                Bus::dispatch(new ExtractCorporateShareAttributesJob($this->attributes['code'], $this->attributes['full_description']));
+                // TODO - Extract corporate share attributes
+                //Bus::dispatch(new ExtractCorporateShareAttributesJob($this->attributes['code'], $this->attributes['full_description']));
             } else {
                 // Set is_other_type as true
-                Item::find($this->attributes['code'])->update(['is_other_type' => true]);
+                Item::find($this->attributes['code'])->update([
+                    'is_other_type' => true,
+                    'seo_title'     => "Bem Penhorado nº {$this->attributes['code']}",
+                ]);
 
                 // Update raw data
                 RawData::find($this->attributes['code'])->update(['extracted' => true]);

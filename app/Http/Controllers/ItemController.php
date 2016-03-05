@@ -31,8 +31,6 @@ class ItemController extends Controller
      * Show a property item.
      *
      * @param strind $slug
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function propertyType($slug)
     {
@@ -49,8 +47,6 @@ class ItemController extends Controller
      * Show a vehicle item.
      *
      * @param strind $slug
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function vehicleType($slug)
     {
@@ -67,8 +63,6 @@ class ItemController extends Controller
      * Show an other item.
      *
      * @param string $slug
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function otherType($slug)
     {
@@ -92,11 +86,12 @@ class ItemController extends Controller
     {
         $generic = Item::withSlug($slug)->first();
 
-        if (empty($generic)) {
+        if (empty($generic) || $generic->itemable_type != Property::class) {
             return [];
         }
 
         $property = Property::find($generic->itemable_id);
+
         $item = [
             'locationOnDesc'  => ($property->location_on_desc == false) ? null : true,
             'landRegistry'    => $property->landRegistry()->pluck('name'),
@@ -120,11 +115,12 @@ class ItemController extends Controller
     {
         $generic = Item::withSlug($slug)->first();
 
-        if (empty($generic)) {
+        if (empty($generic) || $generic->itemable_type != Vehicle::class) {
             return [];
         }
 
         $vehicle = Vehicle::find($generic->itemable_id);
+
         $item = [
             'year'            => $vehicle->year,
             'make'            => $vehicle->make()->pluck('name'),
@@ -155,12 +151,13 @@ class ItemController extends Controller
     {
         $generic = Item::withSlug($slug)->first();
 
-        if (empty($generic)) {
+        if (empty($generic) || !$generic->is_other_type) {
             return [];
         }
 
         $item = [
-            'generic' => self::getGenericAttributes($generic),
+            'generic'  => self::getGenericAttributes($generic),
+            'seoTitle' => $generic->seo_title,
         ];
 
         return $item;
@@ -177,13 +174,18 @@ class ItemController extends Controller
     {
         self::checkIfIsInactive($generic);
 
+        $extraAttr = explode('.', $generic->code);
+
         return [
-            'code'      => $generic->code,
-            'taxOffice' => self::getTaxOfficeName($generic->taxOffice),
-            'location'  => "$generic->municipality, $generic->district",
-            'title'     => $generic->title,
-            'slug'      => $generic->slug,
-            'price'     => [
+            'extId'       => $extraAttr[2],
+            'taxOfficeId' => $extraAttr[0],
+            'year'        => $generic->year,
+            'code'        => $generic->code,
+            'taxOffice'   => self::getTaxOfficeName($generic->taxOffice),
+            'location'    => "$generic->municipality, $generic->district",
+            'title'       => $generic->title,
+            'slug'        => $generic->slug,
+            'price'       => [
                 'value' => $generic->price,
                 'vat'   => $generic->vat,
             ],

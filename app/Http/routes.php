@@ -15,13 +15,16 @@ $app->group([
     // Homepage
     $app->get('/', ['uses' => 'HomeController@index']);
 
-    // Get a property
+    // Get properties
+    $app->get('imoveis', ['uses' => 'SearchController@properties']);
     $app->get('imoveis/{slug}', ['uses' => 'ItemController@propertyType']);
 
-    // Get a vehicle
+    // Get vehicles
+    $app->get('veiculos', ['uses' => 'SearchController@vehicles']);
     $app->get('veiculos/{slug}', ['uses' => 'ItemController@vehicleType']);
 
-    // Get other item
+    // Get other items
+    $app->get('outros', ['uses' => 'SearchController@others']);
     $app->get('outros/{slug}', ['uses' => 'ItemController@otherType']);
 
     // Get static page
@@ -31,7 +34,7 @@ $app->group([
 /*
  * API - Homepage & single pages
  */
-$app->group([
+/*$app->group([
     'prefix'     => 'api/v1/',
     'middleware' => 'wantsJson',
     'namespace'  => 'App\Http\Controllers',
@@ -48,14 +51,13 @@ $app->group([
 
     // Get a single other item
     $app->get('others/{slug}', ['uses' => 'ItemController@otherType']);
-});
+});*/
 
 /*
  * API - Search results
  */
  $app->group([
      'prefix'     => 'api/v1/',
-     'middleware' => 'wantsJson',
      'namespace'  => 'App\Http\Controllers\Results',
  ], function () use ($app) {
 
@@ -97,7 +99,7 @@ $app->group([
 /*
  * API - Auth
  */
-$app->group([
+/*$app->group([
     'prefix'     => 'api/v1/auth/',
     'middleware' => 'wantsJson',
     'namespace'  => 'App\Http\Controllers\User',
@@ -122,12 +124,12 @@ $app->group([
     $app->get('logout', [
         'uses' => 'AuthController@logout',
     ]);
-});
+});*/
 
 /*
  * API - User & favorites
  */
-$app->group([
+/*$app->group([
     'prefix'     => 'api/v1/user/',
     'middleware' => ['wantsJson', 'auth'],
     'namespace'  => 'App\Http\Controllers\User',
@@ -167,4 +169,4 @@ $app->group([
     $app->post('favorites/check', [
         'uses' => 'FavoriteController@check',
     ]);
-});
+});*/

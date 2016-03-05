@@ -71,13 +71,15 @@
                     </div>
                 </div>
             </div>
-            <div class="item-buttons col-md-6 text-center">
+            @if($generic['status'] != 'Finalizado')
+            <!--<div class="item-buttons col-md-6 text-center">
                 <div class="col-xs-12 col-sm-12">
-                    <a class="btn btn-primary" target="_blank" rel="nofollow" href="{{ $generic['code'] }}" role="button">
+                    <a class="btn btn-primary" target="_blank" rel="nofollow" href="http://www.e-financas.gov.pt/vendas/detalheVenda.action?idVenda={{ $generic['extId'] }}&sf={{ $generic['taxOfficeId']}}&ano={{ $generic['year'] }}" role="button">
                         <i class="glyphicon glyphicon-new-window"></i> Ver anúncio original
                     </a>
                 </div>
-            </div>
+            </div>-->
+            @endif
         </div>
         <div class="row">
             <div class="col-md-3">
@@ -173,4 +175,13 @@
         </div>
     </div>
 </div>
+@stop
+
+@section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
+
+<script type="text/javascript">
+angular.module('bens-penhorados', ['ui.bootstrap']);
+</script>
 @stop

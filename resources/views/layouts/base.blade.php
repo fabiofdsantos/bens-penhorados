@@ -13,7 +13,7 @@
         <meta name="robots" content="{{ $metaRobots or 'index, follow' }}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link rel="stylesheet" href="/css/main.css">
         <link rel="stylesheet" href="/css/animate.css">
 
@@ -23,6 +23,16 @@
     <body>
         <!--[if lt IE 7]> <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p> <![endif]-->
 
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-43837076-3', 'auto');
+            ga('send', 'pageview');
+        </script>
+
         <nav class="navbar navbar-default navbar-fixed-top">
             @include('layouts.partials.nav')
         </nav>
@@ -31,31 +41,11 @@
             @include('layouts.partials.footer')
         </footer>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
 
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-resource.min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-touch.min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-cookies.min.js"></script>
-
-        <script src="/js/modules/dirPagination.js"></script>
-        <script src="/js/modules/loading-bar.min.js"></script>
-        <script src="/js/modules/focusIf.js"></script>
-
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
-
-        <script src="/js/main.js"></script>
-        <script src="/js/filters.js"></script>
-
-        <!-- Controllers -->
-        <script src="/js/controllers/UserControllers.js"></script>
-        <script src="/js/controllers/PropertyControllers.js"></script>
-        <script src="/js/controllers/VehicleControllers.js"></script>
-        <script src="/js/controllers/OtherControllers.js"></script>
+        @yield('js')
     </body>
 
 </html>

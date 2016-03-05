@@ -1,6 +1,9 @@
-<div class="section">
+@extends('layouts.base')
+
+@section('main')
+<div class="section" data-ng-controller="SearchCtrl">
     <div class="container">
-        <h1 class="page-header">Veículos penhorados</h1>
+        <h1 class="page-header">{{ $title }}</h1>
         <div class="row">
             <div class="col-xs-12 col-md-4">
 
@@ -15,14 +18,14 @@
                             <div>
                                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                 <span class="sr-only">Aviso</span>
-                                <small>A pesquisa por localização é baseada no serviço de finanças adstrito ao veículo penhorado.</small>
+                                <small>A pesquisa por localização pode ser baseada no serviço de finanças adstrito ao bem penhorado.</small>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="search-query" class="col-sm-4 control-label">Palavras-chave</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" placeholder="ex. BMW" name="search-term" ng-focus="true" ng-model="filters.searchQuery" ng-model-options="{ debounce: 1000 }" data-focus-if="filters.searchQuery">
+                                <input type="text" class="form-control" placeholder="{{ $keyword_search_ex }}" name="search-term" ng-model="filters.searchQuery" ng-model-options="{ debounce: 1000 }" data-focus-if="filters.searchQuery">
                             </div>
                         </div>
 
@@ -99,123 +102,7 @@
                     </div>
                 </div>
 
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">Pesquisa avançada</div>
-                    <div class="panel-body form-horizontal">
-
-                        <div type="info" data-ng-hide="alerts.hideVehicleFilterAlert" class="alert ng-isolate-scope alert-info alert-dismissable" role="alert">
-                            <button type="button" class="close" ng-click="closeAlert('vehicles')">
-                                <span aria-hidden="true">×</span>
-                                <span class="sr-only">Fechar</span>
-                            </button>
-                            <div>
-                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                                <span class="sr-only">Aviso</span>
-                                <small>Existem veículos que não se encontram catalogados por determinados atributos (ex. categoria). Para uma pesquisa mais ampla opte sempre que possível por selecionar a opção:
-                                    <strong>Todos(as)</strong>.</small>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="make" class="col-sm-4 control-label">Marca</label>
-                            <div class="col-sm-8">
-                                <select data-ng-disabled="!filteringAttr.vehicle.makes" class="form-control" data-ng-model="filters.make" data-ng-options="key as value for (key , value) in filteringAttr.vehicle.makes">
-                                    <option value="">-- Todas as marcas --</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="model" class="col-sm-4 control-label">Modelo</label>
-                            <div class="col-sm-8">
-                                <select data-ng-disabled="!filteringAttr.vehicle.models" class="form-control" data-ng-model="filters.model" data-ng-options="key as value for (key , value) in filteringAttr.vehicle.models">
-                                    <option value="">-- Todos os modelos --</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="fuel" class="col-sm-4 control-label">Combustível</label>
-                            <div class="col-sm-8">
-                                <select data-ng-disabled="!filteringAttr.vehicle.fuels" class="form-control" data-ng-model="filters.fuel" data-ng-options="key as value for (key , value) in filteringAttr.vehicle.fuels">
-                                    <option value="">-- Todos os combustíveis --</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="category" class="col-sm-4 control-label">Categoria</label>
-                            <div class="col-sm-8">
-                                <select data-ng-disabled="!filteringAttr.vehicle.categories" class="form-control" data-ng-model="filters.category" data-ng-options="key as value for (key , value) in filteringAttr.vehicle.categories">
-                                    <option value="">-- Todas as categorias --</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="type" class="col-sm-4 control-label">Tipo</label>
-                            <div class="col-sm-8">
-                                <select data-ng-disabled="!filteringAttr.vehicle.types" class="form-control" data-ng-model="filters.type" data-ng-options="key as value for (key , value) in filteringAttr.vehicle.types">
-                                    <option value="">-- Todos os tipos --</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="color" class="col-sm-4 control-label">Cor</label>
-                            <div class="col-sm-8">
-                                <select data-ng-disabled="!filteringAttr.vehicle.colors" class="form-control" data-ng-model="filters.color" data-ng-options="key as value for (key , value) in filteringAttr.vehicle.colors">
-                                    <option value="">-- Todas as cores --</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="year" class="col-sm-4 control-label">Ano</label>
-                            <div class="col-sm-8">
-                                <div class="form-inline input-group">
-                                    <select class="form-control" data-ng-model="filters.minYear" data-ng-options="n for n in [] | range:1950:2015">
-                                        <option value="">Min.</option>
-                                    </select>
-                                    <span class="input-group-addon">até</span>
-                                    <select class="form-control" data-ng-model="filters.maxYear" data-ng-options="n for n in [] | range:1950:2015">
-                                        <option value="">Máx.</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="condition" class="col-sm-4 control-label">Estado</label>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" data-ng-model="filters.isGoodCondition" data-ng-value="undefined"> Ambos / Não definido
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" data-ng-model="filters.isGoodCondition" value="1"> Bom / Razoável
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" data-ng-model="filters.isGoodCondition" value="0"> Mau
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-12 text-right">
-                                <button type="button" class="btn btn-default" data-ng-click="resetVehicleFilters()">Limpar filtros</button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+                @yield('advanced-search')
             </div>
 
             <div class="col-xs-12 col-md-8">
@@ -224,7 +111,7 @@
                         <span data-ng-bind="result.from || 0"></span>
                         <span>-</span>
                         <span data-ng-bind="result.to || 0"></span> de
-                        <span data-ng-bind="result.total || 0"></span> veículos encontrados
+                        <span data-ng-bind="result.total || 0"></span> {{ $category_lc }} encontrados
                     </div>
                     <div class="text-right" style="width:100%;">Ver p/página:</div>
                     <div>
@@ -236,7 +123,7 @@
                     <div class="col-xs-12 col-sm-12">
                         <div class="bs-callout bs-callout-info" id="callout-inline-form-width">
                             <h4>Aguarde um pouco...</h4>
-                            <p>Estamos a pesquisar veículos na nossa base de dados.</p>
+                            <p>Estamos a pesquisar {{ $category_lc }} na nossa base de dados.</p>
                         </div>
                     </div>
                 </div>
@@ -245,19 +132,19 @@
                     <div class="col-xs-12 col-sm-12">
                         <div class="bs-callout bs-callout-warning" id="callout-inline-form-width">
                             <h4>Ooops...</h4>
-                            <p>Não foram encontrados veículos com base nos critérios de pesquisa.</p>
+                            <p>Não foram encontrados {{ $category_lc }} com base nos critérios de pesquisa.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="row list-group" data-ng-show="result.items.length" dir-paginate="item in result.items | itemsPerPage : itemsPerPage" total-items="result.total" current-page="pagination.current">
                     <div class="col-xs-12 col-sm-12">
-                        <a class="list-group-item col-xs-12 col-sm-12" data-ng-href="../veiculos/{{ item.slug }}">
+                        <a class="list-group-item col-xs-12 col-sm-12" data-ng-href="../{{ $category_slug }}/[[- item.slug -]]">
                             <div class="results-image col-xs-12 col-sm-3">
-                                <img class="img-responsive img-thumbnail" alt="{{ item.image != null ? item.title : 'Sem imagem' }}" data-ng-src="../images/{{ item.image != null ? item.image : 'empty.jpg' }}">
+                                <img class="img-responsive img-thumbnail" alt="[[- item.image != null ? item.title : 'Sem imagem' -]]" data-ng-src="../images/[[- item.image != null ? item.image : 'empty.jpg' -]]">
                             </div>
                             <div class="col-xs-12 col-sm-6 results-description">
-                                <h2 data-ng-bind="item.title | resultTitle"></h2>
+                                <h2 data-ng-bind="item.title"></h2>
                                 <p class="small">
                                     <i class="glyphicon glyphicon-asterisk"></i>
                                     <span data-ng-bind="item.status" data-ng-style="item.status == 'Em curso' ? {'color':'green'} : (item.status == 'Suspenso' ? {'color':'red'} : {'color':'blue'})"></span>
@@ -288,3 +175,4 @@
         </div>
     </div>
 </div>
+@stop
