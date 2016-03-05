@@ -38,35 +38,35 @@
 
     @if($color)
     <tr>
-        <th scope="row">Cor</</th>
+        <th scope="row">Cor</th>
         <td>{{ $color }}</td>
     </tr>
     @endif
 
     @if($category)
     <tr>
-        <th scope="row">Categoria</</th>
+        <th scope="row">Categoria</th>
         <td>{{ $category }}</td>
     </tr>
     @endif
 
     @if($type)
     <tr>
-        <th scope="row">Tipo</</th>
+        <th scope="row">Tipo</th>
         <td>{{ $type }}</td>
     </tr>
     @endif
 
     @if($regPlateCode)
     <tr>
-        <th scope="row">Matrícula</</th>
+        <th scope="row">Matrícula</th>
         <td>{{ $regPlateCode }}</td>
     </tr>
     @endif
 
     @if($goodCondition != null)
     <tr>
-        <th scope="row">Estado</</th>
+        <th scope="row">Estado</th>
         <td>{{ ($goodCondition === true ? 'Bom/Razoável' : 'Mau') }}</td>
     </tr>
     @endif
