@@ -278,7 +278,7 @@ class Vehicle extends Model
      *
      * @return Builder
      */
-    public function scopeIsGoodCondition(BUilder $query, $isGoodCondition)
+    public function scopeIsGoodCondition(Builder $query, $isGoodCondition)
     {
         if (isset($isGoodCondition)) {
             return $query->where('is_good_condition', $isGoodCondition);
