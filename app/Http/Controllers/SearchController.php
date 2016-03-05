@@ -11,11 +11,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Attributes\Generic\ItemStatus;
-use App\Models\Items\Item;
-use App\Models\Items\Property;
-use App\Models\Items\Vehicle;
-use Carbon\Carbon;
 use Laravel\Lumen\Routing\Controller;
 
 /**
@@ -30,7 +25,7 @@ class SearchController extends Controller
         $data = [
             'title'             => 'Imóveis Penhorados',
             'seoTitle'          => 'Venda de Imóveis Penhorados em Portugal',
-            'metaDescription'   => 'Encontre imóveis penhorados pela autoridade tributária em Portugal continental, Açores e Mandeira.',
+            'metaDescription'   => 'Encontre apartamentos, prédios, terrenos, lojas e outros imóveis penhorados pelas Finanças em Portugal Continental, Açores e Mandeira.',
             'category_lc'       => 'imóveis',
             'category_c'        => 'Imóveis',
             'category_slug'     => 'imoveis',
@@ -45,7 +40,7 @@ class SearchController extends Controller
         $data = [
             'title'             => 'Veículos Penhorados',
             'seoTitle'          => 'Venda de Veículos Penhorados em Portugal',
-            'metaDescription'   => 'Encontre veículos penhorados pela autoridade tributária em Portugal continental, Açores e Mandeira.',
+            'metaDescription'   => 'Encontre automóveis ligeiros, pesados, motociclos e outros veículos penhorados pelas Finanças em Portugal Continental, Açores e Mandeira.',
             'category_lc'       => 'veículos',
             'category_c'        => 'Veículos',
             'category_slug'     => 'veiculos',
@@ -59,8 +54,8 @@ class SearchController extends Controller
     {
         $data = [
             'title'             => 'Outros Bens Penhorados',
-            'seoTitle'          => 'Outros Bens Penhorados em Portugal',
-            'metaDescription'   => 'Encontre outros bens penhorados pela autoridade tributária em Portugal continental, Açores e Mandeira.',
+            'seoTitle'          => 'Venda de Outros Bens Penhorados em Portugal',
+            'metaDescription'   => 'Encontre outros bens (p. ex. jóias, material de escritório, etc.) penhorados pelas Finanças em Portugal Continental, Açores e Mandeira.',
             'category_lc'       => 'outros bens',
             'category_c'        => 'Outros bens',
             'category_slug'     => 'outros',

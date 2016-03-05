@@ -29,9 +29,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = [];
-        $data['latest'] = self::getLatestItems(8);
-        $data['endingSoon'] = self::getItemsEndingSoon(8);
+        $data = [
+            'latest'          => self::getLatestItems(8),
+            'endingSoon'      => self::getItemsEndingSoon(8),
+            'seoTitle'        => 'Venda de Bens Penhorados em Portugal',
+            'metaDescription' => 'Encontre bens penhorados pelas Finanças. Compre carros, casas, apartamentos, jóias, material de escritório e muito mais a preços fantásticos.',
+        ];
 
         return view('home', $data);
     }
