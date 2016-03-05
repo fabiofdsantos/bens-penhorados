@@ -16,6 +16,7 @@ use App\Jobs\Job;
 use App\Models\Items\Item;
 use App\Models\Items\Vehicle;
 use App\Models\RawData;
+use App\Helpers\Text;
 
 /**
  * This is the extract vehicle attributes job.
@@ -308,7 +309,7 @@ class ExtractVehicleAttributesJob extends Job
             $seoTitle .= $vehicle->make()->pluck('name');
 
             if (isset($this->attributes['model_id'])) {
-                $title .= " {$vehicle->model()->pluck('name')}";
+                $seoTitle .= " {$vehicle->model()->pluck('name')}";
             }
         } else {
             $seoTitle .= $this->code;
@@ -340,6 +341,47 @@ class ExtractVehicleAttributesJob extends Job
      */
     private function generateMetaDescription(Vehicle $vehicle)
     {
-        // TO DO
+        $metaDescription = "Veículo Penhorado nº $this->code. ";
+
+        if (isset($this->attributes['category_id'])) {
+            $metaDescription .= "{$vehicle->category()->pluck('name')} ";
+        }
+
+        if (isset($this->attributes['make_id'])) {
+            $metaDescription .= $vehicle->make()->pluck('name');
+
+            if (isset($this->attributes['model_id'])) {
+                $metaDescription .= " {$vehicle->model()->pluck('name')}";
+            }
+        }
+
+        if (isset($this->attributes['year'])) {
+            $metaDescription .= ", de {$this->attributes['year']}";
+        }
+
+        if (isset($this->attributes['engine_displacement'])) {
+            $eDispl = number_format($this->attributes['engine_displacement']);
+            $metaDescription .= ", $eDispl cc";
+        }
+
+        if (isset($this->attributes['color_id'])) {
+            $metaDescription .= ", {$vehicle->color()->pluck('name')}";
+        }
+
+        if (isset($this->attributes['fuel_id'])) {
+            $metaDescription .= ", a {$vehicle->fuel()->pluck('name')}";
+        }
+
+        // Add location
+        $municipality = $vehicle->item->municipality()->pluck('name');
+        $district = $vehicle->item->district()->pluck('name');
+
+        if (Text::removeAccents($municipality) == Text::removeAccents($district)) {
+            $metaDescription .= ". Localizado em $municipality.";
+        } else {
+            $metaDescription .= ". Localizado em $municipality, $district.";
+        }
+
+        return $metaDescription;
     }
 }
