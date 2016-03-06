@@ -35,6 +35,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        //
+        $schedule->command('jobs:import')
+            ->cron('* 21 * * 1-5');
+
+        $schedule->command('jobs:import --last-page=1')
+            ->cron('* 10,11,12,13,14,15,16,17,18 * * 1-5');
     }
 }

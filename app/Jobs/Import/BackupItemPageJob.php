@@ -15,7 +15,9 @@ use App\Jobs\Job;
 use App\Models\RawData;
 use GuzzleHttp;
 use Storage;
+use Illuminate\Support\Facades\Bus;
 use Symfony\Component\DomCrawler\Crawler;
+use App\Jobs\Extract\ExtractGenericAttributesJob;
 
 /**
  * This is the backup item page job.
@@ -168,6 +170,8 @@ class BackupItemPageJob extends Job
         $item->hash = $this->hash;
         $item->category_id = $this->categoryId;
         $item->save();
+
+        Bus::dispatch(new ExtractGenericAttributesJob($this->itemCode, $this->categoryId, null, null, false));
     }
 
     /**
