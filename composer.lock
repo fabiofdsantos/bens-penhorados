@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "60595ad5d513a74c091793f542cc256c",
-    "content-hash": "a7aead6330a12e2a1539020fdc250ebb",
+    "hash": "09839507bcb06b160a0072e185c4ab10",
+    "content-hash": "28ebb90a3df35051e22ed108fd82e4c7",
     "packages": [
         {
             "name": "danielstjules/stringy",
@@ -2084,16 +2084,16 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v2.8.3",
+            "version": "v2.7.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "8d83ff9777cdbd83e7f90d9c48f4729823791a5e"
+                "reference": "5377825bb6496514f63603af417fa07afaa12357"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/8d83ff9777cdbd83e7f90d9c48f4729823791a5e",
-                "reference": "8d83ff9777cdbd83e7f90d9c48f4729823791a5e",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/5377825bb6496514f63603af417fa07afaa12357",
+                "reference": "5377825bb6496514f63603af417fa07afaa12357",
                 "shasum": ""
             },
             "require": {
@@ -2102,7 +2102,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.8-dev"
+                    "dev-master": "2.7-dev"
                 }
             },
             "autoload": {
@@ -2133,7 +2133,7 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2016-01-27 05:14:19"
+            "time": "2016-01-27 05:09:39"
         },
         {
             "name": "symfony/debug",
