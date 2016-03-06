@@ -44,7 +44,7 @@ class CleanRawDataCommand extends Command
      */
     public function handle()
     {
-        $inactiveItems = Item::inactive()->lists('code');
+        $inactiveItems = Item::inactive()->lists('code')->all();
 
         if (empty($inactiveItems)) {
             return $this->error('There aren\'t any inactive items.');

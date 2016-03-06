@@ -87,6 +87,6 @@ trait GenericResultsTrait
             return $query;
         }
 
-        return $query->lists('itemable_id');
+        return $query->lists('itemable_id')->all();
     }
 }

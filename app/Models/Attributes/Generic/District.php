@@ -52,7 +52,7 @@ class District extends Model
      */
     public function scopeAssignedTo(Builder $query, $itemType)
     {
-        $districts = Item::ofType($itemType)->active()->lists('district_id');
+        $districts = Item::ofType($itemType)->active()->lists('district_id')->all();
 
         return $query->whereIn('id', $districts)->orderBy('name');
     }

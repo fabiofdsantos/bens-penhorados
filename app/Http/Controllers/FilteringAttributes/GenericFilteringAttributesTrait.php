@@ -57,7 +57,7 @@ trait GenericFilteringAttributesTrait
      */
     private static function getDistricts()
     {
-        return District::assignedTo(self::$itemType)->lists('name', 'id') ?: null;
+        return District::assignedTo(self::$itemType)->lists('name', 'id')->all() ?: null;
     }
 
     /**
@@ -70,7 +70,7 @@ trait GenericFilteringAttributesTrait
     private static function getMunicipalities($districtId)
     {
         if (isset($districtId)) {
-            return Municipality::assignedTo(self::$itemType)->ofDistrict($districtId)->lists('name', 'id') ?: null;
+            return Municipality::assignedTo(self::$itemType)->ofDistrict($districtId)->lists('name', 'id')->all() ?: null;
         }
     }
 
@@ -81,6 +81,6 @@ trait GenericFilteringAttributesTrait
      */
     private static function getPurchaseTypes()
     {
-        return ItemPurchaseType::assignedTo(self::$itemType)->lists('name', 'id') ?: null;
+        return ItemPurchaseType::assignedTo(self::$itemType)->lists('name', 'id')->all() ?: null;
     }
 }

@@ -86,7 +86,7 @@ class VehicleFilteringAttrController extends Controller
      */
     private static function getCategories()
     {
-        return VehicleCategory::assigned()->lists('name', 'id') ?: null;
+        return VehicleCategory::assigned()->lists('name', 'id')->all() ?: null;
     }
 
     /**
@@ -96,7 +96,7 @@ class VehicleFilteringAttrController extends Controller
      */
     private static function getColors()
     {
-        return VehicleColor::assigned()->lists('name', 'id') ?: null;
+        return VehicleColor::assigned()->lists('name', 'id')->all() ?: null;
     }
 
     /**
@@ -106,7 +106,7 @@ class VehicleFilteringAttrController extends Controller
      */
     private static function getFuels()
     {
-        return VehicleFuel::assigned()->lists('name', 'id') ?: null;
+        return VehicleFuel::assigned()->lists('name', 'id')->all() ?: null;
     }
 
     /**
@@ -116,7 +116,7 @@ class VehicleFilteringAttrController extends Controller
      */
     private static function getMakes()
     {
-        return VehicleMake::assigned()->lists('name', 'id') ?: null;
+        return VehicleMake::assigned()->lists('name', 'id')->all() ?: null;
     }
 
     /**
@@ -129,7 +129,7 @@ class VehicleFilteringAttrController extends Controller
     private static function getModels($makeId)
     {
         if (isset($makeId)) {
-            return VehicleModel::assigned()->ofMake($makeId)->lists('name', 'id') ?: null;
+            return VehicleModel::assigned()->ofMake($makeId)->lists('name', 'id')->all() ?: null;
         }
     }
 
@@ -140,6 +140,6 @@ class VehicleFilteringAttrController extends Controller
      */
     private static function getTypes()
     {
-        return VehicleType::assigned()->lists('name', 'id') ?: null;
+        return VehicleType::assigned()->lists('name', 'id')->all() ?: null;
     }
 }

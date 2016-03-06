@@ -71,7 +71,7 @@ class PropertyFilteringAttrController extends Controller
      */
     private static function getLandRegistryTypes()
     {
-        return LandRegistry::assigned()->lists('name', 'id') ?: null;
+        return LandRegistry::assigned()->lists('name', 'id')->all() ?: null;
     }
 
     /**
@@ -81,7 +81,7 @@ class PropertyFilteringAttrController extends Controller
      */
     private static function getTypologies()
     {
-        $typologies = Property::distinct()->lists('typology');
+        $typologies = Property::distinct()->lists('typology')->all();
 
         // Remove null value from array
         array_forget($typologies, 0);

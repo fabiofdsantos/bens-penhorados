@@ -75,7 +75,7 @@ class Municipality extends Model
      */
     public function scopeAssignedTo(Builder $query, $itemType)
     {
-        $ids = Item::ofType($itemType)->active()->lists('municipality_id');
+        $ids = Item::ofType($itemType)->active()->lists('municipality_id')->all();
 
         return $query->whereIn('id', $ids)->orderBy('name');
     }

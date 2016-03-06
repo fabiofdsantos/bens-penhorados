@@ -60,7 +60,7 @@ class VehicleMake extends Model
      */
     public function scopeAssigned(Builder $query)
     {
-        $ids = Vehicle::active()->distinct()->lists('make_id');
+        $ids = Vehicle::active()->distinct()->lists('make_id')->all();
 
         return $query->whereIn('id', $ids)->orderBy('name');
     }

@@ -69,7 +69,7 @@ class ImportCommand extends Command
      */
     public function importFromMap()
     {
-        $locations = District::lists('code');
+        $locations = District::lists('code')->all();
 
         Bus::dispatch(new ImportFromMapJob($locations));
     }

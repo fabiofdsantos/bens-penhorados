@@ -148,7 +148,7 @@ class Vehicle extends Model
     {
         $ids = Item::where('itemable_type', self::class)
                 ->where('acceptance_dt', '>', Carbon::now())
-                ->lists('itemable_id');
+                ->lists('itemable_id')->all();
 
         return $query->whereIn('id', $ids);
     }

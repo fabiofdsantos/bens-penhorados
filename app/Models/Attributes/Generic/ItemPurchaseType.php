@@ -51,7 +51,7 @@ class ItemPurchaseType extends Model
      */
     public function scopeAssignedTo(Builder $query, $itemType)
     {
-        $ids = Item::ofType($itemType)->active()->lists('purchase_type_id');
+        $ids = Item::ofType($itemType)->active()->lists('purchase_type_id')->all();
 
         return $query->whereIn('id', $ids)->orderBy('name');
     }

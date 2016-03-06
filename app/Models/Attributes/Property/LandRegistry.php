@@ -50,7 +50,7 @@ class LandRegistry extends Model
      */
     public function scopeAssigned(Builder $query)
     {
-        $ids = Property::active()->distinct()->lists('land_registry_id');
+        $ids = Property::active()->distinct()->lists('land_registry_id')->all();
 
         return $query->whereIn('id', $ids)->orderBy('name');
     }
