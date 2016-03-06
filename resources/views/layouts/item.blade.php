@@ -5,8 +5,8 @@
     <div class="container">
         <h1 class="page-header">{{ $generic['title'] }}</h1>
         <div class="row" style="margin-bottom: 15px">
-            <div class="col-md-6 show-grid">
-                <div style="max-width: 100%">
+            <div class="col-xs-12 col-sm-6 col-md-6 show-grid">
+                <div style="max-width: 100%" class="text-center">
                     @if(empty($generic['images']))
                     <img src="../images/empty.jpg" style="margin:auto; max-width: 100%">
                     @else
@@ -20,7 +20,7 @@
                     @endif
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-xs-12 col-sm-6 col-md-6">
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <div class="row">

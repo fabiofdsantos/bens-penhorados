@@ -16,12 +16,12 @@
 <div class="section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 text-center">
+            <div class="col-md-12 text-center">
                 <h2>Últimas Inserções</h2>
                 <hr>
             </div>
             @foreach($latest as $newItem)
-            <div class="list-group col-lg-3">
+            <div class="list-group-home col-xs-12 col-sm-6 col-md-3">
                 <a class="list-group-item" href="../{{ $newItem['categorySlug'] }}/{{ $newItem['itemSlug'] }}">
                     <img class="img-responsive" alt="{{ $newItem['title'] }}" src="../images/{{ $newItem['image'] != null ? $newItem['image'] : 'empty.jpg' }}">
                     <div class="caption text-center">
@@ -40,12 +40,12 @@
 <div class="section-colored">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 text-center">
+            <div class="col-md-12 text-center">
                 <h2>A terminar o limite para propostas</h2>
                 <hr>
             </div>
             @foreach($endingSoon as $endingItem)
-            <div class="list-group col-lg-3">
+            <div class="list-group-home col-xs-12 col-sm-6 col-md-3">
                 <a class="list-group-item" href="../{{ $endingItem['categorySlug'] }}/{{ $endingItem['itemSlug'] }}">
                     <img class="img-responsive" alt="{{ $endingItem['title'] }}" src="../images/{{ $endingItem['image'] != null ? $endingItem['image'] : 'empty.jpg'}}">
                     <div class="caption text-center">

@@ -36,6 +36,9 @@ body {
 .filter-row {
     margin-bottom: 15px;
 }
+.list-group-home {
+    margin-bottom: 20px;
+}
 .results-image {
     padding: 0px;
     margin: 0px;

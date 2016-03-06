@@ -5,7 +5,7 @@
     <div class="container">
         <h1 class="page-header">{{ $title }}</h1>
         <div class="row">
-            <div class="col-xs-12 col-md-4">
+            <div class="col-xs-12 col-sm-12 col-md-4">
 
                 <div class="panel panel-default">
                     <div class="panel-heading">Pesquisa genérica</div>
@@ -105,7 +105,7 @@
                 @yield('advanced-search')
             </div>
 
-            <div class="col-xs-12 col-md-8">
+            <div class="col-xs-12 col-sm-12 col-md-8">
                 <div class="col-xs-12 col-sm-12 as-table results-head">
                     <div>
                         <span data-ng-bind="result.from || 0"></span>
@@ -140,7 +140,7 @@
                 <div class="row list-group" data-ng-show="result.items.length" dir-paginate="item in result.items | itemsPerPage : itemsPerPage" total-items="result.total" current-page="pagination.current">
                     <div class="col-xs-12 col-sm-12">
                         <a class="list-group-item col-xs-12 col-sm-12" data-ng-href="../{{ $category_slug }}/[[- item.slug -]]">
-                            <div class="results-image col-xs-12 col-sm-3">
+                            <div class="results-image col-xs-12 col-sm-3 text-center">
                                 <img class="img-responsive img-thumbnail" alt="[[- item.image != null ? item.title : 'Sem imagem' -]]" data-ng-src="../images/[[- item.image != null ? item.image : 'empty.jpg' -]]">
                             </div>
                             <div class="col-xs-12 col-sm-6 results-description">
