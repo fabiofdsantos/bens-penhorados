@@ -53,7 +53,7 @@ class ImportFromMapJob extends Job
 
         $i = 0;
         foreach ($this->locations as $location) {
-            $request = $guzzle->createRequest('POST', 'http://www.e-financas.gov.pt/fovendas/proxy.jsp?http://ags/arcgis/rest/services/vendas/fovendas/MapServer/0/query', [
+            $request = $guzzle->request('POST', 'http://www.e-financas.gov.pt/fovendas/proxy.jsp?http://ags/arcgis/rest/services/vendas/fovendas/MapServer/0/query', [
                 'headers' => [
                     'User-Agent'  => '"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0"',
                     'Accept'      => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',

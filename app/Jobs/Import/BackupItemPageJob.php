@@ -129,7 +129,7 @@ class BackupItemPageJob extends Job
 
         echo "\n > Saving $this->itemCode html as raw data... \n";
 
-        $request = $guzzle->createRequest('GET', 'http://www.e-financas.gov.pt/vendas/detalheVenda.action?idVenda='.$this->itemId.'&sf='.$this->taxOffice.'&ano='.$this->year, [
+        $request = $guzzle->request('GET', 'http://www.e-financas.gov.pt/vendas/detalheVenda.action?idVenda='.$this->itemId.'&sf='.$this->taxOffice.'&ano='.$this->year, [
             'headers' => [
                 'User-Agent'  => '"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0"',
                 'Accept'      => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -138,8 +138,7 @@ class BackupItemPageJob extends Job
             'debug' => false,
         ]);
 
-        $response = $guzzle->send($request);
-        $crawler = new Crawler((string) $response->getBody());
+        $crawler = new Crawler((string) $request->getBody());
 
         $filePath = $this->folder.$this->itemCode.$this->extension;
         $oldPath = $this->oldFolder.$this->itemCode.$this->extension;

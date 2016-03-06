@@ -11,7 +11,11 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-Dotenv::load(__DIR__.'/../');
+try {
+    (new Dotenv\Dotenv(__DIR__.'/../'))->load();
+} catch (Dotenv\Exception\InvalidPathException $e) {
+    //
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +28,9 @@ Dotenv::load(__DIR__.'/../');
 |
 */
 
-$app = new Laravel\Lumen\Application();
+$app = new Laravel\Lumen\Application(
+    realpath(__DIR__.'/../')
+);
 
 $app->withFacades();
 $app->withEloquent();
@@ -41,13 +47,13 @@ $app->withEloquent();
 */
 
 $app->singleton(
-    'Illuminate\Contracts\Debug\ExceptionHandler',
-    'App\Exceptions\Handler'
+    Illuminate\Contracts\Debug\ExceptionHandler::class,
+    App\Exceptions\Handler::class
 );
 
 $app->singleton(
-    'Illuminate\Contracts\Console\Kernel',
-    'App\Console\Kernel'
+    Illuminate\Contracts\Console\Kernel::class,
+    App\Console\Kernel::class
 );
 
 /*
@@ -62,16 +68,16 @@ $app->singleton(
 */
 
 $app->middleware([
-    'Illuminate\Cookie\Middleware\EncryptCookies',
-    'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
-    'Illuminate\Session\Middleware\StartSession',
-    'Illuminate\View\Middleware\ShareErrorsFromSession',
-    'Laravel\Lumen\Http\Middleware\VerifyCsrfToken',
+    Illuminate\Cookie\Middleware\EncryptCookies::class,
+    Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+    Illuminate\Session\Middleware\StartSession::class,
+    Illuminate\View\Middleware\ShareErrorsFromSession::class,
+    Laravel\Lumen\Http\Middleware\VerifyCsrfToken::class
 ]);
 
 $app->routeMiddleware([
-    'wantsJson' => 'App\Http\Middleware\CheckIfWantsJson',
-    'auth'      => 'App\Http\Middleware\CheckIfAuthenticated',
+    'wantsJson' => App\Http\Middleware\CheckIfWantsJson::class,
+    'auth'      => App\Http\Middleware\CheckIfAuthenticated::class,
 ]);
 
 /*
@@ -85,9 +91,9 @@ $app->routeMiddleware([
 |
 */
 
-$app->register('App\Providers\LogExtractServiceProvider');
-$app->register('App\Providers\LogImportServiceProvider');
-$app->register('App\Providers\ParsedownServiceProvider');
+$app->register(App\Providers\LogExtractServiceProvider::class);
+$app->register(App\Providers\LogImportServiceProvider::class);
+$app->register(App\Providers\ParsedownServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -100,6 +106,8 @@ $app->register('App\Providers\ParsedownServiceProvider');
 |
 */
 
-require __DIR__.'/../app/Http/routes.php';
+$app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
+    require __DIR__.'/../app/Http/routes.php';
+});
 
 return $app;
