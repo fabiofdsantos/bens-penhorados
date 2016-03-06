@@ -85,7 +85,7 @@ class ImportFromWebsiteJob extends Job
     private static function getLastPage($category)
     {
         $guzzle = new GuzzleHttp\Client();
-        $request = $guzzle->createRequest('GET', 'www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta='.$category->code, [
+        $request = $guzzle->createRequest('GET', 'http://www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta='.$category->code, [
             'headers' => [
                 'User-Agent'  => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
                 'Accept'      => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
