@@ -195,7 +195,8 @@ class Item extends Model
      */
     public function scopeLatest(Builder $query, $howMany)
     {
-        return $query->orderBy('created_at', 'desc')->take($howMany);
+        return $query->whereNotNull('itemable_id')
+            ->orderBy('created_at', 'desc')->take($howMany);
     }
 
     /**
@@ -209,7 +210,8 @@ class Item extends Model
     public function scopeEndingSoon(Builder $query, $howMany)
     {
         // Get active items first
-        $query->where('acceptance_dt', '>=', Carbon::now());
+        $query->where('acceptance_dt', '>=', Carbon::now())
+            ->whereNotNull('itemable_id');
 
         return $query->orderBy('acceptance_dt', 'asc')->take($howMany);
     }
