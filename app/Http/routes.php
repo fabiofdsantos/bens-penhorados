@@ -27,6 +27,35 @@ $app->group([
     $app->get('outros', ['uses' => 'SearchController@others']);
     $app->get('outros/{slug}', ['uses' => 'ItemController@otherType']);
 
+    // Generate sitemap
+    $app->get('sitemap.xml', function () {
+
+        header('Content-type: text/xml');
+
+        $xml = [];
+        $xml[] = '<?xml version="1.0" encoding="UTF-8"?'.'>';
+        $xml[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        $xml[] = '  <url>';
+        $xml[] = '    <loc>https://www.benspenhorados.pt</loc>';
+        $xml[] = '    <lastmod>'.\Carbon\Carbon::today()->toW3cString().'</lastmod>';
+        $xml[] = '    <changefreq>daily</changefreq>';
+        $xml[] = '    <priority>0.8</priority>';
+        $xml[] = '  </url>';
+
+        $items = \App\Models\Items\Item::all();
+
+        foreach ($items as $item) {
+            $xml[] = '  <url>';
+            $xml[] = '    <loc>https://www.benspenhorados.pt/'.$item->category->pluck('slug').'/'.$item->slug.'</loc>';
+            $xml[] = '    <lastmod>'.\Carbon\Carbon::parse($item->updated_at)->toW3cString().'</lastmod>';
+            $xml[] = '  </url>';
+        }
+
+        $xml[] = '</urlset>';
+
+        return join("\n", $xml);
+    });
+
     // Get static page
     $app->get('/{slug}', ['uses' => 'StaticPageController@load']);
 });
