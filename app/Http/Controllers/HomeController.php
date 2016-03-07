@@ -52,12 +52,14 @@ class HomeController extends Controller
 
         $items = [];
         foreach ($results as $result) {
+            $images = json_decode($result->images);
+
             $item = [
                 'title'          => $result->title,
                 'itemSlug'       => $result->slug,
                 'categorySlug'   => $result->category()->pluck('slug'),
                 'price'          => $result->price,
-                'image'          => json_decode($result->images)[0],
+                'image'          => isset($images[0]) ? $images[0] : null,
             ];
 
             $items[] = $item;
@@ -79,12 +81,14 @@ class HomeController extends Controller
 
         $items = [];
         foreach ($results as $result) {
+            $images = json_decode($result->images);
+
             $item = [
                 'title'         => $result->title,
                 'itemSlug'      => $result->slug,
                 'categorySlug'  => $result->category()->pluck('slug'),
                 'price'         => $result->price,
-                'image'         => json_decode($result->images)[0],
+                'image'         => isset($images[0]) ? $images[0] : null,
                 'timeleft'      => $result->acceptance_dt->diffForHumans(Carbon::now(), true),
             ];
 
