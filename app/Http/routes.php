@@ -46,7 +46,7 @@ $app->group([
 
         foreach ($items as $item) {
             $xml[] = '  <url>';
-            $xml[] = '    <loc>https://www.benspenhorados.pt/'.$item->category->pluck('slug').'/'.$item->slug.'</loc>';
+            $xml[] = '    <loc>https://www.benspenhorados.pt/'.$item->category()->pluck('slug').'/'.$item->slug.'</loc>';
             $xml[] = '    <lastmod>'.\Carbon\Carbon::parse($item->updated_at)->toW3cString().'</lastmod>';
             $xml[] = '  </url>';
         }
