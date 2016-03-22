@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 show-grid">
-                <div style="max-width: 100%" class="text-center">
+                <div style="max-width: 100%; min-height: 280px;" class="text-center">
                     @if(empty($generic['images']))
                     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <!-- 24htest-benspenhorados -->
@@ -199,6 +199,22 @@
                 @endif
             </div>
         </div>
+
+        <div class="row" style="margin-bottom:15px;">
+            <div class="col-md-12 col-xs-12">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- 24htest-benspenhorados -->
+                <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-1654487041005723"
+                 data-ad-slot="1538720429"
+                 data-ad-format="auto"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+
     </div>
 </div>
 @stop
