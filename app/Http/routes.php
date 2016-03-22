@@ -53,7 +53,7 @@ $app->group([
 
         $xml[] = '</urlset>';
 
-        return join("\n", $xml);
+        return implode("\n", $xml);
     });
 
     // Get static page

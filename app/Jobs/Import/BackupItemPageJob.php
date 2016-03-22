@@ -11,13 +11,13 @@
 
 namespace App\Jobs\Import;
 
+use App\Jobs\Extract\ExtractGenericAttributesJob;
 use App\Jobs\Job;
 use App\Models\RawData;
 use GuzzleHttp;
-use Storage;
 use Illuminate\Support\Facades\Bus;
+use Storage;
 use Symfony\Component\DomCrawler\Crawler;
-use App\Jobs\Extract\ExtractGenericAttributesJob;
 
 /**
  * This is the backup item page job.
