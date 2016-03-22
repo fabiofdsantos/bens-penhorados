@@ -5,21 +5,6 @@
     <div class="container">
         <h1 class="page-header">{{ $generic['title'] }}</h1>
         <div class="row" style="margin-bottom: 15px">
-            <div class="col-xs-12 col-sm-6 col-md-6 show-grid">
-                <div style="max-width: 100%" class="text-center">
-                    @if(empty($generic['images']))
-                    <img src="../images/empty.jpg" style="margin:auto; max-width: 100%">
-                    @else
-                    <carousel interval="2000">
-                        @foreach($generic['images'] as $image)
-                        <slide>
-                            <img src="../images/{{ $image }}" style="margin:auto;">
-                        </slide>
-                        @endforeach
-                    </carousel>
-                    @endif
-                </div>
-            </div>
             <div class="col-xs-12 col-sm-6 col-md-6">
                 <div class="row">
                     <div class="col-md-12 text-center">
@@ -71,6 +56,30 @@
                     </div>
                 </div>
             </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 show-grid">
+                <div style="max-width: 100%" class="text-center">
+                    @if(empty($generic['images']))
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- 24htest-benspenhorados -->
+                    <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-1654487041005723"
+                     data-ad-slot="1538720429"
+                     data-ad-format="auto"></ins>
+                    <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                    @else
+                    <carousel interval="2000">
+                        @foreach($generic['images'] as $image)
+                        <slide>
+                            <img src="../images/{{ $image }}" style="margin:auto;">
+                        </slide>
+                        @endforeach
+                    </carousel>
+                    @endif
+                </div>
+            </div>
             @if($generic['status'] != 'Finalizado')
             <!--<div class="item-buttons col-md-6 text-center">
                 <div class="col-xs-12 col-sm-12">
@@ -81,6 +90,23 @@
             </div>-->
             @endif
         </div>
+
+        @if(!empty($generic['images']))
+        <div class="row" style="margin-bottom:15px;">
+            <div class="col-md-12 col-xs-12">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- 24htest-benspenhorados -->
+                <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-1654487041005723"
+                 data-ad-slot="1538720429"
+                 data-ad-format="auto"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+        @endif
         <div class="row">
             <div class="col-md-3">
                 <table class="table table-condensed">
