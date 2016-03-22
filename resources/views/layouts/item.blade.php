@@ -74,7 +74,7 @@
             @if($generic['status'] != 'Finalizado')
             <!--<div class="item-buttons col-md-6 text-center">
                 <div class="col-xs-12 col-sm-12">
-                    <a class="btn btn-primary" target="_blank" rel="nofollow" href="http://www.e-financas.gov.pt/vendas/detalheVenda.action?idVenda={{ $generic['extId'] }}&sf={{ $generic['taxOfficeId']}}&ano={{ $generic['year'] }}" role="button">
+                    <a class="btn btn-primary" target="_blank" rel="nofollow" href="https://vendas.portaldasfinancas.gov.pt/bens/detalheVenda.action?idVenda={{ $generic['extId'] }}&sf={{ $generic['taxOfficeId']}}&ano={{ $generic['year'] }}" role="button">
                         <i class="glyphicon glyphicon-new-window"></i> Ver anúncio original
                     </a>
                 </div>

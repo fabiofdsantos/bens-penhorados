@@ -131,11 +131,11 @@ class BackupItemPageJob extends Job
 
         echo "\n > Saving $this->itemCode html as raw data... \n";
 
-        $request = $guzzle->request('GET', 'http://www.e-financas.gov.pt/vendas/detalheVenda.action?idVenda='.$this->itemId.'&sf='.$this->taxOffice.'&ano='.$this->year, [
+        $request = $guzzle->request('GET', 'https://vendas.portaldasfinancas.gov.pt/bens/detalheVenda.action?idVenda='.$this->itemId.'&sf='.$this->taxOffice.'&ano='.$this->year, [
             'headers' => [
                 'User-Agent'  => '"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0"',
                 'Accept'      => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                'Referrer'    => 'http://www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta=02&modalidade=&distrito=&concelho=&minimo=++.+++.+++.+++%2C++&maximo=++.+++.+++.+++%2C++&dataMin=&dataMax=',
+                'Referrer'    => 'https://vendas.portaldasfinancas.gov.pt/bens/consultaVendasCurso.action?tipoConsulta=02&modalidade=&distrito=&concelho=&minimo=++.+++.+++.+++%2C++&maximo=++.+++.+++.+++%2C++&dataMin=&dataMax=',
             ],
             'debug' => false,
         ]);

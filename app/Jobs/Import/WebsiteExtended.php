@@ -52,11 +52,11 @@ class WebsiteExtended extends Job
 
         echo "\n > Getting items from category number ".$this->category->code." (page $this->currentPage) \n";
 
-        $request = $guzzle->request('GET', 'http://www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta='.$this->category->code.'&page='.$this->currentPage, [
+        $request = $guzzle->request('GET', 'https://vendas.portaldasfinancas.gov.pt/bens/consultaVendasCurso.action?tipoConsulta='.$this->category->code.'&page='.$this->currentPage, [
             'headers' => [
                 'User-Agent'  => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0',
                 'Accept'      => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                'Referrer'    => 'http://www.e-financas.gov.pt/vendas/consultaVendasCurso.action?tipoConsulta='.$this->category->code,
+                'Referrer'    => 'https://vendas.portaldasfinancas.gov.pt/bens/consultaVendasCurso.action?tipoConsulta='.$this->category->code,
             ],
             'debug' => false,
         ]);
