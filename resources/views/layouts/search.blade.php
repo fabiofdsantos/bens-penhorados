@@ -103,6 +103,16 @@
                 </div>
 
                 @yield('advanced-search')
+
+                <!-- Bens Penhorados - Sidebar -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-1654487041005723"
+                     data-ad-slot="5492425229"
+                     data-ad-format="auto"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-8">

@@ -59,24 +59,22 @@
             <div class="col-xs-12 col-sm-6 col-md-6 show-grid">
                 <div style="max-width: 100%; min-height: 280px;" class="text-center">
                     @if(empty($generic['images']))
-                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- 24htest-benspenhorados -->
-                    <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-1654487041005723"
-                     data-ad-slot="1538720429"
-                     data-ad-format="auto"></ins>
-                    <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
+                        <!-- Bens Penhorados - Item with no images -->
+                        <ins class="adsbygoogle"
+                         style="display:inline-block;width:300px;height:250px"
+                         data-ad-client="ca-pub-1654487041005723"
+                         data-ad-slot="8445891626"></ins>
+                        <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
                     @else
-                    <carousel interval="2000">
-                        @foreach($generic['images'] as $image)
-                        <slide>
-                            <img src="../images/{{ $image }}" style="margin:auto;">
-                        </slide>
-                        @endforeach
-                    </carousel>
+                        <carousel interval="2000">
+                            @foreach($generic['images'] as $image)
+                            <slide>
+                                <img src="../images/{{ $image }}" style="margin:auto;">
+                            </slide>
+                            @endforeach
+                        </carousel>
                     @endif
                 </div>
             </div>
@@ -94,13 +92,12 @@
         @if(!empty($generic['images']))
         <div class="row" style="margin-bottom:15px;">
             <div class="col-md-12 col-xs-12">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- 24htest-benspenhorados -->
+                <!-- Bens Penhorados - Above item details -->
                 <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-1654487041005723"
-                 data-ad-slot="1538720429"
-                 data-ad-format="auto"></ins>
+                     style="display:block"
+                     data-ad-client="ca-pub-1654487041005723"
+                     data-ad-slot="2818160424"
+                     data-ad-format="auto"></ins>
                 <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
@@ -199,22 +196,6 @@
                 @endif
             </div>
         </div>
-
-        <div class="row" style="margin-bottom:15px;">
-            <div class="col-md-12 col-xs-12">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- 24htest-benspenhorados -->
-                <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-1654487041005723"
-                 data-ad-slot="1538720429"
-                 data-ad-format="auto"></ins>
-                <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-        </div>
-
     </div>
 </div>
 @stop
