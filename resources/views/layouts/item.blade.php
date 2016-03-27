@@ -134,6 +134,8 @@
                             <td>
                                 {{ $generic['description'] }}
                             </td>
+                        </tr>
+                        <tr>
                             <td><!-- Bens Penhorados - Links -->
                                 <ins class="adsbygoogle"
                                      style="display:block"
