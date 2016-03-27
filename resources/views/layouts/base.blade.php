@@ -38,18 +38,23 @@
         </nav>
             @yield('main')
         <footer>
-            <div style="margin-bottom:15px; margint-top:5px;" class="col-md-12 col-xs-12">
-                <!-- Bens Penhorados - Footer -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-1654487041005723"
-                     data-ad-slot="5911227620"
-                     data-ad-format="auto"></ins>
-                <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+            <div class="container">
+                <div class="row" style="margin-bottom:15px; margint-top:5px;">
+                    <div class="col-md-12 col-xs-12">
+                        <!-- Bens Penhorados - Footer -->
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-1654487041005723"
+                             data-ad-slot="5911227620"
+                             data-ad-format="auto"></ins>
+                        <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                </div>
             </div>
             @include('layouts.partials.footer')
+            </div>
         </footer>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
