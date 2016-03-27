@@ -131,16 +131,19 @@
                     <tbody style="font-size: 12px;">
                         @if($generic['description'])
                         <tr>
-                            <td>{{ $generic['description'] }}</td>
-                            <!-- Bens Penhorados - Links -->
-                            <ins class="adsbygoogle"
-                                 style="display:block"
-                                 data-ad-client="ca-pub-1654487041005723"
-                                 data-ad-slot="2538958820"
-                                 data-ad-format="link"></ins>
-                            <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
+                            <td>
+                                {{ $generic['description'] }}
+                            </td>
+                            <td><!-- Bens Penhorados - Links -->
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-1654487041005723"
+                                     data-ad-slot="2538958820"
+                                     data-ad-format="link"></ins>
+                                <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                            </td>
                         </tr>
                         @endif
                     </tbody>
