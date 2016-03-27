@@ -38,8 +38,8 @@
         </nav>
             @yield('main')
         <footer>
-            <div class="row" style="margin-bottom:15px;">
-                <!-- BensPenhorados - Footer -->
+            <div style="margin-bottom:15px; margint-top:5px;" class="col-md-12 col-xs-12">
+                <!-- Bens Penhorados - Footer -->
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-1654487041005723"

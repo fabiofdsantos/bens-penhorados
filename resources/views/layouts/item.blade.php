@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 show-grid">
-                <div style="max-width: 100%; min-height: 280px;" class="text-center">
+                <div style="max-width: 100%;" class="text-center">
                     @if(empty($generic['images']))
                         <!-- Bens Penhorados - Item with no images -->
                         <ins class="adsbygoogle"
@@ -132,6 +132,15 @@
                         @if($generic['description'])
                         <tr>
                             <td>{{ $generic['description'] }}</td>
+                            <!-- Bens Penhorados - Links -->
+                            <ins class="adsbygoogle"
+                                 style="display:block"
+                                 data-ad-client="ca-pub-1654487041005723"
+                                 data-ad-slot="2538958820"
+                                 data-ad-format="link"></ins>
+                            <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
                         </tr>
                         @endif
                     </tbody>
