@@ -312,7 +312,7 @@ class ExtractGenericAttributesJob extends Job
 
                     $images[] = $filename;
                 } catch (\Exception $e) {
-                    // to do
+                    app('LogExtract')->error($e);
                 }
                 $i++;
             }
