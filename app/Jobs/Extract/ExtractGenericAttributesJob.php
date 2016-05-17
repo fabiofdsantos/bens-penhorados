@@ -317,7 +317,7 @@ class ExtractGenericAttributesJob extends Job
                 $i++;
             }
 
-            return json_encode($images);
+            return empty($images) ? null : json_encode($images);
         }
     }
 
