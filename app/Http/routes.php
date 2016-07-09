@@ -29,7 +29,6 @@ $app->group([
 
     // Generate sitemap
     $app->get('sitemap.xml', function () {
-
         header('Content-type: text/xml');
 
         $xml = [];
@@ -98,7 +97,7 @@ $app->group([
 
     // Get other items
     $app->get('others', ['uses' => 'OtherResultsController@index']);
-});
+ });
 
 /*
  * API - Filtering attributes
