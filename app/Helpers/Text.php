@@ -72,7 +72,7 @@ class Text
      * 	- Input: FABIO DOS SANTOS
      *  - Output: Fabio dos Santos
      *
-     * @param str $str
+     * @param string $str
      *
      * @return string
      */
@@ -80,8 +80,8 @@ class Text
     {
         $str = strtolower($str);
         $str = preg_replace_callback('/\b(\w)(?!([oa]s|[aeo])?\b)/u', function ($matches) {
-                return strtoupper($matches[0]);
-            }, $str);
+            return strtoupper($matches[0]);
+        }, $str);
 
         return $str;
     }
