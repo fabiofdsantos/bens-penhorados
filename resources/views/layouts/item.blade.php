@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <div class="row">
-                            <strong>Preço base de venda:</strong>
+                            <strong>Valor base de venda:</strong>
                         </div>
                         <div class="item-price row">
                             <span>{{ $generic['price']['value'] ? number_format($generic['price']['value']).'€' : 'À melhor oferta' }}</span>
