@@ -57,7 +57,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="price" class="col-sm-4 control-label">Preço</label>
+                            <label for="price" class="col-sm-4 control-label">Valor</label>
                             <div class="col-sm-8">
                                 <div class="form-inline input-group">
                                     <select class="form-control" data-ng-disabled="filters.noPrice" data-ng-model="filters.minPrice" data-ng-options="n as (n|currency:'€':0) for n in priceRange">
@@ -87,7 +87,7 @@
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="noprice" data-ng-checked="filters.noPrice" data-ng-model="filters.noPrice" data-ng-true-value="1" data-ng-false-value="undefined"> Sem preço base
+                                            <input type="checkbox" name="noprice" data-ng-checked="filters.noPrice" data-ng-model="filters.noPrice" data-ng-true-value="1" data-ng-false-value="undefined"> Sem valor base
                                         </label>
                                     </div>
                                 </div>
@@ -170,7 +170,7 @@
                             </div>
                             <div class="results-price col-xs-12 col-sm-3">
                                 <div>
-                                    <strong>Preço base de venda:</strong><br />
+                                    <strong>Valor base de venda:</strong><br />
                                     <span data-ng-bind="item.price ? (item.price | currency:'€':0) : 'À melhor oferta'"></span>
                                 </div>
                             </div>
