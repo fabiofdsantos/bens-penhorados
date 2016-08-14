@@ -26,6 +26,11 @@ class StaticPageController extends Controller
             'metaDescription' => 'Política de privacidade do website BensPenhorados.pt',
             'metaRobots'      => 'noindex',
         ],
+        'contacto' => [
+            'seoTitle'        => 'Contacto',
+            'metaDescription' => 'Contacte a equipa do website BensPenhorados.pt',
+            'metaRobots'      => 'noindex',
+        ],
     ];
 
     /**
