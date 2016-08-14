@@ -93,7 +93,7 @@
             <div class="col-md-12 col-xs-12">
                 <!-- Bens Penhorados - Above item details -->
                 <ins class="adsbygoogle"
-                     style="display:block"
+                     style="display:block;height:100%;"
                      data-ad-client="ca-pub-1654487041005723"
                      data-ad-slot="2818160424"
                      data-ad-format="auto"></ins>

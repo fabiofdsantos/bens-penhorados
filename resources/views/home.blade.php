@@ -62,7 +62,7 @@
   <div class="col-md-12 col-xs-12">
 <!-- Bens Penhorados - Homepage (mid) -->
 <ins class="adsbygoogle"
-     style="display:block;height:90px;"
+     style="display:block;height:100%;"
      data-ad-client="ca-pub-1654487041005723"
      data-ad-slot="2614604422"
      data-ad-format="auto"></ins>
