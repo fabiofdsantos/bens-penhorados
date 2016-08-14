@@ -308,7 +308,7 @@ class ExtractGenericAttributesJob extends Job
                     $filename = $i.'-'.$this->attributes['code'].'.jpg';
                     $img->fit(600, 400);
                     $img->encode('jpg', 90);
-                    $img->save('public/images/'.$filename);
+                    $img->save(base_path('public/images/'.$filename));
 
                     $images[] = $filename;
                 } catch (\Exception $e) {
