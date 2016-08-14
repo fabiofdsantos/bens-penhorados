@@ -1,27 +1,15 @@
-<div class="container">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">Bens Penhorados</a>
-    </div>
-
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav navbar-left">
-            <li>
-                <a href="/imoveis"><i class="glyphicon glyphicon-home"></i> Imóveis</a>
-            </li>
-            <li>
-                <a href="/veiculos"><i class="glyphicon glyphicon-dashboard"></i> Veículos</a>
-            </li>
-            <li>
-                <a href="/outros"><i class="glyphicon glyphicon-duplicate"></i> Outros</a>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-        </ul>
-    </div>
+<div class="header clearfix">
+  <nav>
+    <ul class="nav nav-pills pull-right">
+      <li role="presentation"><a href="/">Página inicial</a></li>
+      <li role="presentation"><a href="/imoveis">Imóveis</a></li>
+      <li role="presentation"><a href="/veiculos">Veículos</a></li>
+      <li role="presentation"><a href="/outros">Outros bens</a></li>
+    </ul>
+  </nav>
+  @if(isset($isHomepage))
+    <h1 class="text-muted">Bens Penhorados</h1>
+  @else
+    <h3 class="text-muted">Bens Penhorados</h3>
+  @endif
 </div>

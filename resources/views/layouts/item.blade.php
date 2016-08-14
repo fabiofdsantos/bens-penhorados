@@ -2,7 +2,6 @@
 
 @section('main')
 <div class="section">
-    <div class="container">
         <h1 class="page-header">{{ $generic['title'] }}</h1>
         <div class="row" style="margin-bottom: 15px">
             <div class="col-xs-12 col-sm-6 col-md-6">
@@ -210,7 +209,6 @@
                 @endif
             </div>
         </div>
-    </div>
 </div>
 @stop
 

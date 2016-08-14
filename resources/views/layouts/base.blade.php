@@ -37,30 +37,27 @@
         ga('send', 'pageview');
     </script>
 
-    <nav class="navbar navbar-default navbar-fixed-top">
-        @include('layouts.partials.nav')
-    </nav>
-    @yield('main')
-    <footer>
-        <div class="container">
-            <div class="row" style="margin-bottom:15px; margint-top:5px;">
-                <div class="col-md-12 col-xs-12">
-                    <!-- Bens Penhorados - Footer -->
-                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1654487041005723" data-ad-slot="5911227620" data-ad-format="auto"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-            </div>
-        </div>
-        @include('layouts.partials.footer')
-        </div>
-    </footer>
+    <div class="container">
+      @include('layouts.partials.nav')
+      @yield('main')
+      <footer class="footer text-center">
+              <!--<div class="row" style="margin-bottom:15px; margint-top:5px;">
+                  <div class="col-md-12 col-xs-12">
+                      Bens Penhorados - Footer
+                      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1654487041005723" data-ad-slot="5911227620" data-ad-format="auto"></ins>
+                      <script>
+                          (adsbygoogle = window.adsbygoogle || []).push({});
+                      </script>
+                  </div>
+              </div>-->
+          @include('layouts.partials.footer')
+      </footer>
+    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({
             google_ad_client: "ca-pub-1654487041005723",
