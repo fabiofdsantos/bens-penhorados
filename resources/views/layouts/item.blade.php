@@ -54,6 +54,25 @@
                         </div>
                     </div>
                 </div>
+                @if($generic['status'] != 'Finalizado')
+                    @if($generic['purchaseType'] == 'Leilão eletrónico')
+                    <div class="item-buttons text-center">
+                        <div class="col-xs-12 col-sm-12">
+                            <a class="btn btn-primary" target="_blank" rel="nofollow" href="http://www.portaldasfinancas.gov.pt/pt/main.jsp?body=/external/slelei/SLELEI/detalheLeilao.htm&codigoLeilao={{ $generic['taxOfficeId']}}.{{ $generic['year'] }}.{{ $generic['extId'] }}" role="button">
+                                <i class="glyphicon glyphicon-new-window"></i> Entrar no leilão eletrónico
+                            </a>
+                        </div>
+                    </div>
+                    @else
+                    <div class="item-buttons text-center">
+                        <div class="col-xs-12 col-sm-12">
+                            <a class="btn btn-primary" target="_blank" rel="nofollow" href="https://vendas.portaldasfinancas.gov.pt/bens/entregaPropostaForm.action?idVenda={{ $generic['extId'] }}&sf={{ $generic['taxOfficeId']}}&ano={{ $generic['year'] }}&popup=false" role="button">
+                                <i class="glyphicon glyphicon-new-window"></i> Entregar proposta
+                            </a>
+                        </div>
+                    </div>
+                    @endif
+                @endif
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 show-grid">
                 <div style="max-width: 100%;" class="text-center">
@@ -77,15 +96,6 @@
                     @endif
                 </div>
             </div>
-            @if($generic['status'] != 'Finalizado')
-            <!--<div class="item-buttons col-md-6 text-center">
-                <div class="col-xs-12 col-sm-12">
-                    <a class="btn btn-primary" target="_blank" rel="nofollow" href="https://vendas.portaldasfinancas.gov.pt/bens/detalheVenda.action?idVenda={{ $generic['extId'] }}&sf={{ $generic['taxOfficeId']}}&ano={{ $generic['year'] }}" role="button">
-                        <i class="glyphicon glyphicon-new-window"></i> Ver anúncio original
-                    </a>
-                </div>
-            </div>-->
-            @endif
         </div>
 
         @if(!empty($generic['images']))
