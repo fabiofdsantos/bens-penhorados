@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                @if($generic['status'] != 'Finalizado')
+                @if($generic['status'] == 'Em curso')
                     @if($generic['purchaseType'] == 'Leilão eletrónico')
                     <div class="item-buttons text-center">
                         <div class="col-xs-12 col-sm-12">
