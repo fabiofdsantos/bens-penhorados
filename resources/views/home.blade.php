@@ -5,7 +5,7 @@
   <div class="col-md-12 col-xs-12 text-center" style="margin-bottom:15px;">
     <!-- Bens Penhorados - Links -->
     <ins class="adsbygoogle"
-         style="display:block"
+         style="display:block;height:15px;"
          data-ad-client="ca-pub-1654487041005723"
          data-ad-slot="2538958820"
          data-ad-format="link"></ins>
@@ -62,10 +62,10 @@
   <div class="col-md-12 col-xs-12">
 <!-- Bens Penhorados - Homepage (mid) -->
 <ins class="adsbygoogle"
-     style="display:block;height:100%;"
+     style="display:block;width:100%;height:90px;"
      data-ad-client="ca-pub-1654487041005723"
      data-ad-slot="2614604422"
-     data-ad-format="auto"></ins>
+     data-ad-format="rectangle, horizontal"></ins>
      <script>
          (adsbygoogle = window.adsbygoogle || []).push({});
      </script>
