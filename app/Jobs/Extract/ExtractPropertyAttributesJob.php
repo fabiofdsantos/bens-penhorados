@@ -248,7 +248,7 @@ class ExtractPropertyAttributesJob extends Job
                 $title .= ' - T'.$this->attributes['typology'];
             }
 
-            return $title;
+            return "$title ({$this->code})";
         }
 
         return $this->code;
