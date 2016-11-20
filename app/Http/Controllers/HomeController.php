@@ -32,8 +32,8 @@ class HomeController extends Controller
         $data = [
             'latest'          => self::getLatestItems(6),
             'endingSoon'      => self::getItemsEndingSoon(6),
-            'seoTitle'        => 'Venda de Bens Penhorados em Portugal',
-            'metaDescription' => 'Encontre bens penhorados pelas Finanças. Compre carros, casas, apartamentos, jóias, material de escritório e muito mais a preços fantásticos.',
+            'seoTitle'        => 'Consultar Leilões e Vendas de Bens Penhorados em Portugal',
+            'metaDescription' => 'Encontre bens penhorados pelas finanças, bancos e tribunais. Compre carros, casas, apartamentos, jóias, material de escritório e muito mais a preços fantásticos.',
             'isHomepage'      => true,
         ];
 
