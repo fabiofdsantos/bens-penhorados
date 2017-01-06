@@ -58,7 +58,7 @@
                     @if($generic['purchaseType'] == 'Leilão eletrónico')
                     <div class="item-buttons text-center">
                         <div class="col-xs-12 col-sm-12">
-                            <a class="btn btn-primary" target="_blank" rel="nofollow" href="http://www.portaldasfinancas.gov.pt/pt/main.jsp?body=/external/slelei/SLELEI/detalheLeilao.htm&codigoLeilao={{ $generic['taxOfficeId']}}.{{ $generic['year'] }}.{{ $generic['extId'] }}" role="button">
+                            <a class="btn btn-primary" target="_blank" rel="nofollow" href="https://www.portaldasfinancas.gov.pt/pt/main.jsp?body=/external/sigveclel/detalheLeilao.htm&codigoLeilao={{ $generic['taxOfficeId']}}.{{ $generic['year'] }}.{{ $generic['extId'] }}" role="button">
                                 <i class="glyphicon glyphicon-new-window"></i> Entrar no leilão eletrónico
                             </a>
                         </div>
