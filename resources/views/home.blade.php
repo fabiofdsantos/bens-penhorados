@@ -19,7 +19,7 @@
     <div class="col-md-8">
       <h2>Leilões e Vendas de Penhoras das Finanças</h2>
       <p>Encontre bens penhorados pelas Finanças (Autoridade Tributária), Bancos e Tribunais, em Portugal continental, Madeira e Açores.</p>
-      <p>Poderá comprar carros, veículos pesados, motos, reboques, imóveis (p. ex. casas, apartamentos, lojas e terrenos), participações sociais e outros tipos de bens penhorados como jóias, material de escritório, entre outros.</p>
+      <p>Poderá comprar carros, veículos pesados, motos, reboques, imóveis (p. ex. casas, apartamentos, lojas e terrenos), participações sociais e outros tipos de bens como jóias, material de escritório, entre outros.</p>
       <p>Os negócios são realizados através de leilão eletrónico, carta fechada ou negociação particular, sendo possível encontrar bens penhorados com um valor base a partir de €1.</p>
     </div>
     <div class="col-md-4">
