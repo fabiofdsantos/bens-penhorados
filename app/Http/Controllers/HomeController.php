@@ -32,8 +32,8 @@ class HomeController extends Controller
         $data = [
             'latest'          => self::getLatestItems(6),
             'endingSoon'      => self::getItemsEndingSoon(6),
-            'seoTitle'        => 'Consultar Leilões e Vendas de Bens Penhorados das Finanças',
-            'metaDescription' => 'Encontre bens penhorados pelas finanças, bancos e tribunais. Compre terrenos, motas, carros, casas, apartamentos, material de escritório e muito mais a preços fantásticos.',
+            'seoTitle'        => 'Bens Penhorados das Finanças - Pesquisar Leilões e Vendas',
+            'metaDescription' => 'Consultar bens penhorados pelas finanças, bancos e tribunais. Comprar terrenos, motas, carros, casas, apartamentos, material de escritório, etc.',
             'isHomepage'      => true,
         ];
 
