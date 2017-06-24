@@ -65,7 +65,7 @@
     <hr>
   </div>
   <div class="col-md-12">
-    <p>Sabe o que são bens penhorados? De seguida, poderá encontrar as respostas às dúvidas mais frequentes sobre este tema, por isso fique atento.</p>
+    <p>Sabe o que são bens penhorados pelos bancos, finanças e tribunais? De seguida, poderá encontrar as respostas às dúvidas mais frequentes sobre este tema, por isso fique atento.</p>
 
     <h4>O que são bens penhorados?</h4>
     <p>Antes de começarmos a falar sobre bens penhorados é fundamental entender o significado de penhora. A penhora é na verdade uma apreensão realizada ao abrigo da lei, que incide sobre um bem que teria sido dado anteriormente como garantia de um determinado compromisso (p. ex. pagamento). Quando o devedor que garantiu o bem como meio de pagamento não cumprir o acordo, o credor executa a garantia (o bem) através da penhora deste.</p>
@@ -103,7 +103,16 @@
       </ul>
     </p>
     <p>E são estes alguns dos principais cuidados a ter em consideração no momento de aquisição de um bem nestas condições, observando que estes cuidados visam única e exclusivamente tornar a sua compra muito mais segura e livre de quaisquer fatores que se revelem prejudiciais ou insatisfatórios.</p>
-
+    
+    <h4>Pesquisar penhoras</h4>
+    <p>Neste site poderá encontrar milhares de penhoras das finanças. Basta pesquisar o que pretende em cada uma das categorias que se encontram disponíveis:</p>
+    <p>
+      <ul>
+        <li><a href="/imoveis">Imóveis</a>: Casas, apartamentos, vivendas, terrenos e lojas.</li>
+        <li><a href="/veiculos">Veículos</a>: Carros, pesados, motociclos, tractores e reboques.</li>
+        <li><a href="/outros">Outros</a>: Participações sociais, telemóveis, maquinaria, móveis, jóias, etc.</li>
+      </ul>
+    </p>
   </div>
 </div>
 
