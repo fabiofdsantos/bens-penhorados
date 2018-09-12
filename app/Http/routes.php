@@ -62,7 +62,7 @@ $app->group([
  * API - Search results
  */
  $app->group([
-     'prefix' => 'api/v1/',
+     'prefix'    => 'api/v1/',
      'namespace' => 'App\Http\Controllers\Results',
  ], function () use ($app) {
      // Get properties
@@ -79,9 +79,9 @@ $app->group([
  * API - Filtering attributes
  */
 $app->group([
-    'prefix' => 'api/v1/attributes/',
+    'prefix'     => 'api/v1/attributes/',
     'middleware' => 'wantsJson',
-    'namespace' => 'App\Http\Controllers\FilteringAttributes',
+    'namespace'  => 'App\Http\Controllers\FilteringAttributes',
 ], function () use ($app) {
     // Get filtering attributes for properties
     $app->get('property', [
