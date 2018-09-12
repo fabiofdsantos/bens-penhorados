@@ -10,7 +10,7 @@
  */
 
 $app->group([
-    'namespace'  => 'App\Http\Controllers',
+    'namespace' => 'App\Http\Controllers',
 ], function () use ($app) {
     // Homepage
     $app->get('/', ['uses' => 'HomeController@index']);
@@ -29,30 +29,7 @@ $app->group([
 
     // Generate sitemap
     $app->get('sitemap.xml', function () {
-        header('Content-type: text/xml');
-
-        $xml = [];
-        $xml[] = '<?xml version="1.0" encoding="UTF-8"?'.'>';
-        $xml[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-        $xml[] = '  <url>';
-        $xml[] = '    <loc>https://www.benspenhorados.pt</loc>';
-        $xml[] = '    <lastmod>'.\Carbon\Carbon::today()->toW3cString().'</lastmod>';
-        $xml[] = '    <changefreq>daily</changefreq>';
-        $xml[] = '    <priority>0.8</priority>';
-        $xml[] = '  </url>';
-
-        $items = \App\Models\Items\Item::all();
-
-        foreach ($items as $item) {
-            $xml[] = '  <url>';
-            $xml[] = '    <loc>https://www.benspenhorados.pt/'.$item->category()->pluck('slug').'/'.$item->slug.'</loc>';
-            $xml[] = '    <lastmod>'.\Carbon\Carbon::parse($item->updated_at)->toW3cString().'</lastmod>';
-            $xml[] = '  </url>';
-        }
-
-        $xml[] = '</urlset>';
-
-        return implode("\n", $xml);
+        return \Storage::get('sitemap.xml');
     });
 
     // Get static page
@@ -85,29 +62,27 @@ $app->group([
  * API - Search results
  */
  $app->group([
-     'prefix'     => 'api/v1/',
-     'namespace'  => 'App\Http\Controllers\Results',
+     'prefix' => 'api/v1/',
+     'namespace' => 'App\Http\Controllers\Results',
  ], function () use ($app) {
+     // Get properties
+     $app->get('properties', ['uses' => 'PropertyResultsController@index']);
 
-    // Get properties
-    $app->get('properties', ['uses' => 'PropertyResultsController@index']);
+     // Get vehicles
+     $app->get('vehicles', ['uses' => 'VehicleResultsController@index']);
 
-    // Get vehicles
-    $app->get('vehicles', ['uses' => 'VehicleResultsController@index']);
-
-    // Get other items
-    $app->get('others', ['uses' => 'OtherResultsController@index']);
+     // Get other items
+     $app->get('others', ['uses' => 'OtherResultsController@index']);
  });
 
 /*
  * API - Filtering attributes
  */
 $app->group([
-    'prefix'     => 'api/v1/attributes/',
+    'prefix' => 'api/v1/attributes/',
     'middleware' => 'wantsJson',
-    'namespace'  => 'App\Http\Controllers\FilteringAttributes',
+    'namespace' => 'App\Http\Controllers\FilteringAttributes',
 ], function () use ($app) {
-
     // Get filtering attributes for properties
     $app->get('property', [
         'uses' => 'PropertyFilteringAttrController@index',

@@ -26,6 +26,7 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\ExtractCommand',
         'App\Console\Commands\ResetPreviousExtractionCommand',
         'App\Console\Commands\CleanRawDataCommand',
+        'App\Console\Commands\GenerateSitemapCommand',
     ];
 
     /**
@@ -36,7 +37,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // At 20:00 on Mon, Tue, Wed, Thu and Fri.
-        $schedule->command('jobs:import')
-            ->cron('00 20 * * 1-5');
+        $schedule->command('jobs:import')->cron('00 20 * * 1-5');
+
+        // Once a day
+        $schedule->command('generate:sitemap')->daily();
     }
 }
