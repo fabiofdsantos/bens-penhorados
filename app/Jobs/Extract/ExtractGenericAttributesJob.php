@@ -43,30 +43,24 @@ class ExtractGenericAttributesJob extends Job
      * @var array
      */
     protected $attributes = [
-        'code'             => null,
-        'category_id'      => null,
-        'status_id'        => null,
-        'tax_office_id'    => null,
-        'year'             => null,
+        'code' => null,
+        'category_id' => null,
+        'status_id' => null,
+        'tax_office_id' => null,
+        'year' => null,
         'purchase_type_id' => null,
-        'district_id'      => null,
-        'municipality_id'  => null,
-        'price'            => null,
-        'vat'              => null,
-        'lat'              => null,
-        'lng'              => null,
-        'images'           => null,
+        'district_id' => null,
+        'municipality_id' => null,
+        'price' => null,
+        'vat' => null,
+        'lat' => null,
+        'lng' => null,
+        'images' => null,
         'full_description' => null,
-        'depositary_name'  => null,
-        'depositary_phone' => null,
-        'depositary_email' => null,
-        'mediator_name'    => null,
-        'mediator_phone'   => null,
-        'mediator_email'   => null,
         'preview_dt_start' => null,
-        'preview_dt_end'   => null,
-        'acceptance_dt'    => null,
-        'opening_dt'       => null,
+        'preview_dt_end' => null,
+        'acceptance_dt' => null,
+        'opening_dt' => null,
     ];
 
     /**
@@ -99,7 +93,7 @@ class ExtractGenericAttributesJob extends Job
         $this->attributes['lat'] = $lat;
         $this->attributes['lng'] = $lng;
         $this->filePath = $this->getFilePath($code);
-        $this->downloadImages = ($ignoreImages === false ? true : false);
+        $this->downloadImages = (false === $ignoreImages ? true : false);
         $this->extractor = new GenericExtractorWrapper();
     }
 
@@ -148,18 +142,18 @@ class ExtractGenericAttributesJob extends Job
 
             // Call the right command to extract specific attributes
             $category = ItemCategory::find($this->attributes['category_id']);
-            if ($category->name === 'Imóveis') {
+            if ('Imóveis' === $category->name) {
                 Bus::dispatch(new ExtractPropertyAttributesJob($this->attributes['code'], $description));
-            } elseif ($category->name === 'Veículos') {
+            } elseif ('Veículos' === $category->name) {
                 Bus::dispatch(new ExtractVehicleAttributesJob($this->attributes['code'], $description));
-            } elseif ($category->name === 'Participações sociais') {
+            } elseif ('Participações sociais' === $category->name) {
                 // TODO - Extract corporate share attributes
                 //Bus::dispatch(new ExtractCorporateShareAttributesJob($this->attributes['code'], $this->attributes['full_description']));
             } else {
                 // Set is_other_type as true
                 Item::find($this->attributes['code'])->update([
                     'is_other_type' => true,
-                    'seo_title'     => "Bem Penhorado nº {$this->attributes['code']}",
+                    'seo_title' => "Bem Penhorado nº {$this->attributes['code']}",
                 ]);
 
                 // Update raw data
@@ -172,8 +166,6 @@ class ExtractGenericAttributesJob extends Job
 
     /**
      * Called when the job is failing.
-     *
-     * @return void
      */
     public function failed()
     {
@@ -194,7 +186,7 @@ class ExtractGenericAttributesJob extends Job
     {
         if ($crawler->filter('.info-element-title > p:nth-child(1)')->count() > 0) {
             // dupla verificação
-            if ($crawler->filter('.info-element-title > p')->text() == 'Venda inexistente ou inactiva.' || $crawler->filter('.info-element-title > p')->text() == 'Venda não disponível para consulta') {
+            if ('Venda inexistente ou inactiva.' == $crawler->filter('.info-element-title > p')->text() || 'Venda não disponível para consulta' == $crawler->filter('.info-element-title > p')->text()) {
                 //return 'not found';
             } else {
                 /*Por motivos de ordem técnica, não é possível satisfazer o seu pedido neste momento.
@@ -210,8 +202,6 @@ class ExtractGenericAttributesJob extends Job
      * Extract item's attributes from the top of the raw data.
      *
      * @param Crawler $crawler
-     *
-     * @return void
      */
     private function extractTopAttributes(Crawler $crawler)
     {
@@ -237,8 +227,6 @@ class ExtractGenericAttributesJob extends Job
      * Extract item's attributes from the bottom of the raw data.
      *
      * @param Crawler $crawler
-     *
-     * @return void
      */
     private function extractBottomAttributes(Crawler $crawler)
     {
@@ -248,28 +236,6 @@ class ExtractGenericAttributesJob extends Job
 
             if (preg_match('/caracteristicas/i', $title)) {
                 $this->attributes['full_description'] = Text::clean($text);
-            } elseif (preg_match('/fiel depositario/i', $title)) {
-                $this->attributes['depositary_name'] = $this->extractor->fullName($text);
-
-                if (isset($this->attributes['depositary_name'])) {
-                    $this->attributes['depositary_phone'] = $this->extractor->phoneNumber($text);
-
-                    if (preg_match('/email/i', $text)) {
-                        $text = $crawler->filter('span.info-element-text')->eq($i)->filter('a')->attr('href');
-                        $this->attributes['depositary_email'] = $this->extractor->email($text);
-                    }
-                }
-            } elseif (preg_match('/mediador/i', $title)) {
-                $this->attributes['mediator_name'] = $this->extractor->fullName($text);
-
-                if (isset($this->attributes['mediator_name'])) {
-                    $this->attributes['mediator_phone'] = $this->extractor->phoneNumber($text);
-
-                    if (preg_match('/email/i', $text)) {
-                        $text = $crawler->filter('span.info-element-text')->eq($i)->filter('a')->attr('href');
-                        $this->attributes['mediator_email'] = $this->extractor->email($text);
-                    }
-                }
             } elseif (preg_match('/examinar o bem/i', $title)) {
                 $preview_dt = $this->extractor->startEndDatetime($text);
                 $this->attributes['preview_dt_start'] = $preview_dt[0];
@@ -293,7 +259,7 @@ class ExtractGenericAttributesJob extends Job
     {
         $externalImages = [];
         $image_total = $crawler->filter('img')->count();
-        for ($c = 1; $c <= $image_total; $c++) {
+        for ($c = 1; $c <= $image_total; ++$c) {
             $externalImages[$c - 1] = $crawler->filter('img:nth-child('.$c.')')->attr('src');
             $externalImages[$c - 1] = preg_replace('/1(?=\.jpg)/', '2', $externalImages[$c - 1]);
         }
@@ -312,9 +278,8 @@ class ExtractGenericAttributesJob extends Job
 
                     $images[] = $filename;
                 } catch (\Exception $e) {
-                    //
                 }
-                $i++;
+                ++$i;
             }
 
             return empty($images) ? null : json_encode($images);
@@ -323,8 +288,6 @@ class ExtractGenericAttributesJob extends Job
 
     /**
      * Set the location of the current item by the tax office location.
-     *
-     * @return void
      */
     private function setLocationByTaxOffice()
     {

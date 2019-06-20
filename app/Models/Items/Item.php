@@ -42,12 +42,6 @@ use Illuminate\Support\Str;
  * @property float|null       $lat
  * @property float|null       $lng
  * @property string           $images
- * @property string|null      $depositary_name
- * @property int|null         $depositary_phone
- * @property string|null      $depositary_email
- * @property string|null      $mediator_name
- * @property int|null         $mediator_phone
- * @property string|null      $mediator_email
  * @property Carbon           $preview_dt_start
  * @property Carbon           $preview_dt_end
  * @property Carbon           $acceptance_dt
@@ -180,7 +174,7 @@ class Item extends Model
     public function scopeSetPolymorphicRelation(Builder $query, $code, $model)
     {
         return $query->where('code', $code)->update([
-            'itemable_id'   => $model->getKey(),
+            'itemable_id' => $model->getKey(),
             'itemable_type' => $model->getMorphClass(),
         ]);
     }

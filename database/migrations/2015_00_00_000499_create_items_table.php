@@ -51,12 +51,6 @@ class CreateItemsTable extends Migration
             $table->double('lng')->nullable();
             $table->text('images')->nullable();
             $table->text('full_description');
-            $table->string('depositary_name')->nullable();
-            $table->integer('depositary_phone')->nullable();
-            $table->string('depositary_email')->nullable();
-            $table->string('mediator_name')->nullable();
-            $table->integer('mediator_phone')->nullable();
-            $table->string('mediator_email')->nullable();
             $table->dateTime('preview_dt_start')->nullable();
             $table->dateTime('preview_dt_end')->nullable();
             $table->dateTime('acceptance_dt');
