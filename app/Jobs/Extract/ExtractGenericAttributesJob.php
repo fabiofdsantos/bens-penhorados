@@ -43,24 +43,24 @@ class ExtractGenericAttributesJob extends Job
      * @var array
      */
     protected $attributes = [
-        'code' => null,
-        'category_id' => null,
-        'status_id' => null,
-        'tax_office_id' => null,
-        'year' => null,
+        'code'             => null,
+        'category_id'      => null,
+        'status_id'        => null,
+        'tax_office_id'    => null,
+        'year'             => null,
         'purchase_type_id' => null,
-        'district_id' => null,
-        'municipality_id' => null,
-        'price' => null,
-        'vat' => null,
-        'lat' => null,
-        'lng' => null,
-        'images' => null,
+        'district_id'      => null,
+        'municipality_id'  => null,
+        'price'            => null,
+        'vat'              => null,
+        'lat'              => null,
+        'lng'              => null,
+        'images'           => null,
         'full_description' => null,
         'preview_dt_start' => null,
-        'preview_dt_end' => null,
-        'acceptance_dt' => null,
-        'opening_dt' => null,
+        'preview_dt_end'   => null,
+        'acceptance_dt'    => null,
+        'opening_dt'       => null,
     ];
 
     /**
@@ -153,7 +153,7 @@ class ExtractGenericAttributesJob extends Job
                 // Set is_other_type as true
                 Item::find($this->attributes['code'])->update([
                     'is_other_type' => true,
-                    'seo_title' => "Bem Penhorado nº {$this->attributes['code']}",
+                    'seo_title'     => "Bem Penhorado nº {$this->attributes['code']}",
                 ]);
 
                 // Update raw data
@@ -259,7 +259,7 @@ class ExtractGenericAttributesJob extends Job
     {
         $externalImages = [];
         $image_total = $crawler->filter('img')->count();
-        for ($c = 1; $c <= $image_total; ++$c) {
+        for ($c = 1; $c <= $image_total; $c++) {
             $externalImages[$c - 1] = $crawler->filter('img:nth-child('.$c.')')->attr('src');
             $externalImages[$c - 1] = preg_replace('/1(?=\.jpg)/', '2', $externalImages[$c - 1]);
         }
@@ -279,7 +279,7 @@ class ExtractGenericAttributesJob extends Job
                     $images[] = $filename;
                 } catch (\Exception $e) {
                 }
-                ++$i;
+                $i++;
             }
 
             return empty($images) ? null : json_encode($images);
