@@ -174,7 +174,7 @@ class Item extends Model
     public function scopeSetPolymorphicRelation(Builder $query, $code, $model)
     {
         return $query->where('code', $code)->update([
-            'itemable_id' => $model->getKey(),
+            'itemable_id'   => $model->getKey(),
             'itemable_type' => $model->getMorphClass(),
         ]);
     }

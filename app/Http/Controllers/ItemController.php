@@ -93,11 +93,11 @@ class ItemController extends Controller
         $property = Property::find($generic->itemable_id);
 
         $item = [
-            'locationOnDesc' => (false == $property->location_on_desc) ? null : true,
-            'landRegistry' => $property->landRegistry()->pluck('name'),
-            'typology' => $property->typology,
-            'generic' => self::getGenericAttributes($generic),
-            'seoTitle' => $generic->seo_title,
+            'locationOnDesc'  => (false == $property->location_on_desc) ? null : true,
+            'landRegistry'    => $property->landRegistry()->pluck('name'),
+            'typology'        => $property->typology,
+            'generic'         => self::getGenericAttributes($generic),
+            'seoTitle'        => $generic->seo_title,
             'metaDescription' => $generic->meta_description,
         ];
 
@@ -122,18 +122,18 @@ class ItemController extends Controller
         $vehicle = Vehicle::find($generic->itemable_id);
 
         $item = [
-            'year' => $vehicle->year,
-            'make' => $vehicle->make()->pluck('name'),
-            'model' => $vehicle->model()->pluck('name'),
-            'category' => $vehicle->category()->pluck('name'),
-            'type' => $vehicle->type()->pluck('name'),
-            'color' => $vehicle->color()->pluck('name'),
-            'fuel' => $vehicle->fuel()->pluck('name'),
-            'goodCondition' => is_null($vehicle->is_good_condition) ? null : (bool) $vehicle->is_good_condition,
-            'engDispl' => $vehicle->engine_displacement,
-            'regPlateCode' => $vehicle->reg_plate_code,
-            'generic' => self::getGenericAttributes($generic),
-            'seoTitle' => $generic->seo_title,
+            'year'            => $vehicle->year,
+            'make'            => $vehicle->make()->pluck('name'),
+            'model'           => $vehicle->model()->pluck('name'),
+            'category'        => $vehicle->category()->pluck('name'),
+            'type'            => $vehicle->type()->pluck('name'),
+            'color'           => $vehicle->color()->pluck('name'),
+            'fuel'            => $vehicle->fuel()->pluck('name'),
+            'goodCondition'   => is_null($vehicle->is_good_condition) ? null : (bool) $vehicle->is_good_condition,
+            'engDispl'        => $vehicle->engine_displacement,
+            'regPlateCode'    => $vehicle->reg_plate_code,
+            'generic'         => self::getGenericAttributes($generic),
+            'seoTitle'        => $generic->seo_title,
             'metaDescription' => $generic->meta_description,
         ];
 
@@ -156,7 +156,7 @@ class ItemController extends Controller
         }
 
         $item = [
-            'generic' => self::getGenericAttributes($generic),
+            'generic'  => self::getGenericAttributes($generic),
             'seoTitle' => $generic->seo_title,
         ];
 
@@ -177,27 +177,27 @@ class ItemController extends Controller
         $extraAttr = explode('.', $generic->code);
 
         return [
-            'extId' => $extraAttr[2],
+            'extId'       => $extraAttr[2],
             'taxOfficeId' => $extraAttr[0],
-            'year' => $generic->year,
-            'code' => $generic->code,
-            'taxOffice' => self::getTaxOfficeName($generic->taxOffice),
-            'location' => "$generic->municipality, $generic->district",
-            'title' => $generic->title,
-            'slug' => $generic->slug,
-            'price' => [
+            'year'        => $generic->year,
+            'code'        => $generic->code,
+            'taxOffice'   => self::getTaxOfficeName($generic->taxOffice),
+            'location'    => "$generic->municipality, $generic->district",
+            'title'       => $generic->title,
+            'slug'        => $generic->slug,
+            'price'       => [
                 'value' => $generic->price,
-                'vat' => $generic->vat,
+                'vat'   => $generic->vat,
             ],
-            'status' => $generic->status()->pluck('name'),
+            'status'       => $generic->status()->pluck('name'),
             'purchaseType' => $generic->purchaseType()->pluck('name'),
-            'description' => $generic->full_description,
-            'images' => json_decode($generic->images),
-            'dates' => [
+            'description'  => $generic->full_description,
+            'images'       => json_decode($generic->images),
+            'dates'        => [
                 'previewDtStart' => $generic->preview_dt_start->format(self::DATETIME_FORMAT),
-                'previewDtEnd' => $generic->preview_dt_end->format(self::DATETIME_FORMAT),
-                'openingDt' => $generic->opening_dt->format(self::DATETIME_FORMAT),
-                'acceptanceDt' => $generic->acceptance_dt->format(self::DATETIME_FORMAT),
+                'previewDtEnd'   => $generic->preview_dt_end->format(self::DATETIME_FORMAT),
+                'openingDt'      => $generic->opening_dt->format(self::DATETIME_FORMAT),
+                'acceptanceDt'   => $generic->acceptance_dt->format(self::DATETIME_FORMAT),
             ],
         ];
     }
