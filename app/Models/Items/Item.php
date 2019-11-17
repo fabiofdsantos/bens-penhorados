@@ -91,6 +91,7 @@ class Item extends Model
             'preview_dt_end',
             'acceptance_dt',
             'opening_dt',
+            'created_at,
         ];
     }
 
