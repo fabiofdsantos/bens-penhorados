@@ -1,11 +1,11 @@
 # Política de Privacidade
-> Última atualização desta página: 20/09/2019
+> Última atualização desta página: 17/11/2019
 
-Todas as informações recolhidas serão única e exclusivamente utilizadas para melhorar a sua experiência enquanto visita o nosso website.
+Todas as informações recolhidas serão única e exclusivamente utilizadas para melhorar a sua experiência enquanto visita o nosso website. Este website é apenas um agregador de informação (p. ex. como o Google) e visa única e exclusivamente facilitar o acesso a bens penhorados.
 
-Todas as informações constantes neste website têm origem em várias fontes de informação, sendo estas as responsáveis pela introdução dos referidos dados. Não obstante, é possível requerer a eliminação de qualquer informação constante neste website mediante o contacto através da nossa [página de contacto](/contacto).
+Todas as informações constantes neste website têm origem em várias fontes de informação públicas e acessíveis publicamente, sendo estas as responsáveis pela introdução dos referidos dados em primeira instância. Não obstante, é possível requerer a eliminação de qualquer informação constante neste website mediante o contacto através da nossa [página de contacto](/contacto).
 
-Este website não faz o tratamento de dados pessoais, tais como nome, email e telefone do fiel depositário dos bens e respetivo mediador. Quaisquer dados pessoais que se encontrem neste website derivam de mecanismos automáticos de importação de dados das diferentes fontes de informação e podem ser removidos mediante [contacto](/contacto)..
+Este website não faz o tratamento de dados pessoais, tais como nome, email e telefone do fiel depositário dos bens e respetivo mediador. Quaisquer dados pessoais que se encontrem neste website derivam de mecanismos automáticos de importação de dados das diferentes fontes de informação e podem ser removidos mediante [contacto](/contacto).
 
 ## Cookie DoubleClick Dart
 O Google, como fornecedor de terceiros, utiliza cookies para exibir anúncios no nosso website.
