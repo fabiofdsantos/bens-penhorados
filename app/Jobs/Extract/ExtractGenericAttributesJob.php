@@ -135,7 +135,10 @@ class ExtractGenericAttributesJob extends Job
 
             // Create or update a generic item
             $this->setLocationByTaxOffice();
-            Item::updateOrCreate($this->attributes);
+            $isUpdated = Item::where('code', $this->attributes['code'])->update($this->attributes);
+            if ($isUpdated === 0) {
+                Item::create($this->attributes);  
+            }        
 
             // Split the description
             $description = Text::splitter($this->attributes['full_description']);
