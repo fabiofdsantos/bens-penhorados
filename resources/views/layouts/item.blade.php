@@ -52,7 +52,7 @@
                             <br />
                             <small>Abertura de propostas a {{ $generic['dates']['openingDt'] }}</small>
                             <br />
-                            <small>Publicado a {{ $generic['dates']['createdAt'] }}</small>
+                            <small>Publicado neste website a {{ $generic['dates']['createdAt'] }}</small>
                         </div>
                     </div>
                 </div>
