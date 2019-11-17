@@ -198,6 +198,7 @@ class ItemController extends Controller
                 'previewDtEnd'   => $generic->preview_dt_end->format(self::DATETIME_FORMAT),
                 'openingDt'      => $generic->opening_dt->format(self::DATETIME_FORMAT),
                 'acceptanceDt'   => $generic->acceptance_dt->format(self::DATETIME_FORMAT),
+                'createdAt'      => $generic->created_at->format(self::DATETIME_FORMAT),
             ],
         ];
     }
