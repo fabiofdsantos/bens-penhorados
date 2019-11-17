@@ -53,7 +53,7 @@
                             <small>Abertura de propostas a {{ $generic['dates']['openingDt'] }}</small>
                             <br />
                             <br />
-                            <small style="style="color:#808080; float:right;"><i>Publicado neste website a {{ $generic['dates']['createdAt'] }}</i></small>
+                            <small style="color:#808080; float:right;"><i>Publicado neste website a {{ $generic['dates']['createdAt'] }}</i></small>
                         </div>
                     </div>
                 </div>
