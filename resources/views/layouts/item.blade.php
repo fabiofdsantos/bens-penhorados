@@ -50,7 +50,9 @@
                             <small>Examinação do bem de {{ $generic['dates']['previewDtStart'] }}</small>
                             <small>até {{ $generic['dates']['previewDtEnd'] }}</small>
                             <br />
-                            <small>Abertura de propostas em {{ $generic['dates']['openingDt'] }}</small>
+                            <small>Abertura de propostas a {{ $generic['dates']['openingDt'] }}</small>
+                            <br />
+                            <small>Publicado a {{ $generic['dates']['createdAt'] }}</small>
                         </div>
                     </div>
                 </div>
