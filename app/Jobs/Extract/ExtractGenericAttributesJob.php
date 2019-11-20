@@ -137,8 +137,8 @@ class ExtractGenericAttributesJob extends Job
             $this->setLocationByTaxOffice();
             $isUpdated = Item::where('code', $this->attributes['code'])->update($this->attributes);
             if ($isUpdated === 0) {
-                Item::create($this->attributes);  
-            }        
+                Item::create($this->attributes);
+            }
 
             // Split the description
             $description = Text::splitter($this->attributes['full_description']);
