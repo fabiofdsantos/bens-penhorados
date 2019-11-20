@@ -1,5 +1,5 @@
 # Bens Penhorados
-[![Scrutinizer](https://img.shields.io/scrutinizer/g/ffsantos92/bens-penhorados.svg)](https://scrutinizer-ci.com/g/ffsantos92/bens-penhorados/) [![Travis](https://img.shields.io/travis/ffsantos92/bens-penhorados.svg)](https://travis-ci.org/ffsantos92/bens-penhorados) [![GitHub license](https://img.shields.io/github/license/ffsantos92/bens-penhorados.svg)](https://raw.githubusercontent.com/ffsantos92/bens-penhorados/master/LICENSE)
+[![Scrutinizer](https://img.shields.io/scrutinizer/g/fabiofdsantos/bens-penhorados.svg)](https://scrutinizer-ci.com/g/fabiofdsantos/bens-penhorados/) [![Travis](https://img.shields.io/travis/fabiofdsantos/bens-penhorados.svg)](https://travis-ci.org/fabiofdsantos/bens-penhorados) [![GitHub license](https://img.shields.io/github/license/fabiofdsantos/bens-penhorados.svg)](https://raw.githubusercontent.com/fabiofdsantos/bens-penhorados/master/LICENSE)
 
 Capstone project of the bachelor's degree in Computer Engineering granted by the [Polytechnic Institute of Leiria](http://www.ipleiria.pt/home/), in the 2014-15 academic year.
 
