@@ -7,4 +7,4 @@ The project consisted in the development of a web application that aims to refer
 In order to provide a “user-friendly” experience, this application was built to solve the problems identified in the current state of the art (e.g. by simplifying search tasks).
 
 ## License
-Copyright (c) 2015-2019 [Fábio Santos](http://www.fabiofdsantos.com). See the LICENSE file for license rights and limitations (MIT).
+See the LICENSE file for license rights and limitations (MIT).
