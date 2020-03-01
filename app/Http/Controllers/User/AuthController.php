@@ -48,8 +48,8 @@ class AuthController extends Controller
 
         if (isset($user)) {
             return response()->json([
-                    'success' => 'The user was successfully created!',
-                ], 200);
+                'success' => 'The user was successfully created!',
+            ], 200);
         }
     }
 

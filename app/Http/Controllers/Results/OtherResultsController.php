@@ -76,14 +76,14 @@ class OtherResultsController extends Controller
         $data['items'] = [];
         foreach ($otherItems as $otherItem) {
             $item = [
-                    'title'        => $otherItem->title,
-                    'slug'         => $otherItem->slug,
-                    'price'        => $otherItem->price,
-                    'image'        => json_decode($otherItem->images) ? json_decode($otherItem->images)[0] : null,
-                    'status'       => $otherItem->status()->pluck('name'),
-                    'purchaseType' => $otherItem->purchaseType()->pluck('name'),
-                    'location'     => "$otherItem->municipality, $otherItem->district",
-                ];
+                'title'        => $otherItem->title,
+                'slug'         => $otherItem->slug,
+                'price'        => $otherItem->price,
+                'image'        => json_decode($otherItem->images) ? json_decode($otherItem->images)[0] : null,
+                'status'       => $otherItem->status()->pluck('name'),
+                'purchaseType' => $otherItem->purchaseType()->pluck('name'),
+                'location'     => "$otherItem->municipality, $otherItem->district",
+            ];
 
             $data['items'][] = $item;
         }

@@ -92,7 +92,7 @@ class ImportFromWebsiteJob extends Job
                 'Referrer'    => 'https://vendas.portaldasfinancas.gov.pt/bens/consultaVendasCursoForm.action?tipoConsulta='.$category->code,
             ],
             'debug' => false,
-            ]);
+        ]);
 
         $crawler = new Crawler((string) $request->getBody());
 

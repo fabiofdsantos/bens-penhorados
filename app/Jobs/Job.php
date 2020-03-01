@@ -18,5 +18,6 @@ use Illuminate\Queue\SerializesModels;
 
 abstract class Job implements SelfHandling, ShouldBeQueued
 {
-    use InteractsWithQueue, SerializesModels;
+    use InteractsWithQueue;
+    use SerializesModels;
 }

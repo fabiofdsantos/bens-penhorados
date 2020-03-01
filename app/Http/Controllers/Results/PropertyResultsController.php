@@ -82,14 +82,14 @@ class PropertyResultsController extends Controller
         $data['items'] = [];
         foreach ($properties as $property) {
             $item = [
-                    'title'        => $property->item->title,
-                    'slug'         => $property->item->slug,
-                    'price'        => $property->item->price,
-                    'image'        => json_decode($property->item->images) ? json_decode($property->item->images)[0] : null,
-                    'status'       => $property->item->status()->pluck('name'),
-                    'purchaseType' => $property->item->purchaseType()->pluck('name'),
-                    'location'     => "{$property->item->municipality}, {$property->item->district}",
-                ];
+                'title'        => $property->item->title,
+                'slug'         => $property->item->slug,
+                'price'        => $property->item->price,
+                'image'        => json_decode($property->item->images) ? json_decode($property->item->images)[0] : null,
+                'status'       => $property->item->status()->pluck('name'),
+                'purchaseType' => $property->item->purchaseType()->pluck('name'),
+                'location'     => "{$property->item->municipality}, {$property->item->district}",
+            ];
 
             $data['items'][] = $item;
         }
