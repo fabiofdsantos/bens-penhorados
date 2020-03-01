@@ -82,14 +82,14 @@ class VehicleResultsController extends Controller
         $data['items'] = [];
         foreach ($vehicles as $vehicle) {
             $item = [
-                    'title'        => $vehicle->item->title,
-                    'slug'         => $vehicle->item->slug,
-                    'price'        => $vehicle->item->price,
-                    'image'        => json_decode($vehicle->item->images) ? json_decode($vehicle->item->images)[0] : null,
-                    'status'       => $vehicle->item->status()->pluck('name'),
-                    'purchaseType' => $vehicle->item->purchaseType()->pluck('name'),
-                    'location'     => "{$vehicle->item->municipality}, {$vehicle->item->district}",
-                ];
+                'title'        => $vehicle->item->title,
+                'slug'         => $vehicle->item->slug,
+                'price'        => $vehicle->item->price,
+                'image'        => json_decode($vehicle->item->images) ? json_decode($vehicle->item->images)[0] : null,
+                'status'       => $vehicle->item->status()->pluck('name'),
+                'purchaseType' => $vehicle->item->purchaseType()->pluck('name'),
+                'location'     => "{$vehicle->item->municipality}, {$vehicle->item->district}",
+            ];
 
             $data['items'][] = $item;
         }
