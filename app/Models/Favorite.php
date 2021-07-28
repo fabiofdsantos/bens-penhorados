@@ -19,8 +19,8 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @author Fábio Santos <ffsantos92@gmail.com>
  *
- * @property User  $user
- * @property Item  $item
+ * @property User $user
+ * @property Item $item
  */
 class Favorite extends Model
 {

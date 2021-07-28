@@ -103,7 +103,7 @@ class WebsiteExtended extends Job
                             echo "\n *** ".date('d-m-Y')." - New item found: $taxOffice.$year.$itemId *** \n";
                         }
 
-                        break 1;
+                        break;
                     }
                 }
             }
