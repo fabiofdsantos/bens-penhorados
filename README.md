@@ -3,8 +3,9 @@
 
 Capstone project of the bachelor's degree in Computer Engineering granted by the [Polytechnic Institute of Leiria](http://www.ipleiria.pt/home/), in the 2014-15 academic year.
 
-The project consisted in the development of a web application that aims to references the seized items by Autoridade Tributária.
-In order to provide a “user-friendly” experience, this application was built to solve the problems identified in the current state of the art (e.g. by simplifying search tasks).
+An web application which references assets seized by the Portuguese Tax Authority (Autoridade Tributária e Aduaneira). In order to provide a “user-friendly” experience, it was built to solve the problems identified in the current state of the art (e.g. by simplifying search tasks).
+
+The project was up & running in auto-pilot mode from 2015 to 2021.
 
 ## License
 See the LICENSE file for license rights and limitations (MIT).
